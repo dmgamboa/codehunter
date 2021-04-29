@@ -1,9 +1,10 @@
-import './App.css';
+import "./App.css";
+import ExampleButton from "./components/SampleButton";
 
 function App() {
   return (
     <div className="App">
-      Hello World!
+      <ExampleButton name="Fabio" />
     </div>
   );
 }
