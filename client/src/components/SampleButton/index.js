@@ -1,9 +1,8 @@
 import { Button } from "antd";
-import 'antd/dist/antd.css';
 
 import Container from "./styled";
 
-const ExampleButton = ({ name }) => {
+const SampleButton = ({ name }) => {
     return (
         <Container className="example">
             <Button type="primary">Hello {name}</Button>
@@ -11,4 +10,4 @@ const ExampleButton = ({ name }) => {
     );
 }
 
-export default ExampleButton;
+export default SampleButton;

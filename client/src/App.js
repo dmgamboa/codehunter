@@ -1,10 +1,10 @@
-import "./App.css";
-import ExampleButton from "./components/SampleButton";
+import "./App.less";
+import SampleButton from "./components/SampleButton";
 
 function App() {
   return (
     <div className="App">
-      <ExampleButton name="Fabio" />
+      <SampleButton name="Fabio" />
     </div>
   );
 }
