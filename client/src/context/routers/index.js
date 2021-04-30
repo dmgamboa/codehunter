@@ -8,6 +8,7 @@ const routes = [
         name: "SAMPLE_FEATURE",
         path: `/sample`,
         exact: false,
+        navTab: true,
         icon: <SmileOutlined />,
         component: <SampleFeature />
     }

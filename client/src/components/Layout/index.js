@@ -1,6 +1,6 @@
 import { Layout } from "antd";
 
-import Navigation from "./navigation";
+import Navigation from "../Navigation";
 
 const { Content } = Layout;
 
