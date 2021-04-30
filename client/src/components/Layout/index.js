@@ -1,13 +1,20 @@
 import { Layout } from "antd";
 
+import Navigation from "../Navigation";
+
 const { Content } = Layout;
 
-const MainLayout = () => {
+const MainLayout = ({ children }) => {
+
     return (
-        <Layout>
-            <Content>
-            </Content>
-        </Layout>
+        <>
+            <Layout>
+                <Content>
+                    {children}
+                </Content>
+            </Layout>
+            <Navigation />
+        </>
     );
 }
 
