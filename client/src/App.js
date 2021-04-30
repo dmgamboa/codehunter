@@ -4,12 +4,14 @@ import "./App.less";
 import { getRoute } from "./context/routers";
 import MainLayout from "./components/Layout";
 import SampleFeature from "./feature/sample-feature";
+import Signup from "./components/Signup/Signup";
+import AuthProvider from "./context/Auth"
 
-// TODO:
-// Handle user authentication redirect
 function App() {
   return (
-    <SampleFeature />
+    <AuthProvider>
+      <Signup />
+    </AuthProvider>
   );
 }
 
