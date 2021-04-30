@@ -14,6 +14,14 @@ export default function AuthProvider({ children }) {
     auth.createUserWithEmailAndPassword(email, password);
   }
 
+  function login(email, password) {
+    auth.signInWithEmailAndPassword(email, password);
+  }
+
+  function logout() {
+    return auth.signOut();
+  }
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(token => {
       setUser(token);
@@ -24,12 +32,14 @@ export default function AuthProvider({ children }) {
 
   const value = {
     user,
-    signup
+    signup,
+    login,
+    logout
   };
 
   return (
     <Auth.Provider value={value}>
       { children }
     </Auth.Provider>
-  )
+  );
 }
