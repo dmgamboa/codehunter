@@ -3,11 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@ant-design/icons": "^4.6.2",
     "@craco/craco": "^6.1.2",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "antd": "^4.15.3",
+    "antd-mobile": "^2.3.4",
     "axios": "^0.21.1",
     "craco-less": "^1.17.1",
     "lodash": "^4.17.21",

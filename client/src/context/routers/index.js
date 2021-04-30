@@ -3,12 +3,10 @@ import { SmileOutlined } from "@ant-design/icons";
 
 import SampleFeature from "../../feature/sample-feature";
 
-const BASE_URL = "/";
-
 const routes = [
     {
         name: "SAMPLE_FEATURE",
-        path: `${BASE_URL}sample`,
+        path: `/sample`,
         exact: false,
         icon: <SmileOutlined />,
         component: <SampleFeature />

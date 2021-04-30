@@ -9,7 +9,9 @@ import SampleFeature from "./feature/sample-feature";
 // Handle user authentication redirect
 function App() {
   return (
-    <SampleFeature />
+    <MainLayout>
+      <Switch>{getRoute()}</Switch>
+    </MainLayout>
   );
 }
 
