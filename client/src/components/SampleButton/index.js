@@ -2,10 +2,10 @@ import { Button } from "antd";
 
 import Container from "./styled";
 
-const SampleButton = ({ name }) => {
+const SampleButton = ({ name, onClick }) => {
     return (
         <Container className="example">
-            <Button type="primary">Hello {name}</Button>
+            <Button type="primary" onClick={onClick}>Hello {name}</Button>
         </Container>
     );
 }
