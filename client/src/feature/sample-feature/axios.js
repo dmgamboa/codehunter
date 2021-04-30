@@ -1,6 +1,6 @@
 const BASE_URL = "";
 
-export const sampleCall = () => {
+export const sampleCall = (query) => {
     return apiClient
         .get(`${BASE_URL}/sample`, {
             params: query,
