@@ -4,9 +4,18 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
+// TO DO
+// ADD SPLASH PAGE / WALKTHROUGH ROUTING
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Router>
+      <Switch>
+        <Route exact path={["/"]} render={() => <App />} />
+        <Route path={["/:page", "/:page/:subPage"]} render={() => <App />} />
+      </Switch>
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );
