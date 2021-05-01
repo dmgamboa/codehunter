@@ -52,7 +52,7 @@ It has the following subfolders and files:
     ├── components                              # Component-specific scripts
         /footer.js
         /header.js
-    ├── features                                # HTML page-specific scripts
+    ├── pages                                   # HTML page-specific scripts
 
     ├── jquery                                  # jQuery scripts
 
