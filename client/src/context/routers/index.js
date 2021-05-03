@@ -1,7 +1,7 @@
 import { Route } from "react-router-dom";
 import { SmileOutlined } from "@ant-design/icons";
 
-import SampleFeature from "../../pages/sample-feature";
+import SampleFeature from "../../pages/SampleFeature";
 
 const routes = [
     {
