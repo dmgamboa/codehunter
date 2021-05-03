@@ -18,7 +18,7 @@ import Profile from "../../pages/Profile";
 
 const routes = [
     {
-        name: "LOCATIONS",
+        name: "Locations",
         path: `/locations`,
         exact: false,
         navTab: true,
@@ -27,7 +27,7 @@ const routes = [
         component: <Locations />
     },
     {
-        name: "SCAN",
+        name: "Scan",
         path: `/scan`,
         exact: false,
         navTab: true,
@@ -36,7 +36,7 @@ const routes = [
         component: <Scan />
     },
     {
-        name: "FRIENDS",
+        name: "Friends",
         path: `/friends`,
         exact: false,
         navTab: true,
@@ -45,7 +45,7 @@ const routes = [
         component: <Friends />
     },
     {
-        name: "REWARDS",
+        name: "Rewards",
         path: `/rewards`,
         exact: false,
         navTab: true,
@@ -54,7 +54,7 @@ const routes = [
         component: <Rewards />
     },
     {
-        name: "PROFILE",
+        name: "Profile",
         path: `/profile`,
         exact: false,
         navTab: true,

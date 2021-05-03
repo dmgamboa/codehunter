@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useHistory, useRouteMatch } from "react-router-dom";
 import { TabBar } from "antd-mobile";
 
 import { navRoutes } from "../../context/routers";
@@ -7,21 +7,27 @@ import { navRoutes } from "../../context/routers";
 import NavContainer from "./styled";
 
 const Navigation = ({ hidden }) => {
+    const history = useHistory();
+    let match = useRouteMatch();
 
-    const [tab, setTab] = useState(navRoutes[0].name);
+    const [tab, setTab] = useState(navRoutes[0].path);
 
     const { Item } = TabBar;
 
+    useEffect(() => {
+        history.push(tab);
+    }, [tab]);
+
     const getTabs = (tabs) => {
-        return tabs.map(({ name, icon, selectedIcon }) => {
+        return tabs.map(({ path, name, icon, selectedIcon }) => {
             return (
                 <Item
-                    key={name}
+                    key={path}
                     icon={icon}
                     selectedIcon={selectedIcon}
                     title={name}
-                    selected={tab === name}
-                    onPress={() => setTab(name)}
+                    selected={tab === path}
+                    onPress={() => setTab(path)}
                 />
             );
         })
