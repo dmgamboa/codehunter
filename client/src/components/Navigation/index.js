@@ -1,26 +1,42 @@
-import { useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useHistory, useRouteMatch } from "react-router-dom";
 import { TabBar } from "antd-mobile";
-import { SmileFilled, SmileOutlined } from "@ant-design/icons";
+
+import { navRoutes } from "../../context/routers";
 
 import NavContainer from "./styled";
 
 const Navigation = ({ hidden }) => {
+    const history = useHistory();
+    let match = useRouteMatch();
 
-    const [tab, setTab] = useState("SAMPLE_FEATURE")
+    const [tab, setTab] = useState(navRoutes[0].path);
 
     const { Item } = TabBar;
+
+    useEffect(() => {
+        history.push(tab);
+    }, [tab]);
+
+    const getTabs = (tabs) => {
+        return tabs.map(({ path, name, icon, selectedIcon }) => {
+            return (
+                <Item
+                    key={path}
+                    icon={icon}
+                    selectedIcon={selectedIcon}
+                    title={name}
+                    selected={tab === path}
+                    onPress={() => setTab(path)}
+                />
+            );
+        })
+    }
 
     return (
         <NavContainer>
             <TabBar hidden={hidden}>
-                <Item
-                    icon={<SmileOutlined/>}
-                    selectedIcon={<SmileFilled/>}
-                    title="Sample"
-                    selected={tab === "SAMPLE_FEATURE"}
-                    onPress={() => setTab("SAMPLE_FEATURE")}
-                />
+                {getTabs(navRoutes)}
             </TabBar>            
         </NavContainer>
     );
