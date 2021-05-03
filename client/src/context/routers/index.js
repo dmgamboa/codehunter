@@ -1,27 +1,29 @@
 import { Route } from "react-router-dom";
-import { SmileOutlined } from "@ant-design/icons";
+import { 
+    CompassOutlined,
+    CompassFilled,
+    SmileOutlined,
+    SmileFilled,
+    TeamOutlined,
+    GiftOutlined,
+    GiftFilled,
+    UserOutlined
+ } from "@ant-design/icons";
 
-import SampleFeature from "../../pages/SampleFeature";
 import Locations from "../../pages/Locations";
 import Scan from "../../pages/Scan";
+import Rewards from "../../pages/Rewards";
 import Friends from "../../pages/Friends";
 import Profile from "../../pages/Profile";
 
 const routes = [
     {
-        name: "SAMPLE_FEATURE",
-        path: `/sample`,
-        exact: false,
-        navTab: true,
-        icon: <SmileOutlined />,
-        component: <SampleFeature />
-    },
-    {
         name: "LOCATIONS",
         path: `/locations`,
         exact: false,
         navTab: true,
-        icon: <SmileOutlined />,
+        icon: <CompassOutlined />,
+        selectedIcon: <CompassFilled />,
         component: <Locations />
     },
     {
@@ -30,6 +32,7 @@ const routes = [
         exact: false,
         navTab: true,
         icon: <SmileOutlined />,
+        selectedIcon: <SmileFilled />,
         component: <Scan />
     },
     {
@@ -37,18 +40,31 @@ const routes = [
         path: `/friends`,
         exact: false,
         navTab: true,
-        icon: <SmileOutlined />,
+        icon: <TeamOutlined />,
+        selectedIcon: <TeamOutlined />,
         component: <Friends />
+    },
+    {
+        name: "REWARDS",
+        path: `/rewards`,
+        exact: false,
+        navTab: true,
+        icon: <GiftOutlined />,
+        selectedIcon: <GiftFilled />,
+        component: <Rewards />
     },
     {
         name: "PROFILE",
         path: `/profile`,
         exact: false,
         navTab: true,
-        icon: <SmileOutlined />,
+        icon: <UserOutlined />,
+        selectedIcon: <UserOutlined />,
         component: <Profile />
     },
 ];
+
+export const navRoutes = routes.filter(route => route.navTab);
 
 // TODO
 // Add Permissions & 404
