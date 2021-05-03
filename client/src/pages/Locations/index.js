@@ -1,10 +1,8 @@
 import { Switch, Route, useRouteMatch } from "react-router-dom";
 
-import ProfileScreen from "./ProfileScreen";
+import LocationsMap from "./LocationsMap";
 
-import "./ProfileScreen";
-
-const Profile = () => {
+const Locations = () => {
     const match = useRouteMatch();
 
     return (
@@ -12,10 +10,10 @@ const Profile = () => {
             <Route 
                 exact
                 path={`${match.path}`}
-                render={() => <ProfileScreen />}
+                render={() => <LocationsMap />}
             />
         </Switch>
     );
 }
 
-export default Profile;
+export default Locations;
