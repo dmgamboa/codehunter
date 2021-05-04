@@ -1,10 +1,16 @@
-import './App.css';
+import { Switch } from "react-router-dom";
 
+import "./App.less";
+import { getRoute } from "./context/routers";
+import MainLayout from "./components/Layout";
+
+// TODO:
+// Handle user authentication redirect
 function App() {
   return (
-    <div className="App">
-      Hello World!
-    </div>
+    <MainLayout>
+      <Switch>{getRoute()}</Switch>
+    </MainLayout>
   );
 }
 
