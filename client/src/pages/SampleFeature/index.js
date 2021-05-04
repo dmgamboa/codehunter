@@ -6,7 +6,6 @@ import SampleForm from "./SampleForm";
 const SampleFeature = () => {
     const match = useRouteMatch();
 
-
     return (
         <Switch>
             <Route 

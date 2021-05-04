@@ -10,7 +10,7 @@ const Navigation = ({ hidden }) => {
     const history = useHistory();
     let match = useRouteMatch();
 
-    const [tab, setTab] = useState(navRoutes[0].path);
+    const [tab, setTab] = useState();
 
     const { Item } = TabBar;
 
