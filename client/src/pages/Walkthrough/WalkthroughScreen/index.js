@@ -9,7 +9,7 @@ const WalkthroughScreen = () => {
         return items.map(({ img, heading, body }) => {
             return (
                 <>
-                    <img
+                    <Image
                         src={img}
                         onLoad={() => window.dispatchEvent(new Event("resize"))}
                     />
