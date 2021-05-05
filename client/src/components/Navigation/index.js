@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useHistory, useRouteMatch } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { TabBar } from "antd-mobile";
 
 import { navRoutes } from "../../context/routers";
@@ -8,7 +8,7 @@ import NavContainer from "./styled";
 
 const Navigation = ({ hidden }) => {
     const history = useHistory();
-    let match = useRouteMatch();
+    const { page } = useParams();
 
     const [tab, setTab] = useState();
 
@@ -26,7 +26,7 @@ const Navigation = ({ hidden }) => {
                     icon={icon}
                     selectedIcon={selectedIcon}
                     title={name}
-                    selected={tab === path}
+                    selected={tab === path || `/${page}` === path}
                     onPress={() => setTab(path)}
                 />
             );
