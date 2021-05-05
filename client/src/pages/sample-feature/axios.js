@@ -20,8 +20,8 @@ export function samplePost() {
         firstName: "Finn",
         lastName: "Williams"
     })
-    .then((response) => {
-        console.log(response);
+    .then((res) => {
+        console.log(res.data);
     }, (error) => {
         console.log(error);
     });

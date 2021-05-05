@@ -14,13 +14,13 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 const dbName = "test";
 
 // Call when retrieving data.
-/*app.get("/example", (req, res) => {
+app.get("/example", (req, res) => {
   async function run() {
     try {
       await client.connect();
       console.log("Connected correctly to server");
       const db = client.db(dbName);
-  
+
       // Use the collection "people"
       const col = db.collection("people");
   
@@ -51,16 +51,33 @@ const dbName = "test";
   }
   
   run().catch(console.dir);
-});*/
+});
 
 app.get("/sampleGet", (req, res) => {
-  console.log("In server-side sampleGet");
-  const stuff = {id: 1};
-  res.send(stuff);
+  async function run() {
+    try {
+      console.log("In server-side sampleGet");
+      await client.connect();
+      const db = client.db(dbName);
+  
+      // Use the collection "people"
+      const col = db.collection("people");
+
+      // Find one document
+      const myDoc = await col.findOne();
+      // Send it back
+      res.send(myDoc);
+      
+    } catch (err) {
+      console.log(err.stack);
+    } finally {
+      await client.close();
+    }
+  }
 });
 
 app.post("/samplePost", (req, res) => {
-  console.log("In server-side samplePost. Req: ", req.firstName);
+  console.log("In server-side samplePost. Req: ", req.data);
   //let request = req.query["format"];
 
   
