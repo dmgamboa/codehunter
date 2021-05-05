@@ -14,12 +14,14 @@
     "craco-less": "^1.17.1",
     "lodash": "^4.17.21",
     "mongodb": "^3.6.6",
+    "pagination": "^0.4.6",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-particles-js": "^3.4.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "styled-components": "^5.2.3",
+    "swiper": "^6.5.9",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
@@ -52,6 +54,8 @@
     "enzyme": "^3.11.0",
     "eslint": "^7.25.0",
     "eslint-plugin-react": "^7.23.2",
-    "jest-extended": "^0.11.5"
+    "jest-extended": "^0.11.5",
+    "less": "^4.1.1",
+    "less-loader": "^8.1.1"
   }
 }

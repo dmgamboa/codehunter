@@ -10,14 +10,12 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 // TO DO
 // ADD SPLASH PAGE / WALKTHROUGH ROUTING
 ReactDOM.render(
-  <React.StrictMode>
     <Router>
       <Switch>
         <Route exact path={["/"]} render={() => <Splash />} />
         <Route path={["/:page", "/:page/:subPage"]} render={() => <App />} />
       </Switch>
-    </Router>
-  </React.StrictMode>,
+    </Router>,
   document.getElementById('root')
 );
 
