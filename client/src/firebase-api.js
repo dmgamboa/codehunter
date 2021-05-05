@@ -14,7 +14,6 @@ const app = firebase.initializeApp({
 })
 
 //analytics();
-//const db = firebase.firestore();
 
 export const auth = app.auth();
 export default app;
