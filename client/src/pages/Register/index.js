@@ -1,63 +1,40 @@
 import React, { useRef } from "react";
-import { useAuth, signup } from "../../context/Auth"
+import { createUserFb } from "../../context/Auth"
 import { useHistory } from "react-router-dom"
 import { UserOutlined, LockOutlined, AppleOutlined, FacebookOutlined, TwitterOutlined, MailOutlined } from '@ant-design/icons'
 import { Form, Input, Button, Checkbox } from 'antd'
 
 import StyledRegistration from "./styled.js"
+import createUserDoc from "./axios.js"
 
 const Register = () => {
-  // const email = useRef()
-  // const password = useRef()
-  // const signup= useAuth()
+
   const history = useHistory()
 
-  const onFinish = (values) => {
-    console.log('Received values of form: ', values)
-    signup(values.email, values.password)
+  const tailFormItemLayout = {
+    wrapperCol: {
+      xs: {
+        span: 24,
+        offset: 0,
+      },
+      sm: {
+        span: 16,
+        offset: 8,
+      },
+    },
+  };
 
-    createUser(values)
+  // Create new user in firebase upon clicking register
+  const onFinish = async (values) => {
+    const userUID = await createUserFb(values)
+    console.log("user uid: " + userUID)
+    console.log("values from form: ", values)
+
+    // Axios POST request to create user doc in mongoDb
+    createUserDoc(values, userUID)
   }
 
-  // Create document in user collection in MongoDB
-  const createUser = (values) => {
-    const name = values.name
-    const email = values.email
-    // const 
-  }
-
-  const formItemLayout = {
-      labelCol: {
-        xs: {
-          span: 24,
-        },
-        sm: {
-          span: 8,
-        },
-      },
-      wrapperCol: {
-        xs: {
-          span: 24,
-        },
-        sm: {
-          span: 16,
-        },
-      },
-    };
-    const tailFormItemLayout = {
-      wrapperCol: {
-        xs: {
-          span: 24,
-          offset: 0,
-        },
-        sm: {
-          span: 16,
-          offset: 8,
-        },
-      },
-    };
-
-  function handleSubmit(event) {
+  const handleSubmit = (event) => {
     event.preventDefault();
     signup(email.current.value, password.current.value)
     history.push("/")
@@ -86,7 +63,7 @@ const Register = () => {
     <StyledRegistration className="registration">
         <div className="signup">
             <h1>Sign Up</h1>
-            <img className="logo" src="https://dummyimage.com/150x150/000/fff" /> 
+            <img className="logo" src="../../../assets/logo.svg" alt="codehunter logo"/> 
         </div> 
 
         <Form

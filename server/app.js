@@ -1,5 +1,5 @@
 // Our application entry point
-const { MongoClient } = require('mongodb');
+import { MongoClient } from 'mongodb';
 const uri = "mongodb+srv://teamfourcodehunter:cityofvancouver@codecluster.ktv41.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -42,3 +42,14 @@ async function run() {
 }
 
 run().catch(console.dir);
+
+
+// ***************************************
+import express from 'express'
+
+const app = express()
+const port = 5000
+
+app.listen(port, () => {
+  console.log(`app listening to port ${port}`)
+})

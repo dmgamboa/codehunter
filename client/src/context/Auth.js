@@ -8,8 +8,23 @@ export function useAuth() {
   return useContext(Auth);
 }
 
-export function signup(email, password) {
-  auth.createUserWithEmailAndPassword(email, password)
+
+// Creating new user in firebase and document in user collection in MongoDB
+export const createUserFb = async (values) => {
+  try {
+    const created = await auth.createUserWithEmailAndPassword(values.email, values.password)
+
+    // Get user UID from Firebase
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        const userUID  = user.uid
+        return userUID
+      }
+    })
+
+  } catch (err) {
+    console.log(err)
+  }
 }
 
 export default function AuthProvider({ children }) {
@@ -39,6 +54,7 @@ export default function AuthProvider({ children }) {
   };
 
   return (
+    // Email, Facebook, Apple, Twitter
     <Auth.Provider value={value}>
       { children }
     </Auth.Provider>
