@@ -1,11 +1,22 @@
+import { useHistory } from "react-router-dom";
 import Icon from "@ant-design/icons";
 import Particles from "react-particles-js";
 
-import { particleParams } from "./constant";
+import { particleParams, timeout } from "./constant";
 import { ReactComponent as Logo } from "../../../assets/icons/logo.svg";
 import { Container, Content } from "./styled";
 
 const SplashScreen = () => {
+    const history = useHistory();
+
+    // TODO
+    // Configure navigation depending on user state
+    const redirect = (timeout) => {
+        setTimeout(() => {
+            history.push("/walkthrough");
+        }, timeout);
+    }
+
     return (
         <Container>
             <Content>
@@ -18,6 +29,7 @@ const SplashScreen = () => {
                 height="100vh"
                 params={particleParams}
             />
+            {redirect(timeout)}
         </Container>
     );
 }

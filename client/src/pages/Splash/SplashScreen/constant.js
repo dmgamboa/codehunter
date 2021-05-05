@@ -1,3 +1,5 @@
+export const timeout = 2000;
+
 export const particleParams = {
     "particles": {
         "number": {
