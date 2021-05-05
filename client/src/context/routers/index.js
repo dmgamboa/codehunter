@@ -15,11 +15,12 @@ import Scan from "../../pages/Scan";
 import Rewards from "../../pages/Rewards";
 import Friends from "../../pages/Friends";
 import Profile from "../../pages/Profile";
+import Walkthrough from "../../pages/Walkthrough";
 
 const routes = [
     {
         name: "Locations",
-        path: `/locations`,
+        path: "/locations",
         exact: false,
         navTab: true,
         icon: <CompassOutlined />,
@@ -28,7 +29,7 @@ const routes = [
     },
     {
         name: "Scan",
-        path: `/scan`,
+        path: "/scan",
         exact: false,
         navTab: true,
         icon: <SmileOutlined />,
@@ -37,7 +38,7 @@ const routes = [
     },
     {
         name: "Friends",
-        path: `/friends`,
+        path: "/friends",
         exact: false,
         navTab: true,
         icon: <TeamOutlined />,
@@ -46,7 +47,7 @@ const routes = [
     },
     {
         name: "Rewards",
-        path: `/rewards`,
+        path: "/rewards",
         exact: false,
         navTab: true,
         icon: <GiftOutlined />,
@@ -55,12 +56,19 @@ const routes = [
     },
     {
         name: "Profile",
-        path: `/profile`,
+        path: "/profile",
         exact: false,
         navTab: true,
         icon: <UserOutlined />,
         selectedIcon: <UserOutlined />,
         component: <Profile />
+    },
+    {
+        name: "Walkthrough",
+        path: "/walkthrough",
+        exact: false,
+        navTab: false,
+        component: <Walkthrough />
     },
 ];
 
