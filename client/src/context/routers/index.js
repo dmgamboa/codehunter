@@ -16,6 +16,9 @@ import Rewards from "../../pages/Rewards";
 import Friends from "../../pages/Friends";
 import Profile from "../../pages/Profile";
 
+import Login from "../../pages/Login";
+import Register from "../../pages/Register";
+
 const routes = [
     {
         name: "Locations",
@@ -62,6 +65,18 @@ const routes = [
         selectedIcon: <UserOutlined />,
         component: <Profile />
     },
+    {
+        name: "Login",
+        path: `/login`,
+        exact: false,
+        component: <Login />
+    },
+    {
+        name: "Register",
+        path: `/register`,
+        exact: false,
+        component: <Register />
+    }
 ];
 
 export const navRoutes = routes.filter(route => route.navTab);
