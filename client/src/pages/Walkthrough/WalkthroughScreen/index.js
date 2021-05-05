@@ -7,7 +7,7 @@ import "swiper/components/pagination/pagination.min.css"
 
 
 import { carouselItems } from "./constant";
-import { StyledSwiper, Image } from "./styled";
+import { Container, StyledSwiper, Image } from "./styled";
 import React from "react";
 
 const WalkthroughScreen = () => {
@@ -30,7 +30,7 @@ const WalkthroughScreen = () => {
     }
 
     return (
-        <>
+        <Container>
             <StyledSwiper
                 centeredSlides
                 pagination={{dynamicBullets: true}}
@@ -42,12 +42,13 @@ const WalkthroughScreen = () => {
             <h1>{carouselItems[carouselIndex].heading}</h1>
             <p>{carouselItems[carouselIndex].body}</p>
 
-            <Button type="primary" block>
-                Join the hunt
-            </Button>
-
-            <span className="login">Log In</span>
-        </>
+            <div className="btm">
+                <Button className="register" type="primary" block>
+                    Join the hunt
+                </Button>
+                <span className="login">Log In</span>                
+            </div>
+        </Container>
     );
 }
 

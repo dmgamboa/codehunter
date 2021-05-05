@@ -1,6 +1,25 @@
 import styled from "styled-components";
 import { Swiper } from "swiper/react";
 
+export const Container = styled.div`
+    .btm {
+        position: fixed;
+        bottom: 0;
+        transform: translateY(-50%);
+    }
+
+    .login, .register {
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+    .login {
+        display: block;
+        margin: 0 auto;
+        margin-top: 1rem;
+    }
+`;
+
 export const StyledSwiper = styled(Swiper)`
     .swiper-pagination.swiper-pagination-bullets {
         left: 0;
