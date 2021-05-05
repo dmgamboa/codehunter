@@ -1,10 +1,8 @@
 import { Switch, Route, useRouteMatch } from "react-router-dom";
 
-import ProfileScreen from "./ProfileScreen";
+import RewardsScreen from "./RewardsScreen";
 
-import "./ProfileScreen";
-
-const Profile = () => {
+const Rewards = () => {
     const match = useRouteMatch();
 
     return (
@@ -12,10 +10,10 @@ const Profile = () => {
             <Route 
                 exact
                 path={`${match.path}`}
-                render={() => <ProfileScreen />}
+                render={() => <RewardsScreen />}
             />
         </Switch>
     );
 }
 
-export default Profile;
+export default Rewards;

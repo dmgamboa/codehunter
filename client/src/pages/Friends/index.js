@@ -1,10 +1,8 @@
 import { Switch, Route, useRouteMatch } from "react-router-dom";
 
-import ProfileScreen from "./ProfileScreen";
+import FriendsScreen from "./FriendsScreen";
 
-import "./ProfileScreen";
-
-const Profile = () => {
+const Friends = () => {
     const match = useRouteMatch();
 
     return (
@@ -12,10 +10,10 @@ const Profile = () => {
             <Route 
                 exact
                 path={`${match.path}`}
-                render={() => <ProfileScreen />}
+                render={() => <FriendsScreen />}
             />
         </Switch>
     );
 }
 
-export default Profile;
+export default Friends;
