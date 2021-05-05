@@ -1,18 +1,70 @@
 import { Route } from "react-router-dom";
-import { SmileOutlined } from "@ant-design/icons";
+import { 
+    CompassOutlined,
+    CompassFilled,
+    SmileOutlined,
+    SmileFilled,
+    TeamOutlined,
+    GiftOutlined,
+    GiftFilled,
+    UserOutlined
+ } from "@ant-design/icons";
 
-import SampleFeature from "../../feature/sample-feature";
+import Locations from "../../pages/Locations";
+import Scan from "../../pages/Scan";
+import Rewards from "../../pages/Rewards";
+import Friends from "../../pages/Friends";
+import Profile from "../../pages/Profile";
 
 const routes = [
     {
-        name: "SAMPLE_FEATURE",
-        path: `/sample`,
+        name: "Locations",
+        path: `/locations`,
+        exact: false,
+        navTab: true,
+        icon: <CompassOutlined />,
+        selectedIcon: <CompassFilled />,
+        component: <Locations />
+    },
+    {
+        name: "Scan",
+        path: `/scan`,
         exact: false,
         navTab: true,
         icon: <SmileOutlined />,
-        component: <SampleFeature />
-    }
+        selectedIcon: <SmileFilled />,
+        component: <Scan />
+    },
+    {
+        name: "Friends",
+        path: `/friends`,
+        exact: false,
+        navTab: true,
+        icon: <TeamOutlined />,
+        selectedIcon: <TeamOutlined />,
+        component: <Friends />
+    },
+    {
+        name: "Rewards",
+        path: `/rewards`,
+        exact: false,
+        navTab: true,
+        icon: <GiftOutlined />,
+        selectedIcon: <GiftFilled />,
+        component: <Rewards />
+    },
+    {
+        name: "Profile",
+        path: `/profile`,
+        exact: false,
+        navTab: true,
+        icon: <UserOutlined />,
+        selectedIcon: <UserOutlined />,
+        component: <Profile />
+    },
 ];
+
+export const navRoutes = routes.filter(route => route.navTab);
 
 // TODO
 // Add Permissions & 404

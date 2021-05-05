@@ -1,6 +1,6 @@
 import { useHistory, useRouteMatch } from "react-router-dom";
 
-import SampleButton from "../../../../components/SampleButton";
+import SampleButton from "../../../components/SampleButton";
 
 const SampleScreen = () => {
     const history = useHistory();

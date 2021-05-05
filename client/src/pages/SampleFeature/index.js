@@ -1,7 +1,7 @@
 import { Switch, Route, useRouteMatch } from "react-router-dom";
 
-import SampleScreen from "./components/sample-screen";
-import SampleForm from "./components/sample-form";
+import SampleScreen from "./SampleScreen";
+import SampleForm from "./SampleForm";
 
 const SampleFeature = () => {
     const match = useRouteMatch();
