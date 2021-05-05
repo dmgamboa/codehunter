@@ -11,8 +11,9 @@ const createUserDoc = (values, uid) => {
 
     axios({
         method: "POST",
-        URL: "/createUserDoc",
-        data: regiInfo
+        URL: "/create/userdoc",
+        data: regiInfo,
+        dataType: "json"
         }).then(res => { 
           console.log(res) 
         }).catch(e => {
