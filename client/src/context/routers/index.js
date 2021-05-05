@@ -23,6 +23,7 @@ const routes = [
         path: "/locations",
         exact: false,
         navTab: true,
+        fullscreen: false,
         icon: <CompassOutlined />,
         selectedIcon: <CompassFilled />,
         component: <Locations />
@@ -32,6 +33,7 @@ const routes = [
         path: "/scan",
         exact: false,
         navTab: true,
+        fullscreen: false,
         icon: <SmileOutlined />,
         selectedIcon: <SmileFilled />,
         component: <Scan />
@@ -41,6 +43,7 @@ const routes = [
         path: "/friends",
         exact: false,
         navTab: true,
+        fullscreen: false,
         icon: <TeamOutlined />,
         selectedIcon: <TeamOutlined />,
         component: <Friends />
@@ -50,6 +53,7 @@ const routes = [
         path: "/rewards",
         exact: false,
         navTab: true,
+        fullscreen: false,
         icon: <GiftOutlined />,
         selectedIcon: <GiftFilled />,
         component: <Rewards />
@@ -59,6 +63,7 @@ const routes = [
         path: "/profile",
         exact: false,
         navTab: true,
+        fullscreen: false,
         icon: <UserOutlined />,
         selectedIcon: <UserOutlined />,
         component: <Profile />
@@ -68,11 +73,16 @@ const routes = [
         path: "/walkthrough",
         exact: false,
         navTab: false,
+        fullscreen: true,
         component: <Walkthrough />
     },
 ];
 
 export const navRoutes = routes.filter(route => route.navTab);
+
+export const navlessPaths = routes
+    .filter(route => route.fullscreen)
+    .map(route => route.path);
 
 // TODO
 // Add Permissions & 404
