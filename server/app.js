@@ -1,44 +1,34 @@
 // Our application entry point
-const { MongoClient } = require('mongodb');
-const uri = "mongodb+srv://teamfourcodehunter:cityofvancouver@codecluster.ktv41.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+const { MongoClient } = require('mongodb')
+const uri = "mongodb+srv://teamfourcodehunter:cityofvancouver@codecluster.ktv41.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true })
 
 // The database to use
-const dbName = "other";
+const dbName = "codehunterdb"
+const dbCol = "codes"
 
-async function run() {
-  try {
-    await client.connect();
-    console.log("Connected correctly to server");
-    const db = client.db(dbName);
+app.get("/getMapData", (req, res) => {
+  async function run() {
+    try {
+      await client.connect()
+      console.log("Connected correctly to server")
+      const db = client.db(dbName)
+      const col = db.collection(dbCol)
+      
+      const response = await col.find().toArray();
 
-    // Use the collection "people"
-    const col = db.collection("people");
-
-    // Construct a document                                                                                                                                                              
-    let personDocument = {
-      "name": {
-        "first": "Alan",
-        "last": "Turing"
-      },
-      "birth": new Date(1912, 5, 23), // June 23, 1912                                                                                                                                 
-      "death": new Date(1954, 5, 7), // June 7, 1954                                                                                                                                  
-      "contribs": ["Turing machine", "Turing test", "Turingery"],
-      "views": 1250000
+      console.log("return ", response);
+  
+      // Send it back
+      res.send(response);
+      
+    } catch (err) {
+      console.log(err.stack);
+    } finally {
+      await client.close();
     }
 
-    // Insert a single document, wait for promise so we can read it back
-    const p = await col.insertOne(personDocument);
-    // Find one document
-    const myDoc = await col.findOne();
-    // Print to the console
-    console.log(myDoc);
-
-  } catch (err) {
-    console.log(err.stack);
-  } finally {
-    await client.close();
   }
-}
-
-run().catch(console.dir);
+  
+  run().catch(console.dir);
+});

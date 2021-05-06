@@ -8,10 +8,6 @@ const Marker = ({ show, place }) => {
     fontSize: "300%",
   }
 
-  const doStuff = () => {
-    
-  }
-
   return (
     <>
       <MobileTwoTone twoToneColor="#00cccc" style={markerStyle} />

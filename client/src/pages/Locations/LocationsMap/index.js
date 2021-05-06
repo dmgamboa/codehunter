@@ -2,6 +2,7 @@ import React from "react"
 import GoogleMapReact from "google-map-react"
 import SearchBar from "../../../components/SearchBar"
 import Marker from "../../../components/Marker"
+import { getMapData } from "../axios"
 
 const vancouverCoords = {
   lat: 49.246292,
@@ -9,6 +10,10 @@ const vancouverCoords = {
 }
 
 const initialZoom = 13
+
+const handleGetMapData = () => {
+  getMapData()
+}
 
 const LocationsMap = () => {
   return (
@@ -19,6 +24,7 @@ const LocationsMap = () => {
         center={ vancouverCoords }
         zoom={initialZoom}
       >
+        <button onClick={handleGetMapData}>click it</button>
         <Marker
           id={50}
           lat={49.24}
