@@ -6,8 +6,7 @@ export function sampleGet() {
     console.log("in client-side sampleGet");
     
     // send a GET request
-    axios.get("/sampleGet")
-    .then(res => {
+    axios.get("/sampleGet").then(res => {
         console.log(res.data);
     });
 }

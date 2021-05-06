@@ -1,8 +1,10 @@
 import axios from "axios"
 
 export const getMapData = () => {
-  axios.get("/sample")
-  .then(res => {
-    console.log("data")
+  axios.get("http://localhost:8000/example").then(res => {
+    console.log(res.data)
+  })
+  .catch(() => {
+    console.log("Nope")
   })
 }
