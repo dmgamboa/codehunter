@@ -1,15 +1,15 @@
-import { Container } from "./styled";
+import { Layout, Content } from "./styled";
 import Navigation from "../Navigation";
 
 const MainLayout = ({ children }) => {
 
     return (
-        <>
-            <Container>
+        <Layout>
+            <Content>
                 {children}
-            </Container>
+            </Content>
             <Navigation />
-        </>
+        </Layout>
     );
 }
 
