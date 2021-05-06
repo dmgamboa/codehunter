@@ -1,7 +1,11 @@
 // Our application entry point
 const { MongoClient } = require('mongodb')
+const express = require("express");
 const uri = "mongodb+srv://teamfourcodehunter:cityofvancouver@codecluster.ktv41.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true })
+
+const app = express();
+const port = 5000;
 
 // The database to use
 const dbName = "codehunterdb"
@@ -31,4 +35,8 @@ app.get("/getMapData", (req, res) => {
   }
   
   run().catch(console.dir);
-});
+})
+
+app.listen(port, () => {
+  console.log(`App listening on port ${port}.`)
+})
