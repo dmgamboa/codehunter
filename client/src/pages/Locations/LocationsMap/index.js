@@ -1,10 +1,39 @@
+import React from "react"
+import GoogleMapReact from "google-map-react"
+import SearchBar from "../../../components/SearchBar"
+import Marker from "../../../components/Marker"
+import { getMapData } from "../axios"
 
-const LocationsMap = () => {
-    return (
-        <div>
-            This is locations map.
-        </div>
-    );
+const vancouverCoords = {
+  lat: 49.246292,
+  lng: -123.116226
 }
 
-export default LocationsMap;
+const initialZoom = 13
+
+const handleGetMapData = () => {
+  getMapData()
+}
+
+const LocationsMap = () => {
+  return (
+    <div style={{ height: "100vh", width: "100%" }}>
+      <SearchBar />
+      <GoogleMapReact
+        bootstrapURLKeys={{ key: "" }}
+        center={ vancouverCoords }
+        zoom={initialZoom}
+      >
+        <button onClick={handleGetMapData}>click it</button>
+        <Marker
+          id={50}
+          lat={49.24}
+          lng={-123.11}
+          show={true}
+        />
+      </GoogleMapReact>
+    </div>
+  )
+}
+
+export default LocationsMap

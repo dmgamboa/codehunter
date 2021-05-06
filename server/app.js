@@ -63,7 +63,7 @@ app.get("/getMapData", (req, res) => {
       }
   
       // Insert a single document, wait for promise so we can read it back
-      //const p = await col.insertOne(personDocument);
+      const p = await col.insertOne(personDocument);
       // Find one document
       const myDoc = await col.findOne();
       // Send it back
@@ -72,7 +72,7 @@ app.get("/getMapData", (req, res) => {
     } catch (err) {
       console.log(err.stack);
     } finally {
-      await client.close();
+      
     }
   }
   
