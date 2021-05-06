@@ -1,11 +1,13 @@
+//app.use(express.json());
+
 // Our application entry point
-const { MongoClient } = require('mongodb')
 const express = require("express");
-const uri = "mongodb+srv://teamfourcodehunter:cityofvancouver@codecluster.ktv41.mongodb.net/?retryWrites=true&w=majority"
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true })
+const { MongoClient } = require("mongodb")
 
 const app = express()
 const port = 8000
+const uri = "mongodb+srv://teamfourcodehunter:cityofvancouver@codecluster.ktv41.mongodb.net/?retryWrites=true&w=majority"
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true })
 
 // The database to use
 const dbName = "codehunterdb"
@@ -31,6 +33,8 @@ app.get("/getMapData", (req, res) => {
       await client.close()
     }
   }
+
+  run().catch(console.dir);
 })
 
 //app.use("axios", express.static("../client/src/pages/sample-feature"));
@@ -74,7 +78,7 @@ app.get("/getMapData", (req, res) => {
   
   run().catch(console.dir);
 });
-
+*/
 app.get("/sampleGet", (req, res) => {
   async function run() {
     try {
@@ -96,8 +100,10 @@ app.get("/sampleGet", (req, res) => {
       await client.close();
     }
   }
+  
+  run().catch(console.dir);
 });
-
+/*
 app.post("/samplePost", (req, res) => {
   console.log("In server-side samplePost. Req: ", req.data);
   //let request = req.query["format"];
