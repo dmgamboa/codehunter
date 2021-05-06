@@ -5,7 +5,7 @@ const uri = "mongodb+srv://teamfourcodehunter:cityofvancouver@codecluster.ktv41.
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true })
 
 const app = express();
-const port = 5000;
+const port = 8000;
 
 // The database to use
 const dbName = "codehunterdb"
@@ -22,7 +22,7 @@ app.get("/getMapData", (req, res) => {
       const response = await col.find().toArray();
 
       console.log("return ", response);
-  
+      
       // Send it back
       res.send(response);
       
