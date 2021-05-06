@@ -1,9 +1,12 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useHistory } from "react-router-dom";
+
 import { Button } from "antd";
 import { SwiperSlide } from "swiper/react";
-import SwiperCore, { Pagination } from "swiper/core";
+import SwiperCore, { Pagination, EffectFade } from "swiper/core";
 import "swiper/swiper.min.css";
-import "swiper/components/pagination/pagination.min.css"
+import "swiper/components/pagination/pagination.min.css";
+import 'swiper/components/effect-fade/effect-fade.less';
 
 
 import { carouselItems } from "./constant";
@@ -11,10 +14,10 @@ import { Container, StyledSwiper, Image } from "./styled";
 import React from "react";
 
 const WalkthroughScreen = () => {
-    
+    SwiperCore.use([Pagination, EffectFade]);
+
     const [carouselIndex, setCarouselIndex] = useState(0);
 
-    SwiperCore.use([Pagination]);
 
     const renderCarouselItems = (items) => {
         return items.map(({ img }) => {
@@ -33,6 +36,8 @@ const WalkthroughScreen = () => {
         <Container>
             <StyledSwiper
                 centeredSlides
+                effect="fade"
+                fadeEffect={{crossFade: true}}
                 pagination={{dynamicBullets: true}}
                 onTransitionStart={(swiper) => setCarouselIndex(swiper.realIndex)}
             >
