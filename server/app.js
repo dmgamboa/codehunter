@@ -1,20 +1,46 @@
-// Our application entry point
-// Express stuff
-const express = require('express');
-const app = express();
-const port = 8000;
-app.use("axios", express.static("../client/src/pages/sample-feature"));
+//app.use(express.json());
 
-// MongoDB stuff
-const { MongoClient } = require('mongodb');
-const uri = "mongodb+srv://teamfourcodehunter:cityofvancouver@codecluster.ktv41.mongodb.net/?retryWrites=true&w=majority";
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+// Our application entry point
+const express = require("express");
+const { MongoClient } = require("mongodb")
+
+const app = express()
+const port = 8000
+const uri = "mongodb+srv://teamfourcodehunter:cityofvancouver@codecluster.ktv41.mongodb.net/?retryWrites=true&w=majority"
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true })
 
 // The database to use
-const dbName = "test";
+const dbName = "codehunterdb"
+const dbCol = "codes"
+
+app.get("/getMapData", (req, res) => {
+  async function run() {
+    try {
+      await client.connect()
+      console.log("Connected correctly to server")
+      const db = client.db(dbName)
+      const col = db.collection(dbCol)
+      
+      const response = await col.find().toArray()
+
+      console.log("return ", response)
+      
+      // Send it back
+      res.send(response)
+    } catch (err) {
+      console.log(err.stack)
+    } finally {
+      await client.close()
+    }
+  }
+
+  run().catch(console.dir);
+})
+
+//app.use("axios", express.static("../client/src/pages/sample-feature"));
 
 // Call when retrieving data.
-app.get("/example", (req, res) => {
+/*app.get("/example", (req, res) => {
   async function run() {
     try {
       await client.connect();
@@ -37,7 +63,7 @@ app.get("/example", (req, res) => {
       }
   
       // Insert a single document, wait for promise so we can read it back
-      const p = await col.insertOne(personDocument);
+      //const p = await col.insertOne(personDocument);
       // Find one document
       const myDoc = await col.findOne();
       // Send it back
@@ -52,7 +78,7 @@ app.get("/example", (req, res) => {
   
   run().catch(console.dir);
 });
-
+*/
 app.get("/sampleGet", (req, res) => {
   async function run() {
     try {
@@ -74,8 +100,10 @@ app.get("/sampleGet", (req, res) => {
       await client.close();
     }
   }
+  
+  run().catch(console.dir);
 });
-
+/*
 app.post("/samplePost", (req, res) => {
   console.log("In server-side samplePost. Req: ", req.data);
   //let request = req.query["format"];
@@ -97,9 +125,9 @@ app.post("/samplePost", (req, res) => {
       await client.close();
     }
   }
-  run().catch(console.dir);*/
-});
+  run().catch(console.dir);
+});*/
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
-});
+})
