@@ -2,13 +2,19 @@ import styled from "styled-components";
 import { Swiper } from "swiper/react";
 
 export const Container = styled.div`
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: space-between;
     
     .btm {
-        bottom: 0;
-        width: 100%;
+        margin-bottom: 2rem;
     }
 
     .login, .register {
@@ -54,5 +60,6 @@ export const Image = styled.img`
     padding: 2rem;
     margin-bottom: 1rem;
     max-width: 100%;
+    height: 65vh;
     object-fit: contain;
 `;

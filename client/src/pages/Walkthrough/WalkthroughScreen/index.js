@@ -42,18 +42,20 @@ const WalkthroughScreen = () => {
 
     return (
         <Container>
-            <StyledSwiper
-                centeredSlides
-                effect="fade"
-                fadeEffect={{crossFade: true}}
-                pagination={{dynamicBullets: true}}
-                onTransitionStart={(swiper) => setCarouselIndex(swiper.realIndex)}
-            >
-                {renderCarouselItems(carouselItems)}
-            </StyledSwiper>
+            <div className="top">
+                <StyledSwiper
+                    centeredSlides="true"
+                    effect="fade"
+                    fadeEffect={{crossFade: true}}
+                    pagination={{dynamicBullets: true}}
+                    onTransitionStart={(swiper) => setCarouselIndex(swiper.realIndex)}
+                >
+                    {renderCarouselItems(carouselItems)}
+                </StyledSwiper>
 
-            <h1>{carouselItems[carouselIndex].heading}</h1>
-            <p>{carouselItems[carouselIndex].body}</p>
+                <h1>{carouselItems[carouselIndex].heading}</h1>
+                <p>{carouselItems[carouselIndex].body}</p>
+            </div>
 
             <div className="btm">
                 <Button
