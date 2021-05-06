@@ -20,7 +20,7 @@ const LocationsMap = () => {
     <div style={{ height: "100vh", width: "100%" }}>
       <SearchBar />
       <GoogleMapReact
-        bootstrapURLKeys={{ key: "AIzaSyAeyRbNMuUdpdvj8bd5CTx90-vOrVl2flM" }}
+        bootstrapURLKeys={{ key: "" }}
         center={ vancouverCoords }
         zoom={initialZoom}
       >
