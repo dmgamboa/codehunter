@@ -1,43 +1,17 @@
-//app.use(express.json());
-
 // Our application entry point
-const express = require("express");
-const { MongoClient } = require("mongodb")
+// Express stuff
+const express = require('express');
+const app = express();
+const port = 8000;
+app.use("axios", express.static("../client/src/pages/sample-feature"));
 
-const app = express()
-const port = 8000
-const uri = "mongodb+srv://teamfourcodehunter:cityofvancouver@codecluster.ktv41.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true })
+// MongoDB stuff
+const { MongoClient } = require('mongodb');
+const uri = "mongodb+srv://teamfourcodehunter:cityofvancouver@codecluster.ktv41.mongodb.net/?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 // The database to use
-const dbName = "codehunterdb"
-const dbCol = "codes"
-
-//app.use("axios", express.static("../client/src/pages/sample-feature"));
-
-app.get("/getMapData", (req, res) => {
-  async function run() {
-    try {
-      await client.connect()
-      console.log("Connected correctly to server")
-      const db = client.db(dbName)
-      const col = db.collection(dbCol)
-      
-      const response = await col.find().toArray()
-
-      console.log("return ", response)
-      
-      // Send it back
-      res.send(response)
-    } catch (err) {
-      console.log(err.stack)
-    } finally {
-      await client.close()
-    }
-  }
-
-  run().catch(console.dir);
-})
+const dbName = "test";
 
 // Call when retrieving data.
 app.get("/example", (req, res) => {
@@ -61,7 +35,7 @@ app.get("/example", (req, res) => {
         "contribs": ["Turing machine", "Turing test", "Turingery"],
         "views": 1250000
       }
-
+  
       // Insert a single document, wait for promise so we can read it back
       const p = await col.insertOne(personDocument);
       // Find one document
@@ -72,7 +46,7 @@ app.get("/example", (req, res) => {
     } catch (err) {
       console.log(err.stack);
     } finally {
-      await client.close();
+      
     }
   }
   
@@ -84,7 +58,7 @@ app.get("/sampleGet", (req, res) => {
     try {
       console.log("In server-side sampleGet");
       await client.connect();
-      const db = client.db(dbName)
+      const db = client.db(dbName);
   
       // Use the collection "people"
       const col = db.collection("people");
@@ -100,10 +74,32 @@ app.get("/sampleGet", (req, res) => {
       await client.close();
     }
   }
+});
+
+app.post("/samplePost", (req, res) => {
+  console.log("In server-side samplePost. Req: ", req.data);
+  //let request = req.query["format"];
+
   
-  run().catch(console.dir);
+
+  /*async function run() {
+    try {
+      await client.connect();
+      const db = client.db(dbName);
+
+      const profiles = db.collection("profiles");
+      // create a document to be inserted
+      const doc = req;
+      const result = await profiles.insertOne(doc);
+      res.send(result);
+
+    } finally {
+      await client.close();
+    }
+  }
+  run().catch(console.dir);*/
 });
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
-})
+});
