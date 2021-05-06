@@ -37,7 +37,7 @@ app.get("/example", (req, res) => {
       }
   
       // Insert a single document, wait for promise so we can read it back
-      //const p = await col.insertOne(personDocument);
+      const p = await col.insertOne(personDocument);
       // Find one document
       const myDoc = await col.findOne();
       // Send it back
