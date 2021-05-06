@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams, useLocation } from "react-router-dom";
 import { TabBar } from "antd-mobile";
 
 import { navRoutes, navlessPaths } from "../../context/routers";
 
-import NavContainer from "./styled";
-
 const Navigation = () => {
     const history = useHistory();
     const { page } = useParams();
+    let location = useLocation();
 
     const [tab, setTab] = useState();
     const [hidden, setHidden] = useState(false);
@@ -16,10 +15,8 @@ const Navigation = () => {
     const { Item } = TabBar;
 
     useEffect(() => {
-        if (navlessPaths.includes(`/${page}`)) {
-            setHidden(true);
-        }
-    }, []);
+        navlessPaths.includes(`/${page}`) ? setHidden(true) : setHidden(false);
+    }, [location]);
     
     useEffect(() => {
         history.push(tab);
@@ -41,11 +38,9 @@ const Navigation = () => {
     }
 
     return (
-        <NavContainer>
-            <TabBar hidden={hidden}>
-                {getTabs(navRoutes)}
-            </TabBar>            
-        </NavContainer>
+        <TabBar hidden={hidden}>
+            {getTabs(navRoutes)}
+        </TabBar>            
     );
 }
 
