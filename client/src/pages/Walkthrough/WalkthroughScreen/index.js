@@ -14,10 +14,18 @@ import { Container, StyledSwiper, Image } from "./styled";
 import React from "react";
 
 const WalkthroughScreen = () => {
+    const history = useHistory();
     SwiperCore.use([Pagination, EffectFade]);
 
     const [carouselIndex, setCarouselIndex] = useState(0);
 
+    const handleRegister = () => {
+        history.push("/register");
+    }
+
+    const handleLogin = () => {
+        history.push("/login");
+    }
 
     const renderCarouselItems = (items) => {
         return items.map(({ img }) => {
@@ -48,10 +56,20 @@ const WalkthroughScreen = () => {
             <p>{carouselItems[carouselIndex].body}</p>
 
             <div className="btm">
-                <Button className="register" type="primary" block>
+                <Button
+                    className="register"
+                    type="primary"
+                    onClick={() => handleRegister()}
+                    block
+                >
                     Join the hunt
                 </Button>
-                <span className="login">Log In</span>                
+                <span
+                    className="login"
+                    onClick={() => handleLogin()}
+                >
+                    Log In
+                </span>                
             </div>
         </Container>
     );
