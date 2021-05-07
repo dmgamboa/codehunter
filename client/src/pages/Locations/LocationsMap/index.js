@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import GoogleMapReact from "google-map-react";
+
 import SearchBar from "../../../components/SearchBar";
 import Marker from "../../../components/Marker";
+
+import { StyledMap } from "./styled";
 import { getMapData } from "../axios";
 
 const initialCoords = {
@@ -66,7 +69,7 @@ const LocationsMap = () => {
   };
 
   return (
-    <div style={{ height: "90vh", width: "100%" }}>
+    <StyledMap>
       {//<SearchBar />
       }
       <GoogleMapReact
@@ -76,7 +79,7 @@ const LocationsMap = () => {
       >
         {renderMarkers(markers)}
       </GoogleMapReact>
-    </div>
+    </StyledMap>
   );
 };
 
