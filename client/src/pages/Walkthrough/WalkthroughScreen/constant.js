@@ -1,6 +1,6 @@
-import walkthroughImage01 from "../../../assets/icons/walkthrough/walkthrough-01.png";
-import walkthroughImage02 from "../../../assets/icons/walkthrough/walkthrough-02.png";
-import walkthroughImage03 from "../../../assets/icons/walkthrough/walkthrough-03.png";
+import walkthroughImage01 from "../../../assets/walkthrough/walkthrough-01.svg";
+import walkthroughImage02 from "../../../assets/walkthrough/walkthrough-02.svg";
+import walkthroughImage03 from "../../../assets/walkthrough/walkthrough-03.svg";
 
 export const carouselItems = [
     {
