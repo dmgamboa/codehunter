@@ -5,7 +5,6 @@ import Navigation from "../Navigation";
 const { Content } = Layout;
 
 const MainLayout = ({ children }) => {
-
     return (
         <>
             <Layout>
@@ -16,6 +15,6 @@ const MainLayout = ({ children }) => {
             <Navigation />
         </>
     );
-}
+};
 
 export default MainLayout;

@@ -1,6 +1,6 @@
-import React from "react"
+import React from "react";
 
-const MarkerWindow = () => {
+const MarkerWindow = ({ name }) => {
   const markerWindowStyle = {
     position: "fixed",
     width: 200,
@@ -9,13 +9,13 @@ const MarkerWindow = () => {
     padding: 10,
     fontSize: 14,
     transform: "translateY(-80px)"
-  }
+  };
 
   return (
     <div style={markerWindowStyle}>
-      {"Mall Area"}
+      {name}
     </div>
-  )
-}
+  );
+};
 
-export default MarkerWindow
+export default MarkerWindow;

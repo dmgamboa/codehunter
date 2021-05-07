@@ -1,10 +1,9 @@
-import axios from "axios"
+import axios from "axios";
 
-export const getMapData = () => {
-  axios.get("http://localhost:8000/example").then(res => {
-    console.log(res.data)
-  })
-  .catch(() => {
-    console.log("Nope")
-  })
-}
+export const getMapData = async () => {
+  var mapData;
+  await axios.get("/getMapData").then(res => {
+    mapData = res;
+  });
+  return mapData;
+};
