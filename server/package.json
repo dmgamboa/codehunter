@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
+  "type": "module",
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js"
@@ -14,8 +15,10 @@
   "dependencies": {
     "express": "^4.17.1",
     "firebase": "^8.4.3",
+    "history": "^4.10.1",
     "lodash": "^4.17.21",
     "mongodb": "^3.6.6",
-    "mongoose": "^5.12.7"
+    "mongoose": "^5.12.7",
+    "nodemon": "^2.0.7"
   }
 }

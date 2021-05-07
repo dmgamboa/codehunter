@@ -1,21 +1,17 @@
-import { Layout } from "antd";
+import { motion } from "framer-motion";
 
+import { Layout, Content } from "./styled";
 import Navigation from "../Navigation";
 
-const { Content } = Layout;
-
 const MainLayout = ({ children }) => {
-
     return (
-        <>
-            <Layout>
-                <Content>
+        <Layout>
+            <Content>
                     {children}
-                </Content>
-            </Layout>
+            </Content>
             <Navigation />
-        </>
+        </Layout>
     );
-}
+};
 
 export default MainLayout;

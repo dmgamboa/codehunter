@@ -1,5 +1,5 @@
 import { Route } from "react-router-dom";
-import { 
+import Icon, { 
     CompassOutlined,
     CompassFilled,
     SmileOutlined,
@@ -15,56 +15,85 @@ import Scan from "../../pages/Scan";
 import Rewards from "../../pages/Rewards";
 import Friends from "../../pages/Friends";
 import Profile from "../../pages/Profile";
+import Walkthrough from "../../pages/Walkthrough";
+import Account from "../../pages/Account";
+
+import {ReactComponent as Logo} from "../../assets/icons/logo.svg";
 
 const routes = [
     {
         name: "Locations",
-        path: `/locations`,
+        path: "/locations",
         exact: false,
         navTab: true,
+        fullscreen: false,
         icon: <CompassOutlined />,
         selectedIcon: <CompassFilled />,
         component: <Locations />
     },
     {
         name: "Scan",
-        path: `/scan`,
+        path: "/scan",
         exact: false,
         navTab: true,
-        icon: <SmileOutlined />,
-        selectedIcon: <SmileFilled />,
+        fullscreen: false,
+        icon: <Icon component={Logo} />,
+        selectedIcon: <Icon component={Logo} />,
         component: <Scan />
     },
     {
         name: "Friends",
-        path: `/friends`,
+        path: "/friends",
         exact: false,
         navTab: true,
+        fullscreen: false,
         icon: <TeamOutlined />,
         selectedIcon: <TeamOutlined />,
         component: <Friends />
     },
     {
         name: "Rewards",
-        path: `/rewards`,
+        path: "/rewards",
         exact: false,
         navTab: true,
+        fullscreen: false,
         icon: <GiftOutlined />,
         selectedIcon: <GiftFilled />,
         component: <Rewards />
     },
     {
         name: "Profile",
-        path: `/profile`,
+        path: "/profile",
         exact: false,
         navTab: true,
+        fullscreen: false,
         icon: <UserOutlined />,
         selectedIcon: <UserOutlined />,
         component: <Profile />
     },
+    {
+        name: "Walkthrough",
+        path: "/walkthrough",
+        exact: false,
+        navTab: false,
+        fullscreen: true,
+        component: <Walkthrough />
+    },
+    {
+        name: "Account",
+        path: "/account",
+        exact: false,
+        navTab: false,
+        component: <Account />
+    }
+
 ];
 
 export const navRoutes = routes.filter(route => route.navTab);
+
+export const navlessPaths = routes
+    .filter(route => route.fullscreen)
+    .map(route => route.path);
 
 // TODO
 // Add Permissions & 404

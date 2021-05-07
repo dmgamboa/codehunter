@@ -6,7 +6,7 @@ const SampleForm = () => {
 
     const handleBackClick = () => {
         history.push("/sample/");
-    }
+    };
 
     return (
         <div>
@@ -18,6 +18,6 @@ const SampleForm = () => {
             </Button>
         </div>
     );
-}
+};
 
 export default SampleForm;

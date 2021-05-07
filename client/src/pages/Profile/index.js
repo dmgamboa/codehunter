@@ -16,6 +16,6 @@ const Profile = () => {
             />
         </Switch>
     );
-}
+};
 
 export default Profile;

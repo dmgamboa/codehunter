@@ -1,19 +1,23 @@
 import { useEffect, useState } from "react";
-import { useHistory, useRouteMatch } from "react-router-dom";
+import { useHistory, useParams, useLocation } from "react-router-dom";
 import { TabBar } from "antd-mobile";
 
-import { navRoutes } from "../../context/routers";
+import { navRoutes, navlessPaths } from "../../context/routers";
 
-import NavContainer from "./styled";
-
-const Navigation = ({ hidden }) => {
+const Navigation = () => {
     const history = useHistory();
-    let match = useRouteMatch();
+    const { page } = useParams();
+    let location = useLocation();
 
-    const [tab, setTab] = useState(navRoutes[0].path);
+    const [tab, setTab] = useState();
+    const [hidden, setHidden] = useState(true);
 
     const { Item } = TabBar;
 
+    useEffect(() => {
+        navlessPaths.includes(`/${page}`) ? setHidden(true) : setHidden(false);
+    }, [location]);
+    
     useEffect(() => {
         history.push(tab);
     }, [tab]);
@@ -26,7 +30,7 @@ const Navigation = ({ hidden }) => {
                     icon={icon}
                     selectedIcon={selectedIcon}
                     title={name}
-                    selected={tab === path}
+                    selected={tab === path || `/${page}` === path}
                     onPress={() => setTab(path)}
                 />
             );
@@ -34,11 +38,9 @@ const Navigation = ({ hidden }) => {
     }
 
     return (
-        <NavContainer>
-            <TabBar hidden={hidden}>
-                {getTabs(navRoutes)}
-            </TabBar>            
-        </NavContainer>
+        <TabBar hidden={hidden}>
+            {getTabs(navRoutes)}
+        </TabBar>            
     );
 }
 
