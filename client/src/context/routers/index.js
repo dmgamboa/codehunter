@@ -15,56 +15,74 @@ import Scan from "../../pages/Scan";
 import Rewards from "../../pages/Rewards";
 import Friends from "../../pages/Friends";
 import Profile from "../../pages/Profile";
+import Walkthrough from "../../pages/Walkthrough";
 
 const routes = [
     {
         name: "Locations",
-        path: `/locations`,
+        path: "/locations",
         exact: false,
         navTab: true,
+        fullscreen: false,
         icon: <CompassOutlined />,
         selectedIcon: <CompassFilled />,
         component: <Locations />
     },
     {
         name: "Scan",
-        path: `/scan`,
+        path: "/scan",
         exact: false,
         navTab: true,
+        fullscreen: false,
         icon: <SmileOutlined />,
         selectedIcon: <SmileFilled />,
         component: <Scan />
     },
     {
         name: "Friends",
-        path: `/friends`,
+        path: "/friends",
         exact: false,
         navTab: true,
+        fullscreen: false,
         icon: <TeamOutlined />,
         selectedIcon: <TeamOutlined />,
         component: <Friends />
     },
     {
         name: "Rewards",
-        path: `/rewards`,
+        path: "/rewards",
         exact: false,
         navTab: true,
+        fullscreen: false,
         icon: <GiftOutlined />,
         selectedIcon: <GiftFilled />,
         component: <Rewards />
     },
     {
         name: "Profile",
-        path: `/profile`,
+        path: "/profile",
         exact: false,
         navTab: true,
+        fullscreen: false,
         icon: <UserOutlined />,
         selectedIcon: <UserOutlined />,
         component: <Profile />
     },
+    {
+        name: "Walkthrough",
+        path: "/walkthrough",
+        exact: false,
+        navTab: false,
+        fullscreen: true,
+        component: <Walkthrough />
+    },
 ];
 
 export const navRoutes = routes.filter(route => route.navTab);
+
+export const navlessPaths = routes
+    .filter(route => route.fullscreen)
+    .map(route => route.path);
 
 // TODO
 // Add Permissions & 404

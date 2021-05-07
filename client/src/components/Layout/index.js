@@ -1,19 +1,14 @@
-import { Layout } from "antd";
-
+import { Layout, Content } from "./styled";
 import Navigation from "../Navigation";
-
-const { Content } = Layout;
 
 const MainLayout = ({ children }) => {
     return (
-        <>
-            <Layout>
-                <Content>
-                    {children}
-                </Content>
-            </Layout>
+        <Layout>
+            <Content>
+                {children}
+            </Content>
             <Navigation />
-        </>
+        </Layout>
     );
 };
 
