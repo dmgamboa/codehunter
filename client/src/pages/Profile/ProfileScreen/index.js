@@ -18,6 +18,6 @@ const ProfileScreen = () => {
       <button onClick={handleLogout}>Log Out</button>
     </div>
   );
-}
+};
 
 export default ProfileScreen;

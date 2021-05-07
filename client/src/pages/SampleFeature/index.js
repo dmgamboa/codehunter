@@ -20,6 +20,6 @@ const SampleFeature = () => {
             />
         </Switch>
     );
-}
+};
 
 export default SampleFeature;

@@ -14,6 +14,6 @@ const Locations = () => {
             />
         </Switch>
     );
-}
+};
 
 export default Locations;

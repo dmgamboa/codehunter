@@ -21,11 +21,11 @@ const WalkthroughScreen = () => {
 
     const handleRegister = () => {
         history.push("/register");
-    }
+    };
 
     const handleLogin = () => {
         history.push("/login");
-    }
+    };
 
     const renderCarouselItems = (items) => {
         return items.map(({ img }) => {
@@ -38,7 +38,7 @@ const WalkthroughScreen = () => {
                 </SwiperSlide>
             );
         })
-    }
+    };
 
     return (
         <motion.div
@@ -83,6 +83,6 @@ const WalkthroughScreen = () => {
         </motion.div>
 
     );
-}
+};
 
 export default WalkthroughScreen;

@@ -14,6 +14,6 @@ const Scan = () => {
             />
         </Switch>
     );
-}
+};
 
 export default Scan;

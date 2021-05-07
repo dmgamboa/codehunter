@@ -4,7 +4,6 @@ import { Layout, Content } from "./styled";
 import Navigation from "../Navigation";
 
 const MainLayout = ({ children }) => {
-
     return (
         <Layout>
             <Content>
@@ -13,6 +12,6 @@ const MainLayout = ({ children }) => {
             <Navigation />
         </Layout>
     );
-}
+};
 
 export default MainLayout;

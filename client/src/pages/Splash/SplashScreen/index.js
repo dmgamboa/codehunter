@@ -59,6 +59,6 @@ const SplashScreen = () => {
             </Container>            
         </motion.div>
     );
-}
+};
 
 export default SplashScreen;

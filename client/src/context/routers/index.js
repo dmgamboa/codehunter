@@ -17,6 +17,8 @@ import Friends from "../../pages/Friends";
 import Profile from "../../pages/Profile";
 import Walkthrough from "../../pages/Walkthrough";
 
+import Account from "../../pages/Account";
+
 const routes = [
     {
         name: "Locations",
@@ -76,6 +78,14 @@ const routes = [
         fullscreen: true,
         component: <Walkthrough />
     },
+    {
+        name: "Account",
+        path: "/account",
+        exact: false,
+        navTab: false,
+        component: <Account />
+    }
+
 ];
 
 export const navRoutes = routes.filter(route => route.navTab);
