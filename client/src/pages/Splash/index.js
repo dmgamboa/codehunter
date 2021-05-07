@@ -14,6 +14,6 @@ const Splash = () => {
             />
         </Switch>
     );
-}
+};
 
 export default Splash;

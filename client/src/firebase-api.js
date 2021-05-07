@@ -1,6 +1,6 @@
 // Firebase credentials
-import firebase from 'firebase/app';
-import 'firebase/auth';
+import firebase from "firebase/app";
+import "firebase/auth";
 
 // The Firebase configuration.
 const app = firebase.initializeApp({
@@ -11,7 +11,7 @@ const app = firebase.initializeApp({
     messagingSenderId: "228856337764",
     appId: "1:228856337764:web:43b9139cb373574bd95671",
     measurementId: "G-6CEK3N9EXT"
-})
+});
 
 //analytics();
 

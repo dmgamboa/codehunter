@@ -14,6 +14,6 @@ const Friends = () => {
             />
         </Switch>
     );
-}
+};
 
 export default Friends;

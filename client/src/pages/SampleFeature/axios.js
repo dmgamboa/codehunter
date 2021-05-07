@@ -9,7 +9,7 @@ export function sampleGet() {
     axios.get("/sampleGet").then(res => {
         console.log(res.data);
     });
-}
+};
 
 export function samplePost() {
     console.log("in client-side samplePost");
@@ -24,4 +24,4 @@ export function samplePost() {
     }, (error) => {
         console.log(error);
     });
-}
+};

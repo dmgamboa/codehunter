@@ -5,6 +5,6 @@ const RewardsScreen = () => {
             Hello from Rewards screen.
         </div>
     );
-}
+};
 
 export default RewardsScreen;

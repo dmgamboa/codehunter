@@ -14,6 +14,6 @@ const Walkthrough = () => {
             />
         </Switch>
     );
-}
+};
 
 export default Walkthrough;

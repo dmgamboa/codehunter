@@ -22,7 +22,7 @@ const SplashScreen = () => {
             <Content>
                 <Icon className="logo" component={Logo} />
                 <h1 className="app-name">Code<b>Hunter</b></h1>
-                <h2 className="team-name">by 4bby</h2>                
+                <h2 className="team-name">by 4bby</h2>
             </Content>
             <Particles
                 width="100vw"
@@ -32,6 +32,6 @@ const SplashScreen = () => {
             {redirect(timeout)}
         </Container>
     );
-}
+};
 
 export default SplashScreen;

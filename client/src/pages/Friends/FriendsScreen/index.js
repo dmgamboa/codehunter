@@ -5,6 +5,6 @@ const FriendsScreen = () => {
             Hello from Friends screen.
         </div>
     );
-}
+};
 
 export default FriendsScreen;
