@@ -1,21 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import Splash from "./pages/Splash";
-import reportWebVitals from './reportWebVitals';
-
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
 
-// TO DO
-// ADD SPLASH PAGE / WALKTHROUGH ROUTING
+import reportWebVitals from './reportWebVitals';
+import './index.css';
+import Splash from "./pages/Splash";
+import App from './App';
+
 ReactDOM.render(
+  <React.StrictMode>
     <Router>
-      <Switch>
-        <Route exact path={["/"]} render={() => <Splash />} />
-        <Route path={["/:page", "/:page/:subPage"]} render={() => <App />} />
-      </Switch>
-    </Router>,
+      <AnimatePresence exitBeforeEnter>
+        <Switch>
+          <Route exact path={["/"]} render={() => <Splash />} />
+          <Route path={["/:page", "/:page/:subPage"]} render={() => <App />} />
+        </Switch>        
+      </AnimatePresence>
+    </Router>
+  </React.StrictMode>,
   document.getElementById('root')
 );
 

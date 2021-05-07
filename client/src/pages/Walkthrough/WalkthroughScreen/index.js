@@ -8,7 +8,6 @@ import "swiper/swiper.min.css";
 import "swiper/components/pagination/pagination.min.css";
 import 'swiper/components/effect-fade/effect-fade.less';
 
-
 import { carouselItems } from "./constant";
 import { Container, StyledSwiper, Image } from "./styled";
 import React from "react";

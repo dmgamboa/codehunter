@@ -28,6 +28,6 @@ export const Content = styled.div`
         font-size: clamp(5rem, 45vw, 20rem);
         margin-bottom: 1rem;
         color: white;
-        filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.3));
+        /* filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.3)); */
     }
 `;
