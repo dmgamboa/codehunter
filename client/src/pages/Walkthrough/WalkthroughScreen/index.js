@@ -20,11 +20,11 @@ const WalkthroughScreen = () => {
     const [carouselIndex, setCarouselIndex] = useState(0);
 
     const handleRegister = () => {
-        history.push("/register");
+        history.push("/account/register");
     };
 
     const handleLogin = () => {
-        history.push("/login");
+        history.push("/account/login");
     };
 
     const renderCarouselItems = (items) => {
