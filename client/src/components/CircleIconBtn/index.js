@@ -1,10 +1,15 @@
 import { StyledBtn } from "./styled";
 
 const CircleIconBtn = ({
-    icon
+    className,
+    icon,
+    onClick
 }) => {
     return (
-        <StyledBtn>
+        <StyledBtn
+            className={className}
+            onClick={onClick}
+        >
             {icon}
         </StyledBtn>
     );

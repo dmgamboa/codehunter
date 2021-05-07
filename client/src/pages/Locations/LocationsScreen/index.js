@@ -1,20 +1,31 @@
 import { useState, useEffect } from "react";
+import Icon, { KeyOutlined, UnorderedListOutlined } from "@ant-design/icons";
+
+import { ReactComponent as MapIcon } from "../../../assets/icons/map.svg"; 
+import CircleIconBtn from "../../../components/CircleIconBtn";
 
 import LocationsMap from "../LocationsMap";
 import LocationsList from "../LocationsList";
 
+import { Layout } from "./styled";
+
 const LocationsScreen = () => {
 
-    const [view, setView] = useState("list");
+    const [mapView, setMapView] = useState(true);
 
-    useEffect(() => {
-
-    }, [view]);
+    const handleViewToggle = () => {
+        setMapView(!mapView);
+    }
 
     return (
-        <>
-            {view === "map" ? <LocationsMap /> : <LocationsList />}
-        </>
+        <Layout>
+            {mapView ? <LocationsMap /> : <LocationsList />}
+            <CircleIconBtn
+                className="view-toggle"
+                icon={mapView ? <UnorderedListOutlined /> : <Icon component={MapIcon} />}
+                onClick={handleViewToggle}
+            />
+        </Layout>
     );
 };
 
