@@ -1,21 +1,19 @@
 import React from "react";
-import { MobileTwoTone } from "@ant-design/icons";
+import { EnvironmentFilled } from "@ant-design/icons";
 
 const Marker = ({ handleClick, cultural_space_name, local_area }) => {
   const markerStyle = {
-    fontSize: "250%"
+    fontSize: "250%",
+    color: "#08497E"
   };
 
   return (
-    <>
-      <MobileTwoTone
-        twoToneColor="#00cccc"
-        style={markerStyle}
-        onClick={() => {
-          handleClick(cultural_space_name);
-        }}
-      />
-    </>
+    <EnvironmentFilled
+      style={markerStyle}
+      onClick={() => {
+        handleClick(cultural_space_name);
+      }}
+    />
   );
 };
 

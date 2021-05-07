@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { UserOutlined, LockOutlined, AppleOutlined, FacebookOutlined, TwitterOutlined, MailOutlined } from '@ant-design/icons';
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Form, Input, Button, Checkbox, message } from 'antd';
 
 import { useAuth } from "../../../context/Auth";
 
@@ -45,20 +45,21 @@ const Register = () => {
 
             // Wait for firebase to create user
             await signup(values.email, values.password);
-
+            // console.log("rsults: ", result);
             const userUID = getUserUID();
             // Axios POST request to create user doc in mongoDb
             createUserDoc(values, userUID)
             
+            message.loading({ content: "Validating your CodeHunter license.", duration: 2})
             history.push("/locations");
         } catch (e) {
-            setError("Error creating user ", e);
+            setError("Error creating account, try a different email.");
         } finally {
             setLoading(false);
         }
     
         if (error) {
-            alert("Error in registration, try a different email.")
+            message.error(error)
             console.log(error)
         }
     };
@@ -69,7 +70,7 @@ const Register = () => {
         <StyledRegistration className="registration">
             <div className="signup">
                 <h1>Sign Up</h1>
-                <Icon component={Logo} />
+                <Icon component={Logo} className="logo" />
             </div> 
 
             <Form

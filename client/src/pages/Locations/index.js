@@ -1,6 +1,6 @@
 import { Switch, Route, useRouteMatch } from "react-router-dom";
 
-import LocationsMap from "./LocationsMap";
+import LocationsScreen from "./LocationsScreen";
 
 const Locations = () => {
     const match = useRouteMatch();
@@ -10,7 +10,7 @@ const Locations = () => {
             <Route 
                 exact
                 path={`${match.path}`}
-                render={() => <LocationsMap />}
+                render={() => <LocationsScreen />}
             />
         </Switch>
     );

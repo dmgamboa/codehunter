@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const StyledRegistration = styled.div`
-    margin: 100px 10% 0 10%;
+    margin: 50px 10% 0 10%;
     .signup {
         margin-bottom: 60px;
         display: flex;
@@ -50,6 +50,9 @@ const StyledRegistration = styled.div`
     }
     .full-length {
         width: 100%;
+    }
+    .logo {
+        font-size: clamp(6rem, 10vw, 8rem);
     }
 `;
 

@@ -23,7 +23,7 @@ const AuthProvider = ({ children }) => {
     // Creating new user in firebase and document in user collection in MongoDB
     const signup = (email, password) => {
         console.log("signup() executed for firebase");
-        auth.createUserWithEmailAndPassword(email, password);
+        return auth.createUserWithEmailAndPassword(email, password);
     };
 
     const login = (email, password) => {
