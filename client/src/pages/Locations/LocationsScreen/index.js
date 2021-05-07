@@ -5,7 +5,7 @@ import LocationsList from "../LocationsList";
 
 const LocationsScreen = () => {
 
-    const [view, setView] = useState("map");
+    const [view, setView] = useState("list");
 
     useEffect(() => {
 

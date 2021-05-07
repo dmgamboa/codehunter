@@ -1,8 +1,12 @@
+import { KeyOutlined } from "@ant-design/icons";
+
+import CircleIconBtn from "../../../components/CircleIconBtn";
+
 const LocationsList = () => {
     return (
-        <div>
-            This is LocationsList.
-        </div>
+        <CircleIconBtn
+            icon={<KeyOutlined />}
+        />
     );
 };
 
