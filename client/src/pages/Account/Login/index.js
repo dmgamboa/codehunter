@@ -2,9 +2,8 @@ import React, { useRef, useState, useEffect } from "react";
 import { useAuth } from "../../../context/Auth"
 import { Link, useHistory } from "react-router-dom";
 import { MailOutlined, LockOutlined, AppleOutlined, FacebookOutlined, TwitterOutlined } from '@ant-design/icons'
-import { Form, Input, Button } from 'antd'
+import { Form, Input, Button, message } from 'antd'
 
-import FailedLogin from "./FailedLogin"
 import StyledLogin from "./styled.js"
 
 const Login = () => {
@@ -20,21 +19,19 @@ const Login = () => {
 
         try {
             await login(email, password);
+            message.loading({ content: "Glad to have you back!", duration: 1 })
             history.push("/locations");
         } catch(e) {
-            setError("Error logging in ", e);
+            setError("Failed to login, please check your password and email.");
+            // Displays loading message
+            message.error("Failed to login, check your password and email.")
         }
-        if(error) {
-            console.log(error);
-        };
     };
 
     return (
 
         <StyledLogin className="login">
             <h1 className="welcome"> Welcome Back to CodeHunter.</h1>
-
-            {error ? <FailedLogin></FailedLogin> : ""}
 
             <Form
                 name="normal_login"

@@ -1,4 +1,4 @@
-import axios from "axios"
+import axios from "axios";
 
 // Send POST request
 const createUserDoc = (values, uid) => {
@@ -7,18 +7,14 @@ const createUserDoc = (values, uid) => {
         "email": values.email, 
         "userName": values.username,
         "userUID": uid
-    }
+    };
 
-    axios({
-        method: "POST",
-        URL: "/create/userdoc",
-        data: regiInfo,
-        dataType: "json"
-        }).then(res => { 
-          console.log(res) 
-        }).catch(e => {
-            console.log(e)
-        });
-}
+    axios.post("/registration", regiInfo)
+    .then(res => { 
+        console.log(res) 
+    }).catch(e => {
+        console.log(e)
+    });
+};
 
-export default createUserDoc
+export default createUserDoc;
