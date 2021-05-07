@@ -15,5 +15,42 @@ const app = firebase.initializeApp({
 
 //analytics();
 
-export const auth = app.auth();
-export default app;
+
+// import firebase from 'firebase';
+// var firebaseui = require('firebaseui');
+const auth = app.auth()
+
+// const firebaseUI = () => {
+//     // Initialize the FirebaseUI Widget using Firebase.
+//     // var ui = new firebaseui.auth.AuthUI(auth);
+//     let ui = firebaseui.auth.AuthUI.getInstance() || new firebaseui.auth.AuthUI(auth);
+
+//     let uiConfig = {
+//         // callbacks: {
+//         //     signInSuccessWithAuthResult: async (authResult, redirectUrl) => {
+//         //         return true;
+//         //     },
+//         //     uiShown: function () {
+//         //         document.getElementById('loader').style.display = 'none';
+//         //     }
+//         // },
+//         // signInSuccessUrl: '../../sign-up-success.html',
+//         signInFlow: 'popup',
+//         signInOptions: [
+//             firebase.auth.EmailAuthProvider.PROVIDER_ID,
+//             firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+//             firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+//         ],
+//         // tosUrl: '<your-tos-url>',
+//         // privacyPolicyUrl: '<your-privacy-policy-url>'
+//     };
+
+//     // first param is a container in html 
+//     ui.start('#root', uiConfig);
+// }
+
+
+
+// export { auth, firebaseUI }
+export { auth }
+export default app
