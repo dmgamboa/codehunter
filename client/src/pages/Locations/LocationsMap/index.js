@@ -14,6 +14,7 @@ const initialZoom = 13;
 const LocationsMap = () => {
   const [markers, setMarkers] = useState([]);
   const [coords, setCoords] = useState(initialCoords);
+  const mapsKey = process.env.REACT_APP_MAPS_KEY;
 
   const bound = 0.015;
   
@@ -65,10 +66,11 @@ const LocationsMap = () => {
   };
 
   return (
-    <div style={{ height: "100vh", width: "100%" }}>
-      <SearchBar />
+    <div style={{ height: "90vh", width: "100%" }}>
+      {//<SearchBar />
+      }
       <GoogleMapReact
-        bootstrapURLKeys={{ key: "AIzaSyAeyRbNMuUdpdvj8bd5CTx90-vOrVl2flM" }}
+        bootstrapURLKeys={{ key: mapsKey }}
         center={initialCoords}
         zoom={initialZoom}
       >
