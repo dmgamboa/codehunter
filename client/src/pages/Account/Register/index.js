@@ -8,6 +8,10 @@ import { useAuth } from "../../../context/Auth";
 import StyledRegistration from "./styled.js";
 import createUserDoc from "./axios.js";
 
+import { ReactComponent as Logo } from "../../../assets/icons/logo.svg";
+import Icon from "@ant-design/icons";
+
+
 const Register = () => {
     const tailFormItemLayout = {
         wrapperCol: {
@@ -22,56 +26,50 @@ const Register = () => {
         },
     };
 
-    var valueRef = useRef();
-    var { signup } = useAuth();
-    const history = useHistory(); 
+    var valuesRef = useRef();
+    var { signup, getUserUID } = useAuth();
+    const history = useHistory();
     
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
 
     // Create new user in firebase upon clicking register
     const onFinish = async () => {
-        const email = valueRef.current.getFieldValue().email;
-        const password = valueRef.current.getFieldValue().password;
-
+        const values = valuesRef.current.getFieldValue();
+        console.log("values: ", values);
         // const userUID = await createUserFb(values)
         try {
             setError("");
             // Prevent user from spam clicking register
             setLoading(true);
-            await signup(email, password);
+
+            // Wait for firebase to create user
+            await signup(values.email, values.password);
+
+            const userUID = getUserUID();
+            // Axios POST request to create user doc in mongoDb
+            createUserDoc(values, userUID)
+            
             history.push("/locations");
         } catch (e) {
             setError("Error creating user ", e);
+        } finally {
+            setLoading(false);
         }
-        setLoading(false);
-        
+    
         if (error) {
             alert("Error in registration, try a different email.")
             console.log(error)
         }
+    };
 
-        // console.log("user uid: " + userUID)
-        // console.log("values from form: ", values)
 
-        // Axios POST request to create user doc in mongoDb
-        // createUserDoc(values, userUID)
-    }
-
-    // const handleSubmit = (event) => {
-    //     event.preventDefault();
-    //     signup(email.current.value, password.current.value)
-    //     history.push("/")
-    // }
-    // useEffect(() => {
-    //     valueRef = valueRef.current.getFieldValue();
-    // }, [])
 
     return (
         <StyledRegistration className="registration">
             <div className="signup">
                 <h1>Sign Up</h1>
-                <img className="logo" src="../../../assets/logo.svg" alt="codehunter logo"/> 
+                <Icon component={Logo} />
             </div> 
 
             <Form
@@ -80,7 +78,7 @@ const Register = () => {
                 initialValues={{
                     remember: true,
                 }}
-                ref={valueRef}
+                ref={valuesRef}
                 onFinish={onFinish}
                 >
 
@@ -212,7 +210,7 @@ const Register = () => {
             
              <p>Already have an account? <Link to="/account/login">Login.</Link></p>
         </StyledRegistration>
-    )
-}
+    );
+};
 
 export default Register;
