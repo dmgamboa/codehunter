@@ -13,8 +13,7 @@ const SplashScreen = () => {
         orderInterval,
         traceDuration,
         fillDuration,
-        textDelay,
-        timeoutWait
+        textDelay
     } = animationTimes;
     
     const fillDelay = traceDuration + (orderInterval * 2);

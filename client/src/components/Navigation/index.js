@@ -10,7 +10,7 @@ const Navigation = () => {
     let location = useLocation();
 
     const [tab, setTab] = useState();
-    const [hidden, setHidden] = useState(false);
+    const [hidden, setHidden] = useState(true);
 
     const { Item } = TabBar;
 
