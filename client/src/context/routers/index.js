@@ -17,8 +17,7 @@ import Friends from "../../pages/Friends";
 import Profile from "../../pages/Profile";
 import Walkthrough from "../../pages/Walkthrough";
 
-import Login from "../../pages/Login";
-import Register from "../../pages/Register";
+import Account from "../../pages/Account";
 
 const routes = [
     {
@@ -67,26 +66,20 @@ const routes = [
         component: <Profile />
     },
     {
-<<<<<<< HEAD
         name: "Walkthrough",
         path: "/walkthrough",
         exact: false,
         navTab: false,
         component: <Walkthrough />
     },
-=======
-        name: "Login",
-        path: `/login`,
-        exact: false,
-        component: <Login />
-    },
     {
-        name: "Register",
-        path: `/register`,
+        name: "Account",
+        path: "/account",
         exact: false,
-        component: <Register />
+        navTab: false,
+        component: <Account />
     }
->>>>>>> account
+
 ];
 
 export const navRoutes = routes.filter(route => route.navTab);

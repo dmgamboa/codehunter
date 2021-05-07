@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { auth } from "../firebase"
+import { auth } from "../firebase";
 
 // Create context object
 const Auth = React.createContext();
@@ -9,46 +9,49 @@ export function useAuth() {
 }
 
 
-// Creating new user in firebase and document in user collection in MongoDB
-export const createUserFb = async (values) => {
-  try {
-    const created = await auth.createUserWithEmailAndPassword(values.email, values.password)
+const AuthProvider = ({ children }) => {
+  const [currentUser, setCurrentUser] = useState();
 
-    // Get user UID from Firebase
-    auth.onAuthStateChanged((user) => {
-      if (user) {
-        const userUID  = user.uid
-        return userUID
-      }
-    })
+  
+  // Creating new user in firebase and document in user collection in MongoDB
+  const signup = (email, password) => {
+    return auth.createUserWithEmailAndPassword(email, password)
+  };
 
-  } catch (err) {
-    console.log(err)
-  }
-}
+  // try {
 
-export default function AuthProvider({ children }) {
-  const [user, setUser] = useState();
+  //   // Get user UID from Firebase
+  //   auth.onAuthStateChanged((user) => {
+  //     if (currentUser) {
+  //       const userUID  = user.uid
+  //       return userUID
+  //     }
+  //   })
+
+  // } catch (err) {
+  //   console.log(err)
+  // }
 
 
-  function login(email, password) {
-    auth.signInWithEmailAndPassword(email, password);
+  const login = (email, password) => {
+    return auth.signInWithEmailAndPassword(email, password);
   }
 
   function logout() {
-    return auth.signOut()
+    return auth.signOut();
   }
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(token => {
-      setUser(token);
+      setCurrentUser(token);
     })
-
+    // Unsubscribe from the listener onAuthStateChanged
     return unsubscribe;
   }, [])
 
   const value = {
-    user,
+    currentUser,
+    signup,
     login,
     logout
   };
@@ -60,3 +63,5 @@ export default function AuthProvider({ children }) {
     </Auth.Provider>
   );
 }
+
+export default AuthProvider;

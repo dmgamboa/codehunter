@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled from "styled-components";
 
 const StyledRegistration = styled.div`
     margin: 100px 10% 0 10%;
@@ -15,6 +15,7 @@ const StyledRegistration = styled.div`
         color: steelblue;
         text-align: left;
         width: 150px;
+        max-width: 500px;
     }
     .ant-form-item-control-input-content {
         display: flex;
@@ -50,6 +51,6 @@ const StyledRegistration = styled.div`
     .full-length {
         width: 100%;
     }
-`
+`;
 
-export default StyledRegistration
+export default StyledRegistration;

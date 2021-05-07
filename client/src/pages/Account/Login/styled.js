@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
 const StyledLogin = styled.div`
-    margin: 200px 10% 0 10%;
+    margin: 150px 10% 0 10%;
     .welcome {
         color: steelblue;
         text-align: left;
@@ -16,12 +16,6 @@ const StyledLogin = styled.div`
         flex-direction: row;
         .login-form-button {
             width: 100%;
-        }
-    }
-    a {
-        float: left;
-        span {
-            color: #000;
         }
     }
     .alternative {
