@@ -1,5 +1,5 @@
 import { Route } from "react-router-dom";
-import { 
+import Icon, { 
     CompassOutlined,
     CompassFilled,
     SmileOutlined,
@@ -16,8 +16,9 @@ import Rewards from "../../pages/Rewards";
 import Friends from "../../pages/Friends";
 import Profile from "../../pages/Profile";
 import Walkthrough from "../../pages/Walkthrough";
-
 import Account from "../../pages/Account";
+
+import {ReactComponent as Logo} from "../../assets/icons/logo.svg";
 
 const routes = [
     {
@@ -36,8 +37,8 @@ const routes = [
         exact: false,
         navTab: true,
         fullscreen: false,
-        icon: <SmileOutlined />,
-        selectedIcon: <SmileFilled />,
+        icon: <Icon component={Logo} />,
+        selectedIcon: <Icon component={Logo} />,
         component: <Scan />
     },
     {
