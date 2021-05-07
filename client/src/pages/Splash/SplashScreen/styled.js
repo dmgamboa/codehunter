@@ -24,10 +24,14 @@ export const Content = styled.div`
         text-shadow: 1px 2px 1px rgba(0, 0, 0, 0.3);
     }
     
-    .logo {
-        font-size: clamp(5rem, 45vw, 20rem);
+    svg {
+        width: clamp(5rem, 45vw, 20rem);
         margin-bottom: 1rem;
-        color: white;
-        /* filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.3)); */
+        fill: white;
+        overflow: visible;
+        stroke: #fff;
+        stroke-width: 2;
+        stroke-linejoin: round;
+        stroke-linecap: round;
     }
 `;
