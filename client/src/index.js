@@ -1,12 +1,12 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
+import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 
-import reportWebVitals from './reportWebVitals';
-import './index.css';
+import reportWebVitals from "./reportWebVitals";
+import "./index.css";
 import Splash from "./pages/Splash";
-import App from './App';
+import App from "./App";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -19,7 +19,7 @@ ReactDOM.render(
       </AnimatePresence>
     </Router>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function

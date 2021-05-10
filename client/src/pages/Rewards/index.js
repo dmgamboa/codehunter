@@ -14,6 +14,6 @@ const Rewards = () => {
             />
         </Switch>
     );
-}
+};
 
 export default Rewards;

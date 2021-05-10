@@ -1,9 +1,9 @@
 import React, { useReducer } from "react";
-// import { useAuth } from "../../context/Auth";
+import { useAuth } from "../../../context/Auth";
 import { useHistory } from "react-router-dom";
 
 const ProfileScreen = () => {
-//   const { user, logout } = useAuth();
+  const { logout } = useAuth();
   const history = useHistory();
 
   function handleLogout() {

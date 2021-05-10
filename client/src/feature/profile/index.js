@@ -1,6 +1,6 @@
 import React, { useReducer } from "react";
-import { useAuth } from "../../context/Auth"
-import { useHistory } from "react-router-dom"
+import { useAuth } from "../../context/Auth";
+import { useHistory } from "react-router-dom";
 
 export default function Profile() {
   const { user, logout } = useAuth();

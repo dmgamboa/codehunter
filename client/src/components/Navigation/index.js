@@ -34,14 +34,14 @@ const Navigation = () => {
                     onPress={() => setTab(path)}
                 />
             );
-        })
-    }
+        });
+    };
 
     return (
         <TabBar hidden={hidden}>
             {getTabs(navRoutes)}
         </TabBar>            
     );
-}
+};
 
 export default Navigation;

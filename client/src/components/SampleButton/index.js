@@ -8,6 +8,6 @@ const SampleButton = ({ name, onClick }) => {
             <Button type="primary" onClick={onClick}>Hello {name}</Button>
         </Container>
     );
-}
+};
 
 export default SampleButton;

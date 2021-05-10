@@ -7,7 +7,7 @@ import { SwiperSlide } from "swiper/react";
 import SwiperCore, { Pagination, EffectFade } from "swiper/core";
 import "swiper/swiper.min.css";
 import "swiper/components/pagination/pagination.min.css";
-import 'swiper/components/effect-fade/effect-fade.less';
+import "swiper/components/effect-fade/effect-fade.less";
 
 import { carouselItems } from "./constant";
 import { Container, StyledSwiper, Image } from "./styled";
@@ -37,7 +37,7 @@ const WalkthroughScreen = () => {
                     />                    
                 </SwiperSlide>
             );
-        })
+        });
     };
 
     return (
