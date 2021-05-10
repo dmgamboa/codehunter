@@ -38,7 +38,7 @@ const AuthProvider = ({ children }) => {
         const unsubscribe = auth.onAuthStateChanged(token => {
             setCurrentUser(token);
         });
-    // Unsubscribe from the listener onAuthStateChanged
+        // Unsubscribe from the listener onAuthStateChanged
         return unsubscribe;
     }, []);
 

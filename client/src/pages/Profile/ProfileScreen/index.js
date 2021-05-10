@@ -3,21 +3,21 @@ import { useAuth } from "../../../context/Auth";
 import { useHistory } from "react-router-dom";
 
 const ProfileScreen = () => {
-  const { logout } = useAuth();
-  const history = useHistory();
+    const { logout } = useAuth();
+    const history = useHistory();
 
-  function handleLogout() {
-    logout();
-    history.push("/login");
-  }
+    function handleLogout() {
+        logout();
+        history.push("/login");
+    }
 
-  return (
-    <div>
-      <h1>Profile page</h1>
-      Email: Some email
-      <button onClick={handleLogout}>Log Out</button>
-    </div>
-  );
+    return (
+        <div>
+            <h1>Profile page</h1>
+            Email: Some email
+            <button onClick={handleLogout}>Log Out</button>
+        </div>
+    );
 };
 
 export default ProfileScreen;
