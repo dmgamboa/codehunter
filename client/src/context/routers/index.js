@@ -1,5 +1,5 @@
 import { Route } from "react-router-dom";
-import Icon, { 
+import Icon, {
     CompassOutlined,
     CompassFilled,
     SmileOutlined,
@@ -7,8 +7,8 @@ import Icon, {
     TeamOutlined,
     GiftOutlined,
     GiftFilled,
-    UserOutlined
- } from "@ant-design/icons";
+    UserOutlined,
+} from "@ant-design/icons";
 
 import Locations from "../../pages/Locations";
 import Scan from "../../pages/Scan";
@@ -18,7 +18,7 @@ import Profile from "../../pages/Profile";
 import Walkthrough from "../../pages/Walkthrough";
 import Account from "../../pages/Account";
 
-import {ReactComponent as Logo} from "../../assets/icons/logo.svg";
+import { ReactComponent as Logo } from "../../assets/icons/logo.svg";
 
 const routes = [
     {
@@ -29,7 +29,7 @@ const routes = [
         fullscreen: false,
         icon: <CompassOutlined />,
         selectedIcon: <CompassFilled />,
-        component: <Locations />
+        component: <Locations />,
     },
     {
         name: "Scan",
@@ -39,7 +39,7 @@ const routes = [
         fullscreen: false,
         icon: <Icon component={Logo} />,
         selectedIcon: <Icon component={Logo} />,
-        component: <Scan />
+        component: <Scan />,
     },
     {
         name: "Friends",
@@ -49,7 +49,7 @@ const routes = [
         fullscreen: false,
         icon: <TeamOutlined />,
         selectedIcon: <TeamOutlined />,
-        component: <Friends />
+        component: <Friends />,
     },
     {
         name: "Rewards",
@@ -59,7 +59,7 @@ const routes = [
         fullscreen: false,
         icon: <GiftOutlined />,
         selectedIcon: <GiftFilled />,
-        component: <Rewards />
+        component: <Rewards />,
     },
     {
         name: "Profile",
@@ -69,7 +69,7 @@ const routes = [
         fullscreen: false,
         icon: <UserOutlined />,
         selectedIcon: <UserOutlined />,
-        component: <Profile />
+        component: <Profile />,
     },
     {
         name: "Walkthrough",
@@ -77,35 +77,25 @@ const routes = [
         exact: false,
         navTab: false,
         fullscreen: true,
-        component: <Walkthrough />
+        component: <Walkthrough />,
     },
     {
         name: "Account",
         path: "/account",
         exact: false,
         navTab: false,
-        component: <Account />
-    }
-
+        component: <Account />,
+    },
 ];
 
-export const navRoutes = routes.filter(route => route.navTab);
+export const navRoutes = routes.filter((route) => route.navTab);
 
-export const navlessPaths = routes
-    .filter(route => route.fullscreen)
-    .map(route => route.path);
+export const navlessPaths = routes.filter((route) => route.fullscreen).map((route) => route.path);
 
 // TODO
 // Add Permissions & 404
 export const getRoute = () => {
     return routes.map(({ name, path, exact, component }) => {
-        return (
-            <Route
-                key={name}
-                exact={exact}
-                path={path}
-                render={() => component}
-            />
-        );
+        return <Route key={name} exact={exact} path={path} render={() => component} />;
     });
 };
