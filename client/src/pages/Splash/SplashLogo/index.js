@@ -35,7 +35,7 @@ const SplashLogo = ({
                 }
             }
         };
-    }
+    };
 
     const pathVariantsInner = {
         start: {
@@ -49,7 +49,7 @@ const SplashLogo = ({
                 ease: "easeInOut"
             }
         }
-    }
+    };
 
     return(
         <motion.svg
@@ -133,6 +133,6 @@ const SplashLogo = ({
             />
         </motion.svg>
     );
-}
+};
 
 export default SplashLogo;

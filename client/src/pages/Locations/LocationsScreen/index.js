@@ -15,7 +15,7 @@ const LocationsScreen = () => {
 
     const handleViewToggle = () => {
         setMapView(!mapView);
-    }
+    };
 
     return (
         <Layout>

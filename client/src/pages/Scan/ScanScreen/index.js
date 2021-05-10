@@ -1,7 +1,7 @@
 import React from "react";
 import QrReader from "react-qr-reader";
 
-import { StyledScanner } from "./styled"
+import { StyledScanner } from "./styled";
 
 const ScanScreen = () => {
     const handleScan = (data) => {
