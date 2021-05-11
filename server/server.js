@@ -1,20 +1,16 @@
-/*// Our application entry point
-const express = require("express");
-const { MongoClient } = require("mongodb");
+// Our application entry point
+import express from "express";
+import cors from "cors";
+
+import registration from "./api-routes/registration.route.js";
+import getMapData from "./api-routes/getMapData.route.js";
+import config from "./config/index.js";
 
 const app = express();
-const port = 8000;
-const uri = "mongodb+srv://teamfourcodehunter:cityofvancouver@codecluster.ktv41.mongodb.net/?retryWrites=true&w=majority";
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
-// The database to use
+app.use(cors());
+app.use(express.json());
+app.use("/registration", registration);
+app.use("/getMapData", getMapData);
 
-
-app.get("/getMapData", (req, res) => {
-  
-});
-
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
-});
-*/
+export default app;

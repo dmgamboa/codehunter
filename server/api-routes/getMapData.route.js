@@ -1,8 +1,8 @@
 import express from "express";
-import getMapData from "../models/getMapData.js";
+import MapCtrl from "../controller/mapData.js";
 
 const router = express.Router();
 
-router.route("/").get(getMapData);
+router.route("/").get(MapCtrl.getMapData);
 
 export default router;

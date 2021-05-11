@@ -2,17 +2,18 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "connection.js",
   "type": "module",
   "scripts": {
-    "start": "node app.js",
-    "dev": "nodemon app.js"
+    "start": "node connection.js",
+    "dev": "nodemon connection.js"
   },
   "license": "ISC",
   "devDependencies": {
     "dotenv": "^8.2.0"
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "firebase": "^8.4.3",
     "history": "^4.10.1",
