@@ -11,7 +11,7 @@ import { Layout } from "./styled";
 
 const LocationsScreen = () => {
 
-    const [mapView, setMapView] = useState(true);
+    const [mapView, setMapView] = useState(false);
 
     const handleViewToggle = () => {
         setMapView(!mapView);
