@@ -17,6 +17,7 @@ import Friends from "../../pages/Friends";
 import Profile from "../../pages/Profile";
 import Walkthrough from "../../pages/Walkthrough";
 import Account from "../../pages/Account";
+import AboutUs from "../../pages/AboutUs";
 
 import {ReactComponent as Logo} from "../../assets/icons/logo.svg";
 
@@ -85,6 +86,13 @@ const routes = [
         exact: false,
         navTab: false,
         component: <Account />
+    },
+    {
+        name: "AboutUs",
+        path: "/aboutus",
+        exact: false,
+        navTab: false,
+        component: <AboutUs />
     }
 
 ];
