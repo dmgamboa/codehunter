@@ -3,7 +3,7 @@ import express from "express";
 import mongoose from "mongoose";
 import config from "./config/index.js";
 import getMapData from "./api-routes/getMapData.route.js";
-import registration from "./api-routes/registration.route.js"
+import registration from "./api-routes/registration.route.js";
 
 const app = express();
 const port = config.port;
