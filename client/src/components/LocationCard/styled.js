@@ -1,5 +1,8 @@
+import { Card } from "antd";
 import styled from "styled-components";
 
-export const Container = styled.div`
+const StyledCard = styled(Card)`
 
 `;
+
+export default StyledCard;

@@ -1,25 +1,20 @@
 import { useState, useEffect } from "react";
-import Icon, { CloseCircleOutlined } from "@ant-design/icons";
+import Icon, { CloseCircleOutlined, EllipsisOutlined } from "@ant-design/icons";
 
 import { ReactComponent as GoogleMapsIcon } from "../../../assets/icons/google-maps.svg";
 import { ReactComponent as BookmarkIcon } from "../../../assets/icons/bookmark.svg";
 
 import LocationCard from "../../../components/LocationCard";
 import LocationDetails from "../../../components/LocationDetails";
-import { fromPairs } from "lodash";
 
-const LocationsList = ({ locations }) => {
+const LocationsList = ({ locations }) => {    
     const [drawerVisible, setDrawerVisible] = useState(false);
-
-    const handleClick = () => {
-        setDrawerVisible(true);
-    }
 
     const handleDrawerClose = () => {
         setDrawerVisible(false);
     }
 
-    const handleDetailsTabs = (tab) => {
+    const handleTabs = (tab) => {
         switch (tab) {
             case "directions":
                 // Redirect to GMaps
@@ -27,10 +22,40 @@ const LocationsList = ({ locations }) => {
             case "bookmark":
                 // Add to Bookmarks
                 break;
+            case "details":
+                setDrawerVisible(true);
+                break;
             case "close":
                 setDrawerVisible(false);
         }
     }
+
+    const testLocations = [{
+        name: "Telus World of Science",
+        distance: 5,
+        neighborhood: "Downtown",
+        bookmarked: true,
+        visited: false,
+        type: "Museum / Gallery"
+    }]
+
+    const cardTabs = [
+        {
+            key: "directions",
+            icon: <Icon component={GoogleMapsIcon}/>,
+            onPress: handleTabs
+        },
+        {
+            key: "bookmark",
+            icon: <Icon component={BookmarkIcon}/>,
+            onPress: handleTabs
+        },
+        {
+            key: "more",
+            icon: <EllipsisOutlined />,
+            onPress: handleTabs
+        },
+    ];
 
     const testData = {
         name: "Telus World of Science",
@@ -57,35 +82,47 @@ const LocationsList = ({ locations }) => {
         }
     }
 
-    const tabs = [
+    const detailsTabs = [
         {
             key: "directions",
             name: "Get Directions",
             icon: <Icon component={GoogleMapsIcon}/>,
-            onPress: handleDetailsTabs
+            onPress: handleTabs
         },
         {
             key: "bookmark",
             name: `${testData.bookmarked ? "Remove from" : "Add to"} Bookmarks`,
             icon: <Icon component={BookmarkIcon}/>,
-            onPress: handleDetailsTabs
+            onPress: handleTabs
         },
         {
             key: "close",
             name: "Close",
             icon: <CloseCircleOutlined />,
-            onPress: handleDetailsTabs
+            onPress: handleTabs
         },
     ]
 
+    const renderLocations = (locations) => {
+        return locations.map(location => {
+            return (
+                <LocationCard
+                    key={location.name}
+                    location={location}
+                    tabs={cardTabs}
+                />
+            );
+        })
+    }
+
     return (
         <>
-            <button onClick={handleClick}>Open LocationDetails</button>
+            {testLocations && renderLocations(testLocations)}
             <LocationDetails
                 visible={drawerVisible}
                 onClose={handleDrawerClose}
                 location={testData}
-                tabs={tabs}
+                tabs={detailsTabs}
             />
         </>
     );
