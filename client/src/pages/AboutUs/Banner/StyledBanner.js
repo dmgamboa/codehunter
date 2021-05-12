@@ -1,18 +1,11 @@
 import styled from "styled-components";
+import mountains from "../../../assets/aboutus/mountains.jpg";
 
 const StyledBanner = styled.div`
-    @import url('https://fonts.googleapis.com/css2?family=Tomorrow&display=swap');
     * {
-
-    }
-    .flJFGQ {
-        padding: 0 !important;
-    }
-    img {
-        width: 100%;
-        height: 30vh;
-        opacity: 60%;
-
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
     }
     // Banner Gradient
     .banner {
@@ -23,8 +16,9 @@ const StyledBanner = styled.div`
         -webkit-animation: AnimationName 11s ease infinite;
         -moz-animation: AnimationName 11s ease infinite;
         animation: AnimationName 11s ease infinite;
-    }
 
+        position: relative;
+    }
     @-webkit-keyframes AnimationName {
         0%{background-position:0% 48%}
         50%{background-position:100% 53%}
@@ -40,87 +34,111 @@ const StyledBanner = styled.div`
         50%{background-position:100% 53%}
         100%{background-position:0% 48%}
     }
-    p {
-        text-align: center;
+    .corners {
+        display: grid;
+        grid-template: 
+            "UL UR" 45%
+            "usText usText" 10%
+            "LL LR" 45%
+            / 50% 50%;
+        justify-items: center;
+        align-items: center;
+        height: 100%;
+        
+        ::before {
+            content: '';
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            bottom: 0px;
+            left: 0px;
+            background: url(${mountains});
+            background-size: cover;
+            opacity:  70%;
+        }
+    }
+    .this-is-us {
         position: relative;
-        top: -8.5rem;
+        margin: 0;
+        grid-area: usText;
         color: #fff;
-        font-size: 1.75rem;
+        font-size: 2.75rem;
+        align-self: center;
     }
     .lower-left, .lower-right, .upper-left, .upper-right {
         display: block;
         background: #fff;
     }
-    // Lower left L shape
-    .lower-left {
-        position: relative;
-        bottom: 120px;
-        left: 30px;
-    }
     .head {
-        height: 60px;
-        width: 20px;
+        height: 3rem;
+        width: 1em; 
+    }
+    .button {
+        height: 1em;
+        width: 4em;
+    }
+    // Lower left L shape *****
+    .lower-left {
+        // Control L position
+        grid-area: LL;
+        position: absolute;
+        bottom: -20px;
+        left: -20px;
+    }
+    .headLL {
         position: absolute;
         bottom: 0;
         left: 0;
     }
-    .button {
-        height: 20px;
-        width: 80px;
+    .buttonLL {
         position: relative;
     }
-    // Lower right L shape
+    // Lower right L shape *****
     .lower-right {
+        // Control L position
+        grid-area: LR;
         position: relative;
-        bottom: 140px;
-        left: 230px;
+        bottom: -20px;
+        left: 20px;
     }
     .headLR {
-        height: 60px;
-        width: 20px;
         position: absolute;
         bottom: 0;
-        left: 60px;
+        left: 42px;
     }
     .buttonLR {
-        height: 20px;
-        width: 80px;
         position: relative;
     }
-    // Upper left L shape
+    // Upper left L shape *****
     .upper-left {
+        // Controls L position
+        grid-area: UL;
         position: relative;
-        bottom: 340px;
-        left: 30px;
+        bottom: 20px;
+        left: -20px;
     }
     .headUL {
-        height: 60px;
-        width: 20px;
         position: absolute;
         top: 0px;
         left: 0px;
     }
     .buttonUL {
-        height: 20px;
-        width: 80px;
         position: relative;
     }
-    // Upper right L shape
+    // Upper right L shape *****
     .upper-right {
+        // Controls L position
+        grid-area: UR;
         position: relative;
-        bottom: 360px;
-        left: 230px;
+        bottom: 20px;
+        left: 20px;
     }
     .headUR {
-        height: 60px;
-        width: 20px;
         position: absolute;
         top: 0px;
-        left: 60px;
+        left: 42px;
     }
     .buttonUR {
-        height: 20px;
-        width: 80px;
         position: relative;
     }
 `;

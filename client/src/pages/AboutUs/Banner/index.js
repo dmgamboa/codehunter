@@ -1,30 +1,39 @@
 // import { Image, Button, Space } from "antd";
-import mountains from "../../../assets/aboutus/mountains.jpg";
+// import mountains from "../../../assets/aboutus/mountains.jpg";
 import StyledBanner from "./StyledBanner";
 
 const Banner = () => {
     return (
         <StyledBanner>
             <div className="banner">
-                <img src={mountains} alt="Mountains"></img>
-                <p>This is Us.</p>
+                {/* <img src={mountains} alt="Mountains"></img> */}
 
-                <div className="button lower-left">
-                    <span className="head lower-left"></span>
+                <div className="corners">
+                    <div>
+                        <div className="button buttonUL upper-left">
+                            <span className="head headUL upper-left"></span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div className="button buttonUR upper-right">
+                            <span className="head headUR upper-right"></span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div className="button buttonLL lower-left">
+                            <span className="head headLL lower-left"></span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div className="button buttonLR lower-right">
+                            <span className="head headLR lower-right"></span>
+                        </div>
+                    </div>
+                    <p className="this-is-us">This is Us.</p>
                 </div>
-
-                <div className="buttonLR lower-right">
-                    <span className="headLR lower-right"></span>
-                </div>
-
-                <div className="buttonUL upper-left">
-                    <span className="headUL upper-left"></span>
-                </div>
-
-                <div className="buttonUR upper-right">
-                    <span className="headUR upper-right"></span>
-                </div>
-
             </div>
         </StyledBanner>
     );
