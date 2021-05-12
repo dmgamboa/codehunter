@@ -35,7 +35,7 @@ const LocationsList = ({ locations }) => {
     const testData = {
         name: "Telus World of Science",
         distance: 5,
-        bookmarked: false,
+        bookmarked: true,
         visited: false,
         details: {
             type: "Museum / Gallery",
@@ -43,13 +43,13 @@ const LocationsList = ({ locations }) => {
             hours: {
                 status: "Open now",
                 days: {
-                    monday: ["08:00 AM", "10:00 PM"],
-                    tuesday: ["08:00 AM", "10:00 PM"],
-                    wednesday: ["08:00 AM", "10:00 PM"],
-                    thursday: ["08:00 AM", "10:00 PM"],
-                    friday: ["08:00 AM", "10:00 PM"],
-                    saturday: [],
-                    sunday: [],
+                    mon: ["08:00 AM", "10:00 PM"],
+                    tue: ["08:00 AM", "10:00 PM"],
+                    wed: ["08:00 AM", "10:00 PM"],
+                    thu: ["08:00 AM", "10:00 PM"],
+                    fri: ["08:00 AM", "10:00 PM"],
+                    sat: [],
+                    sun: [],
                 }
             },
             phone: "6041234567",
@@ -66,7 +66,7 @@ const LocationsList = ({ locations }) => {
         },
         {
             key: "bookmark",
-            name: "Add to Bookmarks",
+            name: `${testData.bookmarked ? "Remove from" : "Add to"} Bookmarks`,
             icon: <Icon component={BookmarkIcon}/>,
             onPress: handleDetailsTabs
         },

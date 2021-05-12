@@ -10,14 +10,15 @@ const StyledDrawer = styled(Drawer)`
         display: flex;
         flex-direction: column;
         padding: 0;
+        max-height: 95%;
 
         & > * {
-            padding: 1rem;
+            padding: 0.5rem 1rem;
         }
 
         img {
             padding: 0;
-            max-height: 300px;
+            height: clamp(100px, 30vh, 600px);
             object-fit: cover;
         }
 
@@ -33,6 +34,8 @@ const StyledDrawer = styled(Drawer)`
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
 
             &:after {
                 position: absolute;
@@ -51,12 +54,33 @@ const StyledDrawer = styled(Drawer)`
             }
         }
 
+        .hours {
+            .hours-list {
+                column-count: 2;
+                margin: 0.5rem 0 0 2rem;
+                font-size: clamp(0.6rem, 3vw, 1rem);
+            }
+
+            .hour {
+                display: flex;
+
+                .day {
+                    flex: 1;
+                    font-weight: bold;
+                }
+
+                .time {
+                    flex: 3;
+                }
+            }
+        }
+
         .am-tab-bar {
-            padding: 0.5rem;
+            padding: 0.25rem;
         }
 
         .am-tab-bar-tab {
-            gap: 0.5rem;
+            gap: 0.25rem;
         }
     }
 `;

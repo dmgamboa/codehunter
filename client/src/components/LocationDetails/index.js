@@ -14,7 +14,20 @@ const LocationDetails = ({
 
     const renderHours = (hours) => {
         return Object.keys(hours).map(day => {
-            
+            return (
+                <span
+                    key={day}
+                    className="hour"
+                >
+                    <span className="day">{day}</span>
+                    <span className="time">
+                        {hours[day].length > 0
+                            ? `${hours[day][0]} - ${hours[day][1]}`
+                            : "Closed"
+                        }
+                    </span>
+                </span>                
+            );
         })
     }
 
@@ -30,10 +43,28 @@ const LocationDetails = ({
                         ? detail === "hours"
                             ? loc[detail]["status"]
                         : detail === "website"
-                            ? <a href={loc[detail]}>{loc[detail]}</a>
+                            ? <a
+                                href={loc[detail]}
+                                target="_blank"
+                                rel="noreferrer"
+                            >
+                                {loc[detail]}
+                            </a>
+                        : detail === "phone"
+                        ? <a
+                            href={`tel:+${loc[detail]}`}
+                            target="_blank"
+                            rel="noreferrer"
+                        >
+                            {loc[detail]}
+                        </a>
                         : loc[detail]
                         : `No ${detail} listed.`}
-                    {detail === "hours" && renderHours(loc[detail]["days"])}
+                    {detail === "hours" &&
+                        <div className="hours-list">
+                            {renderHours(loc[detail]["days"])}
+                        </div>
+                    }
                 </span>
             );
         })
