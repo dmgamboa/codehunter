@@ -6,7 +6,11 @@ import LocationPlaceholder from "../../assets/placeholder-location.jpg";
 
 import StyledCard from "./styled";
 
-const LocationCard = ({location, tabs}) => {
+const LocationCard = ({
+    location,
+    tabs,
+    onClick
+}) => {
     const renderTabs = (tabs) => {
         return tabs.map(({
             key,
@@ -27,12 +31,14 @@ const LocationCard = ({location, tabs}) => {
 
     return (
         <StyledCard
+            hoverable
+            onClick={onClick}
             title={(
-                <span>
+                <>
                     <h2>{location.type}</h2>
                     {location.visited ? <CheckCircleOutlined />
                         : location.bookmarked && <Icon component={BookmarkIcon} />}
-                </span>
+                </>
             )}
             cover={<img src={LocationPlaceholder} alt={location.name}/>}
         >
@@ -44,7 +50,10 @@ const LocationCard = ({location, tabs}) => {
             </span>
 
             {tabs &&
-                <TabBar>
+                <TabBar
+                    tintColor="#08497E"
+                    unselectedTintColor="#08497E"
+                >
                     {renderTabs(tabs)}
                 </TabBar>
             }

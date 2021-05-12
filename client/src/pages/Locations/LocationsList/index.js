@@ -10,6 +10,10 @@ import LocationDetails from "../../../components/LocationDetails";
 const LocationsList = ({ locations }) => {    
     const [drawerVisible, setDrawerVisible] = useState(false);
 
+    const handleDrawerOpen = () => {
+        setDrawerVisible(true);
+    }
+
     const handleDrawerClose = () => {
         setDrawerVisible(false);
     }
@@ -51,7 +55,7 @@ const LocationsList = ({ locations }) => {
             onPress: handleTabs
         },
         {
-            key: "more",
+            key: "details",
             icon: <EllipsisOutlined />,
             onPress: handleTabs
         },
@@ -110,6 +114,7 @@ const LocationsList = ({ locations }) => {
                     key={location.name}
                     location={location}
                     tabs={cardTabs}
+                    onClick={handleDrawerOpen}
                 />
             );
         })
