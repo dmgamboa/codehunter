@@ -7,9 +7,9 @@ import {
 } from "@ant-design/icons";
 
 export const details = {
-    type: <BankOutlined />,
-    address: <EnvironmentOutlined />,
-    hours: <ClockCircleOutlined />,
-    phone: <PhoneOutlined />,
-    website: <GlobalOutlined />
+    type: <BankOutlined className="icon"/>,
+    address: <EnvironmentOutlined  className="icon"/>,
+    hours: <ClockCircleOutlined  className="icon"/>,
+    phone: <PhoneOutlined  className="icon"/>,
+    website: <GlobalOutlined  className="icon"/>
 }
