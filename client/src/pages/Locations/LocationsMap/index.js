@@ -6,12 +6,11 @@ import SearchBar from "../../../components/SearchBar";
 import Marker from "../../../components/Marker";
 
 import { StyledMap } from "./styled";
-import { getMapData } from "../axios";
-import { getPlaceData } from "../axios";
+import { getMapData, getPlaceData, getLocationsList } from "../axios";
 
 const initialCoords = {
-    lat: 49.246292,
     lng: -123.116226,
+    lat: 49.246292,
 };
 
 const initialZoom = 13;
@@ -34,8 +33,8 @@ const LocationsMap = () => {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition((pos) => {
                 setCoords({
-                    lat: pos.coords.latitude,
                     lng: pos.coords.longitude,
+                    lat: pos.coords.latitude,
                 });
             });
         } else {
@@ -44,12 +43,20 @@ const LocationsMap = () => {
     };
 
     const handleMarkerClick = async (markerClicked) => {
-        console.log(markerClicked);
-
+        /*console.log(markerClicked);
         const placeData = await getPlaceData(markerClicked);
-
-        console.log(placeData.data.weekday_text);
+        console.log(placeData.data);
+        */
     };
+
+    const withinBounds = (coordinates) => {
+        return (
+            coords.lng > coordinates[0] - bound &&
+            coords.lng < coordinates[0] + bound &&
+            coords.lat > coordinates[1] - bound &&
+            coords.lat < coordinates[1] + bound
+        );
+    }
 
     const renderMarkers = (markerData) => {
         return markerData.map((code) => {
@@ -59,12 +66,7 @@ const LocationsMap = () => {
 
             var searchQuery = cultural_space_name + '+' + website;
 
-            if (
-                coords.lat > coordinates[1] - bound &&
-                coords.lat < coordinates[1] + bound &&
-                coords.lng > coordinates[0] - bound &&
-                coords.lng < coordinates[0] + bound
-            ) {
+            if (withinBounds(coordinates)) {
                 return (
                     <Marker
                         key={_id}

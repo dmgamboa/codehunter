@@ -9,12 +9,12 @@ const getMapData = async () => {
     return mapData;
 };
 
-const getPlaceData = async (query) => {
+const getPlaceData = async (search) => {
     var placeData;
     await axios
         .get("/getPlaceData", {
             params: {
-                query: query,
+                search: search,
             },
         })
         .then((res) => {
@@ -23,4 +23,22 @@ const getPlaceData = async (query) => {
     return placeData;
 };
 
-export { getMapData, getPlaceData };
+const getLocationsList = async (params) => {
+    /*const params = {
+        userCoords: userCoords,
+        page: page,
+        limit: limit,
+        bookmarked: bookmarked,
+        visited: visited,
+        local_area: local_area,
+        type: type,
+    };*/
+
+    var locationsList;
+    await axios.get("/getLocationsList", { params }).then((res) => {
+        locationsList = res;
+    });
+    return locationsList;
+};
+
+export { getMapData, getPlaceData, getLocationsList };

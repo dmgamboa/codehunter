@@ -1,5 +1,5 @@
 import express from "express";
-import getPlace from "../models/places.js";
+import { getPlace } from "../models/places.js";
 
 const router = express.Router();
 
