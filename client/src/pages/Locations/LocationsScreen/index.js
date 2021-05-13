@@ -7,10 +7,11 @@ import { ReactComponent as FilterIcon } from "../../../assets/icons/filters.svg"
 import CircleIconBtn from "../../../components/CircleIconBtn";
 import SearchBar from "../../../components/SearchBar";
 
-import LocationsMap from "../LocationsMap";
-import LocationsList from "../LocationsList";
 import LocationsFilter from "../LocationsFilters";
 import LocationDetails from "../../../components/LocationDetails";
+import LocationsMap from "../LocationsMap";
+import LocationsList from "../LocationsList";
+import LocationsAccess from "../LocationsAccess";
 
 import { Layout, Top } from "./styled";
 import { detailsTabs, defaultFilters, testLocations, testData } from "./constant";
@@ -86,11 +87,16 @@ const LocationsScreen = () => {
                 tabs={detailsTabs}
             />
 
-            <CircleIconBtn
-                className="view-toggle"
-                icon={mapView ? <UnorderedListOutlined /> : <Icon component={MapIcon} />}
-                onClick={handleViewToggle}
-            />
+            <span className="icon-buttons">
+                <LocationsAccess
+                    userCoords={userCoords}
+                />
+                <CircleIconBtn
+                    className="view-toggle"
+                    icon={mapView ? <UnorderedListOutlined /> : <Icon component={MapIcon} />}
+                    onClick={handleViewToggle}
+                />
+            </span>
 
             {!mapView &&
                 <LocationsList
