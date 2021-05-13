@@ -79,6 +79,10 @@ const StyledDrawer = styled(Drawer)`
 
     }
 
+    .ant-select {
+        border-radius: 1.5rem;
+    }
+
 
     .buttons {
         margin-top: 5rem;
