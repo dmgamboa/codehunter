@@ -53,9 +53,11 @@ const LocationsScreen = () => {
     }
 
     return (
-        <Layout>
+        <Layout className={mapView ? "map-view" : "list-view"}>
+            {mapView && <LocationsMap />}
+
             <Top>
-                <SearchBar />
+                <SearchBar className="search"/>
                 <Icon
                     className="filter"
                     component={FilterIcon}
@@ -81,9 +83,7 @@ const LocationsScreen = () => {
                 onClick={handleViewToggle}
             />
 
-            {mapView 
-                ? <LocationsMap /> 
-                :
+            {!mapView &&
                 <LocationsList
                     locations={testLocations}
                     handleTabs={handleTabs}

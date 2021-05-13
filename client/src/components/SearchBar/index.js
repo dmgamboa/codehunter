@@ -3,6 +3,7 @@ import { Input } from "antd";
 import StyledSearch from "./styled";
 
 const SearchBar = ({
+  className,
   onSearch
 }) => {
 
@@ -14,6 +15,7 @@ const SearchBar = ({
 
   return (
     <StyledSearch
+      className={className}
       placeholder="Look up places..."
       onSearch={handleSearch}
       allowClear
