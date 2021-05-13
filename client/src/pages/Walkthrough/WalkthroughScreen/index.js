@@ -11,7 +11,6 @@ import "swiper/components/effect-fade/effect-fade.less";
 
 import { carouselItems } from "./constant";
 import { Container, StyledSwiper, Image } from "./styled";
-import React from "react";
 
 const WalkthroughScreen = () => {
     const history = useHistory();
