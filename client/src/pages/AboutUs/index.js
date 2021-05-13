@@ -30,14 +30,14 @@ const AboutUs = () => {
     const joshIntro = "";
     const ethanIntro = "Thought provoking question: 'Do we want to strive for mastery or proficiency?'";
 
-    const donnaCareer = "";
-    const pariyaCareer = "";
-    const joshCareer = "";
+    const donnaCareer = "Full-stack web/mobile Developer";
+    const pariyaCareer = "Software Developer";
+    const joshCareer = "Game Developer";
     const ethanCareer = "Combining software with automative/finance/medicine";
 
-    const donnaOutsideOfWork = "";
-    const pariyaOutsideOfWork = "";
-    const joshOutsideOfWork = "";
+    const donnaOutsideOfWork = "I like going on long hikes with a rewarding view";
+    const pariyaOutsideOfWork = "I like picnicing with friends";
+    const joshOutsideOfWork = "I like city night runs";
     const ethanOutsideOfWork = "I like to camp near places with nice hiking trails and swimmable bodies of water.";
 
     return (
