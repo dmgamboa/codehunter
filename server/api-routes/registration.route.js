@@ -1,13 +1,11 @@
-import express from 'express'
+import express from "express";
+import addUser from "../models/users.js";
 
 const router = express.Router();
 
-// /registratrion/create/userDoc
-// /registration (in app.js)
-router.route("/")
-    .post((req, res, next) => {
-        console.log("api route: ", req.body)
-        res.send(req.body)
-    });
+router.post("/", async (req, res) => {
+    const response = await addUser(req);
 
+    res.send(response);
+});
 export default router;
