@@ -1,6 +1,10 @@
 import styled from "styled-components";
 import { Drawer } from "antd";
 
+import theme from "../../context/themes/main";
+
+const { colors } = theme;
+
 const StyledDrawer = styled(Drawer)`
     .ant-drawer-close {
         display: none;
@@ -25,7 +29,7 @@ const StyledDrawer = styled(Drawer)`
         .detail {
             .icon {
                 margin-right: 1rem;
-                color: #005526;
+                color: ${colors.secondary};
             }
         }
 
@@ -49,7 +53,7 @@ const StyledDrawer = styled(Drawer)`
 
             h1 {
                 margin: 0;
-                color: #08497E;
+                color: ${colors.primary};
                 font-size: clamp(1rem, 5vw, 2.5rem);
             }
         }

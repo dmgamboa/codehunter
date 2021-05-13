@@ -1,9 +1,23 @@
-import googleMapReact from "google-map-react";
-import React from "react";
+import { Input } from "antd";
 
-const SearchBar = () => {
+import StyledSearch from "./styled";
+
+const SearchBar = ({
+  onSearch
+}) => {
+
+  const { Search } = Input;
+
+  const handleSearch = () => {
+
+  }
+
   return (
-    <input type="text" />
+    <StyledSearch
+      placeholder="Look up places..."
+      onSearch={handleSearch}
+      allowClear
+    />
   );
 };
 

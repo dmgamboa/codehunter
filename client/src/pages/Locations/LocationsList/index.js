@@ -4,6 +4,7 @@ import Icon, { CloseCircleOutlined, EllipsisOutlined } from "@ant-design/icons";
 import { ReactComponent as GoogleMapsIcon } from "../../../assets/icons/google-maps.svg";
 import { ReactComponent as BookmarkIcon } from "../../../assets/icons/bookmark.svg";
 
+import SearchBar from "../../../components/SearchBar";
 import LocationCard from "../../../components/LocationCard";
 import LocationDetails from "../../../components/LocationDetails";
 
@@ -38,8 +39,8 @@ const LocationsList = ({ locations }) => {
         name: "Telus World of Science",
         distance: 5,
         neighborhood: "Downtown",
-        bookmarked: true,
-        visited: false,
+        bookmarked: false,
+        visited: true,
         type: "Museum / Gallery"
     }]
 
@@ -121,7 +122,8 @@ const LocationsList = ({ locations }) => {
     }
 
     return (
-        <>
+        <>  
+            <SearchBar />
             {testLocations && renderLocations(testLocations)}
             <LocationDetails
                 visible={drawerVisible}

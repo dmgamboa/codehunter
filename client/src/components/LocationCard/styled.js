@@ -1,7 +1,13 @@
 import { Card } from "antd";
 import styled from "styled-components";
 
+import theme from "../../context/themes/main";
+
+const { colors } = theme;
+
 const StyledCard = styled(Card)`
+    border-radius: 1.5rem;
+
     .ant-card-head {
         font-size: clamp(0.6rem, 3vw, 1.2rem);
 
@@ -15,7 +21,7 @@ const StyledCard = styled(Card)`
             }
 
             .anticon {
-                color: #005526;
+                color: ${colors.secondary};
             }
         }
     }
@@ -27,7 +33,7 @@ const StyledCard = styled(Card)`
 
     h1 {
         font-size: clamp(1rem, 6vw, 3rem);
-        color: #08497E;
+        color: ${colors.primary};
     }
 
     .am-tab-bar {

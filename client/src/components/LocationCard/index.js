@@ -1,3 +1,4 @@
+import { Tooltip } from "antd";
 import { TabBar } from "antd-mobile";
 import Icon, { CheckCircleOutlined } from "@ant-design/icons";
 
@@ -36,8 +37,25 @@ const LocationCard = ({
             title={(
                 <>
                     <h2>{location.type}</h2>
-                    {location.visited ? <CheckCircleOutlined />
-                        : location.bookmarked && <Icon component={BookmarkIcon} />}
+                    {location.visited ?
+                        <Tooltip
+                            placement="left"
+                            trigger={["hover", "focus"]}
+                            title="You have visited this location before."
+                            color="#005526"
+                        >
+                            <CheckCircleOutlined />
+                        </Tooltip>
+                    : location.bookmarked &&
+                            <Tooltip
+                                placement="left"
+                                trigger={["hover", "focus"]}
+                                title="This location is in your bookmarks."
+                                color="#005526"
+                            >
+                                <Icon component={BookmarkIcon} />
+                            </Tooltip>
+                    }
                 </>
             )}
             cover={<img src={LocationPlaceholder} alt={location.name}/>}
