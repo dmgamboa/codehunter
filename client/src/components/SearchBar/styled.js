@@ -1,28 +1,38 @@
 import { Input } from "antd";
 import styled from "styled-components";
 
+import theme from "../../context/themes/main";
+
 const { Search } = Input;
+const { colors } = theme;
 
 const StyledSearch = styled(Search)`
-    margin-bottom: 1rem;
+    input {
+        &:active, &:focus {
+            border-radius: 2rem;
+        }
+    }
     
     .ant-input-affix-wrapper {
         border: none;
         background: none;
     }
 
-
     .ant-input-wrapper {
         border-radius: 2rem;
-        border: 1px solid #08497E;
+        border: 1px solid ${colors.primary};
     }
 
     .ant-input-group-addon {
         background: none;
         
         .anticon {
-            color: #08497E;
+            color: ${colors.primary};
         }
+    }
+
+    .ant-input-clear-icon {
+        color: ${colors.secondary};
     }
 
     button.ant-btn.ant-btn-icon-only {

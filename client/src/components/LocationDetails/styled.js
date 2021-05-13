@@ -17,7 +17,7 @@ const StyledDrawer = styled(Drawer)`
         max-height: 95%;
 
         & > * {
-            padding: 0.5rem 1rem;
+            padding: 0.75rem 1rem;
         }
 
         img {

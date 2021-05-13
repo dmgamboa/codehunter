@@ -3,20 +3,30 @@ import Icon, { CloseCircleOutlined, EllipsisOutlined } from "@ant-design/icons";
 
 import { ReactComponent as GoogleMapsIcon } from "../../../assets/icons/google-maps.svg";
 import { ReactComponent as BookmarkIcon } from "../../../assets/icons/bookmark.svg";
+import { ReactComponent as FilterIcon } from "../../../assets/icons/filters.svg";
 
 import SearchBar from "../../../components/SearchBar";
 import LocationCard from "../../../components/LocationCard";
 import LocationDetails from "../../../components/LocationDetails";
 
-const LocationsList = ({ locations }) => {    
-    const [drawerVisible, setDrawerVisible] = useState(false);
+import LocationsFilter from "../LocationsFilters";
 
-    const handleDrawerOpen = () => {
-        setDrawerVisible(true);
+import { Top } from "./styled";
+
+const LocationsList = ({ locations }) => {    
+    const [filtersVisible, setFiltersVisible] = useState(false);
+    const [detailsVisible, setDetailsVisible] = useState(false);
+
+    const handleFilterToggle = () => {
+        setFiltersVisible(!filtersVisible);
     }
 
-    const handleDrawerClose = () => {
-        setDrawerVisible(false);
+    const handleDetailsOpen = () => {
+        setDetailsVisible(true);
+    }
+
+    const handleDetailsClose = () => {
+        setDetailsVisible(false);
     }
 
     const handleTabs = (tab) => {
@@ -28,10 +38,10 @@ const LocationsList = ({ locations }) => {
                 // Add to Bookmarks
                 break;
             case "details":
-                setDrawerVisible(true);
+                setDetailsVisible(true);
                 break;
             case "close":
-                setDrawerVisible(false);
+                setDetailsVisible(false);
         }
     }
 
@@ -115,7 +125,7 @@ const LocationsList = ({ locations }) => {
                     key={location.name}
                     location={location}
                     tabs={cardTabs}
-                    onClick={handleDrawerOpen}
+                    onClick={handleDetailsOpen}
                 />
             );
         })
@@ -123,11 +133,22 @@ const LocationsList = ({ locations }) => {
 
     return (
         <>  
-            <SearchBar />
+            <Top>
+                <SearchBar />
+                <Icon
+                    className="filter"
+                    component={FilterIcon}
+                    onClick={handleFilterToggle}
+                />
+            </Top>
             {testLocations && renderLocations(testLocations)}
+            <LocationsFilter
+                visible={filtersVisible}
+                onClose={handleFilterToggle}
+            />
             <LocationDetails
-                visible={drawerVisible}
-                onClose={handleDrawerClose}
+                visible={detailsVisible}
+                onClose={handleDetailsClose}
                 location={testData}
                 tabs={detailsTabs}
             />
