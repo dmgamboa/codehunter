@@ -19,7 +19,7 @@ const config = {
     localhost: process.env.HOST,
     port: parseInt(process.env.PORT, 10),
     databaseURL: process.env.CH_URI,
-    database: process.env.CH_DB,
+    googleMapsKey: process.env.REACT_APP_MAPS_KEY,
 };
 
 export default config;

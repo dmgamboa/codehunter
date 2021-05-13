@@ -1,4 +1,3 @@
-import React, { useReducer } from "react";
 import { useAuth } from "../../../context/Auth";
 import { useHistory } from "react-router-dom";
 

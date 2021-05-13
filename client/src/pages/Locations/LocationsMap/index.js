@@ -7,6 +7,7 @@ import Marker from "../../../components/Marker";
 
 import { StyledMap } from "./styled";
 import { getMapData } from "../axios";
+import { getPlaceData } from "../axios";
 
 const initialCoords = {
     lat: 49.246292,
@@ -42,15 +43,22 @@ const LocationsMap = () => {
         }
     };
 
-    const handleMarkerClick = (cultural_space_name) => {
-        console.log("This place is: ", cultural_space_name);
+    const handleMarkerClick = async (markerClicked) => {
+        console.log(markerClicked);
+
+        const placeData = await getPlaceData(markerClicked);
+
+        console.log(placeData.data.weekday_text);
     };
 
     const renderMarkers = (markerData) => {
         return markerData.map((code) => {
             const { _id } = code;
-            const { cultural_space_name, local_area } = code.fields;
+            const { cultural_space_name, website } = code.fields;
             const { coordinates } = code.fields.geom;
+
+            var searchQuery = cultural_space_name + '+' + website;
+
             if (
                 coords.lat > coordinates[1] - bound &&
                 coords.lat < coordinates[1] + bound &&
@@ -63,8 +71,7 @@ const LocationsMap = () => {
                         lat={coordinates[1]}
                         lng={coordinates[0]}
                         handleClick={handleMarkerClick}
-                        cultural_space_name={cultural_space_name}
-                        local_area={local_area}
+                        data={searchQuery}
                     />
                 );
             }

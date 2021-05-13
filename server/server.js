@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import config from "./config/index.js";
 import getMapData from "./api-routes/getMapData.route.js";
 import registration from "./api-routes/registration.route.js";
+import getPlaceData from "./api-routes/getPlaceData.route.js"
 
 const app = express();
 const port = config.port;
@@ -23,6 +24,7 @@ mongoose.connect(uri, {
 app.use(express.json());
 app.use("/registration", registration);
 app.use("/getMapData", getMapData);
+app.use("/getPlaceData", getPlaceData);
 
 app.listen(port, () => {
     console.log(`App listening to port ${port}`);
