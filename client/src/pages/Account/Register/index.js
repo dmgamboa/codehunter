@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import {
     UserOutlined,
@@ -37,22 +37,21 @@ const Register = () => {
     const history = useHistory();
 
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState("");
+    const [error, setError] = useState();
 
     // Create new user in firebase upon clicking register
     const onFinish = async () => {
-        const values = valuesRef.current.getFieldValue();
-        console.log("values: ", values);
-        // const userUID = await createUserFb(values)
+        let values = valuesRef.current.getFieldValue();
+ 
         try {
             setError("");
             // Prevent user from spam clicking register
             setLoading(true);
 
-            // Wait for firebase to create user
+            // Wait for firebase to create user then get user uid
             await signup(values.email, values.password);
-            // console.log("rsults: ", result);
             const userUID = getUserUID();
+
             // Axios POST request to create user doc in mongoDb
             createUserDoc(values, userUID);
 
