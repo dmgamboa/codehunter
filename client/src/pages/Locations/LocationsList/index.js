@@ -3,23 +3,15 @@ import Icon, { CloseCircleOutlined, EllipsisOutlined } from "@ant-design/icons";
 
 import { ReactComponent as GoogleMapsIcon } from "../../../assets/icons/google-maps.svg";
 import { ReactComponent as BookmarkIcon } from "../../../assets/icons/bookmark.svg";
-import { ReactComponent as FilterIcon } from "../../../assets/icons/filters.svg";
 
-import SearchBar from "../../../components/SearchBar";
 import LocationCard from "../../../components/LocationCard";
 import LocationDetails from "../../../components/LocationDetails";
 
-import LocationsFilter from "../LocationsFilters";
-
-import { Top } from "./styled";
 
 const LocationsList = ({ locations }) => {    
-    const [filtersVisible, setFiltersVisible] = useState(false);
     const [detailsVisible, setDetailsVisible] = useState(false);
 
-    const handleFilterToggle = () => {
-        setFiltersVisible(!filtersVisible);
-    }
+
 
     const handleDetailsOpen = () => {
         setDetailsVisible(true);
@@ -133,19 +125,7 @@ const LocationsList = ({ locations }) => {
 
     return (
         <>  
-            <Top>
-                <SearchBar />
-                <Icon
-                    className="filter"
-                    component={FilterIcon}
-                    onClick={handleFilterToggle}
-                />
-            </Top>
             {testLocations && renderLocations(testLocations)}
-            <LocationsFilter
-                visible={filtersVisible}
-                onClose={handleFilterToggle}
-            />
             <LocationDetails
                 visible={detailsVisible}
                 onClose={handleDetailsClose}
