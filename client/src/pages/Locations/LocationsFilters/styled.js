@@ -44,7 +44,8 @@ const StyledDrawer = styled(Drawer)`
             }
 
             &.ant-radio-button-wrapper-checked {
-                background: ${colors.primary};
+                background: ${colors.secondary};
+                border-color: ${colors.secondary};
                 color: #FFF;
                 font-weight: bold;
             }
@@ -52,6 +53,39 @@ const StyledDrawer = styled(Drawer)`
             .anticon {
                 margin-right: 0.5rem;
             }
+        }
+    }
+
+    .ant-switch {
+        &.ant-switch-checked {
+            background: ${colors.secondary};
+        }
+    }
+
+    .switch {
+        .ant-form-item-control-input-content {
+            display: flex;
+            align-items: center;
+        }
+
+        .switch-label {
+        margin-left: 0.5rem;
+        font-size: 1rem;
+
+            .anticon {
+                margin-right: 0.25rem;
+            }
+        }
+
+    }
+
+
+    .buttons {
+        margin-top: 5rem;
+        display: flex;
+
+        button:first-of-type {
+            margin-right: 1rem;
         }
     }
 `;

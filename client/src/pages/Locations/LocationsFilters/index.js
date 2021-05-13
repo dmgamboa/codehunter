@@ -1,30 +1,50 @@
-import { 
+import {
     Form,
     Radio,
-    Switch
+    Switch,
+    Select,
+    Button
 } from "antd";
 import Icon, { 
     EnvironmentOutlined,
     ArrowUpOutlined,
     ArrowDownOutlined,
-    CheckCircleOutlined
+    CheckCircleOutlined,
+    UndoOutlined
 } from "@ant-design/icons";
+import { kebabCase, lowerCase } from "lodash";
 
 import { ReactComponent as FilterIcon } from "../../../assets/icons/filters.svg";
 import { ReactComponent as BookmarkIcon } from "../../../assets/icons/bookmark.svg";
 
+import { locationTypes, neighborhoods } from "./constant";
 import StyledDrawer from "./styled";
-import { fromPairs } from "lodash";
 
 const LocationsFilters = ({
     visible,
     onClose,
     filters
 }) => {
+
+    const { Option } = Select;
+
+    const renderOptions = (opts) => {
+        return opts.map((option) => {
+            return (
+                <Option
+                    key={kebabCase(option)}
+                    value={lowerCase(option)}
+                >
+                    {option}
+                </Option>
+            );
+        })
+    }
+
     return (
         <StyledDrawer
             placement="bottom"
-            height="100%"
+            height="auto"
             visible={visible}
             onClose={onClose}
             title={(
@@ -44,41 +64,76 @@ const LocationsFilters = ({
                 >
                     <Radio.Group className="sort">
                         <Radio.Button value="az">
-                            <ArrowUpOutlined />
-                            A - Z
+                            <ArrowUpOutlined /> A - Z
                         </Radio.Button>
 
                         <Radio.Button value="distance">
-                            <EnvironmentOutlined />
-                            Nearest
+                            <EnvironmentOutlined /> Nearest
                         </Radio.Button>
                         
                         <Radio.Button value="za">
-                            <ArrowDownOutlined />
-                            Z - A
+                            <ArrowDownOutlined /> Z - A
                         </Radio.Button>
                     </Radio.Group>   
                 </Form.Item>
 
                 <Form.Item label="Show only:">
-                    <Form.Item name="bookmarked">
+                    <Form.Item className="switch" name="bookmarked">
                         <Switch />
-                        <span>
+                        <span className="switch-label">
                             <Icon component={BookmarkIcon} />
                             Bookmarked
                         </span>
                     </Form.Item>
 
-                    <Form.Item name="visited">
+                    <Form.Item className="switch" name="visited">
                         <Switch />
-                        <span>
+                        <span className="switch-label">
                             <CheckCircleOutlined />
                             Visited
                         </span>
                     </Form.Item>
-
                 </Form.Item>
-                     
+
+                <Form.Item
+                    label="Location Type"
+                    name="type"
+                >
+                    <Select
+                        showSearch
+                        allowClear
+                        placeholder="Any"
+                    >
+                        {renderOptions(locationTypes)}
+                    </Select>
+                </Form.Item>
+
+                <Form.Item
+                    label="Neighborhood"
+                    name="neighborhood"
+                >
+                    <Select
+                        showSearch
+                        allowClear
+                        placeholder="Any"
+                    >
+                        {renderOptions(neighborhoods)}
+                    </Select>
+                </Form.Item>
+                
+
+                <span className="buttons">
+                    <Button
+                        type="primary"
+                        block
+                    >
+                        Apply
+                    </Button>
+
+                    <Button block>
+                        <UndoOutlined /> Reset
+                    </Button>
+                </span>
    
             </Form>
         </StyledDrawer>
