@@ -1,53 +1,47 @@
-/* eslint-disable */
-import React, { useEffect, useState } from "react";
 import GoogleMapReact from "google-map-react";
 
-import SearchBar from "../../../components/SearchBar";
 import Marker from "../../../components/Marker";
 
 import { StyledMap } from "./styled";
-import { getMapData, getPlaceData, getLocationsList } from "../axios";
+import {
+    initialCoords,
+    mapViewSettings,
+    mapsKey
+} from "./constant";
 
-const initialCoords = {
-    lng: -123.116226,
-    lat: 49.246292,
-};
 
-const initialZoom = 13;
+const LocationsMap = ({
+    locations,
+    handleDetails,
+    userCoords
+}) => {
+    // const [coords, setCoords] = useState(initialCoords);
 
-const LocationsMap = () => {
-    const [markers, setMarkers] = useState([]);
-    const [coords, setCoords] = useState(initialCoords);
-    const mapsKey = process.env.REACT_APP_MAPS_KEY;
+    // useEffect(async () => {
+    //     // UNCOMMENT TO USE CURRENT POSITION
+    //     //getCoords();
+    //     const mapData = await getMapData();
+    //     setMarkers(mapData.data);
+    // }, []);
 
-    const bound = 0.015;
+    // const getCoords = () => {
+    //     if (navigator.geolocation) {
+    //         navigator.geolocation.getCurrentPosition((pos) => {
+    //             setCoords({
+    //                 lat: pos.coords.latitude,
+    //                 lng: pos.coords.longitude,
+    //             });
+    //         });
+    //     } else {
+    //         console.log("Geolocation is not supported by this browser.");
+    //     }
+    // };
+    
+    const { bound, initialZoom } = mapViewSettings;
 
-    useEffect(async () => {
-        // UNCOMMENT TO USE CURRENT POSITION
-        //getCoords();
-        const mapData = await getMapData();
-        setMarkers(mapData.data);
-    }, []);
+    const handleMarkerClick = () => {
 
-    const getCoords = () => {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition((pos) => {
-                setCoords({
-                    lng: pos.coords.longitude,
-                    lat: pos.coords.latitude,
-                });
-            });
-        } else {
-            console.log("Geolocation is not supported by this browser.");
-        }
-    };
-
-    const handleMarkerClick = async (markerClicked) => {
-        /*console.log(markerClicked);
-        const placeData = await getPlaceData(markerClicked);
-        console.log(placeData.data);
-        */
-    };
+    }
 
     const withinBounds = (coordinates) => {
         return (
@@ -82,15 +76,12 @@ const LocationsMap = () => {
 
     return (
         <StyledMap>
-            {
-                //<SearchBar />
-            }
             <GoogleMapReact
                 bootstrapURLKeys={{ key: mapsKey }}
                 center={initialCoords}
                 zoom={initialZoom}
             >
-                {renderMarkers(markers)}
+                {locations && renderMarkers(locations)}
             </GoogleMapReact>
         </StyledMap>
     );
