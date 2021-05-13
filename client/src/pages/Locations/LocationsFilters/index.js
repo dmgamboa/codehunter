@@ -3,7 +3,8 @@ import {
     Radio,
     Switch,
     Select,
-    Button
+    Button,
+    Tooltip
 } from "antd";
 import Icon, { 
     EnvironmentOutlined,
@@ -16,6 +17,8 @@ import { kebabCase } from "lodash";
 
 import { ReactComponent as FilterIcon } from "../../../assets/icons/filters.svg";
 import { ReactComponent as BookmarkIcon } from "../../../assets/icons/bookmark.svg";
+import ConditionalWrapper from "../../../components/ConditionalWrapper";
+import theme from "../../../context/themes/main";
 
 import { locationTypes, neighborhoods } from "./constant";
 import StyledDrawer from "./styled";
@@ -24,11 +27,13 @@ const LocationsFilters = ({
     visible,
     onClose,
     onFinish,
-    initialValues
+    initialValues,
+    hasUserCoords
 }) => {
 
     const [form] = Form.useForm();
     const { Option } = Select;
+    const { colors } = theme;
 
     const renderOptions = (opts) => {
         return opts.map((option) => {
@@ -71,10 +76,27 @@ const LocationsFilters = ({
                             <ArrowUpOutlined /> A - Z
                         </Radio.Button>
 
-                        <Radio.Button value="distance">
-                            <EnvironmentOutlined /> Nearest
-                        </Radio.Button>
-                        
+                        <ConditionalWrapper
+                            condition={!hasUserCoords}
+                            wrapper={children =>
+                                <Tooltip
+                                    color={colors.primary}
+                                    title="Please allow access to permisions to use this option."
+                                >
+                                    {children}
+                                </Tooltip>
+                            }
+                        >
+                            <Radio.Button
+                                className="distance"
+                                value="distance"
+                                disabled={!hasUserCoords}
+                            >
+                                <EnvironmentOutlined /> Nearest
+                            </Radio.Button>
+                        </ConditionalWrapper>
+
+
                         <Radio.Button value="za">
                             <ArrowDownOutlined /> Z - A
                         </Radio.Button>

@@ -16,10 +16,10 @@ import { Layout, Top } from "./styled";
 import { detailsTabs, defaultFilters, testLocations, testData } from "./constant";
 
 const LocationsScreen = () => {
-    const [filters, setFilters] = useState(defaultFilters);
     const [filtersVisible, setFiltersVisible] = useState(false);
     const [detailsVisible, setDetailsVisible] = useState(false);
     const [mapView, setMapView] = useState(false);
+    const [userCoords, setUserCoords] = useState(null);
 
     const handleFilterToggle = () => {
         setFiltersVisible(!filtersVisible);
@@ -76,6 +76,7 @@ const LocationsScreen = () => {
                 visible={filtersVisible}
                 onClose={handleFilterToggle}
                 onFinish={handleFilterSubmit}
+                hasUserCoords={userCoords ? true : false}
             />
 
             <LocationDetails
