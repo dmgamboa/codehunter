@@ -1,25 +1,47 @@
 import styled from "styled-components";
+import clouds from "../../assets/aboutus/cloud.png";
 
 const Styled= styled.div`
-    @import url('https://fonts.googleapis.com/css2?family=Tomorrow&display=swap');
     * {
         font-family: 'Tomorrow', sans-serif;
     }
-    .banner {
-        margin-bottom: 60px;
+    .aboutus {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: url(${clouds});
+        animation: animate 60s linear infinite;
+
+        display: grid;
+        grid-template:
+            "banner" 30%
+            "carousel" 25%
+            "bubbles" 45%
+            / 100%;
+        justify-items: stretch;
     }
-    p {
-        margin-bottom: 50px;
-        text-align: center;
+    @keyframes animate {
+        0% {background-position: 0%}
+        100% {background-position: 5440px;}
+    }
+    .banner {
+        grid-area: banner;
+    }
+    .about-code-hunter {
+        grid-area: carousel;
     }
     .bubble-container {
+        grid-area: bubbles;
+        height: 40vh;
         display: grid;
         grid-template:
             "bubble1 bubble2" 50%
             "bubble3 bubble4" 50%
             / 50% 50%;
         justify-items: center;
-        grid-row-gap: 20px;
+        grid-row-gap: 5px;
 
         name:nth-of-type(1) {
             grid-area: bubble1;

@@ -1,12 +1,9 @@
-// import { Image, Button, Space } from "antd";
-// import mountains from "../../../assets/aboutus/mountains.jpg";
 import StyledBanner from "./StyledBanner";
 
 const Banner = () => {
     return (
         <StyledBanner>
             <div className="banner">
-                {/* <img src={mountains} alt="Mountains"></img> */}
 
                 <div className="corners">
                     <div>

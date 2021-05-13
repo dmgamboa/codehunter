@@ -7,7 +7,7 @@ const StyledBanner = styled.div`
         margin: 0;
         padding: 0;
     }
-    // Banner Gradient
+    // Banner gradient and animation
     .banner {
         height: 30vh;
         background: linear-gradient(222deg, #08497e, #005526, #ffffff);
@@ -34,6 +34,7 @@ const StyledBanner = styled.div`
         50%{background-position:100% 53%}
         100%{background-position:0% 48%}
     }
+    // positioning the L shapes
     .corners {
         display: grid;
         grid-template: 
@@ -45,6 +46,7 @@ const StyledBanner = styled.div`
         align-items: center;
         height: 100%;
         
+        // Adding opacity to mountain image
         ::before {
             content: '';
             position: absolute;
