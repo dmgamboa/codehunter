@@ -63,14 +63,17 @@ const StyledDrawer = styled(Drawer)`
     }
 
     .switch {
-        .ant-form-item-control-input-content {
-            display: flex;
-            align-items: center;
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+
+        .ant-row.ant-form-item {
+            margin: 0;
         }
 
         .switch-label {
-        margin-left: 0.5rem;
-        font-size: 1rem;
+            margin-left: 0.5rem;
+            font-size: 1rem;
 
             .anticon {
                 margin-right: 0.25rem;

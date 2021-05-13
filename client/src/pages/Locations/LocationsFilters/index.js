@@ -12,7 +12,7 @@ import Icon, {
     CheckCircleOutlined,
     UndoOutlined
 } from "@ant-design/icons";
-import { kebabCase, lowerCase } from "lodash";
+import { kebabCase } from "lodash";
 
 import { ReactComponent as FilterIcon } from "../../../assets/icons/filters.svg";
 import { ReactComponent as BookmarkIcon } from "../../../assets/icons/bookmark.svg";
@@ -23,9 +23,11 @@ import StyledDrawer from "./styled";
 const LocationsFilters = ({
     visible,
     onClose,
-    filters
+    onFinish,
+    initialValues
 }) => {
 
+    const [form] = Form.useForm();
     const { Option } = Select;
 
     const renderOptions = (opts) => {
@@ -33,7 +35,7 @@ const LocationsFilters = ({
             return (
                 <Option
                     key={kebabCase(option)}
-                    value={lowerCase(option)}
+                    value={option}
                 >
                     {option}
                 </Option>
@@ -55,7 +57,9 @@ const LocationsFilters = ({
             )}
         >
             <Form
-                initialValues={filters}
+                form={form}
+                onFinish={onFinish}
+                initialValues={initialValues}
                 layout="vertical"
             >
                 <Form.Item
@@ -77,23 +81,25 @@ const LocationsFilters = ({
                     </Radio.Group>   
                 </Form.Item>
 
-                <Form.Item label="Show only:">
-                    <Form.Item className="switch" name="bookmarked">
+                <div className="switch">
+                    <Form.Item name="bookmarked" valuePropName="checked">
                         <Switch />
-                        <span className="switch-label">
-                            <Icon component={BookmarkIcon} />
-                            Bookmarked
-                        </span>
                     </Form.Item>
+                    <span className="switch-label">
+                        <Icon component={BookmarkIcon} />
+                        Bookmarked
+                    </span>
+                </div>
 
-                    <Form.Item className="switch" name="visited">
+                <div className="switch">
+                    <Form.Item name="visited" valuePropName="checked">
                         <Switch />
-                        <span className="switch-label">
-                            <CheckCircleOutlined />
-                            Visited
-                        </span>
                     </Form.Item>
-                </Form.Item>
+                    <span className="switch-label">
+                        <CheckCircleOutlined />
+                        Visited
+                    </span>
+                </div>
 
                 <Form.Item
                     label="Location Type"
@@ -123,14 +129,18 @@ const LocationsFilters = ({
                 
 
                 <span className="buttons">
+                        <Button
+                            type="primary"
+                            onClick={() => form.submit()}
+                            block
+                        >
+                            Apply
+                        </Button>                        
+
                     <Button
-                        type="primary"
+                        onClick={() => form.resetFields()} 
                         block
                     >
-                        Apply
-                    </Button>
-
-                    <Button block>
                         <UndoOutlined /> Reset
                     </Button>
                 </span>

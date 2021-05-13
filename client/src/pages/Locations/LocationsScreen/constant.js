@@ -19,7 +19,11 @@ export const detailsTabs = [
         name: "Close",
         icon: <CloseCircleOutlined />,
     },
-]
+];
+
+export const defaultFilters = {
+    sort: "az"
+};
 
 export const testLocations = [{
     name: "Telus World of Science",
