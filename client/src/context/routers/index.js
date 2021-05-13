@@ -2,8 +2,8 @@ import { Route } from "react-router-dom";
 import Icon, { 
     CompassOutlined,
     CompassFilled,
-    SmileOutlined,
-    SmileFilled,
+//    SmileOutlined,
+//    SmileFilled,
     TeamOutlined,
     GiftOutlined,
     GiftFilled,

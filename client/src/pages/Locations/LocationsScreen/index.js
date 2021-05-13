@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import Icon, { KeyOutlined, UnorderedListOutlined } from "@ant-design/icons";
+import { useState } from "react";
+import Icon, { UnorderedListOutlined } from "@ant-design/icons";
 
 import { ReactComponent as MapIcon } from "../../../assets/icons/map.svg"; 
 import CircleIconBtn from "../../../components/CircleIconBtn";

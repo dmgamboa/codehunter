@@ -27,7 +27,7 @@ const AboutUs = () => {
 
     const donnaIntro = "";
     const pariyaIntro = "";
-    const joshIntro = "";
+    const joshIntro = "Enough expository banter! Now we fight like men! And ladies! And ladies who dress like men!";
     const ethanIntro = "Thought provoking question: 'Do we want to strive for mastery or proficiency?'";
 
     const donnaCareer = "Full-stack web/mobile Developer";

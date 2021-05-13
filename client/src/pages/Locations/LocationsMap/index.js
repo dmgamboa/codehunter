@@ -6,11 +6,11 @@ import SearchBar from "../../../components/SearchBar";
 import Marker from "../../../components/Marker";
 
 import { StyledMap } from "./styled";
-import { getMapData } from "../axios";
+import { getMapData, getPlaceData, getLocationsList } from "../axios";
 
 const initialCoords = {
-    lat: 49.246292,
     lng: -123.116226,
+    lat: 49.246292,
 };
 
 const initialZoom = 13;
@@ -33,8 +33,8 @@ const LocationsMap = () => {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition((pos) => {
                 setCoords({
-                    lat: pos.coords.latitude,
                     lng: pos.coords.longitude,
+                    lat: pos.coords.latitude,
                 });
             });
         } else {
@@ -42,29 +42,38 @@ const LocationsMap = () => {
         }
     };
 
-    const handleMarkerClick = (cultural_space_name) => {
-        console.log("This place is: ", cultural_space_name);
+    const handleMarkerClick = async (markerClicked) => {
+        /*console.log(markerClicked);
+        const placeData = await getPlaceData(markerClicked);
+        console.log(placeData.data);
+        */
     };
+
+    const withinBounds = (coordinates) => {
+        return (
+            coords.lng > coordinates[0] - bound &&
+            coords.lng < coordinates[0] + bound &&
+            coords.lat > coordinates[1] - bound &&
+            coords.lat < coordinates[1] + bound
+        );
+    }
 
     const renderMarkers = (markerData) => {
         return markerData.map((code) => {
             const { _id } = code;
-            const { cultural_space_name, local_area } = code.fields;
+            const { cultural_space_name, website } = code.fields;
             const { coordinates } = code.fields.geom;
-            if (
-                coords.lat > coordinates[1] - bound &&
-                coords.lat < coordinates[1] + bound &&
-                coords.lng > coordinates[0] - bound &&
-                coords.lng < coordinates[0] + bound
-            ) {
+
+            var searchQuery = cultural_space_name + '+' + website;
+
+            if (withinBounds(coordinates)) {
                 return (
                     <Marker
                         key={_id}
                         lat={coordinates[1]}
                         lng={coordinates[0]}
                         handleClick={handleMarkerClick}
-                        cultural_space_name={cultural_space_name}
-                        local_area={local_area}
+                        data={searchQuery}
                     />
                 );
             }
