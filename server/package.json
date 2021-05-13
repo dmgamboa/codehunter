@@ -2,11 +2,11 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "connection.js",
+  "main": "server.js",
   "type": "module",
   "scripts": {
-    "start": "node connection.js",
-    "dev": "nodemon connection.js"
+    "start": "node server.js",
+    "dev": "nodemon server.js"
   },
   "license": "ISC",
   "devDependencies": {
