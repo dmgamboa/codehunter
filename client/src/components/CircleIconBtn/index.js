@@ -13,6 +13,6 @@ const CircleIconBtn = ({
             {icon}
         </StyledBtn>
     );
-}
+};
 
 export default CircleIconBtn;

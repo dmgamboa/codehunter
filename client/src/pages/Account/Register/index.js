@@ -1,7 +1,14 @@
-import React, { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { UserOutlined, LockOutlined, AppleOutlined, FacebookOutlined, TwitterOutlined, MailOutlined } from '@ant-design/icons';
-import { Form, Input, Button, Checkbox, message } from 'antd';
+import {
+    UserOutlined,
+    LockOutlined,
+    AppleOutlined,
+    FacebookOutlined,
+    TwitterOutlined,
+    MailOutlined,
+} from "@ant-design/icons";
+import { Form, Input, Button, Checkbox, message } from "antd";
 
 import { useAuth } from "../../../context/Auth";
 
@@ -11,67 +18,63 @@ import createUserDoc from "./axios.js";
 import { ReactComponent as Logo } from "../../../assets/icons/logo.svg";
 import Icon from "@ant-design/icons";
 
-
 const Register = () => {
     const tailFormItemLayout = {
         wrapperCol: {
-        xs: {
-            span: 24,
-            offset: 0,
-        },
-        sm: {
-            span: 16,
-            offset: 8,
-        },
+            xs: {
+                span: 24,
+                offset: 0,
+            },
+            sm: {
+                span: 16,
+                offset: 8,
+            },
         },
     };
 
     var valuesRef = useRef();
     var { signup, getUserUID } = useAuth();
     const history = useHistory();
-    
+
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState("");
+    const [error, setError] = useState();
 
     // Create new user in firebase upon clicking register
     const onFinish = async () => {
-        const values = valuesRef.current.getFieldValue();
-        console.log("values: ", values);
-        // const userUID = await createUserFb(values)
+        let values = valuesRef.current.getFieldValue();
+ 
         try {
             setError("");
             // Prevent user from spam clicking register
             setLoading(true);
 
-            // Wait for firebase to create user
+            // Wait for firebase to create user then get user uid
             await signup(values.email, values.password);
-            // console.log("rsults: ", result);
             const userUID = getUserUID();
+
             // Axios POST request to create user doc in mongoDb
-            createUserDoc(values, userUID)
-            
-            message.loading({ content: "Validating your CodeHunter license.", duration: 2})
+            createUserDoc(values, userUID);
+
+            message.loading({ content: "Validating your CodeHunter license.", duration: 2 });
             history.push("/locations");
         } catch (e) {
             setError("Error creating account, try a different email.");
         } finally {
             setLoading(false);
         }
-    
+
         if (error) {
-            message.error(error)
-            console.log(error)
+            message.error(error);
+            console.log(error);
         }
     };
-
-
 
     return (
         <StyledRegistration className="registration">
             <div className="signup">
                 <h1>Sign Up</h1>
                 <Icon component={Logo} className="logo" />
-            </div> 
+            </div>
 
             <Form
                 name="normal_login"
@@ -81,23 +84,25 @@ const Register = () => {
                 }}
                 ref={valuesRef}
                 onFinish={onFinish}
-                >
-
+            >
                 {/* email field */}
                 <Form.Item
                     name="email"
                     rules={[
-                    {
-                        type: 'email',
-                        message: 'The input is not valid E-mail!',
+                        {
+                            type: "email",
+                            message: "The input is not valid E-mail!",
                         },
-                    {
-                        required: true,
-                        message: 'Please input your E-mail!',
-                    },
+                        {
+                            required: true,
+                            message: "Please input your E-mail!",
+                        },
                     ]}
                 >
-                        <Input prefix={<MailOutlined className="site-form-item-icon" />} placeholder="Email" />
+                    <Input
+                        prefix={<MailOutlined className="site-form-item-icon" />}
+                        placeholder="Email"
+                    />
                 </Form.Item>
 
                 {/* username field */}
@@ -105,12 +110,15 @@ const Register = () => {
                     name="username"
                     rules={[
                         {
-                        required: true,
-                        message: 'Please input your Username!',
+                            required: true,
+                            message: "Please input your Username!",
                         },
                     ]}
-                    >
-                    <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
+                >
+                    <Input
+                        prefix={<UserOutlined className="site-form-item-icon" />}
+                        placeholder="Username"
+                    />
                 </Form.Item>
 
                 {/* First name, last name field */}
@@ -118,25 +126,28 @@ const Register = () => {
                     name="fullname"
                     tooltip="What do you want others to call you?"
                     rules={[
-                    {
-                        required: true,
-                        message: 'Please input your full name!',
-                        whitespace: true,
-                    },
+                        {
+                            required: true,
+                            message: "Please input your full name!",
+                            whitespace: true,
+                        },
                     ]}
                 >
-                    <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="John Smithens" />
+                    <Input
+                        prefix={<UserOutlined className="site-form-item-icon" />}
+                        placeholder="John Smithens"
+                    />
                 </Form.Item>
 
                 {/* password field */}
                 <Form.Item
                     name="password"
                     rules={[
-                    {
-                        min: 6,
-                        required: true,
-                        message: 'At least 6 characters required',
-                    },
+                        {
+                            min: 6,
+                            required: true,
+                            message: "At least 6 characters required",
+                        },
                     ]}
                     hasFeedback
                 >
@@ -150,22 +161,24 @@ const Register = () => {
                 {/* confirm password field */}
                 <Form.Item
                     name="confirm"
-                    dependencies={['password']} // I think this refers to above name="password"
+                    dependencies={["password"]} // I think this refers to above name="password"
                     hasFeedback
                     rules={[
-                    {
-                        required: true,
-                        message: 'Please confirm your password!',
-                    },
-                    ({ getFieldValue }) => ({
-                        validator(_, value) {
-                        if (!value || getFieldValue('password') === value) {
-                            return Promise.resolve();
-                        }
-
-                        return Promise.reject(new Error('The passwords you entered do not match!'));
+                        {
+                            required: true,
+                            message: "Please confirm your password!",
                         },
-                    }),
+                        ({ getFieldValue }) => ({
+                            validator(_, value) {
+                                if (!value || getFieldValue("password") === value) {
+                                    return Promise.resolve();
+                                }
+
+                                return Promise.reject(
+                                    new Error("The passwords you entered do not match!")
+                                );
+                            },
+                        }),
                     ]}
                 >
                     <Input
@@ -174,28 +187,35 @@ const Register = () => {
                         placeholder="Password"
                     />
                 </Form.Item>
-  
+
                 <Form.Item
                     name="agreement"
                     valuePropName="checked"
                     rules={[
-                    {
-                        validator: (_, value) =>
-                        value ? Promise.resolve() : Promise.reject(new Error('Accept the agreement to register.')),
-                    },
+                        {
+                            validator: (_, value) =>
+                                value
+                                    ? Promise.resolve()
+                                    : Promise.reject(
+                                          new Error("Accept the agreement to register.")
+                                      ),
+                        },
                     ]}
-                    {...tailFormItemLayout}>
+                    {...tailFormItemLayout}
+                >
                     <Checkbox>
                         I have read the <a href="">agreement</a>
                     </Checkbox>
                 </Form.Item>
 
                 {/* register button */}
-                <Form.Item {...tailFormItemLayout} >
-                    <Button disabled={ loading }
-                            type="primary" 
-                            htmlType="submit" 
-                            className="full-length">
+                <Form.Item {...tailFormItemLayout}>
+                    <Button
+                        disabled={loading}
+                        type="primary"
+                        htmlType="submit"
+                        className="full-length"
+                    >
                         Register
                     </Button>
                 </Form.Item>
@@ -208,8 +228,9 @@ const Register = () => {
                 <TwitterOutlined />
             </div>
 
-            
-             <p>Already have an account? <Link to="/account/login">Login.</Link></p>
+            <p>
+                Already have an account? <Link to="/account/login">Login.</Link>
+            </p>
         </StyledRegistration>
     );
 };

@@ -6,7 +6,7 @@ export const animationTimes = {
     fillDuration: 1.5,
     textDelay: 0.5,
     timeoutWait: 1
-}
+};
 
 export const particleParams = {
     particles: {

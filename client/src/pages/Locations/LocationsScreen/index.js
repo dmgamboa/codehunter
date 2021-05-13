@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Icon, { UnorderedListOutlined } from "@ant-design/icons";
 
 import { ReactComponent as MapIcon } from "../../../assets/icons/map.svg"; 
@@ -34,7 +34,7 @@ const LocationsScreen = () => {
 
     const handleViewToggle = () => {
         setMapView(!mapView);
-    }
+    };
 
     const handleTabs = (tab) => {
         switch (tab) {

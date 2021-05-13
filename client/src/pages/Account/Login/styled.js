@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled from "styled-components";
 
 const StyledLogin = styled.div`
     margin: 150px 10% 0 10%;
@@ -25,6 +25,6 @@ const StyledLogin = styled.div`
         display: flex;
         justify-content: space-around;
     }
-`
+`;
 
-export default StyledLogin
+export default StyledLogin;
