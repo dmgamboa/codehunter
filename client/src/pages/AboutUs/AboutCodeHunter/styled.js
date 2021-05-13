@@ -4,7 +4,8 @@ import { Swiper } from "swiper/react";
 export const Container = styled.div`
     width: 100vw;
     height: 20vh;
-    padding: 1rem;
+    max-height: 100px;
+    padding: 1rem 1rem 20px 1rem;
 `;
 
 export const StyledSwiper = styled(Swiper)`
@@ -16,25 +17,21 @@ export const StyledSwiper = styled(Swiper)`
 `;
 
 export const StyledPara = styled.div`
-    padding: 1rem;
-    font-size: 1rem;
+    margin: 1rem;
+    font-size: 2vh;
     display: grid;
-    grid-template:
-        "title content" 100%
-        / 20% 80%;
-    justify-items: center;
+    text-align: center;
     align-items: center;
     min-height: 120px;
-    h4 {
-        grid-area: title;
+    .heading {
         color: #08497E;
-        transform: rotate(-90deg);
-        white-space: nowrap;
-        text-align: center;
         font-weight: bold;
     }
-    p {
-        grid-area: content;
-        text-align: right;
+    .text {
+        margin: 0;
+        .emphasize {
+            color: #005526;
+            font-weight: bold;
+        }
     }
 `;

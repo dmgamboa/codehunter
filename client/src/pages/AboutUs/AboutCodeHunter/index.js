@@ -1,5 +1,3 @@
-
-import { useState } from "react";
 import { motion } from "framer-motion";
 import { SwiperSlide } from "swiper/react";
 import SwiperCore, { Pagination, EffectFade } from "swiper/core";
@@ -12,22 +10,37 @@ import { Container, StyledSwiper, StyledPara } from "./styled";
 
 const AboutCodeHunter = () => {
     SwiperCore.use([Pagination, EffectFade]);
-    
-    const [carouselIndex, setCarouselIndex] = useState(0);
+
+    const emphasize = (text) => {
+			let para = [];
+            text.split(" ").map(word => {
+                if (word == "passion" | word == "desire" | word == "resolve") {
+                    para.push(
+                        <span className="emphasize">{word} </span>
+                    );
+                } else {
+                    para.push(word + " ");
+                }
+            });
+            return para;
+    };
     
     const renderCarouselItems = (items) => {
-        return items.map(({ text }) => {
+        return items.map(({ text, heading }) => {
             return (
                 <SwiperSlide key={text}>
-                    <StyledPara className="removethis">
-                        <h4>{carouselItems[carouselIndex].heading}</h4>
-                        <p className="text">{text}</p>
+                    <StyledPara>
+                        {text ? 
+                            <div className="text">{text ? emphasize(text) : ""}</div>  
+                        : ""}
+                        {heading ? <h4 className="heading">{heading}</h4> : ""} 
 
                     </StyledPara>
                 </SwiperSlide>
             );
         });
     };
+    
     return (
         <motion.div
         initial={{ opacity: 0 }}
@@ -36,19 +49,16 @@ const AboutCodeHunter = () => {
         transition={{ duration: 1, ease: "easeInOut"}}
         >
             <Container>
-                <div className="top">
-
+      
                     <StyledSwiper
                         centeredSlides="true"
                         effect="fade"
                         fadeEffect={{crossFade: true}}
                         pagination={{dynamicBullets: true}}
-                        onTransitionStart={(swiper) => setCarouselIndex(swiper.realIndex)}
                     >
                         {renderCarouselItems(carouselItems)}
                     </StyledSwiper>
 
-                </div>
             </Container>
         </motion.div>
     );

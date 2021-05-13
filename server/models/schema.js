@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const locationSchema = new Schema({
-    datasetid: String,
+    /*datasetid: String,
     recordid: String,
     fields: {
         website: String,
@@ -19,7 +19,7 @@ const locationSchema = new Schema({
         type: String,
         primary_use: String
     },
-    record_timestamp: String
+    record_timestamp: String*/
 });
 
 const userSchema = new Schema({
@@ -33,7 +33,7 @@ const userSchema = new Schema({
 });
 
 // User -> users
-const User = mongoose.model("users", userSchema);
 const Location = mongoose.model("locations", locationSchema);
+const User = mongoose.model("users", userSchema);
 
-export default User;
+export { Location, User };
