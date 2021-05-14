@@ -4,8 +4,8 @@ var LocationsList = document.querySelector("locationsList");
 
 const renderHistoryList = (list) => {
     LocationsList.innerHTML = "";
-    list.map(item => {
-        const {name, date, points} = item;
+    list.map((item) => {
+        const { name, date, points } = item;
         const location = document.createElement("div");
         location.setAttribute("class", "location");
         location.innerHTML = `
@@ -16,9 +16,7 @@ const renderHistoryList = (list) => {
             <p>
         `;
         LocationsList.appendChild(location);
-
     });
-    
-}
+};
 
 //user axios here

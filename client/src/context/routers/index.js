@@ -74,10 +74,11 @@ const routes = [
         path: "/account",
         exact: false,
         navTab: false,
+        fullscreen: true,
         component: <Account />
     },
     {
-        name: "AboutUs",
+        name: "About Us",
         path: "/aboutus",
         exact: false,
         navTab: false,
@@ -90,7 +91,7 @@ const routes = [
         name: "Rewards",
         path: "/rewards",
         exact: false,
-        navTab: true,
+        navTab: false,
         navDrawer: true,
         fullscreen: false,
         icon: <GiftOutlined />,

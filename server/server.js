@@ -29,5 +29,5 @@ app.use("/getPlaceData", getPlaceData);
 app.use("/getLocationsList", getLocationsList);
 
 app.listen(port, () => {
-    console.log(`App listening to port ${port}`);
+    //console.log(`App listening to port ${port}`);
 });

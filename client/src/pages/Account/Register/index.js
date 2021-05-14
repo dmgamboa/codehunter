@@ -65,7 +65,6 @@ const Register = () => {
 
         if (error) {
             message.error(error);
-            console.log(error);
         }
     };
 

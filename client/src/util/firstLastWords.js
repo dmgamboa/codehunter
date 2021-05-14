@@ -2,7 +2,6 @@
 
 const firstLast = (str) => {
     let arr = str.split(" ");
-    console.log(arr);
     let first = arr[0];
     let last = arr.pop();
     return { firstName: first, lastName: last };

@@ -74,6 +74,8 @@ const LocationsScreen = () => {
         }
     };
 
+    const detailsTabsWithHandle = detailsTabs.map(tab => ({...tab, onPress: handleTabs}));
+
     useEffect(async () => {
 
         // TODO
@@ -112,7 +114,7 @@ const LocationsScreen = () => {
                 visible={detailsVisible}
                 onClose={handleDetailsClose}
                 location={testData}
-                tabs={detailsTabs}
+                tabs={detailsTabsWithHandle}
             />
 
             <span className="icon-buttons">

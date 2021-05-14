@@ -5,11 +5,11 @@ import PointsSection from "../components/Points/PointsSection";
 import LocationsList from "../components/History/LocationsList";
 
 const ProfileScreen = () => {
-  const { logout } = useAuth();
+  //const { logout } = useAuth();
   const history = useHistory();
 
   function handleLogout() {
-    logout();
+    //logout();
     history.push("/login");
   }
 

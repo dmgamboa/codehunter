@@ -9,17 +9,14 @@ const SampleScreen = () => {
     let match = useRouteMatch();
 
     const handleClick = () => {
-        console.log("in handleClick");
         history.push(`${match.path}/form`);
     };
 
     const handleGet = () => {
-        console.log("in handleGet");
         sampleGet();
     };
 
     const handlePost = () => {
-        console.log("in handlePost");
         samplePost();
     };
 

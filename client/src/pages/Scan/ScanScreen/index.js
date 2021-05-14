@@ -4,11 +4,13 @@ import { StyledScanner } from "./styled";
 
 const ScanScreen = () => {
     const handleScan = (data) => {
-        console.log(data);
+        return data;
+        // console.log(data);
     };
 
     const handleError = (err) => {
-        console.error(err);
+        return err;
+        //console.error(err);
     };
 
     return (

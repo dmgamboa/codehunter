@@ -3,7 +3,7 @@ import styled from "styled-components";
 const AvatarContainer = styled.div`
     #editBtn {
         color: black;
-        background-color: #ADC9DF;
+        background-color: #adc9df;
         width: 17%;
         height: 3.5%;
         position: absolute;
@@ -42,7 +42,6 @@ const AvatarContainer = styled.div`
         height: 10%;
         z-index: 0;
     }
-
 `;
 
 export default AvatarContainer;

@@ -40,10 +40,10 @@ const StyledDrawer = styled.div`
                 display: grid;
                 grid-template:
                     "return" 5%
-                    "general-info" 65%
+                    "general-info" 55%
                     "...." 10%
                     "contact-info" 10%
-                    "name" 10%
+                    "name" 20%
                     / 100%;
                 align-items: center;
                 .return {
