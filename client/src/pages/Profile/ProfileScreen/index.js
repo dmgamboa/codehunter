@@ -1,21 +1,23 @@
-import React, { useReducer } from "react";
-// import { useAuth } from "../../context/Auth";
+import { useAuth } from "../../../context/Auth";
 import { useHistory } from "react-router-dom";
+import AvatarSection from "../components/Avatar/Avatar";
+import PointsSection from "../components/Points/PointsSection";
+import LocationsList from "../components/History/LocationsList";
 
 const ProfileScreen = () => {
-//   const { user, logout } = useAuth();
+  //const { logout } = useAuth();
   const history = useHistory();
 
   function handleLogout() {
-    logout();
+    //logout();
     history.push("/login");
   }
 
   return (
     <div>
-      <h1>Profile page</h1>
-      Email: Some email
-      <button onClick={handleLogout}>Log Out</button>
+      <AvatarSection/>
+      <PointsSection points={12}/>
+      <LocationsList/>
     </div>
   );
 };

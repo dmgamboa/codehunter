@@ -1,9 +1,28 @@
+import QrReader from "react-qr-reader";
+
+import { StyledScanner } from "./styled";
 
 const ScanScreen = () => {
+    const handleScan = (data) => {
+        return data;
+        // console.log(data);
+    };
+
+    const handleError = (err) => {
+        return err;
+        //console.error(err);
+    };
+
     return (
-        <div>
-            Welcome to the Scan screen.
-        </div>
+        <StyledScanner>
+            <QrReader
+                delay={250}
+                style={{ height: "40vh", width: "40vw" }}
+                onError={handleError}
+                onScan={handleScan}
+                //facingMode={"rear"}
+            />
+        </StyledScanner>
     );
 };
 

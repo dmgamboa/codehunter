@@ -1,7 +1,6 @@
-import React from "react";
 import { EnvironmentFilled } from "@ant-design/icons";
 
-const Marker = ({ handleClick, cultural_space_name, local_area }) => {
+const Marker = ({ handleClick, data }) => {
   const markerStyle = {
     fontSize: "250%",
     color: "#08497E"
@@ -11,7 +10,7 @@ const Marker = ({ handleClick, cultural_space_name, local_area }) => {
     <EnvironmentFilled
       style={markerStyle}
       onClick={() => {
-        handleClick(cultural_space_name);
+        handleClick(data);
       }}
     />
   );

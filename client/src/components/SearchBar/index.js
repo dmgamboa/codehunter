@@ -1,9 +1,15 @@
-import googleMapReact from "google-map-react";
-import React from "react";
+import StyledSearch from "./styled";
 
-const SearchBar = () => {
+const SearchBar = ({ className, onSearch }) => {
+    const handleSearch = () => {};
+
   return (
-    <input type="text" />
+    <StyledSearch
+      className={className}
+      placeholder="Look up places..."
+      onSearch={handleSearch}
+      allowClear
+    />
   );
 };
 

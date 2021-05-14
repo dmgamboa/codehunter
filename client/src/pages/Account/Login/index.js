@@ -1,10 +1,11 @@
-import React, { useRef, useState, useEffect } from "react";
-import { useAuth } from "../../../context/Auth"
+import { useAuth } from "../../../context/Auth";
 import { Link, useHistory } from "react-router-dom";
-import { MailOutlined, LockOutlined, AppleOutlined, FacebookOutlined, TwitterOutlined } from '@ant-design/icons'
-import { Form, Input, Button, message } from 'antd'
+import { MailOutlined, LockOutlined, AppleOutlined, FacebookOutlined, TwitterOutlined } from "@ant-design/icons";
+import { Form, Input, Button, message } from "antd";
 
-import StyledLogin from "./styled.js"
+import StyledLogin from "./styled.js";
+
+import { useState, useRef } from "react";
 
 const Login = () => {
     const valuesRef = useRef();
@@ -19,12 +20,12 @@ const Login = () => {
 
         try {
             await login(email, password);
-            message.loading({ content: "Glad to have you back!", duration: 1 })
+            message.loading({ content: "Glad to have you back!", duration: 1 });
             history.push("/locations");
         } catch(e) {
             setError("Failed to login, please check your password and email.");
             // Displays loading message
-            message.error("Failed to login, check your password and email.")
+            message.error(error);
         }
     };
 
@@ -48,12 +49,12 @@ const Login = () => {
                     name="email"
                     rules={[
                     {
-                        type: 'email',
-                        message: 'The input is not valid E-mail!',
+                        type: "email",
+                        message: "The input is not valid E-mail!",
                         },
                     {
                         required: true,
-                        message: 'Please input your E-mail!',
+                        message: "Please input your E-mail!",
                     },
                     ]}
                 >
@@ -66,7 +67,7 @@ const Login = () => {
                 rules={[
                     {
                     required: true,
-                    message: 'Please input your Password!',
+                    message: "Please input your Password!",
                     },
                 ]}
                 >
@@ -106,7 +107,7 @@ const Login = () => {
                 </div>
             </Form>
         </StyledLogin>
-    )
-}
+    );
+};
 
-export default Login
+export default Login;

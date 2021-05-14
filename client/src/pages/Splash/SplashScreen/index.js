@@ -23,7 +23,7 @@ const SplashScreen = () => {
         setTimeout(() => {
             history.push("/walkthrough");
         }, timeout * 1000);
-    }
+    };
 
     return (
         <motion.div

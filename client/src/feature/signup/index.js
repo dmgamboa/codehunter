@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
-import { useAuth } from "../../context/Auth"
-import { Link, useHistory } from "react-router-dom"
+import { useAuth } from "../../context/Auth";
+import { Link, useHistory } from "react-router-dom";
 
 export default function Signup() {
   const email = useRef();

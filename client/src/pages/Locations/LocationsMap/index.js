@@ -1,86 +1,61 @@
-import React, { useEffect, useState } from "react";
 import GoogleMapReact from "google-map-react";
 
-import SearchBar from "../../../components/SearchBar";
 import Marker from "../../../components/Marker";
 
 import { StyledMap } from "./styled";
-import { getMapData } from "../axios";
+import { initialCoords, mapViewSettings, mapsKey } from "./constant";
 
-const initialCoords = {
-  lat: 49.246292,
-  lng: -123.116226
-};
 
-const initialZoom = 13;
+const LocationsMap = ({
+    locations,
+    handleDetails,
+    userCoords,
+}) => {
+    const { bound, initialZoom } = mapViewSettings;
 
-const LocationsMap = () => {
-  const [markers, setMarkers] = useState([]);
-  const [coords, setCoords] = useState(initialCoords);
-  const mapsKey = process.env.REACT_APP_MAPS_KEY;
+    const handleMarkerClick = () => {
 
-  const bound = 0.015;
-  
-  useEffect(async () => {
-    // UNCOMMENT TO USE CURRENT POSITION
-    //getCoords();
-    const mapData = await getMapData();
-    setMarkers(mapData.data);
-  }, []);
+    };
 
-  const getCoords = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((pos) => {
-        setCoords({
-          lat: pos.coords.latitude,
-          lng: pos.coords.longitude
+    // const withinBounds = (coordinates) => {
+    //     return (
+    //         initialCoords.lng > coordinates[0] - bound &&
+    //         initialCoords.lng < coordinates[0] + bound &&
+    //         initialCoords.lat > coordinates[1] - bound &&
+    //         initialCoords.lat < coordinates[1] + bound
+    //     );
+    // };
+
+    const renderMarkers = (locations) => {
+        return locations.map(({
+            name,
+            website,
+            coordinates
+        }) => {
+
+            return (
+                <Marker
+                    key={name}
+                    lat={coordinates.lat}
+                    lng={coordinates.lng}
+                    handleClick={handleMarkerClick}
+                    data={`${name}+${website}`}
+                />
+            );
         });
-      });
-    } else {
-      console.log("Geolocation is not supported by this browser.");
-    }
-  };
+    };
 
-  const handleMarkerClick = (cultural_space_name) => {
-    console.log("This place is: ", cultural_space_name);
-  };
-
-  const renderMarkers = (markerData) => {
-    return markerData.map(code => {
-      const { _id } = code;
-      const { cultural_space_name, local_area } = code.fields;
-      const { coordinates } = code.fields.geom;
-      if (coords.lat > coordinates[1] - bound
-        && coords.lat < coordinates[1] + bound
-        && coords.lng > coordinates[0] - bound
-        && coords.lng < coordinates[0] + bound) {
-        return (
-          <Marker
-            key={_id}
-            lat={coordinates[1]}
-            lng={coordinates[0]}
-            handleClick={handleMarkerClick}
-            cultural_space_name={cultural_space_name}
-            local_area={local_area}
-          />
-        );
-      }
-    });
-  };
-
-  return (
-    <StyledMap>
-      {//<SearchBar />
-      }
-      <GoogleMapReact
-        bootstrapURLKeys={{ key: mapsKey }}
-        center={initialCoords}
-        zoom={initialZoom}
-      >
-        {renderMarkers(markers)}
-      </GoogleMapReact>
-    </StyledMap>
-  );
+    return (
+        <StyledMap>
+            <GoogleMapReact
+                bootstrapURLKeys={{ key: mapsKey }}
+                center={initialCoords}
+                zoom={initialZoom}
+            >
+                {locations && renderMarkers(locations)}
+            </GoogleMapReact>
+        </StyledMap>
+    );
 };
 
 export default LocationsMap;
