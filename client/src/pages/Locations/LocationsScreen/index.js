@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Icon, { UnorderedListOutlined } from "@ant-design/icons";
 
 import { ReactComponent as MapIcon } from "../../../assets/icons/map.svg"; 
@@ -15,12 +15,16 @@ import LocationsAccess from "../LocationsAccess";
 
 import { Layout, Top } from "./styled";
 import { detailsTabs, defaultFilters, testLocations, testData } from "./constant";
+import { getLocationsList } from "../axios";
 
 const LocationsScreen = () => {
     const [filtersVisible, setFiltersVisible] = useState(false);
     const [detailsVisible, setDetailsVisible] = useState(false);
     const [mapView, setMapView] = useState(false);
     const [userCoords, setUserCoords] = useState(null);
+    const [filters, setFilters] = useState(defaultFilters);
+    const [search, setSearch] = useState(null);
+    const [page, setPage] = useState(1);
 
     const handleFilterToggle = () => {
         setFiltersVisible(!filtersVisible);
@@ -66,6 +70,30 @@ const LocationsScreen = () => {
                 setDetailsVisible(false);
         }
     }
+
+    useEffect(async () => {
+        /*const params = {
+            userCoords: userCoords,
+            page: page,
+            limit: limit,
+            bookmarked: bookmarked,
+            visited: visited,
+            local_area: local_area,
+            type: type,
+        };*/
+
+        const testParams = {
+            page: 1,
+            limit: 10,
+            filters: {
+                local_area: "Downtown",
+                type: "Museum / Gallery"
+            }
+        }
+
+        const locationsList = await getLocationsList(testParams);
+        console.log(locationsList);
+    }, []);
 
     return (
         <Layout className={mapView ? "map-view" : "list-view"}>

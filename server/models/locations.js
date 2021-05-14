@@ -1,3 +1,5 @@
+import isEmpty from "lodash/isEmpty.js";
+
 import { Location } from "./schema.js";
 
 const getLocations = () => {
@@ -36,12 +38,22 @@ const getLocationsList = (req) => {
     return new Promise((res, rej) => {
         const userCoords = req.query.userCoords;
         const page = parseInt(req.query.page);
-        const limit = parseInt(req.query.limit);
+        const limit = req.query.limit ? parseInt(req.query.limit) : 10;
         const skip = (page - 1) * limit;
-        const local_area = req.query.local_area;
-        const type = req.query.type;
+        const filterReq = JSON.parse(req.query.filters);
 
-        Location.find({ "fields.local_area": local_area, "fields.type": type }, {}, { skip: skip, limit: limit }).exec((err, data) => {
+        let filters = {};
+        if (filterReq) {
+            for (const filter in filterReq) {
+                if (filterReq[filter]) {
+                    filters[`fields.${filter}`] = filterReq[filter];
+                }
+            }
+        }
+
+        console.log(filters);
+
+        Location.find(filters, {}, { skip: skip, limit: limit }).exec((err, data) => {
             if (err) {
                 return rej(err);
             }
@@ -49,7 +61,7 @@ const getLocationsList = (req) => {
             var jsonData = JSON.stringify(data);
             jsonData = JSON.parse(jsonData);
 
-            if (jsonData == "") {
+            if (isEmpty(jsonData)) {
                 return res(jsonData);
             }
 

@@ -33,11 +33,14 @@ const getLocationsList = async (params) => {
         local_area: local_area,
         type: type,
     };*/
+    let locationsList;
 
-    var locationsList;
-    await axios.get("/getLocationsList", { params }).then((res) => {
+    await axios
+    .get("/getLocationsList", { params })
+    .then((res) => {
         locationsList = res;
     });
+
     return locationsList;
 };
 
