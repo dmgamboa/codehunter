@@ -1,4 +1,6 @@
-var LocationsList = document.querySelector("#LocationsList");
+"use strict";
+
+var LocationsList = document.querySelector("locationsList");
 
 const renderHistoryList = (list) => {
     LocationsList.innerHTML = "";
@@ -16,18 +18,7 @@ const renderHistoryList = (list) => {
         LocationsList.appendChild(location);
 
     });
+    
 }
 
-const getHistoryList = () => {
-    $.ajax({
-        url: "/read-locations",
-        type: "GET",
-        dataType: "json",
-        success: data => renderHistoryList(data),
-        error: e => console.log(e)
-    });
-}
-
-$( document ).ready(() => {
-    getHistoryList();
-});
+//user axios here

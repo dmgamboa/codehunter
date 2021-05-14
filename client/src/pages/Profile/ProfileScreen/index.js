@@ -1,8 +1,9 @@
 import React, { useReducer } from "react";
 // import { useAuth } from "../../context/Auth";
 import { useHistory } from "react-router-dom";
-import AvatarSection from "../components/Avatar/AvatarSection"
-import PointsSection from "../components/Points/PointsSection"
+import AvatarSection from "../components/Avatar/Avatar";
+import PointsSection from "../components/Points/PointsSection";
+import LocationsList from "../components/History/LocationsList";
 
 const ProfileScreen = () => {
 //   const { user, logout } = useAuth();
@@ -17,9 +18,7 @@ const ProfileScreen = () => {
     <div>
       <AvatarSection/>
       <PointsSection points={12}/>
-      <h1>Profile page</h1>
-      Email: Some email
-      <button onClick={handleLogout}>Log Out</button>
+      <LocationsList/>
     </div>
   );
 };
