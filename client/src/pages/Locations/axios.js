@@ -1,9 +1,11 @@
 import axios from "axios";
 
+const url = process.env.REACT_APP_SERVER;
+
 const getMapData = async () => {
     var mapData;
 
-    await axios.get("/getMapData").then((res) => {
+    await axios.get(`${url}getMapData`).then((res) => {
         mapData = res;
     });
     return mapData;
@@ -12,7 +14,7 @@ const getMapData = async () => {
 const getPlaceData = async (search) => {
     let placeData;
     await axios
-        .get("/getPlaceData", {
+        .get(`${url}getPlaceData`, {
             params: {
                 search: search,
             },
@@ -25,7 +27,7 @@ const getPlaceData = async (search) => {
 
 const getLocationsList = async (params) => {
     return await axios
-        .get("/getLocationsList", { params })
+        .get(`${url}getLocationsList`, { params })
         .then((res) => {
             const { status, data } = res;
 

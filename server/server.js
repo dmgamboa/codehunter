@@ -1,6 +1,7 @@
 // Our application entry point
 import express from "express";
 import mongoose from "mongoose";
+import cors from "cors";
 import config from "./config/index.js";
 import getMapData from "./api-routes/getMapData.route.js";
 import registration from "./api-routes/registration.route.js";
@@ -23,6 +24,7 @@ mongoose.connect(uri, {
 });
 
 app.use(express.json());
+app.use(cors());
 app.use("/registration", registration);
 app.use("/getMapData", getMapData);
 app.use("/getPlaceData", getPlaceData);
