@@ -27,7 +27,6 @@ const LocationsMap = ({
     // };
 
     const renderMarkers = (locations) => {
-        console.log(locations);
         return locations.map(({
             name,
             website,

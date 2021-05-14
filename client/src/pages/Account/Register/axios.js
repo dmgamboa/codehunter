@@ -17,12 +17,7 @@ const createUserDoc = (values, uid) => {
         "uid": uid
     };
 
-    axios.post("/registration", regiInfo)
-    .then(res => { 
-        console.log(res); 
-    }).catch(e => {
-        console.log(e);
-    });
+    axios.post("/registration", regiInfo);
 };
 
 export default createUserDoc;

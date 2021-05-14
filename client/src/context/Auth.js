@@ -13,7 +13,6 @@ const AuthProvider = ({ children }) => {
 
     const getUserUID = () => {
         if (currentUser) {
-            console.log("token or naw ", currentUser);
             return currentUser.uid;
         } else {
             return "no uid";
@@ -22,7 +21,6 @@ const AuthProvider = ({ children }) => {
 
     // Creating new user in firebase and document in user collection in MongoDB
     const signup = (email, password) => {
-        console.log("signup() executed for firebase");
         return auth.createUserWithEmailAndPassword(email, password);
     };
 
