@@ -5,15 +5,17 @@ import {
     useLocation,
     Link
 } from "react-router-dom";
-import { Drawer } from "antd";
 import { TabBar } from "antd-mobile";
-import { EllipsisOutlined } from "@ant-design/icons";
+import Icon, { EllipsisOutlined } from "@ant-design/icons";
 
 import {
     navTabRoutes,
     navDrawerRoutes,
     navlessPaths,
 } from "../../context/routers";
+import { ReactComponent as Logo } from "../../assets/icons/logo.svg";
+
+import { StyledDrawer } from "./styled";
 
 const Navigation = () => {
     const history = useHistory();
@@ -65,7 +67,7 @@ const Navigation = () => {
                     <span className="link">
                         {name}
                     </span>
-                </Link>
+                </Link>                    
             );
         })
     }
@@ -76,18 +78,22 @@ const Navigation = () => {
                 {getTabs(navTabRoutes)}
                 <Item
                     icon={<EllipsisOutlined />}
+                    selectedIcon={<EllipsisOutlined />}
                     title="More"
                     selected={drawer}
                     onPress={handleToggleMore}
                 />
             </TabBar>
-            <Drawer
-                width="auto"
+            <StyledDrawer
                 visible={drawer}
                 onClose={handleToggleMore}
             >
+                <Icon
+                    className="logo"
+                    component={Logo}
+                />
                 {getDrawerLinks(navDrawerRoutes)}
-            </Drawer>
+            </StyledDrawer>
         </>            
     );
 };

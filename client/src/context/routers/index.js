@@ -2,12 +2,11 @@ import { Route } from "react-router-dom";
 import Icon, { 
     CompassOutlined,
     CompassFilled,
-//    SmileOutlined,
-//    SmileFilled,
     TeamOutlined,
     GiftOutlined,
     GiftFilled,
-    UserOutlined
+    UserOutlined,
+    QuestionCircleOutlined
  } from "@ant-design/icons";
 
 import Locations from "../../pages/Locations";
@@ -84,7 +83,8 @@ const routes = [
         navTab: false,
         navDrawer: true,
         fullScreen: false,
-        component: <AboutUs />
+        icon: <QuestionCircleOutlined />,
+        component: <AboutUs />,
     },
     {
         name: "Rewards",
