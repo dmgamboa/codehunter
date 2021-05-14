@@ -28,8 +28,8 @@ const LocationDetails = ({
                     </span>
                 </span>                
             );
-        })
-    }
+        });
+    };
 
     const renderDetails = (loc) => {
         return Object.keys(detailsToRender).map(detail => {
@@ -67,8 +67,8 @@ const LocationDetails = ({
                     }
                 </span>
             );
-        })
-    }
+        });
+    };
 
     const renderTabs = (tabs) => {
         return tabs.map(({
@@ -85,8 +85,8 @@ const LocationDetails = ({
                     onPress={() => onPress(key)}
                 />
             );
-        })
-    }
+        });
+    };
 
     return (
 
@@ -116,6 +116,6 @@ const LocationDetails = ({
 
             </StyledDrawer>
     );
-}
+};
 
 export default LocationDetails;

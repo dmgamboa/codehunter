@@ -27,8 +27,8 @@ const LocationCard = ({
                     onPress={() => onPress(key)}
                 />
             );
-        })
-    }
+        });
+    };
 
     return (
         <StyledCard
@@ -77,6 +77,6 @@ const LocationCard = ({
             }
         </StyledCard>
     );
-}
+};
 
 export default LocationCard;

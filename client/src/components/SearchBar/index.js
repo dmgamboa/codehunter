@@ -11,7 +11,7 @@ const SearchBar = ({
 
   const handleSearch = () => {
 
-  }
+  };
 
   return (
     <StyledSearch

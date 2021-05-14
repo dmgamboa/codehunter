@@ -6,6 +6,6 @@ export const initialCoords = {
 export const mapViewSettings = {
     initialZoom: 13,
     bound: 0.015
-}
+};
 
 export const mapsKey = process.env.REACT_APP_MAPS_KEY;

@@ -19,8 +19,8 @@ const LocationsList = ({
                     onClick={handleDetailsOpen}
                 />
             );
-        })
-    }
+        });
+    };
 
     return (
         <>  

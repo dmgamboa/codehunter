@@ -11,7 +11,7 @@ export const detailsTabs = [
     },
     {
         key: "bookmark",
-        name: `Add to Bookmarks`,
+        name: "Add to Bookmarks",
         icon: <Icon component={BookmarkIcon}/>,
     },
     {
@@ -57,4 +57,4 @@ export const testData = {
         phone: "6041234567",
         website: "https://www.scienceworld.ca"
     }
-}
+};

@@ -30,7 +30,7 @@ const Navigation = () => {
 
     const handleToggleMore = () => {
         setDrawer(!drawer);
-    }
+    };
 
     useEffect(() => {
         navlessPaths.includes(`/${page}`) ? setHidden(true) : setHidden(false);
@@ -69,8 +69,8 @@ const Navigation = () => {
                     </span>
                 </Link>                    
             );
-        })
-    }
+        });
+    };
 
     return (
         <>

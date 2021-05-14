@@ -4,6 +4,6 @@ const theme = {
         secondary: "#005526",
         accent: "#88201C"
     }
-}
+};
 
 export default theme;

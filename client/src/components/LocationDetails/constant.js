@@ -12,4 +12,4 @@ export const details = {
     hours: <ClockCircleOutlined  className="icon"/>,
     phone: <PhoneOutlined  className="icon"/>,
     website: <GlobalOutlined  className="icon"/>
-}
+};

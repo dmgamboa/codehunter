@@ -13,7 +13,7 @@ const LocationsAccess = ({ userCoords, handleSuccess }) => {
 
         message.error("Sorry, geolocation is not supported by your browser.");
         return false;
-    }
+    };
 
     const hasUserPermission = async () => {
         const { state } = await navigator.permissions.query({ name: "geolocation" });
@@ -24,17 +24,17 @@ const LocationsAccess = ({ userCoords, handleSuccess }) => {
         }
 
         return true;
-    }
+    };
 
     const handleError = () => {
         message.error("Something went wrong! Please try again later.");
-    }
+    };
 
     const handleClick = async () => {
         if (canUseGeolocation() && await hasUserPermission()) {
             navigator.geolocation.getCurrentPosition(handleSuccess, handleError);
         }
-    }
+    };
 
     return (
         <CircleIconBtn
@@ -44,6 +44,6 @@ const LocationsAccess = ({ userCoords, handleSuccess }) => {
             onClick={handleClick}
         />
     );
-}
+};
 
 export default LocationsAccess;

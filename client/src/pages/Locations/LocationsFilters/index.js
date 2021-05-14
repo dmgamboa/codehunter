@@ -45,8 +45,8 @@ const LocationsFilters = ({
                     {option}
                 </Option>
             );
-        })
-    }
+        });
+    };
 
     return (
         <StyledDrawer
@@ -170,6 +170,6 @@ const LocationsFilters = ({
             </Form>
         </StyledDrawer>
     );
-}
+};
 
 export default LocationsFilters;

@@ -28,20 +28,20 @@ const LocationsScreen = () => {
 
     const handleFilterToggle = () => {
         setFiltersVisible(!filtersVisible);
-    }
+    };
 
     const handleFilterSubmit = (val) => {
         setFilters(val);
         setFiltersVisible(false);
-    }
+    };
 
     const handleDetailsOpen = () => {
         setDetailsVisible(true);
-    }
+    };
 
     const handleDetailsClose = () => {
         setDetailsVisible(false);
-    }
+    };
 
     const handleViewToggle = () => {
         setMapView(!mapView);
@@ -53,7 +53,7 @@ const LocationsScreen = () => {
             lat: latitude,
             lng: longitude
         });
-    }
+    };
 
     const handleTabs = (tab) => {
         switch (tab) {
@@ -69,7 +69,7 @@ const LocationsScreen = () => {
             case "close":
                 setDetailsVisible(false);
         }
-    }
+    };
 
     useEffect(async () => {
         /*const params = {
@@ -89,7 +89,7 @@ const LocationsScreen = () => {
                 local_area: "Downtown",
                 type: "Museum / Gallery"
             }
-        }
+        };
 
         const locationsList = await getLocationsList(testParams);
         console.log(locationsList);

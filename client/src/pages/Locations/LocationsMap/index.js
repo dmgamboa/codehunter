@@ -13,13 +13,17 @@ import {
 const LocationsMap = ({
     locations,
     handleDetails,
-    userCoords
+    userCoords,
 }) => {
+    const coords = {
+        lat: 0,
+        lng: 0
+    };
     const { bound, initialZoom } = mapViewSettings;
 
     const handleMarkerClick = () => {
 
-    }
+    };
 
     const withinBounds = (coordinates) => {
         return (
@@ -28,7 +32,7 @@ const LocationsMap = ({
             coords.lat > coordinates[1] - bound &&
             coords.lat < coordinates[1] + bound
         );
-    }
+    };
 
     const renderMarkers = (markerData) => {
         return markerData.map((code) => {
@@ -36,7 +40,7 @@ const LocationsMap = ({
             const { cultural_space_name, website } = code.fields;
             const { coordinates } = code.fields.geom;
 
-            var searchQuery = cultural_space_name + '+' + website;
+            var searchQuery = cultural_space_name + "+" + website;
 
             if (withinBounds(coordinates)) {
                 return (
