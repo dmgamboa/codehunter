@@ -1,7 +1,6 @@
 import axios from "axios";
 
 const url = process.env.REACT_APP_SERVER;
-console.log(url);
 
 const getMapData = async () => {
     var mapData;
