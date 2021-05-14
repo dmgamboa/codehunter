@@ -1,45 +1,35 @@
-import {
-    Form,
-    Radio,
-    Switch,
-    Select,
-    Button
-} from "antd";
-import Icon, { 
+import { Form, Radio, Switch, Select, Button, Tooltip } from "antd";
+import Icon, {
     EnvironmentOutlined,
     ArrowUpOutlined,
     ArrowDownOutlined,
     CheckCircleOutlined,
-    UndoOutlined
+    UndoOutlined,
 } from "@ant-design/icons";
-import { kebabCase, lowerCase } from "lodash";
+import { kebabCase } from "lodash";
 
 import { ReactComponent as FilterIcon } from "../../../assets/icons/filters.svg";
 import { ReactComponent as BookmarkIcon } from "../../../assets/icons/bookmark.svg";
+import ConditionalWrapper from "../../../components/ConditionalWrapper";
+import theme from "../../../context/themes/main";
 
 import { locationTypes, neighborhoods } from "./constant";
 import StyledDrawer from "./styled";
 
-const LocationsFilters = ({
-    visible,
-    onClose,
-    filters
-}) => {
-
+const LocationsFilters = ({ visible, onClose, onFinish, initialValues, hasUserCoords }) => {
+    const [form] = Form.useForm();
     const { Option } = Select;
+    const { colors } = theme;
 
     const renderOptions = (opts) => {
         return opts.map((option) => {
             return (
-                <Option
-                    key={kebabCase(option)}
-                    value={lowerCase(option)}
-                >
+                <Option key={kebabCase(option)} value={option}>
                     {option}
                 </Option>
             );
-        })
-    }
+        });
+    };
 
     return (
         <StyledDrawer
@@ -47,97 +37,90 @@ const LocationsFilters = ({
             height="auto"
             visible={visible}
             onClose={onClose}
-            title={(
+            title={
                 <>
                     <Icon component={FilterIcon} />
                     <h1>Sort and Filter</h1>
                 </>
-            )}
+            }
         >
-            <Form
-                initialValues={filters}
-                layout="vertical"
-            >
-                <Form.Item
-                    label="Sort by"
-                    name="sort"
-                >
+            <Form form={form} onFinish={onFinish} initialValues={initialValues} layout="vertical">
+                <Form.Item label="Sort by" name="sort">
                     <Radio.Group className="sort">
                         <Radio.Button value="az">
                             <ArrowUpOutlined /> A - Z
                         </Radio.Button>
 
-                        <Radio.Button value="distance">
-                            <EnvironmentOutlined /> Nearest
-                        </Radio.Button>
-                        
+                        <ConditionalWrapper
+                            condition={!hasUserCoords}
+                            wrapper={(children) => (
+                                <Tooltip
+                                    color={colors.primary}
+                                    title="Please allow access to permisions to use this option."
+                                >
+                                    {children}
+                                </Tooltip>
+                            )}
+                        >
+                            <Radio.Button
+                                className="distance"
+                                value="distance"
+                                disabled={!hasUserCoords}
+                            >
+                                <EnvironmentOutlined /> Nearest
+                            </Radio.Button>
+                        </ConditionalWrapper>
+
                         <Radio.Button value="za">
                             <ArrowDownOutlined /> Z - A
                         </Radio.Button>
-                    </Radio.Group>   
+                    </Radio.Group>
                 </Form.Item>
 
-                <Form.Item label="Show only:">
-                    <Form.Item className="switch" name="bookmarked">
+                <div className="switch">
+                    <Form.Item name="bookmarked" valuePropName="checked">
                         <Switch />
-                        <span className="switch-label">
-                            <Icon component={BookmarkIcon} />
-                            Bookmarked
-                        </span>
                     </Form.Item>
+                    <span className="switch-label">
+                        <Icon component={BookmarkIcon} />
+                        Bookmarked
+                    </span>
+                </div>
 
-                    <Form.Item className="switch" name="visited">
+                <div className="switch">
+                    <Form.Item name="visited" valuePropName="checked">
                         <Switch />
-                        <span className="switch-label">
-                            <CheckCircleOutlined />
-                            Visited
-                        </span>
                     </Form.Item>
-                </Form.Item>
+                    <span className="switch-label">
+                        <CheckCircleOutlined />
+                        Visited
+                    </span>
+                </div>
 
-                <Form.Item
-                    label="Location Type"
-                    name="type"
-                >
-                    <Select
-                        showSearch
-                        allowClear
-                        placeholder="Any"
-                    >
+                <Form.Item label="Location Type" name="type">
+                    <Select showSearch allowClear placeholder="Any">
                         {renderOptions(locationTypes)}
                     </Select>
                 </Form.Item>
 
-                <Form.Item
-                    label="Neighborhood"
-                    name="neighborhood"
-                >
-                    <Select
-                        showSearch
-                        allowClear
-                        placeholder="Any"
-                    >
+                <Form.Item label="Neighborhood" name="location_type">
+                    <Select showSearch allowClear placeholder="Any">
                         {renderOptions(neighborhoods)}
                     </Select>
                 </Form.Item>
-                
 
                 <span className="buttons">
-                    <Button
-                        type="primary"
-                        block
-                    >
+                    <Button type="primary" onClick={() => form.submit()} block>
                         Apply
                     </Button>
 
-                    <Button block>
+                    <Button onClick={() => form.resetFields()} block>
                         <UndoOutlined /> Reset
                     </Button>
                 </span>
-   
             </Form>
         </StyledDrawer>
     );
-}
+};
 
 export default LocationsFilters;

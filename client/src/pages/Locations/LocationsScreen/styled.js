@@ -12,10 +12,17 @@ export const Layout = styled.div`
         }
     }
 
-    .view-toggle {
-        position: absolute;
-        right: 0;
-        bottom: 0;
+    .icon-buttons {
+        z-index: 999;
+        position: fixed;
+        right: 1rem;
+        bottom: 5rem;
+        display: flex;
+        flex-direction: column;
+
+        & > *:not(:last-child) {
+            margin-bottom: 0.5rem;
+        }
     }
 `;
 

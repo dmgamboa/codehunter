@@ -1,17 +1,7 @@
-import { Input } from "antd";
-
 import StyledSearch from "./styled";
 
-const SearchBar = ({
-  className,
-  onSearch
-}) => {
-
-  const { Search } = Input;
-
-  const handleSearch = () => {
-
-  }
+const SearchBar = ({ className, onSearch }) => {
+    const handleSearch = () => {};
 
   return (
     <StyledSearch

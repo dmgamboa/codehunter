@@ -1,30 +1,34 @@
+import InfiniteScroll from "react-infinite-scroller";
+
 import LocationCard from "../../../components/LocationCard";
 
 import { cardTabs } from "./constant";
+import { StyledList } from "./styled";
 
-const LocationsList = ({
-    locations,
-    handleTabs,
-    handleDetailsOpen
-}) => {    
-    const tabs = cardTabs.map(tab => ({...tab, onPress: handleTabs}));
+const LocationsList = ({ locations, handleTabs, handleDetailsOpen }) => {
+    const tabs = cardTabs.map((tab) => ({ ...tab, onPress: handleTabs }));
 
-    const renderLocations = (locations) => {
-        return locations.map(location => {
-            return (
-                <LocationCard
-                    key={location.name}
-                    location={location}
-                    tabs={tabs}
-                    onClick={handleDetailsOpen}
-                />
-            );
-        })
-    }
+    const renderLocation = (location) => {
+        return (
+            <LocationCard
+                className="location-card"
+                location={location}
+                tabs={tabs}
+                onClick={handleDetailsOpen}
+            />
+        );
+    };
 
     return (
-        <>  
-            {locations ? renderLocations(locations) : "No locations found."}
+        <>
+            {locations
+            ?
+            <StyledList
+                dataSource={locations}
+                renderItem={renderLocation}
+            />
+
+            : "No locations found."}
         </>
     );
 };

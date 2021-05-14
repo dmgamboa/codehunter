@@ -1,10 +1,10 @@
 export const locationTypes = [
-    "Museum / Gallery",
-    "Studio / Rehearsal",
+    "Museum/Gallery",
+    "Studio/Rehearsal",
     "Community Space",
-    "Theatre / Performance",
+    "Theatre/Performance",
     "Educational",
-    "Cafe / Restaurant / Bar",
+    "Cafe/Restaurant/Bar",
     "Other"
 ];
 
