@@ -5,10 +5,21 @@ import Marker from "../../../components/Marker";
 import { StyledMap } from "./styled";
 import { initialCoords, mapViewSettings, mapsKey } from "./constant";
 
-const LocationsMap = ({ locations, handleDetails, userCoords }) => {
+
+const LocationsMap = ({
+    locations,
+    handleDetails,
+    userCoords,
+}) => {
+    const coords = {
+        lat: 0,
+        lng: 0
+    };
     const { bound, initialZoom } = mapViewSettings;
 
-    const handleMarkerClick = () => {};
+    const handleMarkerClick = () => {
+
+    };
 
     const withinBounds = (coordinates) => {
         return (

@@ -12,7 +12,11 @@ export const detailsTabs = [
     {
         key: "bookmark",
         name: "Add to Bookmarks",
+<<<<<<< HEAD
         icon: <Icon component={BookmarkIcon} />,
+=======
+        icon: <Icon component={BookmarkIcon}/>,
+>>>>>>> 7e1a799777a000391bfdf49ff9437e471ca0f61c
     },
     {
         key: "close",
@@ -57,6 +61,12 @@ export const testData = {
             },
         },
         phone: "6041234567",
+<<<<<<< HEAD
         website: "https://www.scienceworld.ca",
     },
 };
+=======
+        website: "https://www.scienceworld.ca"
+    }
+};
+>>>>>>> 7e1a799777a000391bfdf49ff9437e471ca0f61c
