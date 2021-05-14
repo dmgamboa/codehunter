@@ -11,44 +11,38 @@ const LocationsMap = ({
     handleDetails,
     userCoords,
 }) => {
-    const coords = {
-        lat: 0,
-        lng: 0
-    };
     const { bound, initialZoom } = mapViewSettings;
 
     const handleMarkerClick = () => {
 
     };
 
-    const withinBounds = (coordinates) => {
-        return (
-            initialCoords.lng > coordinates[0] - bound &&
-            initialCoords.lng < coordinates[0] + bound &&
-            initialCoords.lat > coordinates[1] - bound &&
-            initialCoords.lat < coordinates[1] + bound
-        );
-    };
+    // const withinBounds = (coordinates) => {
+    //     return (
+    //         initialCoords.lng > coordinates[0] - bound &&
+    //         initialCoords.lng < coordinates[0] + bound &&
+    //         initialCoords.lat > coordinates[1] - bound &&
+    //         initialCoords.lat < coordinates[1] + bound
+    //     );
+    // };
 
-    const renderMarkers = (markerData) => {
-        return markerData.map((code) => {
-            const { _id } = code;
-            const { cultural_space_name, website } = code.fields;
-            const { coordinates } = code.fields.geom;
+    const renderMarkers = (locations) => {
+        console.log(locations);
+        return locations.map(({
+            name,
+            website,
+            coordinates
+        }) => {
 
-            var searchQuery = cultural_space_name + "+" + website;
-
-            if (withinBounds(coordinates)) {
-                return (
-                    <Marker
-                        key={_id}
-                        lat={coordinates[1]}
-                        lng={coordinates[0]}
-                        handleClick={handleMarkerClick}
-                        data={searchQuery}
-                    />
-                );
-            }
+            return (
+                <Marker
+                    key={name}
+                    lat={coordinates.lat}
+                    lng={coordinates.lng}
+                    handleClick={handleMarkerClick}
+                    data={`${name}+${website}`}
+                />
+            );
         });
     };
 

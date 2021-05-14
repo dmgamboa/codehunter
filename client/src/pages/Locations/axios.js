@@ -28,7 +28,6 @@ const getLocationsList = async (params) => {
         .get("/getLocationsList", { params })
         .then((res) => {
             const { status, data } = res;
-            console.log({res});
 
             if (status === 200) {
                 return data.map(({ fields, distanceInKm }) => {
@@ -36,14 +35,20 @@ const getLocationsList = async (params) => {
                         local_area,
                         type,
                         cultural_space_name,
-                        website } = fields;
+                        website,
+                        geom
+                    } = fields;
 
                     return {
                         name: cultural_space_name,
                         type,
                         local_area,
                         website,
-                        distance: distanceInKm && Math.round(distanceInKm)
+                        distance: distanceInKm && Math.round(distanceInKm),
+                        coordinates: {
+                            lng: geom?.coordinates?.[0],
+                            lat: geom?.coordinates?.[1]
+                        }
                     };
                 });
             }

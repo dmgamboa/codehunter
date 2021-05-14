@@ -6,17 +6,18 @@ import theme from "../../context/themes/main";
 const { colors } = theme;
 
 export const Container = styled.div`
-    .am-tab-bar {
+    /* .am-tab-bar {
         z-index: 999;
         position: fixed;
         bottom: 0;
         width: 100%;
-        overflow: hidden;
-
+        .am-tabs-content-wrap {
+            /* display: none; */
+        }
         .am-tabs-pane-wrap {
             overflow: hidden;
         }
-    }
+    } */
 `;
 
 export const StyledDrawer = styled(Drawer)`
