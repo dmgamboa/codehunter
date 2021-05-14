@@ -7,12 +7,12 @@ export const detailsTabs = [
     {
         key: "directions",
         name: "Get Directions",
-        icon: <Icon component={GoogleMapsIcon}/>,
+        icon: <Icon component={GoogleMapsIcon} />,
     },
     {
         key: "bookmark",
-        name: `Add to Bookmarks`,
-        icon: <Icon component={BookmarkIcon}/>,
+        name: "Add to Bookmarks",
+        icon: <Icon component={BookmarkIcon} />,
     },
     {
         key: "close",
@@ -22,17 +22,19 @@ export const detailsTabs = [
 ];
 
 export const defaultFilters = {
-    sort: "az"
+    sort: "az",
 };
 
-export const testLocations = [{
-    name: "Telus World of Science",
-    distance: 5,
-    neighborhood: "Downtown",
-    bookmarked: false,
-    visited: true,
-    type: "Museum / Gallery"
-}];
+export const testLocations = [
+    {
+        name: "Telus World of Science",
+        distance: 5,
+        neighborhood: "Downtown",
+        bookmarked: false,
+        visited: true,
+        type: "Museum / Gallery",
+    },
+];
 
 export const testData = {
     name: "Telus World of Science",
@@ -52,9 +54,9 @@ export const testData = {
                 fri: ["08:00 AM", "10:00 PM"],
                 sat: [],
                 sun: [],
-            }
+            },
         },
         phone: "6041234567",
-        website: "https://www.scienceworld.ca"
-    }
-}
+        website: "https://www.scienceworld.ca",
+    },
+};

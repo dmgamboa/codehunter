@@ -51,8 +51,6 @@ const getLocationsList = (req) => {
             }
         }
 
-        console.log(filters);
-
         Location.find(filters, {}, { skip: skip, limit: limit }).exec((err, data) => {
             if (err) {
                 return rej(err);
@@ -61,11 +59,11 @@ const getLocationsList = (req) => {
             var jsonData = JSON.stringify(data);
             jsonData = JSON.parse(jsonData);
 
-            if (isEmpty(jsonData)) {
+            if (isEmpty(jsonData) || !userCoords) {
                 return res(jsonData);
             }
 
-            for (var i = 0; i < limit; i++) {
+            for (let i = 0; i < limit; i++) {
                 const locationCoords = {
                     lng: jsonData[i].fields.geom.coordinates[0],
                     lat: jsonData[i].fields.geom.coordinates[1],

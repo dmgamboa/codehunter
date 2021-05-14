@@ -10,7 +10,7 @@ const getMapData = async () => {
 };
 
 const getPlaceData = async (search) => {
-    var placeData;
+    let placeData;
     await axios
         .get("/getPlaceData", {
             params: {

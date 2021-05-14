@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Icon, { UnorderedListOutlined } from "@ant-design/icons";
 
-import { ReactComponent as MapIcon } from "../../../assets/icons/map.svg"; 
+import { ReactComponent as MapIcon } from "../../../assets/icons/map.svg";
 import { ReactComponent as FilterIcon } from "../../../assets/icons/filters.svg";
 
 import CircleIconBtn from "../../../components/CircleIconBtn";
@@ -28,32 +28,34 @@ const LocationsScreen = () => {
 
     const handleFilterToggle = () => {
         setFiltersVisible(!filtersVisible);
-    }
+    };
 
     const handleFilterSubmit = (val) => {
         setFilters(val);
         setFiltersVisible(false);
-    }
+    };
 
     const handleDetailsOpen = () => {
         setDetailsVisible(true);
-    }
+    };
 
     const handleDetailsClose = () => {
         setDetailsVisible(false);
-    }
+    };
 
     const handleViewToggle = () => {
         setMapView(!mapView);
     };
 
     const handleUserCoords = (val) => {
-        const { coords: { latitude, longitude } } = val; 
+        const {
+            coords: { latitude, longitude },
+        } = val;
         setUserCoords({
             lat: latitude,
-            lng: longitude
+            lng: longitude,
         });
-    }
+    };
 
     const handleTabs = (tab) => {
         switch (tab) {
@@ -69,7 +71,7 @@ const LocationsScreen = () => {
             case "close":
                 setDetailsVisible(false);
         }
-    }
+    };
 
     useEffect(async () => {
         /*const params = {
@@ -87,9 +89,9 @@ const LocationsScreen = () => {
             limit: 10,
             filters: {
                 local_area: "Downtown",
-                type: "Museum / Gallery"
-            }
-        }
+                type: "Museum/Gallery",
+            },
+        };
 
         const locationsList = await getLocationsList(testParams);
         console.log(locationsList);
@@ -100,12 +102,8 @@ const LocationsScreen = () => {
             {mapView && <LocationsMap />}
 
             <Top>
-                <SearchBar className="search"/>
-                <Icon
-                    className="filter"
-                    component={FilterIcon}
-                    onClick={handleFilterToggle}
-                />
+                <SearchBar className="search" />
+                <Icon className="filter" component={FilterIcon} onClick={handleFilterToggle} />
             </Top>
 
             <LocationsFilter
@@ -124,10 +122,7 @@ const LocationsScreen = () => {
             />
 
             <span className="icon-buttons">
-                <LocationsAccess
-                    userCoords={userCoords}
-                    handleSuccess={handleUserCoords}
-                />
+                <LocationsAccess userCoords={userCoords} handleSuccess={handleUserCoords} />
                 <CircleIconBtn
                     className="view-toggle"
                     icon={mapView ? <UnorderedListOutlined /> : <Icon component={MapIcon} />}
@@ -135,13 +130,13 @@ const LocationsScreen = () => {
                 />
             </span>
 
-            {!mapView &&
+            {!mapView && (
                 <LocationsList
                     locations={testLocations}
                     handleTabs={handleTabs}
                     handleDetailsOpen={handleDetailsOpen}
                 />
-            }
+            )}
         </Layout>
     );
 };

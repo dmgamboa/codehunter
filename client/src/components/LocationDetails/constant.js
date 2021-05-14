@@ -3,13 +3,13 @@ import {
     EnvironmentOutlined,
     ClockCircleOutlined,
     PhoneOutlined,
-    GlobalOutlined
+    GlobalOutlined,
 } from "@ant-design/icons";
 
 export const details = {
-    type: <BankOutlined className="icon"/>,
-    address: <EnvironmentOutlined  className="icon"/>,
-    hours: <ClockCircleOutlined  className="icon"/>,
-    phone: <PhoneOutlined  className="icon"/>,
-    website: <GlobalOutlined  className="icon"/>
-}
+    type: <BankOutlined className="icon" />,
+    address: <EnvironmentOutlined className="icon" />,
+    hours: <ClockCircleOutlined className="icon" />,
+    phone: <PhoneOutlined className="icon" />,
+    website: <GlobalOutlined className="icon" />,
+};
