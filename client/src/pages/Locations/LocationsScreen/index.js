@@ -43,6 +43,14 @@ const LocationsScreen = () => {
         setMapView(!mapView);
     };
 
+    const handleUserCoords = (val) => {
+        const { coords: { latitude, longitude } } = val; 
+        setUserCoords({
+            lat: latitude,
+            lng: longitude
+        });
+    }
+
     const handleTabs = (tab) => {
         switch (tab) {
             case "directions":
@@ -90,6 +98,7 @@ const LocationsScreen = () => {
             <span className="icon-buttons">
                 <LocationsAccess
                     userCoords={userCoords}
+                    handleSuccess={handleUserCoords}
                 />
                 <CircleIconBtn
                     className="view-toggle"

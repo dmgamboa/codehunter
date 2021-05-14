@@ -15,28 +15,6 @@ const LocationsMap = ({
     handleDetails,
     userCoords
 }) => {
-    // const [coords, setCoords] = useState(initialCoords);
-
-    // useEffect(async () => {
-    //     // UNCOMMENT TO USE CURRENT POSITION
-    //     //getCoords();
-    //     const mapData = await getMapData();
-    //     setMarkers(mapData.data);
-    // }, []);
-
-    // const getCoords = () => {
-    //     if (navigator.geolocation) {
-    //         navigator.geolocation.getCurrentPosition((pos) => {
-    //             setCoords({
-    //                 lat: pos.coords.latitude,
-    //                 lng: pos.coords.longitude,
-    //             });
-    //         });
-    //     } else {
-    //         console.log("Geolocation is not supported by this browser.");
-    //     }
-    // };
-    
     const { bound, initialZoom } = mapViewSettings;
 
     const handleMarkerClick = () => {
