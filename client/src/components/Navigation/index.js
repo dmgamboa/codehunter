@@ -1,8 +1,19 @@
 import { useEffect, useState } from "react";
-import { useHistory, useParams, useLocation } from "react-router-dom";
+import { 
+    useHistory,
+    useParams,
+    useLocation,
+    Link
+} from "react-router-dom";
+import { Drawer } from "antd";
 import { TabBar } from "antd-mobile";
+import { EllipsisOutlined } from "@ant-design/icons";
 
-import { navRoutes, navlessPaths } from "../../context/routers";
+import {
+    navTabRoutes,
+    navDrawerRoutes,
+    navlessPaths,
+} from "../../context/routers";
 
 const Navigation = () => {
     const history = useHistory();
@@ -11,8 +22,13 @@ const Navigation = () => {
 
     const [tab, setTab] = useState();
     const [hidden, setHidden] = useState(true);
+    const [drawer, setDrawer] = useState(false);
 
     const { Item } = TabBar;
+
+    const handleToggleMore = () => {
+        setDrawer(!drawer);
+    }
 
     useEffect(() => {
         navlessPaths.includes(`/${page}`) ? setHidden(true) : setHidden(false);
@@ -37,10 +53,42 @@ const Navigation = () => {
         });
     };
 
+    const getDrawerLinks = (link) => {
+        return link.map(({ path, name, icon }) => {
+            return (
+                <Link
+                    key={path}
+                    to={path} 
+                    className="drawer-item"
+                >
+                    {icon}
+                    <span className="link">
+                        {name}
+                    </span>
+                </Link>
+            );
+        })
+    }
+
     return (
-        <TabBar hidden={hidden}>
-            {getTabs(navRoutes)}
-        </TabBar>            
+        <>
+            <TabBar hidden={hidden}>
+                {getTabs(navTabRoutes)}
+                <Item
+                    icon={<EllipsisOutlined />}
+                    title="More"
+                    selected={drawer}
+                    onPress={handleToggleMore}
+                />
+            </TabBar>
+            <Drawer
+                width="auto"
+                visible={drawer}
+                onClose={handleToggleMore}
+            >
+                {getDrawerLinks(navDrawerRoutes)}
+            </Drawer>
+        </>            
     );
 };
 

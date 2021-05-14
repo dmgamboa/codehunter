@@ -53,16 +53,6 @@ const routes = [
         component: <Friends />
     },
     {
-        name: "Rewards",
-        path: "/rewards",
-        exact: false,
-        navTab: true,
-        fullscreen: false,
-        icon: <GiftOutlined />,
-        selectedIcon: <GiftFilled />,
-        component: <Rewards />
-    },
-    {
         name: "Profile",
         path: "/profile",
         exact: false,
@@ -92,12 +82,26 @@ const routes = [
         path: "/aboutus",
         exact: false,
         navTab: false,
+        navDrawer: true,
+        fullScreen: false,
         component: <AboutUs />
-    }
-
+    },
+    {
+        name: "Rewards",
+        path: "/rewards",
+        exact: false,
+        navTab: true,
+        navDrawer: true,
+        fullscreen: false,
+        icon: <GiftOutlined />,
+        selectedIcon: <GiftFilled />,
+        component: <Rewards />
+    },
 ];
 
-export const navRoutes = routes.filter(route => route.navTab);
+export const navTabRoutes = routes.filter(route => route.navTab);
+
+export const navDrawerRoutes = routes.filter(route => route.navDrawer);
 
 export const navlessPaths = routes
     .filter(route => route.fullscreen)
