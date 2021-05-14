@@ -103,7 +103,7 @@ const LocationsFilters = ({ visible, onClose, onFinish, initialValues, hasUserCo
                     </Select>
                 </Form.Item>
 
-                <Form.Item label="Neighborhood" name="neighborhood">
+                <Form.Item label="Neighborhood" name="location_type">
                     <Select showSearch allowClear placeholder="Any">
                         {renderOptions(neighborhoods)}
                     </Select>

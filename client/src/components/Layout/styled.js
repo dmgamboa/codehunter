@@ -15,4 +15,5 @@ export const Content = styled.div`
     height: 100%;
     background: rgb(8,73,126);
     background: linear-gradient(0deg, rgba(8,73,126,0.22) 0%, rgba(8,73,126,0) 20%, rgba(255,255,255,1) 100%);
+
 `;

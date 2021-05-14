@@ -14,10 +14,11 @@ import LocationsList from "../LocationsList";
 import LocationsAccess from "../LocationsAccess";
 
 import { Layout, Top } from "./styled";
-import { detailsTabs, defaultFilters, testLocations, testData } from "./constant";
+import { detailsTabs, defaultFilters, testData } from "./constant";
 import { getLocationsList } from "../axios";
 
 const LocationsScreen = () => {
+    const [locations, setLocations] = useState([]);
     const [filtersVisible, setFiltersVisible] = useState(false);
     const [detailsVisible, setDetailsVisible] = useState(false);
     const [mapView, setMapView] = useState(false);
@@ -74,32 +75,25 @@ const LocationsScreen = () => {
     };
 
     useEffect(async () => {
-        /*const params = {
-            userCoords: userCoords,
-            page: page,
-            limit: limit,
-            bookmarked: bookmarked,
-            visited: visited,
-            local_area: local_area,
-            type: type,
-        };*/
 
-        const testParams = {
-            page: 1,
-            limit: 10,
-            filters: {
-                local_area: "Downtown",
-                type: "Museum/Gallery",
-            },
+        // TODO
+        // Delete this when sorters/addtl filters are available
+        let filtersAsParams = {...filters};
+        delete filtersAsParams.sort;
+
+        let params = {
+            ...filtersAsParams,
+            page,
+            userCoords
         };
 
-        const locationsList = await getLocationsList(testParams);
-        console.log(locationsList);
-    }, []);
+        const locationsList = await getLocationsList(params);
+        setLocations(locationsList);
+    }, [filters, search, userCoords]);
 
     return (
         <Layout className={mapView ? "map-view" : "list-view"}>
-            {mapView && <LocationsMap />}
+            {mapView && <LocationsMap locations={locations}/>}
 
             <Top>
                 <SearchBar className="search" />
@@ -132,7 +126,7 @@ const LocationsScreen = () => {
 
             {!mapView && (
                 <LocationsList
-                    locations={testLocations}
+                    locations={locations}
                     handleTabs={handleTabs}
                     handleDetailsOpen={handleDetailsOpen}
                 />

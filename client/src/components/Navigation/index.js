@@ -6,7 +6,7 @@ import Icon, { EllipsisOutlined } from "@ant-design/icons";
 import { navTabRoutes, navDrawerRoutes, navlessPaths } from "../../context/routers";
 import { ReactComponent as Logo } from "../../assets/icons/logo.svg";
 
-import { StyledDrawer } from "./styled";
+import { StyledDrawer, Container } from "./styled";
 
 const Navigation = () => {
     const history = useHistory();
@@ -58,7 +58,7 @@ const Navigation = () => {
     };
 
     return (
-        <>
+        <Container>
             <TabBar hidden={hidden}>
                 {getTabs(navTabRoutes)}
                 <Item
@@ -73,7 +73,7 @@ const Navigation = () => {
                 <Icon className="logo" component={Logo} />
                 {getDrawerLinks(navDrawerRoutes)}
             </StyledDrawer>
-        </>
+        </Container>
     );
 };
 

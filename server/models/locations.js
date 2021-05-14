@@ -51,11 +51,11 @@ const getLocationsList = (req) => {
             }
         }
 
-        Location.find(filters, {}, { skip: skip, limit: limit }).exec((err, data) => {
+        Location.find(filters, {}, { skip, limit }).exec((err, data) => {
             if (err) {
                 return rej(err);
             }
-            console.log(data);
+
             var jsonData = JSON.stringify(data);
             jsonData = JSON.parse(jsonData);
 

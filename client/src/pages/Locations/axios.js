@@ -24,24 +24,30 @@ const getPlaceData = async (search) => {
 };
 
 const getLocationsList = async (params) => {
-    /*const params = {
-        userCoords: userCoords,
-        page: page,
-        limit: limit,
-        bookmarked: bookmarked,
-        visited: visited,
-        local_area: local_area,
-        type: type,
-    };*/
-    let locationsList;
+    return await axios
+        .get("/getLocationsList", { params })
+        .then((res) => {
+            const { status, data } = res;
+            console.log({res});
 
-    await axios
-    .get("/getLocationsList", { params })
-    .then((res) => {
-        locationsList = res;
-    });
+            if (status === 200) {
+                return data.map(({ fields, distanceInKm }) => {
+                    const { 
+                        local_area,
+                        type,
+                        cultural_space_name,
+                        website } = fields;
 
-    return locationsList;
+                    return {
+                        name: cultural_space_name,
+                        type,
+                        local_area,
+                        website,
+                        distance: distanceInKm && Math.round(distanceInKm)
+                    };
+                });
+            }
+        });
 };
 
 export { getMapData, getPlaceData, getLocationsList };

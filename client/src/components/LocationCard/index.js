@@ -48,7 +48,7 @@ const LocationCard = ({ location, tabs, onClick }) => {
         >
             <h1>{location.name}</h1>
             <span className="subtitle">
-                {location.neighborhood}
+                {location.local_area}
                 {location.distance && ` (${location.distance}km away)`}
             </span>
 
