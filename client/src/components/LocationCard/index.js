@@ -9,25 +9,8 @@ import StyledCard from "./styled";
 
 const LocationCard = ({ location, tabs, onClick }) => {
     const renderTabs = (tabs) => {
-<<<<<<< HEAD
         return tabs.map(({ key, name, icon, onPress }) => {
             return <TabBar.Item key={key} title={name} icon={icon} onPress={() => onPress(key)} />;
-=======
-        return tabs.map(({
-            key,
-            name,
-            icon,
-            onPress
-        }) => {
-            return (
-                <TabBar.Item
-                    key={key}
-                    title={name}
-                    icon={icon}
-                    onPress={() => onPress(key)}
-                />
-            );
->>>>>>> 7e1a799777a000391bfdf49ff9437e471ca0f61c
         });
     };
 
