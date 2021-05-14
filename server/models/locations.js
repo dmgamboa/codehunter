@@ -40,7 +40,7 @@ const getLocationsList = (req) => {
         const page = parseInt(req.query.page);
         const limit = req.query.limit ? parseInt(req.query.limit) : 10;
         const skip = (page - 1) * limit;
-        const filterReq = JSON.parse(req.query.filters);
+        const filterReq = req.query.filters && JSON.parse(req.query.filters);
 
         let filters = {};
         if (filterReq) {
@@ -55,7 +55,7 @@ const getLocationsList = (req) => {
             if (err) {
                 return rej(err);
             }
-
+            console.log(data);
             var jsonData = JSON.stringify(data);
             jsonData = JSON.parse(jsonData);
 
