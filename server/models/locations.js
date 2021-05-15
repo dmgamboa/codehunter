@@ -78,4 +78,15 @@ const getLocationsList = (req) => {
     });
 };
 
-export { getLocations, getLocationsList };
+const getLocation = (locationID) => {
+    return new Promise((res, rej) => {
+        Location.findOne({ _id: locationID }).exec((err, data) => {
+            if (err) {
+                return rej(err);
+            }
+            return res(data);
+        });
+    });
+};
+
+export { getLocations, getLocationsList, getLocation };

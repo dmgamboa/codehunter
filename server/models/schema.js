@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const locationSchema = new Schema({
+    points: Number
     /*datasetid: String,
     recordid: String,
     fields: {

@@ -26,7 +26,6 @@ const getPlaceData = async (search) => {
 };
 
 const getLocationsList = async (params) => {
-    console.log(url);
     return await axios
         .get(`${url}getLocationsList`, { params })
         .then((res) => {
