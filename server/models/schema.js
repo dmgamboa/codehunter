@@ -25,12 +25,54 @@ const locationSchema = new Schema({
 
 const userSchema = new Schema({
     name: {
-        first: String,
-        last: String
+        first: {
+            type: String,
+            required: true
+        },
+        last: {
+            type: String,
+            required: true
+        }
     },
-    username: String,
-    email: String,
-    uid: String
+    username: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    email: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    uid: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    avatar: {
+        data: {
+            type: Buffer,
+            required: true
+        },
+        imageType: {
+            type: String,
+            required: true
+        }
+    },
+    points: {
+        type: Number,
+        required: true,
+        default: 0,
+        min: 0
+    },
+    friends: [{
+        type: Schema.Types.ObjectId,
+        ref: "User"
+    }],
+    redeemed: [{
+        type: Schema.Types.ObjectId,
+        ref: "Location"
+     }]
 });
 
 // User -> users
