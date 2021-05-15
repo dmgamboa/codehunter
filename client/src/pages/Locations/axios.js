@@ -26,6 +26,7 @@ const getPlaceData = async (search) => {
 };
 
 const getLocationsList = async (params) => {
+    console.log(url);
     return await axios
         .get(`${url}getLocationsList`, { params })
         .then((res) => {
@@ -33,7 +34,7 @@ const getLocationsList = async (params) => {
 
             if (status === 200) {
                 return data.map(({ fields, distanceInKm }) => {
-                    const { 
+                    const {
                         local_area,
                         type,
                         cultural_space_name,
