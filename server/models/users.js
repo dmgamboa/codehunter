@@ -14,4 +14,16 @@ const addUser = (req) => {
     });
 };
 
-export default addUser;
+const addLocationAndPoints = (location) => {
+    return new Promise((res, rej) => {
+        if (location == null) {
+            return rej("Invalid location");
+        }
+        const points = location.points;
+        
+    });
+    
+
+}
+
+export { addUser, addLocationAndPoints };

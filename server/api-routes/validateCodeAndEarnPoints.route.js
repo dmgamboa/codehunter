@@ -1,23 +1,14 @@
 import express from "express";
 import { getLocation } from "../models/locations.js";
+import { addLocationAndPoints } from "../models/users.js"
 
 const router = express.Router();
 
 router.post("/", async (req, res) => {
-    const locationID = req.body.locationID;
-    const location = await getLocation(locationID);
-    
-    if (location == null) {
-        return;
-    }
+    // Validate code by finding and returning the location. If it doesn't exist, it will return null.
+    const location = await getLocation(req);
+    const response = await addLocationAndPoints(location);
 
-    const points = location.points;
-
-    console.log(points);
-
-    // TODO: Have points, now check if location is in user's collection, then if not, add points.
-
-    const response = "success";
     res.send(response);
 });
 

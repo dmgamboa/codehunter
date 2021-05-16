@@ -33,7 +33,7 @@ const Register = () => {
     };
 
     var valuesRef = useRef();
-    var { signup, getUserUID } = useAuth();
+    var { signup, getUID } = useAuth();
     const history = useHistory();
 
     const [loading, setLoading] = useState(false);
@@ -50,7 +50,7 @@ const Register = () => {
 
             // Wait for firebase to create user then get user uid
             await signup(values.email, values.password);
-            const userUID = getUserUID();
+            const userUID = getUID();
 
             // Axios POST request to create user doc in mongoDb
             createUserDoc(values, userUID);

@@ -50,14 +50,8 @@ const userSchema = new Schema({
         unique: true
     },
     avatar: {
-        data: {
-            type: Buffer,
-            required: true
-        },
-        imageType: {
-            type: String,
-            required: true
-        }
+        data: String,
+        imageType: String,
     },
     points: {
         type: Number,

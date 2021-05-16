@@ -11,7 +11,7 @@ export function useAuth() {
 const AuthProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState();
 
-    const getUserUID = () => {
+    const getUID = () => {
         if (currentUser) {
             return currentUser.uid;
         } else {
@@ -45,7 +45,7 @@ const AuthProvider = ({ children }) => {
         signup,
         login,
         logout,
-        getUserUID
+        getUID
     };
 
     return (
