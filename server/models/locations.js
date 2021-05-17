@@ -80,7 +80,7 @@ const getLocationsList = (req) => {
 
 const getLocation = (req) => {
     return new Promise((res, rej) => {
-        locationID = req.body.locationID;
+        const locationID = req.body.locationID;
         Location.findOne({ _id: locationID }).exec((err, data) => {
             if (err) {
                 return rej(err);

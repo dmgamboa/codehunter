@@ -6,14 +6,14 @@ import { useAuth } from "../../../context/Auth";
 const ScanScreen = () => {
     const prefix = "/codehunter/";
     const mongoDBIDLength = 24;
-    const { getUID } = useAuth();
+    const { getUser } = useAuth();
     
     const handleScan = (data) => {
         if (data && data.substring(0, prefix.length) == prefix) {
             const locationID = data.substring(prefix.length);
             
             if (locationID.length == mongoDBIDLength) {
-                validateCodeAndEarnPoints(locationID, getUID());
+                validateCodeAndEarnPoints(locationID, getUser());
             }
         }
     };
@@ -25,7 +25,7 @@ const ScanScreen = () => {
     return (
         <StyledScanner>
             <QrReader
-                delay={250}
+                delay={500}
                 style={{ height: "40vh", width: "40vw" }}
                 onError={handleError}
                 onScan={handleScan}

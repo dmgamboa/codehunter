@@ -11,6 +11,14 @@ export function useAuth() {
 const AuthProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState();
 
+    const getUser = () => {
+        if (currentUser) {
+            return currentUser;
+        } else {
+            return "No user";
+        }
+    };
+
     const getUID = () => {
         if (currentUser) {
             return currentUser.uid;
@@ -36,7 +44,8 @@ const AuthProvider = ({ children }) => {
         const unsubscribe = auth.onAuthStateChanged(token => {
             setCurrentUser(token);
         });
-    // Unsubscribe from the listener onAuthStateChanged
+
+        // Unsubscribe from the listener onAuthStateChanged
         return unsubscribe;
     }, []);
 
@@ -45,7 +54,8 @@ const AuthProvider = ({ children }) => {
         signup,
         login,
         logout,
-        getUID
+        getUID,
+        getUser
     };
 
     return (

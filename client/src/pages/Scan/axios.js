@@ -2,13 +2,13 @@ import axios from "axios";
 
 const url = process.env.REACT_APP_SERVER;
 
-const validateCodeAndEarnPoints = async (locationID, userUID) => {
-    const ids = {
+const validateCodeAndEarnPoints = async (locationID, user) => {
+    const params = {
         locationID: locationID,
-        userUID: userUID,
+        user: user,
     };
 
-    await axios.post(`${url}validateCodeAndEarnPoints`, ids);
+    await axios.post(`${url}validateCodeAndEarnPoints`, params);
 };
 
 export { validateCodeAndEarnPoints };

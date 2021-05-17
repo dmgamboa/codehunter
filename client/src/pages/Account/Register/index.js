@@ -50,10 +50,10 @@ const Register = () => {
 
             // Wait for firebase to create user then get user uid
             await signup(values.email, values.password);
-            const userUID = getUID();
+            const userID = getUID();
 
-            // Axios POST request to create user doc in mongoDb
-            createUserDoc(values, userUID);
+            // Axios POST request to create user doc in MongoDB
+            createUserDoc(values, userID);
 
             message.loading({ content: "Validating your CodeHunter license.", duration: 2 });
             history.push("/locations");
