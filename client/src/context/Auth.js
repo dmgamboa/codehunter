@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import { auth } from "../firebase";
 
 // Create context object
@@ -12,16 +12,30 @@ const AuthProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState();
 
     const getUserUID = () => {
-        if (currentUser) {
-            return currentUser.uid;
-        } else {
-            return "no uid";
-        }
+        auth.onAuthStateChanged(token => {
+            if (token) {
+                setCurrentUser(token);
+                console.log("token uid ", token.uid, " token: ", token);
+                return token;
+            } else {
+                return "no uid";
+            }
+            
+        });
     };
 
-    // Creating new user in firebase and document in user collection in MongoDB
-    const signup = (email, password) => {
-        return auth.createUserWithEmailAndPassword(email, password);
+    // Creating new user in firebase and returns uid to create doc in user collection.
+    // Set the currentUser as a token accessed from creating an account
+    // Return the uid
+    const signup = async (email, password) => {
+        const userCredentials = await auth.createUserWithEmailAndPassword(email, password);
+        // token to be set as currentUser
+        const userData = userCredentials.user;
+        setCurrentUser(userData);
+        
+        const uid = userCredentials.user.uid;
+
+        return uid;
     };
 
     const login = (email, password) => {
@@ -31,14 +45,6 @@ const AuthProvider = ({ children }) => {
     function logout() {
         return auth.signOut();
     };
-
-    useEffect(() => {
-        const unsubscribe = auth.onAuthStateChanged(token => {
-            setCurrentUser(token);
-        });
-    // Unsubscribe from the listener onAuthStateChanged
-        return unsubscribe;
-    }, []);
 
     const value = {
         currentUser,

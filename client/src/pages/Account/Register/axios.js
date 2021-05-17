@@ -3,6 +3,8 @@ import axios from "axios";
 // Utility
 import firstLast from "../../../util/firstLastWords.js";
 
+const url = process.env.REACT_APP_SERVER;
+
 // Send POST request
 const createUserDoc = (values, uid) => {
     const { firstName, lastName } = firstLast(values.fullname);
@@ -17,7 +19,7 @@ const createUserDoc = (values, uid) => {
         "uid": uid
     };
 
-    axios.post("/registration", regiInfo);
+    axios.post(`${url}registration`, regiInfo);
 };
 
 export default createUserDoc;

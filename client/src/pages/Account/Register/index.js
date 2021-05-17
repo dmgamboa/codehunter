@@ -33,7 +33,7 @@ const Register = () => {
     };
 
     var valuesRef = useRef();
-    var { signup, getUserUID } = useAuth();
+    var { signup } = useAuth();
     const history = useHistory();
 
     const [loading, setLoading] = useState(false);
@@ -49,11 +49,10 @@ const Register = () => {
             setLoading(true);
 
             // Wait for firebase to create user then get user uid
-            await signup(values.email, values.password);
-            const userUID = getUserUID();
+            const uid = await signup(values.email, values.password);
 
             // Axios POST request to create user doc in mongoDb
-            createUserDoc(values, userUID);
+            createUserDoc(values, uid);
 
             message.loading({ content: "Validating your CodeHunter license.", duration: 2 });
             history.push("/locations");
