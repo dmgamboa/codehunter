@@ -12,11 +12,12 @@ import { Form, Input, Button, message } from "antd";
 import StyledLogin from "./styled.js";
 
 import { useState, useRef } from "react";
+import { getUserPoints } from "../axios";
 
 const Login = () => {
     const valuesRef = useRef();
     const history = useHistory();
-    const { login } = useAuth();
+    const { login, setUserPoints } = useAuth();
 
     const [error, setError] = useState();
 
@@ -25,7 +26,9 @@ const Login = () => {
         const password = valuesRef.current.getFieldValue().password;
 
         try {
-            await login(email, password);
+            const userData = await login(email, password);
+            const userPoints = await getUserPoints(userData);
+            setUserPoints(userPoints);
             message.loading({ content: "Glad to have you back!", duration: 1 });
             history.push("/locations");
         } catch (e) {

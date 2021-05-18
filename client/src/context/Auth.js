@@ -10,12 +10,13 @@ export function useAuth() {
 
 const AuthProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState();
+    const [userPoints, setUserPoints] = useState();
 
     const getUser = () => {
         if (currentUser) {
             return currentUser;
         } else {
-            return "User unavailable";
+            return;
         }
     };
 
@@ -48,7 +49,7 @@ const AuthProvider = ({ children }) => {
         const userCredentials = await auth.signInWithEmailAndPassword(email, password); 
         const userData = userCredentials.user;
         setCurrentUser(userData);
-        return userCredentials;
+        return userData;
     };
 
     function logout() {
@@ -61,7 +62,9 @@ const AuthProvider = ({ children }) => {
         login,
         logout,
         getUID,
-        getUser
+        getUser,
+        userPoints,
+        setUserPoints
     };
 
     return (

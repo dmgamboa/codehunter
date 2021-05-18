@@ -12,8 +12,8 @@ import { Form, Input, Button, Checkbox, message } from "antd";
 
 import { useAuth } from "../../../context/Auth";
 
-import StyledRegistration from "./styled.js";
-import createUserDoc from "./axios.js";
+import StyledRegistration from "./styled";
+import { createUserDoc } from "../axios";
 
 import { ReactComponent as Logo } from "../../../assets/icons/logo.svg";
 import Icon from "@ant-design/icons";
@@ -33,7 +33,7 @@ const Register = () => {
     };
 
     var valuesRef = useRef();
-    var { signup } = useAuth();
+    var { signup, setUserPoints } = useAuth();
     const history = useHistory();
 
     const [loading, setLoading] = useState(false);
@@ -51,8 +51,10 @@ const Register = () => {
             // Wait for firebase to create user then get user uid
             const uid = await signup(values.email, values.password);
 
-            // Axios POST request to create user doc in mongoDb
-            createUserDoc(values, uid);
+            // Axios POST request to create user doc in MongoDB
+            const initialPoints = await createUserDoc(values, uid);
+
+            setUserPoints(initialPoints);
 
             message.loading({ content: "Validating your CodeHunter license.", duration: 2 });
             history.push("/locations");

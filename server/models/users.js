@@ -9,15 +9,18 @@ const addUser = (req) => {
             if (err) {
                 return rej(err);
             }
-            return res("Success!");
+            return res(newUser.points);
         });
     });
 };
 
-const getUser = (req) => {
+const getUser = (user) => {
     return new Promise((res, rej) => {
+        if (!user) {
+            return rej("User not logged in");
+        }
         // Get the Firebase user ID from the token.
-        const userID = req.body.user.uid;
+        const userID = user.uid;
         
         User.findOne({ uid: userID }).exec((err, data) => {
             if (err) {
@@ -28,12 +31,20 @@ const getUser = (req) => {
     });
 };
 
+const getUserPoints = (req) => {
+    return new Promise(async (res, rej) => {
+        const user = await getUser(JSON.parse(req.query.user));
+
+        return res(user.points);
+    });
+};
+
 const addLocationAndPoints = (req, location) => {
     return new Promise(async (res, rej) => {
         if (location == null) {
             return rej("Invalid location");
         }
-        const user = await getUser(req);
+        const user = await getUser(req.body.user);
 
         const hasRedeemed = user.redeemed.some((instance) => {
             return instance.equals(location.id);
@@ -51,7 +62,9 @@ const addLocationAndPoints = (req, location) => {
         user.points += points;
 
         await user.save();
+
+        return res(user.points);
     });
 };
 
-export { addUser, getUser, addLocationAndPoints };
+export { addUser, getUser, getUserPoints, addLocationAndPoints };

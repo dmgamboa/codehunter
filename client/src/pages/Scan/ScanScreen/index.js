@@ -6,14 +6,17 @@ import { useAuth } from "../../../context/Auth";
 const ScanScreen = () => {
     const prefix = "/codehunter/";
     const mongoDBIDLength = 24;
-    const { getUser } = useAuth();
+    const { getUser, userPoints, setUserPoints } = useAuth();
     
-    const handleScan = (data) => {
+    const handleScan = async (data) => {
         if (data && data.substring(0, prefix.length) == prefix) {
             const locationID = data.substring(prefix.length);
             
             if (locationID.length == mongoDBIDLength) {
-                validateCodeAndEarnPoints(locationID, getUser());
+                const oldPoints = userPoints;
+                
+                const newPoints = await validateCodeAndEarnPoints(locationID, getUser());
+                setUserPoints(newPoints);
             }
         }
     };
