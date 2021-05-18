@@ -3,6 +3,7 @@ import { useHistory, useParams, useLocation, Link } from "react-router-dom";
 import { TabBar } from "antd-mobile";
 import Icon, { EllipsisOutlined } from "@ant-design/icons";
 
+import theme from "../../context/themes/main";
 import { navTabRoutes, navDrawerRoutes, navlessPaths } from "../../context/routers";
 import { ReactComponent as Logo } from "../../assets/icons/logo.svg";
 
@@ -18,6 +19,7 @@ const Navigation = () => {
     const [drawer, setDrawer] = useState(false);
 
     const { Item } = TabBar;
+    const { colors } = theme;
 
     const handleToggleMore = () => {
         setDrawer(!drawer);
@@ -59,7 +61,7 @@ const Navigation = () => {
 
     return (
         <Container>
-            <TabBar hidden={hidden}>
+            <TabBar hidden={hidden} tintColor={colors.primary}>
                 {getTabs(navTabRoutes)}
                 <Item
                     icon={<EllipsisOutlined />}

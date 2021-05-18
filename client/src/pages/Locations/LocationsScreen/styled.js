@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Layout = styled.div`
     flex: 1;
-    position: relative;
+    width: 100%;
 
     &.map-view {
         .search {

@@ -4,7 +4,7 @@ export const StyledMap = styled.div`
     z-index: 0;
     position: absolute;
     top: -1rem;
-    left: -1rem;
+    left: 0;
     width: 100vw;
     height: 100vh;
 

@@ -4,7 +4,6 @@ export const Layout = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    /* min-height: 100vh; */
     height: 100vh;
 `;
 
@@ -12,6 +11,7 @@ export const Content = styled.div`
     flex: 1;
     display: flex;
     flex-direction: column;
+    align-items: center;
     padding: 1rem;
     height: 100%;
     background: rgb(8,73,126);
@@ -21,4 +21,12 @@ export const Content = styled.div`
     overflow-x: hidden;
     -ms-overflow-style: none;
     scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }  
+
+    & > * {
+        max-width: 600px;
+    }
 `;
