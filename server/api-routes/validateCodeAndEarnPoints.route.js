@@ -12,9 +12,10 @@ router.post("/", async (req, res) => {
         const location = await getLocation(req);
         response = await addLocationAndPoints(req, location);
     } catch (error) {
-        console.log("oop");
         response = "Error: " + error;
     }
+
+    console.log("oop");
 
     res.send(response);
 });
