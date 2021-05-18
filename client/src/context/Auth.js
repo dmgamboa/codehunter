@@ -11,16 +11,22 @@ export function useAuth() {
 const AuthProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState();
 
-    const getUserUID = () => {
+    const getUser = () => {
+        if (currentUser) {
+            return currentUser;
+        } else {
+            return "User unavailable";
+        }
+    };
+
+    const getUID = () => {
         auth.onAuthStateChanged(token => {
             if (token) {
                 setCurrentUser(token);
-                console.log("token uid ", token.uid, " token: ", token);
                 return token;
             } else {
-                return "no uid";
+                return "UID unavailable";
             }
-            
         });
     };
 
@@ -38,8 +44,11 @@ const AuthProvider = ({ children }) => {
         return uid;
     };
 
-    const login = (email, password) => {
-        return auth.signInWithEmailAndPassword(email, password);
+    const login = async (email, password) => {
+        const userCredentials = await auth.signInWithEmailAndPassword(email, password); 
+        const userData = userCredentials.user;
+        setCurrentUser(userData);
+        return userCredentials;
     };
 
     function logout() {
@@ -51,7 +60,8 @@ const AuthProvider = ({ children }) => {
         signup,
         login,
         logout,
-        getUserUID
+        getUID,
+        getUser
     };
 
     return (

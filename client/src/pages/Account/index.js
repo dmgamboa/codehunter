@@ -7,12 +7,10 @@ import AuthProvider from "../../context/Auth";
 const Account = () => {
     const match = useRouteMatch();
     return (
-        <AuthProvider>
-            <Switch>
-                <Route exact path={`${match.path}/register`} render={() => <Register />} />
-                <Route exact path={`${match.path}/login`} render={() => <Login />} />
-            </Switch>
-        </AuthProvider>
+        <Switch>
+            <Route exact path={`${match.path}/register`} render={() => <Register />} />
+            <Route exact path={`${match.path}/login`} render={() => <Login />} />
+        </Switch>
     );
 };
 
