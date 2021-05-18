@@ -6,9 +6,8 @@ import theme from "../../context/themes/main";
 const { colors } = theme;
 
 export const Container = styled.div`
-        .am-tabs-pane-wrap {
-            overflow: hidden;
-        }
+    .am-tabs-pane-wrap {
+        overflow: hidden;
     }
 `;
 

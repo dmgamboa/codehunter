@@ -19,6 +19,7 @@ import { getLocationsList } from "../axios";
 
 const LocationsScreen = () => {
     const [locations, setLocations] = useState([]);
+    const [locationsCount, setLocationsCount] = useState(500);
     const [filtersVisible, setFiltersVisible] = useState(false);
     const [detailsVisible, setDetailsVisible] = useState(false);
     const [mapView, setMapView] = useState(false);
@@ -27,6 +28,7 @@ const LocationsScreen = () => {
     const [search, setSearch] = useState(null);
     const [page, setPage] = useState(1);
     const [loading, setLoading] = useState(false);
+    const [detailsLoading, setDetailsLoading] = useState(false);
 
     const handleFilterToggle = () => {
         setFiltersVisible(!filtersVisible);
@@ -59,6 +61,11 @@ const LocationsScreen = () => {
         });
     };
 
+    const handleScroll = () => {
+        console.log("in handleScroll");
+        setPage(page + 1);
+    };
+
     const handleTabs = (tab) => {
         switch (tab) {
         case "directions":
@@ -88,14 +95,19 @@ const LocationsScreen = () => {
             page,
             userCoords,
         };
+        setLoading(true);
 
-        const locationsList = await getLocationsList(params);
-        setLocations(locationsList);
-    }, [filters, search, userCoords]);
+        // TO DO
+        // Add locationsList max count
+        let newLocations = await getLocationsList(params);
+        newLocations = locations.length > 0 ? locations.concat(newLocations) : newLocations;
+        setLocations(newLocations);
+        setLoading(false);
+    }, [filters, search, userCoords, page]);
 
     return (
         <Layout className={mapView ? "map-view" : "list-view"}>
-            {mapView && <LocationsMap locations={locations} />}
+            {mapView && <LocationsMap loading={loading} locations={locations} />}
 
             <Top>
                 <SearchBar className="search" />
@@ -111,7 +123,7 @@ const LocationsScreen = () => {
             />
 
             <LocationDetails
-                loading={loading}
+                loading={detailsLoading}
                 visible={detailsVisible}
                 onClose={handleDetailsClose}
                 location={testData}
@@ -131,8 +143,10 @@ const LocationsScreen = () => {
                 <LocationsList
                     loading={loading}
                     locations={locations}
+                    hasMore={locations.length < locationsCount}
                     handleTabs={handleTabs}
                     handleDetailsOpen={handleDetailsOpen}
+                    handleScroll={handleScroll}
                 />
             )}
         </Layout>

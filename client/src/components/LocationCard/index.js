@@ -7,7 +7,7 @@ import LocationPlaceholder from "../../assets/placeholder-location.jpg";
 
 import StyledCard from "./styled";
 
-const LocationCard = ({ location, tabs, onClick }) => {
+const LocationCard = ({ loading, location, tabs, onClick }) => {
     const renderTabs = (tabs) => {
         return tabs.map(({ key, name, icon, onPress }) => {
             return <TabBar.Item key={key} title={name} icon={icon} onPress={() => onPress(key)} />;
@@ -16,6 +16,7 @@ const LocationCard = ({ location, tabs, onClick }) => {
 
     return (
         <StyledCard
+            loading={loading}
             hoverable
             onClick={onClick}
             title={
