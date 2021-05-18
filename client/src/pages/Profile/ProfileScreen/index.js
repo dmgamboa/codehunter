@@ -3,10 +3,13 @@ import { useHistory } from "react-router-dom";
 import AvatarSection from "../components/Avatar/Avatar";
 import PointsSection from "../components/Points/PointsSection";
 import LocationsList from "../components/History/LocationsList";
+import { getProfileData } from "../axios";
 
 const ProfileScreen = () => {
-    //const { logout } = useAuth();
+    const { /*logout,*/ userPoints, getUser } = useAuth();
     const history = useHistory();
+
+    const points = (userPoints ? userPoints.data : "N/A");
 
     function handleLogout() {
         //logout();
@@ -16,7 +19,7 @@ const ProfileScreen = () => {
     return (
         <div>
             <AvatarSection />
-            <PointsSection points={12} />
+            <PointsSection points={points} />
             <LocationsList />
         </div>
     );

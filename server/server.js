@@ -9,6 +9,7 @@ import getPlaceData from "./api-routes/getPlaceData.route.js";
 import getLocationsList from "./api-routes/getLocationsList.route.js";
 import validateCodeAndEarnPoints from "./api-routes/validateCodeAndEarnPoints.route.js";
 import getUserPoints from "./api-routes/getUserPoints.route.js";
+import getProfileData from "./api-routes/getProfileData.route.js";
 
 const app = express();
 const port = config.port;
@@ -34,6 +35,7 @@ app.use("/getPlaceData", getPlaceData);
 app.use("/getLocationsList", getLocationsList);
 app.use("/validateCodeAndEarnPoints", validateCodeAndEarnPoints);
 app.use("/getUserPoints", getUserPoints);
+app.use("/getProfileData", getProfileData);
 
 app.listen(port, () => {
     console.log(`App listening to port ${port}`);
