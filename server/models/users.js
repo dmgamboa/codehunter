@@ -17,7 +17,6 @@ const addUser = (req) => {
 const getUser = (req) => {
     return new Promise((res, rej) => {
         // Get the Firebase user ID from the token.
-        console.log(req.body.user);
         const userID = req.body.user.uid;
         
         User.findOne({ uid: userID }).exec((err, data) => {
@@ -34,7 +33,6 @@ const addLocationAndPoints = (req, location) => {
         if (location == null) {
             return rej("Invalid location");
         }
-        console.log("here2");
         const user = await getUser(req);
 
         const hasRedeemed = user.redeemed.some((instance) => {
@@ -51,8 +49,9 @@ const addLocationAndPoints = (req, location) => {
         const points = location.points;
 
         user.points += points;
+
         await user.save();
     });
-}
+};
 
 export { addUser, getUser, addLocationAndPoints };

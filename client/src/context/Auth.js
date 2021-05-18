@@ -12,7 +12,6 @@ const AuthProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState();
 
     const getUser = () => {
-        console.log(currentUser);
         if (currentUser) {
             return currentUser;
         } else {
@@ -28,7 +27,6 @@ const AuthProvider = ({ children }) => {
             } else {
                 return "UID unavailable";
             }
-            
         });
     };
 
@@ -46,8 +44,11 @@ const AuthProvider = ({ children }) => {
         return uid;
     };
 
-    const login = (email, password) => {
-        return auth.signInWithEmailAndPassword(email, password);
+    const login = async (email, password) => {
+        const userCredentials = await auth.signInWithEmailAndPassword(email, password); 
+        const userData = userCredentials.user;
+        setCurrentUser(userData);
+        return userCredentials;
     };
 
     function logout() {

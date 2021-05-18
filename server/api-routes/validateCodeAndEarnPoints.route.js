@@ -15,8 +15,6 @@ router.post("/", async (req, res) => {
         response = "Error: " + error;
     }
 
-    console.log("oop");
-
     res.send(response);
 });
 
