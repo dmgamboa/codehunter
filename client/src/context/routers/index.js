@@ -1,5 +1,5 @@
 import { Route } from "react-router-dom";
-import Icon, { 
+import Icon, {
     CompassOutlined,
     CompassFilled,
     TeamOutlined,
@@ -7,7 +7,7 @@ import Icon, {
     GiftFilled,
     UserOutlined,
     QuestionCircleOutlined
- } from "@ant-design/icons";
+} from "@ant-design/icons";
 
 import Locations from "../../pages/Locations";
 import Scan from "../../pages/Scan";
@@ -18,7 +18,7 @@ import Walkthrough from "../../pages/Walkthrough";
 import Account from "../../pages/Account";
 import AboutUs from "../../pages/AboutUs";
 
-import {ReactComponent as Logo} from "../../assets/icons/logo.svg";
+import { ReactComponent as Logo } from "../../assets/icons/logo.svg";
 
 const routes = [
     {
@@ -29,7 +29,7 @@ const routes = [
         fullscreen: false,
         icon: <CompassOutlined />,
         selectedIcon: <CompassFilled />,
-        component: <Locations />
+        component: <Locations />,
     },
     {
         name: "Scan",
@@ -39,7 +39,7 @@ const routes = [
         fullscreen: false,
         icon: <Icon component={Logo} />,
         selectedIcon: <Icon component={Logo} />,
-        component: <Scan />
+        component: <Scan />,
     },
     {
         name: "Friends",
@@ -49,7 +49,7 @@ const routes = [
         fullscreen: false,
         icon: <TeamOutlined />,
         selectedIcon: <TeamOutlined />,
-        component: <Friends />
+        component: <Friends />,
     },
     {
         name: "Profile",
@@ -59,7 +59,7 @@ const routes = [
         fullscreen: false,
         icon: <UserOutlined />,
         selectedIcon: <UserOutlined />,
-        component: <Profile />
+        component: <Profile />,
     },
     {
         name: "Walkthrough",
@@ -67,7 +67,7 @@ const routes = [
         exact: false,
         navTab: false,
         fullscreen: true,
-        component: <Walkthrough />
+        component: <Walkthrough />,
     },
     {
         name: "Account",
@@ -104,21 +104,12 @@ export const navTabRoutes = routes.filter(route => route.navTab);
 
 export const navDrawerRoutes = routes.filter(route => route.navDrawer);
 
-export const navlessPaths = routes
-    .filter(route => route.fullscreen)
-    .map(route => route.path);
+export const navlessPaths = routes.filter((route) => route.fullscreen).map((route) => route.path);
 
 // TODO
 // Add Permissions & 404
 export const getRoute = () => {
     return routes.map(({ name, path, exact, component }) => {
-        return (
-            <Route
-                key={name}
-                exact={exact}
-                path={path}
-                render={() => component}
-            />
-        );
+        return <Route key={name} exact={exact} path={path} render={() => component} />;
     });
 };

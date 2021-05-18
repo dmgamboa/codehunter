@@ -5,11 +5,11 @@ import { getRoute } from "./context/routers";
 import MainLayout from "./components/Layout";
 
 const App = () => {
-  return (
-      <MainLayout>
-        <Switch>{getRoute()}</Switch>
-      </MainLayout>      
-  );
+    return (
+        <MainLayout>
+            <Switch>{getRoute()}</Switch>
+        </MainLayout>
+    );
 };
 
 export default App;

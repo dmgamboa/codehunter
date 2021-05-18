@@ -21,14 +21,11 @@ const LocationsList = ({ locations, handleTabs, handleDetailsOpen }) => {
 
     return (
         <>
-            {locations
-            ?
-            <StyledList
-                dataSource={locations}
-                renderItem={renderLocation}
-            />
-
-            : "No locations found."}
+            {locations ? (
+                <StyledList dataSource={locations} renderItem={renderLocation} />
+            ) : (
+                "No locations found."
+            )}
         </>
     );
 };

@@ -195,8 +195,8 @@ const Register = () => {
                                 value
                                     ? Promise.resolve()
                                     : Promise.reject(
-                                          new Error("Accept the agreement to register.")
-                                      ),
+                                        new Error("Accept the agreement to register.")
+                                    ),
                         },
                     ]}
                     {...tailFormItemLayout}
