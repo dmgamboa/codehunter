@@ -7,7 +7,6 @@ export const StyledScanner = styled.div`
     width: 100vw;
     height: 100vh;
 
-    .gmnoprint {
-        display: none;
+    section {
     }
 `;
