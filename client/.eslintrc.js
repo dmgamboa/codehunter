@@ -24,7 +24,7 @@ module.exports = {
     rules: {
         quotes: ["error", "double"],
         semi: ["error", "always"],
-        indent: ["error", 4],
+        indent: ["warn", 4],
         "no-unused-vars": "warn",
         "react/jsx-uses-react": "off",
         "react/react-in-jsx-scope": "off",
