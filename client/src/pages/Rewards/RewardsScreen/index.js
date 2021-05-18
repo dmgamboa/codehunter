@@ -18,34 +18,33 @@ const RewardsScreen = () => {
     
     const [category, setCategory] = useState("Extra Action");
     
-    function preventDefault(e) {
-        e.preventDefault();
-        console.log("Clicked! But prevent default.");
-      }
-    
     function log(e) {
         console.log(e);
     }
     return (
         <Layout>   
-            <h1>CodeHunter Rewards</h1>
-            <Filters>
-                <Tag closable onClose={log}>
-                    Tag 2
-                </Tag>
-                <Tag closable onClose={log}>
-                    Tag 3
-                </Tag>
-                <Icon component={FilterIcon}>this is an icon</Icon>
+            <h1 className="title">CodeHunter Rewards</h1>
+
+            <Filters className="filters">
+                <div className="filterTags">
+                    <Tag closable onClose={log}>
+                        Tag 2
+                    </Tag>
+                    <Tag closable onClose={log}>
+                        Tag 3
+                    </Tag>
+
+                </div>
+                <Icon className="filterIcon" component={FilterIcon}>this is an icon</Icon>
             </Filters>
 
-            <Tabs defaultActiveKey="1" tabBarExtraContent={category}>
+            <Tabs className="tabs" defaultActiveKey="1" tabBarExtraContent={category}>
                 <TabPane tab="5000 pts" key="1">
                     {/* this is where we see rewards */}
                     
                     <RewardCard></RewardCard>
                     
-                    <div> 
+                    <div className="loadingIcon"> 
                         <LoadingOutlined />
                     </div>
                 </TabPane>

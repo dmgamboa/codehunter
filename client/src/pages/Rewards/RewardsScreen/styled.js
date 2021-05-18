@@ -2,9 +2,30 @@ import styled from "styled-components";
 
 export const Layout = styled.div`
     height: 89vh;
-    grid-template: 
-        "title"
+    /* width: 100vw; */
+    display: flex;
+    flex-direction: column;
+    text-align: center;
 
+    .filters {
+        /* min-width: 90vw; */
+        /* max-width: 450px; */
+        display: flex;
+        justify-content: space-between;
+        
+    }
+
+    .tabs {
+        text-align: left;
+    
+    
+        .loadingIcon {
+            margin-top: 20px;
+            font-size: clamp(1rem, 25px, 2rem);
+            text-align: center;
+        }
+    }
+    
     /* flex: 1;
     position: relative;
 

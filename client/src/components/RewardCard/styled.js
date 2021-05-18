@@ -12,8 +12,8 @@ const StyledCard = styled(Card)`
 
         height: 100px;
         .ant-card-cover {
-            /* height: 100px; */
-            width: 20vh;
+            height: 100px;
+            width: 160px;
             /* object-fit: cover; */
         }
 
