@@ -7,17 +7,20 @@ import reportWebVitals from "./reportWebVitals";
 import "./index.css";
 import Splash from "./pages/Splash";
 import App from "./App";
+import AuthProvider from "./context/Auth";
 
 ReactDOM.render(
     <React.StrictMode>
-        <Router>
-            <AnimatePresence exitBeforeEnter>
-                <Switch>
-                    <Route exact path={["/"]} render={() => <Splash />} />
-                    <Route path={["/:page", "/:page/:subPage"]} render={() => <App />} />
-                </Switch>
-            </AnimatePresence>
-        </Router>
+        <AuthProvider>
+            <Router>
+                <AnimatePresence exitBeforeEnter>
+                    <Switch>
+                        <Route exact path={["/"]} render={() => <Splash />} />
+                        <Route path={["/:page", "/:page/:subPage"]} render={() => <App />} />
+                    </Switch>
+                </AnimatePresence>
+            </Router>
+        </AuthProvider>
     </React.StrictMode>,
     document.getElementById("root")
 );

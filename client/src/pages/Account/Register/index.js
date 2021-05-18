@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import {
     UserOutlined,
@@ -33,28 +33,26 @@ const Register = () => {
     };
 
     var valuesRef = useRef();
-    var { signup, getUserUID } = useAuth();
+    var { signup } = useAuth();
     const history = useHistory();
 
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState("");
+    const [error, setError] = useState();
 
     // Create new user in firebase upon clicking register
     const onFinish = async () => {
-        const values = valuesRef.current.getFieldValue();
-        console.log("values: ", values);
-        // const userUID = await createUserFb(values)
+        let values = valuesRef.current.getFieldValue();
+ 
         try {
             setError("");
             // Prevent user from spam clicking register
             setLoading(true);
 
-            // Wait for firebase to create user
-            await signup(values.email, values.password);
-            // console.log("rsults: ", result);
-            const userUID = getUserUID();
+            // Wait for firebase to create user then get user uid
+            const uid = await signup(values.email, values.password);
+
             // Axios POST request to create user doc in mongoDb
-            createUserDoc(values, userUID);
+            createUserDoc(values, uid);
 
             message.loading({ content: "Validating your CodeHunter license.", duration: 2 });
             history.push("/locations");
@@ -66,7 +64,6 @@ const Register = () => {
 
         if (error) {
             message.error(error);
-            console.log(error);
         }
     };
 

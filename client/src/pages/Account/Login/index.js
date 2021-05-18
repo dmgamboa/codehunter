@@ -31,7 +31,7 @@ const Login = () => {
         } catch (e) {
             setError("Failed to login, please check your password and email.");
             // Displays loading message
-            message.error("Failed to login, check your password and email.");
+            message.error(error);
         }
     };
 

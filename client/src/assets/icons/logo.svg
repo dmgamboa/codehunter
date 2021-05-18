@@ -5,7 +5,7 @@
 	<defs>
 		<!-- adapted from https://codepen.io/mathiesjanssen/pen/QgLzmM -->
 		<filter id="inset-shadow">
-			<feComponentTransfer in=SourceAlpha>
+			<feComponentTransfer in="SourceAlpha">
 			<feFuncA type="table" tableValues="1 0" />
 			</feComponentTransfer>
 			<feGaussianBlur stdDeviation="4"/>

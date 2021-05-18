@@ -1,11 +1,21 @@
-import React from "react";
 import QrReader from "react-qr-reader";
-
 import { StyledScanner } from "./styled";
+import { validateCodeAndEarnPoints } from "../axios";
+import { useAuth } from "../../../context/Auth";
 
 const ScanScreen = () => {
+    const prefix = "/codehunter/";
+    const mongoDBIDLength = 24;
+    const { getUser } = useAuth();
+    
     const handleScan = (data) => {
-        console.log(data);
+        if (data && data.substring(0, prefix.length) == prefix) {
+            const locationID = data.substring(prefix.length);
+            
+            if (locationID.length == mongoDBIDLength) {
+                validateCodeAndEarnPoints(locationID, getUser());
+            }
+        }
     };
 
     const handleError = (err) => {
@@ -15,7 +25,7 @@ const ScanScreen = () => {
     return (
         <StyledScanner>
             <QrReader
-                delay={250}
+                delay={500}
                 style={{ height: "40vh", width: "40vw" }}
                 onError={handleError}
                 onScan={handleScan}

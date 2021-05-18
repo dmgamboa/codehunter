@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import { auth } from "../firebase";
 
 // Create context object
@@ -11,29 +11,51 @@ export function useAuth() {
 const AuthProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState();
 
-    const getUserUID = () => {
+    const getUser = () => {
         if (currentUser) {
-            console.log("token or naw ", currentUser);
-            return currentUser.uid;
+            return currentUser;
         } else {
-            return "no uid";
+            return "User unavailable";
         }
     };
 
-    // Creating new user in firebase and document in user collection in MongoDB
-    const signup = (email, password) => {
-        console.log("signup() executed for firebase");
-        return auth.createUserWithEmailAndPassword(email, password);
+    const getUID = () => {
+        auth.onAuthStateChanged(token => {
+            if (token) {
+                setCurrentUser(token);
+                return token;
+            } else {
+                return "UID unavailable";
+            }
+        });
     };
 
-    const login = (email, password) => {
-        return auth.signInWithEmailAndPassword(email, password);
+    // Creating new user in firebase and returns uid to create doc in user collection.
+    // Set the currentUser as a token accessed from creating an account
+    // Return the uid
+    const signup = async (email, password) => {
+        const userCredentials = await auth.createUserWithEmailAndPassword(email, password);
+        // token to be set as currentUser
+        const userData = userCredentials.user;
+        setCurrentUser(userData);
+        
+        const uid = userCredentials.user.uid;
+
+        return uid;
+    };
+
+    const login = async (email, password) => {
+        const userCredentials = await auth.signInWithEmailAndPassword(email, password); 
+        const userData = userCredentials.user;
+        setCurrentUser(userData);
+        return userCredentials;
     };
 
     function logout() {
         return auth.signOut();
     };
 
+<<<<<<< HEAD
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(token => {
             setCurrentUser(token);
@@ -42,12 +64,15 @@ const AuthProvider = ({ children }) => {
         return unsubscribe;
     }, []);
 
+=======
+>>>>>>> 07e7eb60c287a6dae2656b1b15c874ad1b778f55
     const value = {
         currentUser,
         signup,
         login,
         logout,
-        getUserUID
+        getUID,
+        getUser
     };
 
     return (
