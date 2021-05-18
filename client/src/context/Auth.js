@@ -55,6 +55,17 @@ const AuthProvider = ({ children }) => {
         return auth.signOut();
     };
 
+<<<<<<< HEAD
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged(token => {
+            setCurrentUser(token);
+        });
+        // Unsubscribe from the listener onAuthStateChanged
+        return unsubscribe;
+    }, []);
+
+=======
+>>>>>>> 07e7eb60c287a6dae2656b1b15c874ad1b778f55
     const value = {
         currentUser,
         signup,
