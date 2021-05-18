@@ -8,6 +8,7 @@ const StyledDrawer = styled.div`
     .ant-drawer-content {
         position: relative;
         color: #fff;
+        height: 100vh;   
         .darken-overlay div {
             position: absolute;
             top: 0;
@@ -34,7 +35,8 @@ const StyledDrawer = styled.div`
                 color: #fff;
             }
         }
-        .ant-drawer-body {        
+        .ant-drawer-body {
+     
             .about-me {
                 height: 100%;
                 display: grid;
@@ -103,7 +105,7 @@ const StyledBubble = styled.div`
         opacity: 70%;
     }
     img {
-        width: 30vw;
+        width: 50%;
         border-radius: 100%;
         max-width: 130px;
         max-height: 130px;

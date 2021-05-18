@@ -10,7 +10,9 @@ router.post("/", async (req, res) => {
     
     try {
         const location = await getLocation(req);
-        response = await addLocationAndPoints(req, location);
+        var newPoints = await addLocationAndPoints(req, location);
+        newPoints = JSON.stringify(newPoints);
+        res.send(newPoints);
     } catch (error) {
         response = "Error: " + error;
     }

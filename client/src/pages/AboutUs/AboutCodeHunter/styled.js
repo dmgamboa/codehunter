@@ -2,10 +2,8 @@ import styled from "styled-components";
 import { Swiper } from "swiper/react";
 
 export const Container = styled.div`
-    width: 100vw;
-    height: 20vh;
     max-height: 100px;
-    padding: 1rem 1rem 20px 1rem;
+    margin-bottom: 40px;
 `;
 
 export const StyledSwiper = styled(Swiper)`
@@ -18,13 +16,14 @@ export const StyledSwiper = styled(Swiper)`
 
 export const StyledPara = styled.div`
     margin: 1rem;
-    font-size: 2vh;
+    font-size: 1.8vh;
     display: grid;
     text-align: center;
     align-items: center;
     min-height: 120px;
+    padding: 0px 1rem;
     .heading {
-        color: #08497E;
+        color: #08497e;
         font-weight: bold;
     }
     .text {
