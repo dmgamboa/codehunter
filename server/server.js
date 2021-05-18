@@ -8,6 +8,7 @@ import registration from "./api-routes/registration.route.js";
 import getPlaceData from "./api-routes/getPlaceData.route.js";
 import getLocationsList from "./api-routes/getLocationsList.route.js";
 import validateCodeAndEarnPoints from "./api-routes/validateCodeAndEarnPoints.route.js";
+import getUserPoints from "./api-routes/getUserPoints.route.js";
 
 const app = express();
 const port = config.port;
@@ -21,7 +22,8 @@ mongoose.connect(uri, {
     // Warning: Top-level use of w, wtimeout, j, and fsync is deprecated. Use writeConcern instead.
     //wtimeout: 2500,
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useCreateIndex: true
 });
 
 app.use(express.json());
@@ -31,6 +33,7 @@ app.use("/getMapData", getMapData);
 app.use("/getPlaceData", getPlaceData);
 app.use("/getLocationsList", getLocationsList);
 app.use("/validateCodeAndEarnPoints", validateCodeAndEarnPoints);
+app.use("/getUserPoints", getUserPoints);
 
 app.listen(port, () => {
     console.log(`App listening to port ${port}`);

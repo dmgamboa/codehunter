@@ -8,7 +8,8 @@ const validateCodeAndEarnPoints = async (locationID, user) => {
         user: user,
     };
 
-    await axios.post(`${url}validateCodeAndEarnPoints`, params);
+    const newPoints = await axios.post(`${url}validateCodeAndEarnPoints`, params);
+    return newPoints;
 };
 
 export { validateCodeAndEarnPoints };
