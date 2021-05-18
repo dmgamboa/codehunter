@@ -8,11 +8,9 @@ export const StyledMap = styled.div`
     width: 100vw;
     height: 100vh;
 
-    .gm-fullscreen-control {
-        display: none;
-    }
-
-    .gmnoprint {
+    .gm-fullscreen-control,
+    .gmnoprint,
+    .gm-style-iw-d {
         display: none;
     }
 `;

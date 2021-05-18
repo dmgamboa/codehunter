@@ -62,8 +62,7 @@ const LocationsScreen = () => {
     };
 
     const handleScroll = () => {
-        console.log("in handleScroll");
-        setPage(page + 1);
+        locations.length < locationsCount && setPage(page + 1);
     };
 
     const handleTabs = (tab) => {
@@ -85,16 +84,12 @@ const LocationsScreen = () => {
     const detailsTabsWithHandle = detailsTabs.map((tab) => ({ ...tab, onPress: handleTabs }));
 
     useEffect(async () => {
-        // TODO
-        // Delete this when sorters/addtl filters are available
-        let filtersAsParams = { ...filters };
-        delete filtersAsParams.sort;
-
         let params = {
-            ...filtersAsParams,
+            ...filters,
             page,
             userCoords,
         };
+
         setLoading(true);
 
         // TO DO
@@ -102,12 +97,14 @@ const LocationsScreen = () => {
         let newLocations = await getLocationsList(params);
         newLocations = locations.length > 0 ? locations.concat(newLocations) : newLocations;
         setLocations(newLocations);
-        setLoading(false);
-    }, [filters, search, userCoords, page]);
+        setTimeout(() => {
+            setLoading(false);
+        }, 500);
+    }, [page]);
 
     return (
         <Layout className={mapView ? "map-view" : "list-view"}>
-            {mapView && <LocationsMap loading={loading} locations={locations} />}
+            {mapView && <LocationsMap loading={loading} locations={locations} handleDetails={handleDetailsOpen}/>}
 
             <Top>
                 <SearchBar className="search" />

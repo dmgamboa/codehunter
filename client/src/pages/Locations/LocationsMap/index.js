@@ -13,10 +13,6 @@ const LocationsMap = ({
 }) => {
     const { bound, initialZoom } = mapViewSettings;
 
-    const handleMarkerClick = () => {
-
-    };
-
     // const withinBounds = (coordinates) => {
     //     return (
     //         initialCoords.lng > coordinates[0] - bound &&
@@ -38,7 +34,7 @@ const LocationsMap = ({
                     key={name}
                     lat={coordinates.lat}
                     lng={coordinates.lng}
-                    handleClick={handleMarkerClick}
+                    handleClick={handleDetails}
                     data={`${name}+${website}`}
                 />
             );
