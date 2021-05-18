@@ -26,6 +26,7 @@ const LocationsScreen = () => {
     const [filters, setFilters] = useState(defaultFilters);
     const [search, setSearch] = useState(null);
     const [page, setPage] = useState(1);
+    const [loading, setLoading] = useState(false);
 
     const handleFilterToggle = () => {
         setFiltersVisible(!filtersVisible);
@@ -111,6 +112,7 @@ const LocationsScreen = () => {
             />
 
             <LocationDetails
+                loading={loading}
                 visible={detailsVisible}
                 onClose={handleDetailsClose}
                 location={testData}
@@ -128,6 +130,7 @@ const LocationsScreen = () => {
 
             {!mapView && (
                 <LocationsList
+                    loading={loading}
                     locations={locations}
                     handleTabs={handleTabs}
                     handleDetailsOpen={handleDetailsOpen}
