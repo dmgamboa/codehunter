@@ -12,11 +12,16 @@ export const Container = styled.div`
         margin-bottom: 5rem;
     }
 
-    .image {
-        align-self: center;
-        width: 30%;
-        margin-bottom: 5rem;
+    .image-container {
+        margin-left: 50%;
+        
+        .image {
+            width: 50%;
+            transform: translateX(-50%);
+            margin-bottom: 5rem;
+        }
     }
+
 
     a {
         align-self: center;
