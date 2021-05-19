@@ -3,6 +3,7 @@ import { useHistory, useParams, useLocation, Link } from "react-router-dom";
 import { TabBar } from "antd-mobile";
 import Icon, { EllipsisOutlined } from "@ant-design/icons";
 
+import { useAuth } from "../../context/Auth";
 import theme from "../../context/themes/main";
 import { navTabRoutes, navDrawerRoutes, navlessPaths } from "../../context/routers";
 import { ReactComponent as Logo } from "../../assets/icons/logo.svg";
@@ -13,6 +14,9 @@ const Navigation = () => {
     const history = useHistory();
     const { page } = useParams();
     let location = useLocation();
+
+    const { getUser } = useAuth();
+    const isLoggedIn = getUser();
 
     const [tab, setTab] = useState();
     const [hidden, setHidden] = useState(true);
@@ -27,6 +31,7 @@ const Navigation = () => {
 
     useEffect(() => {
         navlessPaths.includes(`/${page}`) ? setHidden(true) : setHidden(false);
+        !isLoggedIn && setHidden(true);
     }, [location]);
 
     useEffect(() => {

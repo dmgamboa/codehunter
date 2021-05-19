@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import QrReader from "react-qr-reader";
 
-import { StyledScanner } from "./styled";
-import { validateCodeAndEarnPoints } from "../axios";
 import { useAuth } from "../../../context/Auth";
+
+import ScanModal from "../ScanModal";
+import { validateCodeAndEarnPoints } from "../axios";
+import { StyledScanner } from "./styled";
 
 const ScanScreen = () => {
     const prefix = "/codehunter/";
@@ -11,38 +13,38 @@ const ScanScreen = () => {
     const { getUser, userPoints, setUserPoints } = useAuth();
 
     const [error, setError] = useState("");
-    const [code, setCode] = useState(null);
-
-    const handleError = (err) => {
-        console.error(err);
-    };
+    const [success, setSuccess] = useState(null);
+    const [modalVisible, setModalVisible] = useState(false);
 
     const handleScan = async (data) => {
-        setCode(data);
+        console.log(data);
         if (data) {
+            console.log("detected QR code");
             if (data.substring(0, prefix.length) !== prefix) {
-                handleError("Invalid QR code.");
+                setError("Invalid QR code.");
             } else {
                 const locationID = data.substring(prefix.length);
-                
+
                 if (locationID.length == mongoDBIDLength) {
                     const oldPoints = userPoints;
-                    
+
                     const newPoints = await validateCodeAndEarnPoints(locationID, getUser());
                     setUserPoints(newPoints);
-                }                
+                }
             }
         }
-        setCode(null);
     };
 
     return (
         <StyledScanner>
             <QrReader
-                delay={2000}
-                onError={handleError}
-                onScan={() => { !code && handleScan(); }}
+                delay={1000}
+                onError={(e) => console.error(e)}
+                onScan={() => {
+                    !modalVisible && handleScan();
+                }}
             />
+            <ScanModal error={error} success={success} visible={modalVisible} />
         </StyledScanner>
     );
 };
