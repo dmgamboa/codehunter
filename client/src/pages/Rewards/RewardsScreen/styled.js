@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+import theme from "../../../context/themes/main";
+
+const { colors } = theme;
+
 export const Layout = styled.div`
     height: 89vh;
     /* width: 100vw; */
@@ -7,15 +11,42 @@ export const Layout = styled.div`
     flex-direction: column;
     text-align: center;
 
+    display: grid;
+    grid-template: 
+        "title" 10%
+        "filters" 8%
+        "tabsAndList" 82%
+        / 100%;
+
+    .title {
+        grid-area: title;
+        .giftIcon {
+            color: ${colors.primary};
+        }
+    }
+
     .filters {
-        /* min-width: 90vw; */
-        /* max-width: 450px; */
-        display: flex;
-        justify-content: space-between;
+        grid-area: filters;
         
+        .filterTags {
+            display: flex;
+            justify-content: space-around;
+        }
+        .filterTag {
+            border-radius: 16px;
+        }
+        .filterTagActive {
+            background-color: ${colors.primary};
+            color: #FFF;
+        }
+        .filterTagInactive {
+            border: 1px solid ${colors.secondary};
+
+        }
     }
 
     .tabs {
+        grid-area: tabsAndList;
         text-align: left;
     
     
@@ -26,29 +57,6 @@ export const Layout = styled.div`
         }
     }
     
-    /* flex: 1;
-    position: relative;
-
-    &.map-view {
-        .search {
-            span.ant-input-wrapper.ant-input-group {
-                background: white;
-            }
-        }
-    }
-
-    .icon-buttons {
-        z-index: 999;
-        position: fixed;
-        right: 1rem;
-        bottom: 5rem;
-        display: flex;
-        flex-direction: column;
-
-        & > *:not(:last-child) {
-            margin-bottom: 0.5rem;
-        }
-    } */
 `;
 
 export const Filters = styled.div`
