@@ -1,10 +1,10 @@
 import express from "express";
-import { addUser } from "../models/users.js";
+import { getUserPoints } from "../models/users.js";
 
 const router = express.Router();
 
-router.post("/", async (req, res) => {
-    var response = await addUser(req);
+router.route("/").get(async (req, res) => {
+    var response = await getUserPoints(req);
     response = JSON.stringify(response);
     res.send(response);
 });

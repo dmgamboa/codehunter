@@ -33,7 +33,7 @@ const getLocationsList = async (params) => {
 
             if (status === 200) {
                 return data.map(({ fields, distanceInKm }) => {
-                    const { 
+                    const {
                         local_area,
                         type,
                         cultural_space_name,

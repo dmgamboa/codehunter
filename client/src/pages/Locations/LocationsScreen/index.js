@@ -60,33 +60,32 @@ const LocationsScreen = () => {
 
     const handleTabs = (tab) => {
         switch (tab) {
-            case "directions":
-                // Redirect to GMaps
-                break;
-            case "bookmark":
-                // Add to Bookmarks
-                break;
-            case "details":
-                setDetailsVisible(true);
-                break;
-            case "close":
-                setDetailsVisible(false);
+        case "directions":
+            // Redirect to GMaps
+            break;
+        case "bookmark":
+            // Add to Bookmarks
+            break;
+        case "details":
+            setDetailsVisible(true);
+            break;
+        case "close":
+            setDetailsVisible(false);
         }
     };
 
-    const detailsTabsWithHandle = detailsTabs.map(tab => ({...tab, onPress: handleTabs}));
+    const detailsTabsWithHandle = detailsTabs.map((tab) => ({ ...tab, onPress: handleTabs }));
 
     useEffect(async () => {
-
         // TODO
         // Delete this when sorters/addtl filters are available
-        let filtersAsParams = {...filters};
+        let filtersAsParams = { ...filters };
         delete filtersAsParams.sort;
 
         let params = {
             ...filtersAsParams,
             page,
-            userCoords
+            userCoords,
         };
 
         const locationsList = await getLocationsList(params);
@@ -95,7 +94,7 @@ const LocationsScreen = () => {
 
     return (
         <Layout className={mapView ? "map-view" : "list-view"}>
-            {mapView && <LocationsMap locations={locations}/>}
+            {mapView && <LocationsMap locations={locations} />}
 
             <Top>
                 <SearchBar className="search" />
