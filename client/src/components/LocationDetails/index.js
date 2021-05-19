@@ -42,7 +42,7 @@ const LocationDetails = ({ loading, visible, onClose, location, tabs }) => {
                     ) : (
                         `No ${detail} listed.`
                     )}
-                    {detail === "hours" && loc.hours && (
+                    {detail === "hours" && loc.hours?.days && (
                         <div className="hours-list">{renderHours(loc[detail]["days"])}</div>
                     )}
                 </span>
@@ -69,7 +69,8 @@ const LocationDetails = ({ loading, visible, onClose, location, tabs }) => {
             {location && (
                 <>
                     <img
-                        src={location.image ? location.image : LocationPlaceholder}
+                        referrerPolicy="no-referrer" 
+                        src={location.image ?? LocationPlaceholder}
                         alt={location.name}
                     />
 

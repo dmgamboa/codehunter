@@ -72,6 +72,7 @@ const LocationsScreen = () => {
             distance: location.distance,
             bookmarked: location.bookmarked,
             visited: location.visited,
+            image: placesData.image,
             details: {
                 type: location.type,
                 address: location.address,
