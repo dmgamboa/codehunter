@@ -5,7 +5,7 @@ export const StyledMap = styled.div`
     position: absolute;
     top: -1rem;
     left: 0;
-    width: 100vw;
+    width: 100%;
     height: 100vh;
 
     .gm-fullscreen-control,

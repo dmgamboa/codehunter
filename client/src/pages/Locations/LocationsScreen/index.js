@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Icon, { UnorderedListOutlined } from "@ant-design/icons";
+import Icon, { UnorderedListOutlined, ArrowUpOutlined } from "@ant-design/icons";
 
 import { ReactComponent as MapIcon } from "../../../assets/icons/map.svg";
 import { ReactComponent as FilterIcon } from "../../../assets/icons/filters.svg";
@@ -41,6 +41,13 @@ const LocationsScreen = () => {
         });
 
         setLocations(newLocations);
+    };
+
+    const hasScrolledDownWindow = () => {
+        if (window.pageYOffset > window.innerHeight) {
+            return true;
+        }
+        return false;
     };
 
     const handleSearch = (val) => {
@@ -93,7 +100,7 @@ const LocationsScreen = () => {
         locations.length < locationsCount && setPage(page + 1);
     };
 
-    const handleTabs = ({tab, location}) => {
+    const handleTabs = ({ tab, location }) => {
         switch (tab) {
         case "directions":
             // Redirect to GMaps
@@ -122,7 +129,7 @@ const LocationsScreen = () => {
         !userCoords && !init && updateLocationDistance(parsedCoords);
         setUserCoords(parsedCoords);
 
-        init && handleLocations({coords: parsedCoords});
+        init && handleLocations({ coords: parsedCoords });
     };
 
     const handleLocationsAccess = (init) => {
@@ -137,7 +144,7 @@ const LocationsScreen = () => {
 
     const handleLocations = async ({ coords, newList }) => {
         setLoading(true);
-        
+
         const { sort } = filters;
 
         const searchAndFilter = {
@@ -165,7 +172,7 @@ const LocationsScreen = () => {
     }, []);
 
     useEffect(() => {
-        page > 1 && handleLocations({newList: true});
+        page > 1 && handleLocations({ newList: true });
     }, [page]);
 
     useEffect(() => {
@@ -206,6 +213,7 @@ const LocationsScreen = () => {
             />
 
             <span className="icon-buttons">
+                {!mapView && hasScrolledDownWindow() && <CircleIconBtn icon={<ArrowUpOutlined />} />}
                 <LocationsAccess userCoords={userCoords} handleClick={handleLocationsAccess} />
                 <CircleIconBtn
                     className="view-toggle"

@@ -15,7 +15,7 @@ export const Layout = styled.div`
     .icon-buttons {
         z-index: 999;
         position: fixed;
-        right: 1rem;
+        right: 2rem;
         bottom: 5rem;
         display: flex;
         flex-direction: column;

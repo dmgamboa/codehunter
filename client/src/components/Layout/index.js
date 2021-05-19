@@ -3,7 +3,7 @@ import Navigation from "../Navigation";
 
 const MainLayout = ({ children }) => {
     return (
-        <Layout>
+        <Layout id="layout">
             <Content id="mainContent">{children}</Content>
             <Navigation />
         </Layout>
