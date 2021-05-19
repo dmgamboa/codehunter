@@ -1,4 +1,5 @@
 import { Card, Modal } from "antd";
+// import Modal from "styled-react-modal";
 import styled from "styled-components";
 
 import theme from "../../context/themes/main";

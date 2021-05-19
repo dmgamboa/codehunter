@@ -8,7 +8,6 @@ const url = process.env.REACT_APP_SERVER;
 // Send POST request
 const createUserDoc = async (values, uid) => {
     const { firstName, lastName } = firstLast(values.fullname);
-
     const regiInfo = {
         name: {
             first: firstName,
@@ -20,7 +19,9 @@ const createUserDoc = async (values, uid) => {
     };
 
     const initialPoints = await axios.post(`${url}registration`, regiInfo);
-    return initialPoints;
+    const initialPointsData = initialPoints.data;
+
+    return initialPointsData;
 };
 
 const getUserPoints = async (user) => {
@@ -29,7 +30,6 @@ const getUserPoints = async (user) => {
             user: user,
         },
     });
-    
     return userPoints;
 };
 

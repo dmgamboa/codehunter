@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useContext, useState } from "react";
 import { auth } from "../firebase";
 
@@ -39,8 +40,8 @@ const AuthProvider = ({ children }) => {
         // token to be set as currentUser
         const userData = userCredentials.user;
         setCurrentUser(userData);
-        
         const uid = userCredentials.user.uid;
+        setUserPoints(0);
 
         return uid;
     };

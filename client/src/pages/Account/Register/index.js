@@ -54,7 +54,9 @@ const Register = () => {
             // Axios POST request to create user doc in MongoDB
             const initialPoints = await createUserDoc(values, uid);
 
-            setUserPoints(initialPoints);
+            console.log("initialPoints: " + initialPoints);
+
+            // setUserPoints(initialPoints);
 
             message.loading({ content: "Validating your CodeHunter license.", duration: 2 });
             history.push("/locations");

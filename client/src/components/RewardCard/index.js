@@ -71,7 +71,7 @@ const RewardCard = ({ location, tabs, onClick }) => {
                 onCancel={handleCancel}
                 okText="Redeem Now!"
                 cancelText="Maybe Later"
-                ref={confettiRef}
+                // ref={confettiRef}
             >
 
 
