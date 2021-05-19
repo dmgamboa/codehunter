@@ -6,6 +6,7 @@ import { ReactComponent as FilterIcon } from "../../../assets/icons/filters.svg"
 
 import CircleIconBtn from "../../../components/CircleIconBtn";
 import SearchBar from "../../../components/SearchBar";
+import { calculateDistance } from "../../../util/calculateDistance";
 
 import LocationsFilter from "../LocationsFilters";
 import LocationDetails from "../../../components/LocationDetails";
@@ -16,6 +17,7 @@ import LocationsAccess from "../LocationsAccess";
 import { Layout, Top } from "./styled";
 import { detailsTabs, defaultFilters, testData } from "./constant";
 import { getLocationsList } from "../axios";
+import { message } from "antd";
 
 const LocationsScreen = () => {
     const [locations, setLocations] = useState([]);
@@ -24,11 +26,25 @@ const LocationsScreen = () => {
     const [detailsVisible, setDetailsVisible] = useState(false);
     const [mapView, setMapView] = useState(false);
     const [userCoords, setUserCoords] = useState(null);
-    const [filters, setFilters] = useState(defaultFilters);
     const [search, setSearch] = useState(null);
+    const [filters, setFilters] = useState(defaultFilters);
     const [page, setPage] = useState(1);
     const [loading, setLoading] = useState(false);
     const [detailsLoading, setDetailsLoading] = useState(false);
+
+    const updateLocationDistance = (coords) => {
+        const newLocations = locations.map((location) => {
+            let newLocation = location;
+            newLocation.distance = calculateDistance(coords);
+            return newLocation;
+        });
+
+        setLocations(newLocations);
+    };
+
+    const handleSearch = (val) => {
+        val.trim() !== search && setSearch(val.trim());
+    };
 
     const handleFilterToggle = () => {
         setFiltersVisible(!filtersVisible);
@@ -51,16 +67,6 @@ const LocationsScreen = () => {
         setMapView(!mapView);
     };
 
-    const handleUserCoords = (val) => {
-        const {
-            coords: { latitude, longitude },
-        } = val;
-        setUserCoords({
-            lat: latitude,
-            lng: longitude,
-        });
-    };
-
     const handleScroll = () => {
         locations.length < locationsCount && setPage(page + 1);
     };
@@ -81,33 +87,83 @@ const LocationsScreen = () => {
         }
     };
 
-    const detailsTabsWithHandle = detailsTabs.map((tab) => ({ ...tab, onPress: handleTabs }));
+    const handleUserCoords = (val, init) => {
+        const {
+            coords: { latitude, longitude }
+        } = val;
 
-    useEffect(async () => {
-        let params = {
-            ...filters,
-            page,
-            userCoords,
+        const parsedCoords = {
+            lat: latitude,
+            lng: longitude
         };
 
-        setLoading(true);
+        !userCoords && !init && updateLocationDistance(parsedCoords);
+        setUserCoords(parsedCoords);
 
-        // TO DO
-        // Add locationsList max count
+        init && handleLocations({coords: parsedCoords});
+    };
+
+    const handleLocationsAccess = (init) => {
+        navigator.geolocation &&
+            navigator.geolocation.getCurrentPosition(
+                (val) => {
+                    handleUserCoords(val, init);
+                },
+                () => message.error("Unable to get current position.")
+            );
+    };
+
+    const handleLocations = async ({ coords, newList }) => {
+        setLoading(true);
+        
+        const { sort } = filters;
+
+        const searchAndFilter = {
+            ...filters,
+            cultural_space_name: search
+        };
+        delete searchAndFilter.sort;
+
+        const params = {
+            sort,
+            filters: searchAndFilter,
+            page,
+            userCoords: userCoords ?? coords
+        };
+
         let newLocations = await getLocationsList(params);
-        newLocations = locations.length > 0 ? locations.concat(newLocations) : newLocations;
+        newLocations = newList ? locations.concat(newLocations) : newLocations;
         setLocations(newLocations);
-        setTimeout(() => {
-            setLoading(false);
-        }, 500);
+
+        setLoading(false);
+    };
+
+    useEffect(() => {
+        handleLocationsAccess(true);
+    }, []);
+
+    useEffect(() => {
+        page > 1 && handleLocations({newList: true});
     }, [page]);
+
+    useEffect(() => {
+        handleLocations({});
+    }, [search, filters]);
+
+    const detailsTabsWithHandle = detailsTabs.map((tab) => ({ ...tab, onPress: handleTabs }));
 
     return (
         <Layout className={mapView ? "map-view" : "list-view"}>
-            {mapView && <LocationsMap loading={loading} locations={locations} handleDetails={handleDetailsOpen}/>}
+            {mapView && (
+                <LocationsMap
+                    loading={loading}
+                    locations={locations}
+                    handleDetails={handleDetailsOpen}
+                />
+            )}
 
             <Top>
-                <SearchBar className="search" />
+                <SearchBar className="search" handleSearch={handleSearch} />
                 <Icon className="filter" component={FilterIcon} onClick={handleFilterToggle} />
             </Top>
 
@@ -128,7 +184,7 @@ const LocationsScreen = () => {
             />
 
             <span className="icon-buttons">
-                <LocationsAccess userCoords={userCoords} handleSuccess={handleUserCoords} />
+                <LocationsAccess userCoords={userCoords} handleClick={handleLocationsAccess} />
                 <CircleIconBtn
                     className="view-toggle"
                     icon={mapView ? <UnorderedListOutlined /> : <Icon component={MapIcon} />}
