@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-import SearchBar from "../../../components/SearchBar";
-import CircleIconBtn from "../../../components/CircleIconBtn";
-import LocationCard from "../../../components/LocationCard";
+
 import Icon, {
     UnorderedListOutlined,
     LoadingOutlined,
@@ -18,7 +16,12 @@ import RewardCard from "../../../components/RewardCard";
 
 import { Tag, Tabs } from "antd";
 
+import { useAuth } from "../../../context/Auth";
+
 const RewardsScreen = () => {
+    const { currentUser, getUserUID } = useAuth();
+    console.log("currentUser", currentUser(), "getUserUID", getUserUID());
+
     const { TabPane } = Tabs;
 
     const CheckableTag = Tag;
@@ -56,11 +59,12 @@ const RewardsScreen = () => {
  
     };
 
-    // const rewardSearch = (query, pageNumber) => {
+    // const useBookSearch = (query, pageNumber) => {
 
     // };
 
     // useEffect(() => {
+    
     // }, [query, pageNumber]);
 
     return (

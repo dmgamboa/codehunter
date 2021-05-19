@@ -2152,6 +2152,11 @@
   dependencies:
     "@babel/types" "^7.3.0"
 
+"@types/canvas-confetti@1.4.0":
+  "integrity" "sha512-Neq4mvVecrHmTdyo98EY5bnKCjkZGQ6Ma7VyOrxIcMHEZPmt4kfquccqfBMrpNrdryMHgk3oGQi7XtpZacltnw=="
+  "resolved" "https://registry.npmjs.org/@types/canvas-confetti/-/canvas-confetti-1.4.0.tgz"
+  "version" "1.4.0"
+
 "@types/eslint@^7.2.6":
   "integrity" "sha512-kUEPnMKrqbtpCq/KTaGFFKAcz6Ethm2EjCoKIDaCmfRBWLbFuTcOJfTlorwbnboXBzahqWLgUp1BQeKHiJzPUQ=="
   "resolved" "https://registry.npmjs.org/@types/eslint/-/eslint-7.2.10.tgz"
@@ -2644,15 +2649,15 @@
   "resolved" "https://registry.npmjs.org/acorn-walk/-/acorn-walk-7.2.0.tgz"
   "version" "7.2.0"
 
-"acorn@^6.0.0 || ^7.0.0 || ^8.0.0", "acorn@^7.1.0", "acorn@^7.1.1", "acorn@^7.4.0":
-  "integrity" "sha512-nQyp0o1/mNdbTO1PO6kHkwSrmgZ0MT/jCCpNiwbUjGoRN4dlBhqJtoQuCnEOKzgTVwg0ZWiCoQy6SxMebQVh8A=="
-  "resolved" "https://registry.npmjs.org/acorn/-/acorn-7.4.1.tgz"
-  "version" "7.4.1"
-
 "acorn@^6.4.1":
   "integrity" "sha512-XtGIhXwF8YM8bJhGxG5kXgjkEuNGLTkoYqVE+KMR+aspr4KGYmKYg7yUe3KghyQ9yheNwLnjmzh/7+gfDBmHCQ=="
   "resolved" "https://registry.npmjs.org/acorn/-/acorn-6.4.2.tgz"
   "version" "6.4.2"
+
+"acorn@^7.1.0", "acorn@^7.1.1", "acorn@^7.4.0":
+  "integrity" "sha512-nQyp0o1/mNdbTO1PO6kHkwSrmgZ0MT/jCCpNiwbUjGoRN4dlBhqJtoQuCnEOKzgTVwg0ZWiCoQy6SxMebQVh8A=="
+  "resolved" "https://registry.npmjs.org/acorn/-/acorn-7.4.1.tgz"
+  "version" "7.4.1"
 
 "acorn@^8.1.0":
   "integrity" "sha512-Ibt84YwBDDA890eDiDCEqcbwvHlBvzzDkU2cGBBDDI1QWT12jTiXIOn2CIw5KK4i6N5Z2HUxwYjzriDyqaqqZg=="
@@ -3766,6 +3771,11 @@
   "integrity" "sha512-k/RYs6zc/fjbxTjaWZemeSmOjO0JJV+KguOBA3NwPup8uzxM1cMhR2BD9XmO86GuqaqTCO8CgkgH9Rz//vdDiA=="
   "resolved" "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001223.tgz"
   "version" "1.0.30001223"
+
+"canvas-confetti@^1.4.0", "canvas-confetti@1.4.0":
+  "integrity" "sha512-S18o4Y9PqI/uabdlT/jI3MY7XBJjNxnfapFIkjkMwpz6qNxLFZOm2b22OMf4ZYDL9lpNWI+Ih4fEMVPwO1KHFQ=="
+  "resolved" "https://registry.npmjs.org/canvas-confetti/-/canvas-confetti-1.4.0.tgz"
+  "version" "1.4.0"
 
 "capture-exit@^2.0.0":
   "integrity" "sha512-PiT/hQmTonHhl/HFGN+Lx3JJUznrVYJ3+AQsnthneZbvW7x+f08Tk7yLJTLEOUvBTbduLeeBkxEaYXUOUrRq6g=="
@@ -5581,7 +5591,7 @@
     "normalize-path" "^3.0.0"
     "schema-utils" "^3.0.0"
 
-"eslint@^7.11.0", "eslint@^7.26.0", "eslint@>=5.0.0", "eslint@>=7.0.0":
+"eslint@^7.11.0", "eslint@^7.26.0":
   "integrity" "sha512-4R1ieRf52/izcZE7AlLy56uIHHDLT74Yzz2Iv2l6kDaYvEu9x+wMB5dZArVL8SYGXSYV2YAg70FcW5Y5nGGNIg=="
   "resolved" "https://registry.npmjs.org/eslint/-/eslint-7.26.0.tgz"
   "version" "7.26.0"
@@ -10292,7 +10302,7 @@
   dependencies:
     "fast-diff" "^1.1.2"
 
-"prettier@^2.3.0", "prettier@>=1.13.0":
+"prettier@^2.3.0":
   "integrity" "sha512-kXtO4s0Lz/DW/IJ9QdWhAf7/NmPWQXkFr/r/WkR3vyI+0v8amTDxiaQSLzs8NBlytfLWX/7uQUMIW677yLKl4w=="
   "resolved" "https://registry.npmjs.org/prettier/-/prettier-2.3.0.tgz"
   "version" "2.3.0"
@@ -11064,6 +11074,21 @@
     "regenerator-runtime" "^0.13.7"
     "whatwg-fetch" "^3.4.1"
 
+"react-canvas-confetti@^1.2.0":
+  "integrity" "sha512-idkiQMtG1AzywPHvZSdyn0BbpgofXDIfWBYyCQRZVBqZUZlKa3tUMfe477LqNtnXZvft0yAu+fXsRpkxKx1IfQ=="
+  "resolved" "https://registry.npmjs.org/react-canvas-confetti/-/react-canvas-confetti-1.2.0.tgz"
+  "version" "1.2.0"
+  dependencies:
+    "@types/canvas-confetti" "1.4.0"
+    "canvas-confetti" "1.4.0"
+
+"react-confetti@^6.0.1":
+  "integrity" "sha512-ZpOTBrqSNhWE4rRXCZ6E6U+wGd7iYHF5MGrqwikoiBpgBq9Akdu0DcLW+FdFnLjyZYC+VfAiV2KeFgYRMyMrkA=="
+  "resolved" "https://registry.npmjs.org/react-confetti/-/react-confetti-6.0.1.tgz"
+  "version" "6.0.1"
+  dependencies:
+    "tween-functions" "^1.2.0"
+
 "react-dev-utils@^11.0.3":
   "integrity" "sha512-dx0LvIGHcOPtKbeiSUM4jqpBl3TcY7CDjZdfOIcKeznE7BWr9dg0iPG90G5yfVQ+p/rGNMXdbfStvzQZEVEi4A=="
   "resolved" "https://registry.npmjs.org/react-dev-utils/-/react-dev-utils-11.0.4.tgz"
@@ -11107,6 +11132,13 @@
   "integrity" "sha512-nQTTcUu+ATDbrSD1BZHr5kgSD4oF8OFjxun8uAaL8RwPBacGBNPf/yAuVVdx17N8XNzRDMrZ9XcKZHCjPW+9ew=="
   "resolved" "https://registry.npmjs.org/react-error-overlay/-/react-error-overlay-6.0.9.tgz"
   "version" "6.0.9"
+
+"react-infinite-scroller@^1.2.4":
+  "integrity" "sha512-/oOa0QhZjXPqaD6sictN2edFMsd3kkMiE19Vcz5JDgHpzEJVqYcmq+V3mkwO88087kvKGe1URNksHEOt839Ubw=="
+  "resolved" "https://registry.npmjs.org/react-infinite-scroller/-/react-infinite-scroller-1.2.4.tgz"
+  "version" "1.2.4"
+  dependencies:
+    "prop-types" "^15.5.8"
 
 "react-is@^16.12.0", "react-is@^16.6.0", "react-is@^16.7.0", "react-is@^16.8.1", "react-is@^16.8.4":
   "integrity" "sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ=="
@@ -11257,7 +11289,7 @@
     "raf" "^3.1.0"
     "tween-functions" "^1.0.1"
 
-"react@^17.0.2":
+"react@*", "react@^16.3.0 || ^17.0.1", "react@^17.0.2":
   "integrity" "sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA=="
   "resolved" "https://registry.npmjs.org/react/-/react-17.0.2.tgz"
   "version" "17.0.2"
@@ -13195,7 +13227,7 @@
   dependencies:
     "safe-buffer" "^5.0.1"
 
-"tween-functions@^1.0.1":
+"tween-functions@^1.0.1", "tween-functions@^1.2.0":
   "integrity" "sha1-GuOlDnxguz3vd06scHrLynO7w/8="
   "resolved" "https://registry.npmjs.org/tween-functions/-/tween-functions-1.2.0.tgz"
   "version" "1.2.0"
