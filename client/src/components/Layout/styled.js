@@ -24,6 +24,7 @@ export const Content = styled.div`
     overflow-x: hidden;
     -ms-overflow-style: none;
     scrollbar-width: none;
+    scroll-behavior: smooth;
 
     &::-webkit-scrollbar {
         display: none;

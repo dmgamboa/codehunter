@@ -9,7 +9,8 @@ const LocationsList = ({
     handleTabs,
     handleDetails,
     hasMore,
-    handleScroll
+    handleScroll,
+    handleScrollArrow
 }) => {
     const tabs = cardTabs.map((tab) => ({ ...tab, onPress: handleTabs }));
 
@@ -40,6 +41,7 @@ const LocationsList = ({
                     hasMore={hasMore}
                     scrollableTarget="mainContent"
                     scrollThreshold={0.95}
+                    onScroll={handleScrollArrow}
                 >
                     {renderLocations(locations)}
                 </StyledInfiniteScroll>

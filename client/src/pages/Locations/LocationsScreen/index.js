@@ -32,6 +32,7 @@ const LocationsScreen = () => {
     const [page, setPage] = useState(1);
     const [loading, setLoading] = useState(false);
     const [detailsLoading, setDetailsLoading] = useState(false);
+    const [scrollArrowVisible, setScrollArrowVisible] = useState(false);
 
     const updateLocationDistance = (coords) => {
         const newLocations = locations.map((location) => {
@@ -44,7 +45,8 @@ const LocationsScreen = () => {
     };
 
     const hasScrolledDownWindow = () => {
-        if (window.pageYOffset > window.innerHeight) {
+        const mainContent = document.getElementById("mainContent");
+        if (mainContent.scrollTop > window.innerHeight) {
             return true;
         }
         return false;
@@ -98,6 +100,15 @@ const LocationsScreen = () => {
 
     const handleScroll = () => {
         locations.length < locationsCount && setPage(page + 1);
+    };
+
+    const handleScrollArrow = () => {
+        setScrollArrowVisible(hasScrolledDownWindow());
+    };
+
+    const handleScrollArrowClick = () => {
+        const mainContent = document.getElementById("mainContent");
+        mainContent.scrollTo(0, 0);
     };
 
     const handleTabs = ({ tab, location }) => {
@@ -213,7 +224,9 @@ const LocationsScreen = () => {
             />
 
             <span className="icon-buttons">
-                {!mapView && hasScrolledDownWindow() && <CircleIconBtn icon={<ArrowUpOutlined />} />}
+                {!mapView && scrollArrowVisible && (
+                    <CircleIconBtn icon={<ArrowUpOutlined onClick={handleScrollArrowClick} />} />
+                )}
                 <LocationsAccess userCoords={userCoords} handleClick={handleLocationsAccess} />
                 <CircleIconBtn
                     className="view-toggle"
@@ -230,6 +243,7 @@ const LocationsScreen = () => {
                     handleTabs={handleTabs}
                     handleDetails={handleDetails}
                     handleScroll={handleScroll}
+                    handleScrollArrow={handleScrollArrow}
                 />
             )}
         </Layout>
