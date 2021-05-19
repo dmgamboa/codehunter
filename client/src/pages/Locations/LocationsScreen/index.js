@@ -15,13 +15,14 @@ import LocationsList from "../LocationsList";
 import LocationsAccess from "../LocationsAccess";
 
 import { Layout, Top } from "./styled";
-import { detailsTabs, defaultFilters, testData } from "./constant";
-import { getLocationsList } from "../axios";
+import { detailsTabs, defaultFilters } from "./constant";
+import { getLocationsList, getPlaceData } from "../axios";
 import { message } from "antd";
 
 const LocationsScreen = () => {
     const [locations, setLocations] = useState([]);
     const [locationsCount, setLocationsCount] = useState(500);
+    const [locationDetails, setLocationDetails] = useState(null);
     const [filtersVisible, setFiltersVisible] = useState(false);
     const [detailsVisible, setDetailsVisible] = useState(false);
     const [mapView, setMapView] = useState(false);
@@ -55,12 +56,32 @@ const LocationsScreen = () => {
         setFiltersVisible(false);
     };
 
-    const handleDetailsOpen = () => {
-        setDetailsVisible(true);
+    const handleDetailsClose = () => {
+        setLocationDetails(null);
+        setDetailsVisible(false);
     };
 
-    const handleDetailsClose = () => {
-        setDetailsVisible(false);
+    const handleDetails = async (location) => {
+        setDetailsLoading(true);
+        setDetailsVisible(true);
+        const searchQuery = `${location.name}${location.website && `+ ${location.website}`}`;
+
+        const placesData = await getPlaceData(searchQuery);
+        const details = {
+            name: location.name,
+            distance: location.distance,
+            bookmarked: location.bookmarked,
+            visited: location.visited,
+            details: {
+                type: location.type,
+                address: location.address,
+                hours: placesData.hours,
+                phone: placesData.phone,
+                website: location.website
+            }
+        };
+        setLocationDetails(details);
+        setDetailsLoading(false);
     };
 
     const handleViewToggle = () => {
@@ -71,7 +92,7 @@ const LocationsScreen = () => {
         locations.length < locationsCount && setPage(page + 1);
     };
 
-    const handleTabs = (tab) => {
+    const handleTabs = ({tab, location}) => {
         switch (tab) {
         case "directions":
             // Redirect to GMaps
@@ -80,7 +101,7 @@ const LocationsScreen = () => {
             // Add to Bookmarks
             break;
         case "details":
-            setDetailsVisible(true);
+            handleDetails(location);
             break;
         case "close":
             setDetailsVisible(false);
@@ -158,7 +179,7 @@ const LocationsScreen = () => {
                 <LocationsMap
                     loading={loading}
                     locations={locations}
-                    handleDetails={handleDetailsOpen}
+                    handleDetails={handleDetails}
                 />
             )}
 
@@ -179,7 +200,7 @@ const LocationsScreen = () => {
                 loading={detailsLoading}
                 visible={detailsVisible}
                 onClose={handleDetailsClose}
-                location={testData}
+                location={locationDetails}
                 tabs={detailsTabsWithHandle}
             />
 
@@ -198,7 +219,7 @@ const LocationsScreen = () => {
                     locations={locations}
                     hasMore={locations.length < locationsCount}
                     handleTabs={handleTabs}
-                    handleDetailsOpen={handleDetailsOpen}
+                    handleDetails={handleDetails}
                     handleScroll={handleScroll}
                 />
             )}

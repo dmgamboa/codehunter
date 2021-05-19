@@ -12,17 +12,35 @@ const getMapData = async () => {
 };
 
 const getPlaceData = async (search) => {
-    let placeData;
-    await axios
+    return await axios
         .get(`${url}getPlaceData`, {
             params: {
                 search: search,
             },
         })
         .then((res) => {
-            placeData = res;
+            const { status, data } = res;
+            const dayArr = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
+
+            if (status === 200) {
+                let days = {};
+                const { hours } = data;
+
+                dayArr.forEach(day => {
+                    const period = hours && hours[dayArr.indexOf(day)];
+                    days[day] = [period?.open?.time, period?.close?.time]; 
+                });
+
+                return {
+                    hours: hours && {
+                        status: data.open_now ? "Open Now" : "Closed",
+                        days
+                    },
+                    image: data.photoURL,
+                    phone: data.phoneNumber
+                };
+            }
         });
-    return placeData;
 };
 
 const getLocationsList = async (params) => {
@@ -38,6 +56,7 @@ const getLocationsList = async (params) => {
                         type,
                         cultural_space_name,
                         website,
+                        address,
                         geom
                     } = fields;
 
@@ -46,6 +65,7 @@ const getLocationsList = async (params) => {
                         type,
                         local_area,
                         website,
+                        address,
                         distance: distanceInKm && Math.round(distanceInKm),
                         coordinates: {
                             lng: geom?.coordinates?.[0],

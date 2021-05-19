@@ -23,19 +23,15 @@ const LocationsMap = ({
     // };
 
     const renderMarkers = (locations) => {
-        return locations.map(({
-            name,
-            website,
-            coordinates
-        }) => {
+        return locations.map(location => {
+            const { coordinates, name } = location;
 
             return (
                 <Marker
                     key={name}
                     lat={coordinates.lat}
                     lng={coordinates.lng}
-                    handleClick={handleDetails}
-                    data={`${name}+${website}`}
+                    handleClick={() => handleDetails(location)}
                 />
             );
         });
