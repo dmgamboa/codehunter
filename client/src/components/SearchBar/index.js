@@ -1,13 +1,19 @@
+import { useCallback } from "react";
+import debounce from "lodash/debounce";
+
 import StyledSearch from "./styled";
 
-const SearchBar = ({ className, onSearch }) => {
-    const handleSearch = () => {};
+const SearchBar = ({ className, handleSearch }) => {
+    const debouncedSearch = useCallback(
+        debounce(e => handleSearch(e.target.value), 500),
+        []
+    );
 
     return (
         <StyledSearch
             className={className}
             placeholder="Look up places..."
-            onSearch={handleSearch}
+            onChange={debouncedSearch}
             allowClear
         />
     );
