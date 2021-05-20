@@ -45,7 +45,8 @@ const PageNotFound = () => {
     const getSwipes = useSwipeable({
         onSwiped: (e) => {
             !bounce && handleSwipe(e.dir);
-        }
+        },
+        trackMouse: true
     });
 
     const checkSwipes = () => {
