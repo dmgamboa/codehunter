@@ -84,6 +84,18 @@ const routes = [
         component: <Account />
     },
     {
+        name: "Rewards",
+        path: "/rewards",
+        exact: false,
+        navTab: false,
+        navDrawer: true,
+        fullscreen: false,
+        restricted: true,
+        icon: <GiftOutlined />,
+        selectedIcon: <GiftFilled />,
+        component: <Rewards />
+    },
+    {
         name: "About Us",
         path: "/aboutus",
         exact: false,
@@ -95,16 +107,15 @@ const routes = [
         component: <AboutUs />
     },
     {
-        name: "Rewards",
-        path: "/rewards",
+        name: "Credits",
+        path: "/credits",
         exact: false,
         navTab: false,
         navDrawer: true,
-        fullscreen: false,
+        fullScreen: false,
         restricted: true,
-        icon: <GiftOutlined />,
-        selectedIcon: <GiftFilled />,
-        component: <Rewards />
+        icon: <QuestionCircleOutlined />,
+        component: <AboutUs />
     },
     {
         name: "404",

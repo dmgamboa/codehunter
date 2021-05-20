@@ -21,6 +21,7 @@
     "mongodb": "^3.6.6",
     "pagination": "^0.4.6",
     "parse-node-version": "^1.0.1",
+    "polished": "^4.1.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-infinite-scroll-component": "^6.1.0",
