@@ -169,12 +169,12 @@ router.post("/add-all-rewards", async (req, res) => {
 });
 
 router.get("/getRewards", async (req, res) => {
-    // try {
+    try {
+        console.log(req);
 
-
-    // } catch(err) {
-
-    // }
+    } catch(err) {
+        console.err(rr)
+    }
 });
 
 export default router;

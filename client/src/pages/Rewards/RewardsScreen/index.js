@@ -70,6 +70,10 @@ const RewardsScreen = () => {
         }
     };
 
+    const getAllRewards = () => {
+        console.log("geting all rewards, once sec plz");
+    };
+
     // const useBookSearch = (query, pageNumber) => {
 
     // };
@@ -106,23 +110,32 @@ const RewardsScreen = () => {
             </Filters>
 
             <Tabs className="tabs" defaultActiveKey="1" tabBarExtraContent={category}>
-                <TabPane tab="All" key="1">
+                <TabPane tab="All" key="1" onClick={getAllRewards}>
                     {/* this is where we see rewards */}
 
-                    <RewardCard></RewardCard>
+                    <RewardCard name="Cuisine Italiano" 
+                        // description="smoothies and milkshakes on us!" 
+                        description="Get 50% off" 
+                        cost={500} 
+                        category={<><ShopOutlined /><LaptopOutlined /></>}>
+                        
+                    </RewardCard>
 
                     <div className="loadingIcon">
                         <LoadingOutlined />
                     </div>
                 </TabPane>
                 <TabPane tab="Food" key="2">
-                    Under construction
+                    
                 </TabPane>
                 <TabPane tab="Accessories" key="3">
-                    Under construction
+                    
                 </TabPane>
                 <TabPane tab="Activities" key="4">
-                    Under construction
+                    
+                </TabPane>
+                <TabPane tab="Tech" key="5">
+                    
                 </TabPane>
             </Tabs>
         </Layout>

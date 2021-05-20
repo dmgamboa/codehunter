@@ -14,9 +14,14 @@ export const StyledCard = styled(Card)`
     align-items: center;
 
     height: 100px;
+    display: grid;
+    grid-template:
+        "image content" 100%
+        / 40% 60%;
     .ant-card-cover {
+        grid-area: image;
         height: 100%;
-        width: 160px;
+        max-width: 160px;
         align-self: center;
         img {
             height: 100%;
@@ -24,6 +29,7 @@ export const StyledCard = styled(Card)`
     }
 
     .ant-card-body {
+        grid-area: content;
         padding: 10px 2%;
         font-size: clamp(0.5rem, 3vw, 0.8rem);
         height: 100%;
@@ -33,7 +39,8 @@ export const StyledCard = styled(Card)`
             "details icons" 50%
             / 80% 20%;
         
-        .place {
+        .name {
+            font-size: clamp(0.5rem, 16pt, 1rem);
             grid-area: placeName;
             color: ${colors.primary};
         }
@@ -41,6 +48,7 @@ export const StyledCard = styled(Card)`
             grid-area: details;
             font-size: 11pt;
             opacity: 80%;
+            align-self: flex-end;
         }
         .icons {
             grid-area: icons;

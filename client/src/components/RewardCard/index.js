@@ -12,7 +12,7 @@ import Confetti from "react-confetti";
 
 
 
-const RewardCard = ({ location, tabs, onClick }) => {
+const RewardCard = ({ name, description, cost, category }) => {
 
 
  
@@ -47,15 +47,16 @@ const RewardCard = ({ location, tabs, onClick }) => {
             >
                 {showConfetti ? <Confetti numberOfPieces={80}/> : null}   
 
-                <h1 className="place">
-                    Some place
+                <h1 className="name">
+                    Some place 
                 </h1>
-                <span className="details">Some field in db indicating specific reward</span>
+                <span className="details">{description}</span>
 
                 <div className="icons">
-                    <ShopOutlined />
-                    <LaptopOutlined />
-                    <FieldTimeOutlined />
+                    {category}
+                    {/* <ShopOutlined /> */}
+                    {/* <LaptopOutlined /> */}
+                    {/* <FieldTimeOutlined /> */}
                 </div>
 
                 {/* {tabs && (
