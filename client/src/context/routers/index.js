@@ -111,7 +111,7 @@ const routes = [
         path: "*",
         exact: false,
         navTab: false,
-        navDrawer: true,
+        navDrawer: false,
         fullscreen: true,
         restricted: true,
         component: <PageNotFound />
