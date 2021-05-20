@@ -26,7 +26,7 @@ const SplashScreen = () => {
     
     const redirect = (timeout) => {
         setTimeout(() => {
-            history.push("/walkthrough");
+            localStorage.getItem("skip") ? history.push("/account/login") : history.push("/walkthrough");
         }, timeout * 1000);
     };
 
