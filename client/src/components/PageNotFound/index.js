@@ -1,19 +1,22 @@
 import { useEffect, useState } from "react";
 import { Button } from "antd";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
 import { useSwipeable } from "react-swipeable";
 
-import { ReactComponent as ClosedDoge } from "../../assets/icons/awkward.svg";
-import { ReactComponent as OpenDoge } from "../../assets/icons/dizzy.svg";
+import { ReactComponent as ClosedDoge } from "../../assets/icons/doge/awkward.svg";
+import { ReactComponent as OpenDoge } from "../../assets/icons/doge/dizzy.svg";
+import { ReactComponent as HappyDoge } from "../../assets/icons/doge/love.svg";
 
 import { Container } from "./styled";
 
 const PageNotFound = () => {
+    const key = ["up", "up", "down", "down", "left", "right", "left", "right"];
+    const doge = useAnimation();
+
     const [bounce, setBounce] = useState(true);
     const [swipes, setSwipes] = useState([]);
-
-    const key = ["up", "up", "down", "down", "left", "right", "left", "right"];
+    const [success, setSuccess] = useState(false);
 
     const variants = {
         bounce: {
@@ -27,8 +30,7 @@ const PageNotFound = () => {
                     ease: "easeOut"
                 }
             }
-        },
-        stop: { y: ["0%", "0%"], transition: { repeat: Infinity, repeatDelay: 1, ease: "easeOut" } }
+        }
     };
 
     const handleDogeClick = () => {
@@ -49,19 +51,26 @@ const PageNotFound = () => {
     const checkSwipes = () => {
         const keyAsString = key.join("");
         const swipesAsString = swipes.join("");
-        swipesAsString.includes(keyAsString) && console.log("success!");
+        swipesAsString.includes(keyAsString) && setSuccess(true);
     };
 
     useEffect(() => {
+        doge.start(variants.bounce);
+    }, []);
+
+    useEffect(() => {
         if (!bounce) {
+            doge.stop();
             setTimeout(() => {
                 setBounce(true);
-            }, 2500);
-        }
+            }, 3500);
+        } else {
+            doge.start(variants.bounce);
 
-        if (bounce && swipes.length > 0) {
-            checkSwipes();
-            setSwipes([]);
+            if (swipes.length > 0) {
+                checkSwipes();
+                setSwipes([]);
+            }
         }
     }, [bounce]);
 
@@ -69,11 +78,17 @@ const PageNotFound = () => {
         <Container {...getSwipes}>
             <motion.div
                 variants={variants}
-                animate={bounce ? "bounce" : "stop"}
+                animate={doge}
                 className="image-container"
                 onClick={handleDogeClick}
             >
-                {bounce ? <ClosedDoge className="image" /> : <OpenDoge className="image" />}
+                {success ? (
+                    <HappyDoge className="image" />
+                ) : bounce ? (
+                    <ClosedDoge className="image" />
+                ) : (
+                    <OpenDoge className="image" />
+                )}
             </motion.div>
 
             <h1>Well, this is awkward...</h1>
