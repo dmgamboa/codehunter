@@ -113,9 +113,9 @@ const RewardsScreen = () => {
                 <TabPane tab="All" key="1" onClick={getAllRewards}>
                     {/* this is where we see rewards */}
 
-                    <RewardCard name="Cuisine Italiano" 
+                    <RewardCard name="Cuisine Italianoasdasdasda" 
                         // description="smoothies and milkshakes on us!" 
-                        description="Get 50% off" 
+                        description="Get 50% offasddasdadsaadads" 
                         cost={500} 
                         category={<><ShopOutlined /><LaptopOutlined /></>}>
                         

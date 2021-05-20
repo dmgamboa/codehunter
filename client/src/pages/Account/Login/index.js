@@ -29,8 +29,6 @@ const Login = () => {
             const userData = await login(email, password);
             const userPoints = await getUserPoints(userData);
 
-            console.log("user pts login: " + userPoints.data);
-
             setUserPoints(userPoints.data);
             message.loading({ content: "Glad to have you back!", duration: 1 });
             history.push("/locations");

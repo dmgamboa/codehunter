@@ -48,7 +48,7 @@ const RewardCard = ({ name, description, cost, category }) => {
                 {showConfetti ? <Confetti numberOfPieces={80}/> : null}   
 
                 <h1 className="name">
-                    Some place 
+                    {name} 
                 </h1>
                 <span className="details">{description}</span>
 

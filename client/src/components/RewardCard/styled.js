@@ -1,18 +1,14 @@
 import { Card, Modal } from "antd";
-// import Modal from "styled-react-modal";
 import styled from "styled-components";
-
 import theme from "../../context/themes/main";
 
 const { colors } = theme;
 
 export const StyledCard = styled(Card)`
     .rewardCard {
-        
     }
     display: flex;
     align-items: center;
-
     height: 100px;
     display: grid;
     grid-template:
@@ -27,7 +23,6 @@ export const StyledCard = styled(Card)`
             height: 100%;
         }
     }
-
     .ant-card-body {
         grid-area: content;
         padding: 10px 2%;
@@ -38,17 +33,20 @@ export const StyledCard = styled(Card)`
             "placeName icons" 50%
             "details icons" 50%
             / 80% 20%;
-        
         .name {
             font-size: clamp(0.5rem, 16pt, 1rem);
             grid-area: placeName;
             color: ${colors.primary};
+            text-overflow: ellipsis;
+            overflow: hidden;
         }
         .details {
             grid-area: details;
             font-size: 11pt;
             opacity: 80%;
             align-self: flex-end;
+            text-overflow: ellipsis;
+            overflow: hidden;
         }
         .icons {
             grid-area: icons;
@@ -58,18 +56,15 @@ export const StyledCard = styled(Card)`
             justify-content: space-around;
             font-size: 18pt;
         }
-    }  
+    }
 `;
 
 export const StyledModal = styled(Modal)`
-        text-align: center;
+    text-align: center;
     .ant-modal-title {
         color: ${colors.primary};
     }
     button:hover.ant-btn-primary {
         background-color: ${colors.secondary};
-        /* color: #FFF; */
     }
 `;
-
-// export default StyledCard;
