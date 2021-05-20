@@ -4,7 +4,7 @@ import { auth } from "../firebase";
 // Create context object
 const Auth = React.createContext();
 
-export function useAuth() {
+export const useAuth = () => {
     return useContext(Auth);
 };
 
@@ -13,8 +13,8 @@ const AuthProvider = ({ children }) => {
     const [userPoints, setUserPoints] = useState();
 
     const getUser = () => {
-        if (currentUser) {
-            return currentUser;
+        if (localStorage.getItem("uid")) {
+            return localStorage.getItem("uid");
         } else {
             return;
         }
@@ -26,6 +26,7 @@ const AuthProvider = ({ children }) => {
                 setCurrentUser(token);
                 return token;
             } else {
+                localStorage.removeItem("uid");
                 return "UID unavailable";
             }
         });
@@ -48,6 +49,7 @@ const AuthProvider = ({ children }) => {
     const login = async (email, password) => {
         const userCredentials = await auth.signInWithEmailAndPassword(email, password); 
         const userData = userCredentials.user;
+        localStorage.setItem("uid", userData.uid);
         setCurrentUser(userData);
         return userData;
     };

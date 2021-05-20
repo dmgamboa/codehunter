@@ -11,7 +11,7 @@ import { Form, Input, Button, message } from "antd";
 
 import StyledLogin from "./styled.js";
 
-import { useState, useRef } from "react";
+import { useRef } from "react";
 import { getUserPoints } from "../axios";
 
 const Login = () => {
@@ -25,7 +25,7 @@ const Login = () => {
 
         try {
             const userData = await login(email, password);
-            const userPoints = await getUserPoints(userData);
+            const userPoints = await getUserPoints(userData.uid);
             setUserPoints(userPoints);
             message.loading({ content: "Glad to have you back!", duration: 1 });
             history.push("/locations");

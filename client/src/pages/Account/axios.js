@@ -24,13 +24,16 @@ const createUserDoc = async (values, uid) => {
 };
 
 const getUserPoints = async (user) => {
-    const userPoints = await axios.get(`${url}getUserPoints`, {
-        params: {
-            user: user,
-        },
-    });
-    
-    return userPoints;
+    return await axios
+        .get(`${url}getUserPoints`, {
+            params: {
+                user: user,
+            },
+        })
+        .then(res => {
+            const { data } = res;
+            return data;
+        });
 };
 
 export { createUserDoc, getUserPoints };

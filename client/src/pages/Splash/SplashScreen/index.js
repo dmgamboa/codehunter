@@ -1,13 +1,18 @@
+import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Particles from "react-particles-js";
 import { motion } from "framer-motion";
 
+import { useAuth } from "../../../context/Auth";
+
 import SplashLogo from "../SplashLogo";
 import { particleParams, animationTimes } from "./constant";
 import { Container, Content } from "./styled";
+import { getUserPoints } from "../axios";
 
 const SplashScreen = () => {
     const history = useHistory();
+    const { getUser, setUserPoints } = useAuth();
 
     const {
         orderInterval,
@@ -24,6 +29,15 @@ const SplashScreen = () => {
             history.push("/walkthrough");
         }, timeout * 1000);
     };
+
+    useEffect(async () => {
+
+        const user = getUser();
+        if (user) {
+            const points = await getUserPoints(user);
+            setUserPoints(points);
+        }
+    }, []);
 
     return (
         <motion.div
