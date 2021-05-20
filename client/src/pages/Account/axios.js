@@ -27,7 +27,7 @@ const getUserPoints = async (user) => {
     return await axios
         .get(`${url}getUserPoints`, {
             params: {
-                user: user,
+                user,
             },
         })
         .then(res => {

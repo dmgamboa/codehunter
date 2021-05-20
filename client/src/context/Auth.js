@@ -13,8 +13,8 @@ const AuthProvider = ({ children }) => {
     const [userPoints, setUserPoints] = useState();
 
     const getUser = () => {
-        if (localStorage.getItem("uid")) {
-            return localStorage.getItem("uid");
+        if (localStorage.getItem("user")) {
+            return localStorage.getItem("user");
         } else {
             return;
         }
@@ -26,7 +26,7 @@ const AuthProvider = ({ children }) => {
                 setCurrentUser(token);
                 return token;
             } else {
-                localStorage.removeItem("uid");
+                localStorage.removeItem("user");
                 return "UID unavailable";
             }
         });
@@ -49,7 +49,7 @@ const AuthProvider = ({ children }) => {
     const login = async (email, password) => {
         const userCredentials = await auth.signInWithEmailAndPassword(email, password); 
         const userData = userCredentials.user;
-        localStorage.setItem("uid", userData.uid);
+        localStorage.setItem("user", JSON.stringify(userData));
         setCurrentUser(userData);
         return userData;
     };

@@ -19,8 +19,11 @@ const getUser = (user) => {
         if (!user) {
             return rej("User not logged in");
         }
+
+        const userID = user.uid;
         
-        User.findOne({ uid: user }).exec((err, data) => {
+        User.findOne({ uid: userID
+         }).exec((err, data) => {
             if (err) {
                 return rej(err);
             }
@@ -31,8 +34,7 @@ const getUser = (user) => {
 
 const getUserPoints = (req) => {
     return new Promise(async (res, rej) => {
-        const user = await getUser(req.query.user);
-
+        const user = await getUser(JSON.parse(req.query.user));
         return res(user.points);
     });
 };
