@@ -19,8 +19,6 @@ const Login = () => {
     const history = useHistory();
     const { login, setUserPoints } = useAuth();
 
-    const [error, setError] = useState();
-
     const onFinish = async () => {
         const email = valuesRef.current.getFieldValue().email;
         const password = valuesRef.current.getFieldValue().password;
@@ -32,9 +30,8 @@ const Login = () => {
             message.loading({ content: "Glad to have you back!", duration: 1 });
             history.push("/locations");
         } catch (e) {
-            setError("Failed to login, please check your password and email.");
             // Displays loading message
-            message.error(error);
+            message.error("Failed to login, please check your password and email.");
         }
     };
 

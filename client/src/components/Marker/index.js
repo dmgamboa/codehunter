@@ -1,6 +1,6 @@
 import { EnvironmentFilled } from "@ant-design/icons";
 
-const Marker = ({ handleClick, data }) => {
+const Marker = ({ handleClick }) => {
     const markerStyle = {
         fontSize: "250%",
         color: "#08497E",
@@ -9,9 +9,7 @@ const Marker = ({ handleClick, data }) => {
     return (
         <EnvironmentFilled
             style={markerStyle}
-            onClick={() => {
-                handleClick(data);
-            }}
+            onClick={handleClick}
         />
     );
 };

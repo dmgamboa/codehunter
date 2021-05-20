@@ -4,15 +4,13 @@ export const StyledMap = styled.div`
     z-index: 0;
     position: absolute;
     top: -1rem;
-    left: -1rem;
-    width: 100vw;
+    left: 0;
+    width: 100%;
     height: 100vh;
 
-    .gm-fullscreen-control {
-        display: none;
-    }
-
-    .gmnoprint {
+    .gm-fullscreen-control,
+    .gmnoprint,
+    .gm-style-iw-d {
         display: none;
     }
 `;

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Layout = styled.div`
     flex: 1;
-    position: relative;
+    width: 100%;
 
     &.map-view {
         .search {
@@ -15,7 +15,7 @@ export const Layout = styled.div`
     .icon-buttons {
         z-index: 999;
         position: fixed;
-        right: 1rem;
+        right: 2rem;
         bottom: 5rem;
         display: flex;
         flex-direction: column;

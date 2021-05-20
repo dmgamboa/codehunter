@@ -4,7 +4,7 @@ import Icon, {
     ArrowUpOutlined,
     ArrowDownOutlined,
     CheckCircleOutlined,
-    UndoOutlined,
+    UndoOutlined
 } from "@ant-design/icons";
 import { kebabCase } from "lodash";
 
@@ -103,7 +103,7 @@ const LocationsFilters = ({ visible, onClose, onFinish, initialValues, hasUserCo
                     </Select>
                 </Form.Item>
 
-                <Form.Item label="Neighborhood" name="location_type">
+                <Form.Item label="Neighborhood" name="local_area">
                     <Select showSearch allowClear placeholder="Any">
                         {renderOptions(neighborhoods)}
                     </Select>
@@ -114,7 +114,13 @@ const LocationsFilters = ({ visible, onClose, onFinish, initialValues, hasUserCo
                         Apply
                     </Button>
 
-                    <Button onClick={() => form.resetFields()} block>
+                    <Button
+                        onClick={() => {
+                            form.resetFields();
+                            form.submit();
+                        }}
+                        block
+                    >
                         <UndoOutlined /> Reset
                     </Button>
                 </span>

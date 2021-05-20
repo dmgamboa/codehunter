@@ -1,3 +1,4 @@
+import { Spin } from "antd";
 import { TabBar } from "antd-mobile";
 
 import { details as detailsToRender } from "./constant";
@@ -5,14 +6,14 @@ import StyledDrawer from "./styled";
 
 import LocationPlaceholder from "../../assets/placeholder-location.jpg";
 
-const LocationDetails = ({ visible, onClose, location, tabs }) => {
+const LocationDetails = ({ loading, visible, onClose, location, tabs }) => {
     const renderHours = (hours) => {
         return Object.keys(hours).map((day) => {
             return (
                 <span key={day} className="hour">
                     <span className="day">{day}</span>
                     <span className="time">
-                        {hours[day].length > 0 ? `${hours[day][0]} - ${hours[day][1]}` : "Closed"}
+                        {hours[day][0] ? `${hours[day][0]} - ${hours[day][1]}` : "Closed"}
                     </span>
                 </span>
             );
@@ -26,7 +27,7 @@ const LocationDetails = ({ visible, onClose, location, tabs }) => {
                     {detailsToRender[detail]}
                     {loc[detail] ? (
                         detail === "hours" ? (
-                            loc[detail]["status"]
+                            loc.hours?.status
                         ) : detail === "website" ? (
                             <a href={loc[detail]} target="_blank" rel="noreferrer">
                                 {loc[detail]}
@@ -41,7 +42,7 @@ const LocationDetails = ({ visible, onClose, location, tabs }) => {
                     ) : (
                         `No ${detail} listed.`
                     )}
-                    {detail === "hours" && (
+                    {detail === "hours" && loc.hours?.days && (
                         <div className="hours-list">{renderHours(loc[detail]["days"])}</div>
                     )}
                 </span>
@@ -51,27 +52,43 @@ const LocationDetails = ({ visible, onClose, location, tabs }) => {
 
     const renderTabs = (tabs) => {
         return tabs.map(({ key, name, icon, onPress }) => {
-            return <TabBar.Item key={key} title={name} icon={icon} onPress={() => onPress(key)} />;
+            return (
+                <TabBar.Item
+                    key={key}
+                    title={name}
+                    icon={icon}
+                    onPress={() => onPress({ tabs: key })}
+                />
+            );
         });
     };
 
     return (
         <StyledDrawer height="auto" placement="bottom" visible={visible} onClose={onClose}>
-            <img src={location.img ? location.img : LocationPlaceholder} alt={location.name} />
+            <Spin spinning={loading}/>
+            {location && (
+                <>
+                    <img
+                        referrerPolicy="no-referrer" 
+                        src={location.image ?? LocationPlaceholder}
+                        alt={location.name}
+                    />
 
-            <span className="top">
-                <h1>{location.name}</h1>
-                <span className="distance">
-                    {location.distance && `${location.distance}km away`}
-                </span>
-            </span>
+                    <span className="top">
+                        <h1>{location.name}</h1>
+                        <span className="distance">
+                            {location.distance && `${location.distance}km away`}
+                        </span>
+                    </span>
 
-            {renderDetails(location.details)}
+                    {renderDetails(location.details)}
 
-            {tabs && (
-                <TabBar tintColor="#08497E" unselectedTintColor="#08497E">
-                    {renderTabs(tabs)}
-                </TabBar>
+                    {tabs && (
+                        <TabBar tintColor="#08497E" unselectedTintColor="#08497E">
+                            {renderTabs(tabs)}
+                        </TabBar>
+                    )}
+                </>
             )}
         </StyledDrawer>
     );
