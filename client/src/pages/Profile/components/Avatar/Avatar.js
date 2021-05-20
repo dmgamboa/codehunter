@@ -7,7 +7,7 @@ import EditIcon from "../../images/edit.png";
 import Liner from "../../images/blackDivider.png";
 import pic from "../../images/sampleAvatar.png";
 
-const AvatarSection = () => {
+const AvatarSection = ({name}) => {
     const history = useHistory();
 
     const handleEdit = () => {
@@ -26,7 +26,10 @@ const AvatarSection = () => {
                 <div id="avatarPic">
                     {/* <Avatar size={300} icon={<UserOutlined />} shape="square" id="profilePic"/> */}
                     <img src={pic} id="profilePic" />
-                    <img src={Liner} id="picLine" />
+                    <hr id="picLine" />
+                </div>
+                <div id="name">
+                    <p>{name}</p>
                 </div>
             </AvatarContainer>
         </>

@@ -18,7 +18,8 @@ const ProfileScreen = () => {
 
     return (
         <div>
-            <AvatarSection />
+            <AvatarSection name={"Hunter Welles"}/>
+            {/* <AvatarSection name={getUser}/> */}
             <PointsSection points={points} />
             <LocationsList />
         </div>
