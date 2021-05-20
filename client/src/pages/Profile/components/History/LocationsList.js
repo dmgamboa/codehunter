@@ -49,55 +49,6 @@ function LocationsList() {
                             <span className="location-points">points</span>
                         </p>
                     </div>
-                    <div>
-                        <p>
-                            <span className="location-name">name</span>
-                            <span className="location-date">date</span>
-                            <span className="location-points">points</span>
-                        </p>
-                    </div>
-                    <div>
-                        <p>
-                            <span className="location-name">name</span>
-                            <span className="location-date">date</span>
-                            <span className="location-points">points</span>
-                        </p>
-                    </div>
-                    <div>
-                        <p>
-                            <span className="location-name">name</span>
-                            <span className="location-date">date</span>
-                            <span className="location-points">points</span>
-                        </p>
-                    </div>
-                    <div>
-                        <p>
-                            <span className="location-name">name</span>
-                            <span className="location-date">date</span>
-                            <span className="location-points">points</span>
-                        </p>
-                    </div>
-                    <div>
-                        <p>
-                            <span className="location-name">name</span>
-                            <span className="location-date">date</span>
-                            <span className="location-points">points</span>
-                        </p>
-                    </div>
-                    <div>
-                        <p>
-                            <span className="location-name">name</span>
-                            <span className="location-date">date</span>
-                            <span className="location-points">points</span>
-                        </p>
-                    </div>
-                    <div>
-                        <p>
-                            <span className="location-name">name</span>
-                            <span className="location-date">date</span>
-                            <span className="location-points">points</span>
-                        </p>
-                    </div>
                 </ListStyled>
             </HistoryListStyled>
         </>
