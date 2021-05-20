@@ -20,6 +20,8 @@ const config = {
     port: parseInt(process.env.PORT, 10),
     databaseURL: process.env.CH_URI,
     googleMapsKey: process.env.REACT_APP_MAPS_KEY,
+    awsAccessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    awsSecretKey: process.env.AWS_SECRET_KEY,
 };
 
 export default config;
