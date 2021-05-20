@@ -54,16 +54,8 @@ const RewardCard = ({ name, description, cost, category }) => {
 
                 <div className="icons">
                     {category}
-                    {/* <ShopOutlined /> */}
-                    {/* <LaptopOutlined /> */}
-                    {/* <FieldTimeOutlined /> */}
                 </div>
 
-                {/* {tabs && (
-                <TabBar tintColor="#08497E" unselectedTintColor="#08497E">
-                {renderTabs(tabs)}
-                </TabBar>
-            )} */}
             </StyledCard>
             <StyledModal
                 title={<span><GiftOutlined/> Please confirm</span>}
@@ -75,9 +67,9 @@ const RewardCard = ({ name, description, cost, category }) => {
                 // ref={confettiRef}
             >
 
-
-                <p>Some company</p>
-                <p>1 free bacon and egger</p>
+                <p className="modal-name">{name}</p>
+                <p className="modal-details">{description}</p>
+                <p className="modal-cost">{cost} pts</p>
 
             </StyledModal>
         </>

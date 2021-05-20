@@ -21,31 +21,27 @@ import { useAuth } from "../../../context/Auth";
 import axios from "axios";
 
 const RewardsScreen = () => {
-    
     // for axios request
     const url = process.env.REACT_APP_SERVER;
     const { currentUser, getUID, userPoints } = useAuth();
-    console.log("currentUser", currentUser, "getUID", getUID(), "user points", userPoints);
+    console.log("currentUser", currentUser, "user points", userPoints);
 
     // to use variable userPoints in Auht.js
 
     // axios.post(`${url}rewards`, rewardsData);
 
-
     const { TabPane } = Tabs;
-
     const CheckableTag = Tag;
+
+    const [category, setCategory] = useState(userPoints + " pts");
+
     const tagsData = {
         Online: "<LaptopOutlined/>",
         "In-Store": "<ShopOutlined/>",
         "Limited Time": "<FieldTimeOutlined>",
     };
     const tagsDataArr = ["Online", "In-Store", "Limited Time"];
-
     const [selectedTags, setSelectedTags] = useState([]);
-
-    const [category, setCategory] = useState(userPoints + " pts");
-
     const handleFilterTag = (tag) => {
         const nextSelectedTags = selectedTags.includes(tag)
             ? selectedTags.filter((t) => {
@@ -56,6 +52,7 @@ const RewardsScreen = () => {
         setSelectedTags(nextSelectedTags);
     };
 
+    // To add icons to filter tags
     const addIcon = (tag) => {
         // console.log("tag: ", tag);
         // let components = [];
@@ -70,17 +67,53 @@ const RewardsScreen = () => {
         }
     };
 
-    const getAllRewards = () => {
-        console.log("geting all rewards, once sec plz");
-    };
-
     // const useBookSearch = (query, pageNumber) => {
 
     // };
+    const [query, setQuery] = useState("all");
+    const [pageNumber, setPageNumber] = useState(1);
+    const [loading, setLoading] = useState(false);
+    const [rewards, setRewards] = useState([]);
+    const [erros, setError] = useState(false);
+    const [hasMore, setHasMore] = useState(false);
 
-    // useEffect(() => {
+    useEffect(() => {
+        setLoading(true);
+        setError(false);
 
-    // }, [query, pageNumber]);
+        console.log("query: " + JSON.stringify(query));
+        
+        axios
+            // Equivalent to params sent through url
+            .get(`${url}rewards/getRewards`, { params: {category: query, skip: pageNumber} }) 
+            .then((res) => { 
+                setRewards(prevRewards => {
+                    return [...prevRewards, res.data];
+                });
+                setHasMore(res.data.length > 0);
+                console.log("response", res.data); 
+                setLoading(false);
+            })
+            .catch((err) => { 
+                setError(err);
+                console.log("axios err: ", err); 
+            });
+    }, [query, pageNumber]);
+
+    const handleCategory = (key) => {
+        if (key === "1") {
+            setQuery("all");
+        } else if (key === "2") {
+            setQuery("food");
+        } else if (key === "3") {
+            setQuery("accessories");
+        } else if (key === "4") {
+            setQuery("activities");
+        } else if (key === "5") {
+            setQuery("tech");
+        }
+        console.log("key: " + key);
+    };
 
     return (
         <Layout>
@@ -109,34 +142,38 @@ const RewardsScreen = () => {
                 </div>
             </Filters>
 
-            <Tabs className="tabs" defaultActiveKey="1" tabBarExtraContent={category}>
-                <TabPane tab="All" key="1" onClick={getAllRewards}>
+            <Tabs className="tabs" defaultActiveKey="1" tabBarExtraContent={category} onChange={(key) => handleCategory(key)}>
+                <TabPane tab="All" key="1">
                     {/* this is where we see rewards */}
 
-                    <RewardCard name="Cuisine Italianoasdasdasda" 
-                        // description="smoothies and milkshakes on us!" 
-                        description="Get 50% offasddasdadsaadads" 
-                        cost={500} 
-                        category={<><ShopOutlined /><LaptopOutlined /></>}>
-                        
-                    </RewardCard>
+                    {/* <RewardCard
+                        name="Cuisine Italianoasdasdasda"
+                        // description="smoothies and milkshakes on us!"
+                        description="Get 50% offasddasdadsaadads"
+                        cost={500}
+                        category={
+                            <>
+                                <ShopOutlined />
+                                <LaptopOutlined />
+                            </>
+                        }
+                    ></RewardCard> */}
+                    {rewards.map(reward => {
+                        console.log("building card, name: " + reward.name);
+
+                        //TODO: whats the best way to construct icons components from category list
+
+                        return (<><RewardCard name={reward.name} description={reward.description} cost={reward.cost} c></RewardCard></>);
+                    })}
 
                     <div className="loadingIcon">
-                        <LoadingOutlined />
+                        {loading && <LoadingOutlined />}
                     </div>
                 </TabPane>
-                <TabPane tab="Food" key="2">
-                    
-                </TabPane>
-                <TabPane tab="Accessories" key="3">
-                    
-                </TabPane>
-                <TabPane tab="Activities" key="4">
-                    
-                </TabPane>
-                <TabPane tab="Tech" key="5">
-                    
-                </TabPane>
+                <TabPane tab="Food" key="2"></TabPane>
+                <TabPane tab="Accessories" key="3"></TabPane>
+                <TabPane tab="Activities" key="4"></TabPane>
+                <TabPane tab="Tech" key="5"></TabPane>
             </Tabs>
         </Layout>
     );

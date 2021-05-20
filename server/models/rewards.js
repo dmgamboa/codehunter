@@ -16,3 +16,26 @@ export const massWriteRewards = async (documents) => {
 
         })
 };
+
+
+export const getRewards = async (category) => {
+    return new Promise((res, rej) => {
+        if (category === "all") {
+            Reward.find()
+            .then((results) => { 
+                return res(results)
+            }).catch(err => {
+                return rej(err);
+            });
+        };
+        Reward.find({ category: {$all: [category]}})
+        .then((results)=> { 
+            console.log("results: " + results)
+            return res(results);
+        }).catch(err => {
+            return rej(err);
+        });
+
+    });
+    
+};
