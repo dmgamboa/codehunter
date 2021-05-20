@@ -19,10 +19,11 @@ const getUser = (user) => {
         if (!user) {
             return rej("User not logged in");
         }
-        // Get the Firebase user ID from the token.
+
         const userID = user.uid;
         
-        User.findOne({ uid: userID }).exec((err, data) => {
+        User.findOne({ uid: userID
+         }).exec((err, data) => {
             if (err) {
                 return rej(err);
             }
@@ -34,7 +35,6 @@ const getUser = (user) => {
 const getUserPoints = (req) => {
     return new Promise(async (res, rej) => {
         const user = await getUser(JSON.parse(req.query.user));
-
         return res(user.points);
     });
 };
