@@ -72,8 +72,21 @@ const userSchema = new Schema({
     }]
 });
 
+const rewardSchema = new Schema({
+    logo: {
+        data: String,
+        imageType: String,
+    },
+    name:  String,
+    description: String,
+    cost: Number,
+    availability: [String], //online, in-store, limited time
+    category: [String], //food, accessories, acitivites, tech
+});
+
 // User -> users
 const Location = mongoose.model("locations", locationSchema);
 const User = mongoose.model("users", userSchema);
+const Reward = mongoose.model("reward", rewardSchema);
 
-export { Location, User };
+export { Location, User, Reward };

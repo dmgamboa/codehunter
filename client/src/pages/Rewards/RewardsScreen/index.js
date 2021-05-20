@@ -29,7 +29,7 @@ const RewardsScreen = () => {
 
     // to use variable userPoints in Auht.js
 
-
+    // axios.post(`${url}rewards`, rewardsData);
 
 
     const { TabPane } = Tabs;
