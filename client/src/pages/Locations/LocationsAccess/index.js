@@ -5,7 +5,7 @@ import CircleIconBtn from "../../../components/CircleIconBtn";
 import { ReactComponent as LocationIconFilled } from "../../../assets/icons/target-location-filled.svg";
 import { ReactComponent as LocationIconOutline } from "../../../assets/icons/target-location-outline.svg";
 
-const LocationsAccess = ({ userCoords, handleSuccess }) => {
+const LocationsAccess = ({ userCoords, handleClick }) => {
     const canUseGeolocation = () => {
         if (navigator.geolocation) {
             return true;
@@ -26,13 +26,9 @@ const LocationsAccess = ({ userCoords, handleSuccess }) => {
         return true;
     };
 
-    const handleError = () => {
-        message.error("Something went wrong! Please try again later.");
-    };
-
-    const handleClick = async () => {
-        if (canUseGeolocation() && (await hasUserPermission())) {
-            navigator.geolocation.getCurrentPosition(handleSuccess, handleError);
+    const onClick = async () => {
+        if (canUseGeolocation && await hasUserPermission()) {
+            handleClick();
         }
     };
 
@@ -45,7 +41,7 @@ const LocationsAccess = ({ userCoords, handleSuccess }) => {
                     <Icon component={LocationIconOutline} />
                 )
             }
-            onClick={handleClick}
+            onClick={onClick}
         />
     );
 };
