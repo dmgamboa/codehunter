@@ -3,6 +3,12 @@ import { massWriteRewards, getRewards } from "../models/rewards.js";
 
 const router = express.Router();
 
+// return <LaptopOutlined />;
+// } else if (tag === "In-Store") {
+//     return <ShopOutlined />;
+// } else if (tag === "Limited Time") {
+//     return <FieldTimeOutlinedd />;
+
 // Mass add documents to rewards collection
 const rewardsData = [
     // to add image/company logo (using placehold for now)

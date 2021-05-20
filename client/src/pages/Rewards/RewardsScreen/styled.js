@@ -48,7 +48,7 @@ export const Layout = styled.div`
     .tabs {
         grid-area: tabsAndList;
         text-align: left;
-    
+        overflow-y: scroll;
     
         .loadingIcon {
             margin-top: 20px;

@@ -12,7 +12,7 @@ import Confetti from "react-confetti";
 
 
 
-const RewardCard = ({ name, description, cost, category }) => {
+const RewardCard = ({ name, description, cost, availability }) => {
 
 
  
@@ -53,7 +53,7 @@ const RewardCard = ({ name, description, cost, category }) => {
                 <span className="details">{description}</span>
 
                 <div className="icons">
-                    {category}
+                    {availability}
                 </div>
 
             </StyledCard>

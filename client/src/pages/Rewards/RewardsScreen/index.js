@@ -24,7 +24,7 @@ const RewardsScreen = () => {
     // for axios request
     const url = process.env.REACT_APP_SERVER;
     const { currentUser, getUID, userPoints } = useAuth();
-    console.log("currentUser", currentUser, "user points", userPoints);
+    // console.log("currentUser", currentUser, "user points", userPoints);
 
     // to use variable userPoints in Auht.js
 
@@ -45,15 +45,15 @@ const RewardsScreen = () => {
     const handleFilterTag = (tag) => {
         const nextSelectedTags = selectedTags.includes(tag)
             ? selectedTags.filter((t) => {
-                return t !== tag;
-            })
+                  return t !== tag;
+              })
             : [...selectedTags, tag];
         // console.log("You are interested in: ", nextSelectedTags);
         setSelectedTags(nextSelectedTags);
     };
 
     // To add icons to filter tags
-    const addIcon = (tag) => {
+    const addIconFilterTags = (tag) => {
         // console.log("tag: ", tag);
         // let components = [];
         if (tag === "Online") {
@@ -74,7 +74,7 @@ const RewardsScreen = () => {
     const [pageNumber, setPageNumber] = useState(1);
     const [loading, setLoading] = useState(false);
     const [rewards, setRewards] = useState([]);
-    const [erros, setError] = useState(false);
+    const [error, setError] = useState(false);
     const [hasMore, setHasMore] = useState(false);
 
     useEffect(() => {
@@ -82,22 +82,27 @@ const RewardsScreen = () => {
         setError(false);
 
         console.log("query: " + JSON.stringify(query));
-        
+
         axios
             // Equivalent to params sent through url
-            .get(`${url}rewards/getRewards`, { params: {category: query, skip: pageNumber} }) 
-            .then((res) => { 
-                setRewards(prevRewards => {
+            .get(`${url}rewards/getRewards`, { params: { category: query, skip: pageNumber } })
+            .then((res) => {
+                setRewards((prevRewards) => {
                     return [...prevRewards, res.data];
                 });
+
                 setHasMore(res.data.length > 0);
-                console.log("response", res.data); 
+                // console.log("response", res.data);
                 setLoading(false);
+
+                // console.log("rewards: " + JSON.stringify(rewards));
             })
-            .catch((err) => { 
-                setError(err);
-                console.log("axios err: ", err); 
+            .catch((err) => {
+                setError(true);
+                console.log("axios err: ", err);
             });
+        
+        
     }, [query, pageNumber]);
 
     const handleCategory = (key) => {
@@ -112,9 +117,22 @@ const RewardsScreen = () => {
         } else if (key === "5") {
             setQuery("tech");
         }
-        console.log("key: " + key);
+        // console.log("key: " + key);
     };
 
+    const addIconRewardCard = (availabilityArr) => {
+        let icons = [];
+        if (availabilityArr.includes("online")) {
+            icons.push(<LaptopOutlined key="laptop"/>);
+        }
+        if (availabilityArr.includes("in-store")) {
+            icons.push(<ShopOutlined key="shop"/>);
+        }
+        if (availabilityArr.includes("limited time")) {
+            icons.push(<FieldTimeOutlined key="fieldtime"/>);
+        }
+        return icons;
+    };
     return (
         <Layout>
             <h1 className="title">
@@ -134,7 +152,7 @@ const RewardsScreen = () => {
                                     ? "filterTagActive filterTag"
                                     : "filterTagInactive filterTag"
                             }
-                            icon={addIcon(tag)}
+                            icon={addIconFilterTags(tag)}
                         >
                             {tag}
                         </CheckableTag>
@@ -142,7 +160,12 @@ const RewardsScreen = () => {
                 </div>
             </Filters>
 
-            <Tabs className="tabs" defaultActiveKey="1" tabBarExtraContent={category} onChange={(key) => handleCategory(key)}>
+            <Tabs
+                className="tabs"
+                defaultActiveKey="1"
+                tabBarExtraContent={category}
+                onChange={(key) => handleCategory(key)}
+            >
                 <TabPane tab="All" key="1">
                     {/* this is where we see rewards */}
 
@@ -158,17 +181,26 @@ const RewardsScreen = () => {
                             </>
                         }
                     ></RewardCard> */}
-                    {rewards.map(reward => {
-                        console.log("building card, name: " + reward.name);
+                    {rewards.map((arr) => {
+                        return arr.map((rewardInfo) => {
+                            // console.log(rewardInfo.name);
+                            // if (item > 0) {
+                            const icons = addIconRewardCard(rewardInfo.availability);
+                            return (
+                                <RewardCard
+                                    key={rewardInfo._id}
+                                    name={rewardInfo.name}
+                                    description={rewardInfo.description}
+                                    cost={rewardInfo.cost}
+                                    availability={icons}
+                                ></RewardCard>
+                            );
+                        });
 
                         //TODO: whats the best way to construct icons components from category list
-
-                        return (<><RewardCard name={reward.name} description={reward.description} cost={reward.cost} c></RewardCard></>);
                     })}
 
-                    <div className="loadingIcon">
-                        {loading && <LoadingOutlined />}
-                    </div>
+                    <div className="loadingIcon">{loading && <LoadingOutlined />}</div>
                 </TabPane>
                 <TabPane tab="Food" key="2"></TabPane>
                 <TabPane tab="Accessories" key="3"></TabPane>
