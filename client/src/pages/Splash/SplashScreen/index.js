@@ -26,12 +26,19 @@ const SplashScreen = () => {
     
     const redirect = (timeout) => {
         setTimeout(() => {
-            localStorage.getItem("skip") ? history.push("/account/login") : history.push("/walkthrough");
+            let path;
+
+            if (getUser()) {
+                path = "/locations";
+            } else {
+                path = localStorage.getItem("skip") ? "/account/login" : "/walkthrough";
+            }
+
+            history.push(path);
         }, timeout * 1000);
     };
 
     useEffect(async () => {
-
         const user = getUser();
         if (user) {
             const points = await getUserPoints(user);
