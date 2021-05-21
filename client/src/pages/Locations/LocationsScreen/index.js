@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
+import { Tag } from "antd";
 import Icon, { UnorderedListOutlined, ArrowUpOutlined } from "@ant-design/icons";
+import startCase from "lodash/startCase";
 
 import { ReactComponent as MapIcon } from "../../../assets/icons/map.svg";
 import { ReactComponent as FilterIcon } from "../../../assets/icons/filters.svg";
@@ -64,6 +66,12 @@ const LocationsScreen = () => {
     const handleFilterSubmit = (val) => {
         setFilters(val);
         setFiltersVisible(false);
+    };
+
+    const handleFilterTag = (filter) => {
+        let newFilters = {...filters};
+        delete newFilters[filter];
+        setFilters(newFilters);
     };
 
     const handleDetailsClose = () => {
@@ -195,6 +203,18 @@ const LocationsScreen = () => {
 
     const detailsTabsWithHandle = detailsTabs.map((tab) => ({ ...tab, onPress: handleTabs }));
 
+    const renderFilterTags = () => {
+        return Object.keys(filters).map((filter) => {
+            if (filter !== "sort" && filters[filter]) {
+                return (
+                    <Tag key={filter} closable onClose={() => handleFilterTag(filter)}>
+                        {`${startCase(filter)}: ${startCase(filters[filter])}`}
+                    </Tag>
+                );
+            }
+        });
+    };
+
     return (
         <Layout className={mapView ? "map-view" : "list-view"}>
             {mapView && (
@@ -210,6 +230,10 @@ const LocationsScreen = () => {
                 <SearchBar className="search" handleSearch={handleSearch} />
                 <Icon className="filter" component={FilterIcon} onClick={handleFilterToggle} />
             </Top>
+
+            {Object.keys(filters).length > 1 && (
+                <div className="filter-tags">{renderFilterTags()}</div>
+            )}
 
             <LocationsFilter
                 initialValues={defaultFilters}
