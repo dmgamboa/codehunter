@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Tag } from "antd";
 import Icon, { UnorderedListOutlined, ArrowUpOutlined } from "@ant-design/icons";
 import startCase from "lodash/startCase";
+import replace from "lodash/replace";
 
 import { ReactComponent as MapIcon } from "../../../assets/icons/map.svg";
 import { ReactComponent as FilterIcon } from "../../../assets/icons/filters.svg";
@@ -17,7 +18,7 @@ import LocationsList from "../LocationsList";
 import LocationsAccess from "../LocationsAccess";
 
 import { Layout, Top } from "./styled";
-import { detailsTabs, defaultFilters } from "./constant";
+import { detailsTabs, defaultFilters, gMapsLink } from "./constant";
 import { getLocationsList, getPlaceData } from "../axios";
 import { message } from "antd";
 
@@ -69,7 +70,7 @@ const LocationsScreen = () => {
     };
 
     const handleFilterTag = (filter) => {
-        let newFilters = {...filters};
+        let newFilters = { ...filters };
         delete newFilters[filter];
         setFilters(newFilters);
     };
@@ -122,9 +123,16 @@ const LocationsScreen = () => {
 
     const handleTabs = ({ tab, location }) => {
         switch (tab) {
-        case "directions":
-            // Redirect to GMaps
+        case "directions": {
+            const destination = location.coordinates
+                ? encodeURIComponent(`${location.coordinates.lat},${location.coordinates.lng}`)
+                : location.address
+                    ? encodeURIComponent(replace(location.address, " ", "+"))
+                    : encodeURIComponent(replace(location.name, " ", "+"));
+            const origin = userCoords ? encodeURIComponent(`${userCoords.lat},${userCoords.lng}`) : "";
+            window.open(`${gMapsLink}destination=${destination}&origin=${origin ?? ""}`);
             break;
+        }
         case "bookmark":
             // Add to Bookmarks
             break;

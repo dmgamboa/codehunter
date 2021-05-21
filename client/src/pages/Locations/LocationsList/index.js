@@ -7,7 +7,6 @@ const LocationsList = ({
     loading,
     locations,
     handleTabs,
-    handleDetails,
     hasMore,
     handleScroll,
     handleScrollArrow
@@ -25,7 +24,6 @@ const LocationsList = ({
                     className="location-card"
                     location={location}
                     tabs={tabs}
-                    handleClick={handleDetails}
                 />
             );
         });
