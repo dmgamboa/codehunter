@@ -19,8 +19,10 @@ import LocationsAccess from "../LocationsAccess";
 
 import { Layout, Top } from "./styled";
 import { detailsTabs, defaultFilters, gMapsLink } from "./constant";
-import { getLocationsList, getPlaceData } from "../axios";
+import { readLocations, readPlace } from "../axios";
 import { message } from "antd";
+
+import { useAuth } from "../../../context/Auth";
 
 const LocationsScreen = () => {
     const [locations, setLocations] = useState([]);
@@ -37,6 +39,9 @@ const LocationsScreen = () => {
     const [detailsLoading, setDetailsLoading] = useState(false);
     const [scrollArrowVisible, setScrollArrowVisible] = useState(false);
     const [mapInitialCoords, setMapInitialCoords] = useState(null);
+
+    const { userData } = useAuth();
+    console.log(userData);
 
     const updateLocationDistance = (coords) => {
         const newLocations = locations.map((location) => {
@@ -85,7 +90,7 @@ const LocationsScreen = () => {
         setDetailsVisible(true);
         const searchQuery = `${location.name}${location.website && `+ ${location.website}`}`;
 
-        const placesData = await getPlaceData(searchQuery);
+        const placesData = await readPlace(searchQuery);
         const details = {
             name: location.name,
             distance: location.distance,
@@ -188,7 +193,7 @@ const LocationsScreen = () => {
             userCoords: userCoords ?? coords
         };
 
-        let newLocations = await getLocationsList(params);
+        let newLocations = await readLocations(params);
         newLocations = newList ? locations.concat(newLocations) : newLocations;
         setLocations(newLocations);
 

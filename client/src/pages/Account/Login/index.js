@@ -13,21 +13,21 @@ import StyledLogin from "./styled.js";
 
 import { useRef } from "react";
 import { motion } from "framer-motion";
-import { getUserPoints } from "../axios";
+import { readUserContext } from "../axios";
 
 const Login = () => {
     const valuesRef = useRef();
     const history = useHistory();
-    const { login, setUserPoints } = useAuth();
+    const { login, setUserData, getUser } = useAuth();
 
     const onFinish = async () => {
         const email = valuesRef.current.getFieldValue().email;
         const password = valuesRef.current.getFieldValue().password;
 
         try {
-            const userData = await login(email, password);
-            const userPoints = await getUserPoints(userData);
-            setUserPoints(userPoints);
+            await login(email, password);
+            const userData = await readUserContext(getUser());
+            setUserData(userData);
             message.loading({ content: "Glad to have you back!", duration: 1 });
             history.push("/locations");
         } catch (e) {

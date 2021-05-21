@@ -3,26 +3,20 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import config from "./config/index.js";
-import getMapData from "./api-routes/getMapData.route.js";
-import registration from "./api-routes/registration.route.js";
-import getPlaceData from "./api-routes/getPlaceData.route.js";
-import getLocationsList from "./api-routes/getLocationsList.route.js";
-import validateCodeAndEarnPoints from "./api-routes/validateCodeAndEarnPoints.route.js";
-import getUserPoints from "./api-routes/getUserPoints.route.js";
-import getProfileData from "./api-routes/getProfileData.route.js";
+import createUser from "./api-routes/createUser.route.js";
+import handleCodeScan from "./api-routes/handleCodeScan.route.js";
+import readLocations from "./api-routes/readLocations.route.js";
+import readPlace from "./api-routes/readPlace.route.js";
+import readUser from "./api-routes/readUser.route.js";
 import updateUser from "./api-routes/updateUser.route.js";
 
 const app = express();
 const port = config.port;
 const uri = config.databaseURL;
 
-// Connect with mongoose.
+// Connection to MongoDB.
 mongoose.connect(uri, {
-    // only 50 ppl can connect at one time
     poolSize: 50,
-    // after 2500 ms request will timeout
-    // Warning: Top-level use of w, wtimeout, j, and fsync is deprecated. Use writeConcern instead.
-    //wtimeout: 2500,
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
@@ -31,13 +25,11 @@ mongoose.connect(uri, {
 
 app.use(express.json());
 app.use(cors());
-app.use("/registration", registration);
-app.use("/getMapData", getMapData);
-app.use("/getPlaceData", getPlaceData);
-app.use("/getLocationsList", getLocationsList);
-app.use("/validateCodeAndEarnPoints", validateCodeAndEarnPoints);
-app.use("/getUserPoints", getUserPoints);
-app.use("/getProfileData", getProfileData);
+app.use("/createUser", createUser);
+app.use("/handleCodeScan", handleCodeScan);
+app.use("/readLocations", readLocations);
+app.use("/readPlace", readPlace);
+app.use("/readUser", readUser);
 app.use("/updateUser", updateUser);
 
 app.listen(port, () => {

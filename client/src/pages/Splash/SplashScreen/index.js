@@ -8,11 +8,11 @@ import { useAuth } from "../../../context/Auth";
 import SplashLogo from "../SplashLogo";
 import { particleParams, animationTimes } from "./constant";
 import { Container, Content } from "./styled";
-import { getUserPoints } from "../axios";
+import { readUserContext } from "../axios";
 
 const SplashScreen = () => {
     const history = useHistory();
-    const { getUser, setUserPoints } = useAuth();
+    const { getUser, setUserData } = useAuth();
 
     const {
         orderInterval,
@@ -41,8 +41,8 @@ const SplashScreen = () => {
     useEffect(async () => {
         const user = getUser();
         if (user) {
-            const points = await getUserPoints(user);
-            setUserPoints(points);
+            const userData = await readUserContext(user);
+            setUserData(userData);
         }
     }, []);
 
