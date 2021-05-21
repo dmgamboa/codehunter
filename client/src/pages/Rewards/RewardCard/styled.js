@@ -1,6 +1,6 @@
 import { Card, Modal } from "antd";
 import styled from "styled-components";
-import theme from "../../context/themes/main";
+import theme from "../../../context/themes/main";
 
 const { colors } = theme;
 
@@ -9,11 +9,11 @@ export const StyledCard = styled(Card)`
     }
     display: flex;
     align-items: center;
-    height: 100px;
+    height: 90px;
     display: grid;
     grid-template:
         "image content" 100%
-        / 40% 60%;
+        / 30% 70%;
     .ant-card-cover {
         grid-area: image;
         height: 100%;
@@ -30,11 +30,13 @@ export const StyledCard = styled(Card)`
         height: 100%;
         display: grid;
         grid-template:
-            "placeName icons" 50%
+            "placeName icons" 45%
             "details icons" 50%
+            "cost icons" 5%
             / 80% 20%;
         .name {
-            font-size: clamp(0.5rem, 16pt, 1rem);
+            margin: 0;
+            font-size: clamp(0.5rem, 16px, 1rem);
             grid-area: placeName;
             color: ${colors.primary};
             text-overflow: ellipsis;
@@ -42,11 +44,17 @@ export const StyledCard = styled(Card)`
         }
         .details {
             grid-area: details;
-            font-size: 11pt;
+            font-size: 16px;
             opacity: 80%;
-            align-self: flex-end;
+            /* align-self: flex-end; */
             text-overflow: ellipsis;
             overflow: hidden;
+            white-space: nowrap;
+        }
+        .cost {
+            margin: 0;
+            grid-area: cost;
+            /* display: "block"; */
         }
         .icons {
             grid-area: icons;
@@ -62,7 +70,16 @@ export const StyledCard = styled(Card)`
 export const StyledModal = styled(Modal)`
     text-align: center;
     .ant-modal-title {
+        font-size: 25px;
         color: ${colors.primary};
+    }
+    .ant-modal-body {
+        font-size: 20px;
+        color: #000;
+    }
+    .modal-cost {
+        color: ${colors.accent};
+        font-weight: bold;
     }
     button:hover.ant-btn-primary {
         background-color: ${colors.secondary};

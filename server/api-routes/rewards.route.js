@@ -1,15 +1,7 @@
 import express from "express";
-import { massWriteRewards, getRewards } from "../models/rewards.js";
+import { massWriteRewards, getRewards, getCodeForReward } from "../models/rewards.js";
 
 const router = express.Router();
-
-// return <LaptopOutlined />;
-// } else if (tag === "In-Store") {
-//     return <ShopOutlined />;
-// } else if (tag === "Limited Time") {
-//     return <FieldTimeOutlinedd />;
-
-
 
 // ${url}rewards/add-all-rewards
 router.post("/add-all-rewards", async (req, res) => {
@@ -26,12 +18,23 @@ router.post("/add-all-rewards", async (req, res) => {
 router.get("/getRewards", async (req, res) => {
     try {
         const category = req.query.category;
+        const availability = req.query.availability;
         const pageNumber = req.query.pageNum;
-        console.log("categories: ", category);
-        const results = await getRewards(category, pageNumber);
+        const results = await getRewards(category, availability, pageNumber);
+
         res.send(results);
     } catch(err) {
         console.log(err)
+    }
+});
+
+router.get("/getCodeForReward", async (req, res) => {
+    try {
+        const params = req.query;
+        const code = await getCodeForReward(params);
+        res.send(code);
+    } catch (err) {
+        console.log(err);
     }
 });
 
