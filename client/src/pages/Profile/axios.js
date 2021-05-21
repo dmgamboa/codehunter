@@ -12,4 +12,10 @@ const getProfileData = async (user) => {
     return profileData;
 };
 
-export { getProfileData };
+const updateUser = async (data) => {
+    const response = await axios.post(`${url}updateUser`, data);
+
+    return response;
+};
+
+export { getProfileData, updateUser};

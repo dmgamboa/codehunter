@@ -10,6 +10,7 @@ import getLocationsList from "./api-routes/getLocationsList.route.js";
 import validateCodeAndEarnPoints from "./api-routes/validateCodeAndEarnPoints.route.js";
 import getUserPoints from "./api-routes/getUserPoints.route.js";
 import getProfileData from "./api-routes/getProfileData.route.js";
+import updateUser from "./api-routes/updateUser.route.js";
 
 const app = express();
 const port = config.port;
@@ -24,7 +25,8 @@ mongoose.connect(uri, {
     //wtimeout: 2500,
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useCreateIndex: true
+    useCreateIndex: true,
+    useFindAndModify: false,
 });
 
 app.use(express.json());
@@ -36,6 +38,7 @@ app.use("/getLocationsList", getLocationsList);
 app.use("/validateCodeAndEarnPoints", validateCodeAndEarnPoints);
 app.use("/getUserPoints", getUserPoints);
 app.use("/getProfileData", getProfileData);
+app.use("/updateUser", updateUser);
 
 app.listen(port, () => {
     console.log(`App listening to port ${port}`);

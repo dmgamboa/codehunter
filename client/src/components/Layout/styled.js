@@ -1,12 +1,14 @@
 import styled from "styled-components";
 
+const maxWidth = "500px";
+
 export const Layout = styled.div`
     position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     height: 100vh;
-    max-width: 500px;
+    max-width: ${maxWidth};
     margin: 0 auto;
     background: #FFF;
 `;

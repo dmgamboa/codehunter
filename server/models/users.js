@@ -19,10 +19,11 @@ const getUser = (user) => {
         if (!user) {
             return rej("User not logged in");
         }
-        // Get the Firebase user ID from the token.
+
         const userID = user.uid;
         
-        User.findOne({ uid: userID }).exec((err, data) => {
+        User.findOne({ uid: userID
+         }).exec((err, data) => {
             if (err) {
                 return rej(err);
             }
@@ -34,7 +35,6 @@ const getUser = (user) => {
 const getUserPoints = (req) => {
     return new Promise(async (res, rej) => {
         const user = await getUser(JSON.parse(req.query.user));
-
         return res(user.points);
     });
 };
@@ -67,4 +67,31 @@ const addLocationAndPoints = (req, location) => {
     });
 };
 
-export { addUser, getUser, getUserPoints, addLocationAndPoints };
+const updateUser = (req) => {
+    return new Promise(async (res, rej) => {
+        const firebaseUser = JSON.parse(req.body.user);
+
+        if (!firebaseUser) {
+            return rej("User not logged in");
+        }
+        // Get the Firebase user ID from the token.
+        const userID = firebaseUser.uid;
+        const fields = JSON.parse(req.body.fields);
+
+        User.findOneAndUpdate({ uid: userID }, { $set: fields }, async (err, user) => {
+            if (err) {
+                return rej(err);
+            }
+
+            if (req.file) {
+                user.avatar = req.file.location;
+            }
+
+            await user.save();
+
+            return res(user);
+        });
+    });
+};
+
+export { addUser, getUser, getUserPoints, addLocationAndPoints, updateUser };

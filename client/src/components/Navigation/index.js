@@ -7,6 +7,7 @@ import { useAuth } from "../../context/Auth";
 import theme from "../../context/themes/main";
 import { navTabRoutes, navDrawerRoutes, navlessPaths } from "../../context/routers";
 import { ReactComponent as Logo } from "../../assets/icons/logo.svg";
+import NavigationDrawer from "../NavigationDrawer/";
 
 import { StyledDrawer, Container } from "./styled";
 
@@ -53,17 +54,6 @@ const Navigation = () => {
         });
     };
 
-    const getDrawerLinks = (link) => {
-        return link.map(({ path, name, icon }) => {
-            return (
-                <Link key={path} to={path} className="drawer-item">
-                    {icon}
-                    <span className="link">{name}</span>
-                </Link>
-            );
-        });
-    };
-
     return (
         <Container>
             <TabBar hidden={hidden} tintColor={colors.primary}>
@@ -76,10 +66,7 @@ const Navigation = () => {
                     onPress={handleToggleMore}
                 />
             </TabBar>
-            <StyledDrawer visible={drawer} onClose={handleToggleMore}>
-                <Icon className="logo" component={Logo} />
-                {getDrawerLinks(navDrawerRoutes)}
-            </StyledDrawer>
+            <NavigationDrawer visible={drawer} onClose={handleToggleMore} links={navDrawerRoutes} />
         </Container>
     );
 };
