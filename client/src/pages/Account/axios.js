@@ -7,7 +7,6 @@ const url = process.env.REACT_APP_SERVER;
 
 const createUser = async (values, userToken) => {
     const { firstName, lastName } = firstLast(values.fullname);
-
     const regiInfo = {
         userInfo: {
             name: {
