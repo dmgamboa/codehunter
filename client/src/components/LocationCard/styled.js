@@ -32,7 +32,7 @@ const StyledCard = styled(Card)`
     }
 
     h1 {
-        font-size: clamp(1rem, 6vw, 3rem);
+        font-size: clamp(1rem, 6vw, 2.2rem);
         color: ${colors.primary};
     }
 

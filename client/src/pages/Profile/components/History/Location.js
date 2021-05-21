@@ -9,11 +9,13 @@ const renderHistoryList = (list) => {
         const location = document.createElement("div");
         location.setAttribute("class", "location");
         location.innerHTML = `
+        <div>
             <p>
                 <span class="location-name">${name}</span>
                 <span class="location-date">${date}</span>
                 <span class="location-points">${points}</span>
-            <p>
+            </p>
+        </div>
         `;
         LocationsList.appendChild(location);
     });

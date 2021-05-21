@@ -19,6 +19,8 @@ import Account from "../../pages/Account";
 import AboutUs from "../../pages/AboutUs";
 
 import { ReactComponent as Logo } from "../../assets/icons/logo.svg";
+import PageNotFound from "../../components/PageNotFound";
+import { useAuth } from "../Auth";
 
 const routes = [
     {
@@ -27,9 +29,10 @@ const routes = [
         exact: false,
         navTab: true,
         fullscreen: false,
+        restricted: true,
         icon: <CompassOutlined />,
         selectedIcon: <CompassFilled />,
-        component: <Locations />,
+        component: <Locations />
     },
     {
         name: "Scan",
@@ -37,9 +40,10 @@ const routes = [
         exact: false,
         navTab: true,
         fullscreen: false,
+        restricted: true,
         icon: <Icon component={Logo} />,
         selectedIcon: <Icon component={Logo} />,
-        component: <Scan />,
+        component: <Scan />
     },
     {
         name: "Friends",
@@ -47,9 +51,10 @@ const routes = [
         exact: false,
         navTab: true,
         fullscreen: false,
+        restricted: true,
         icon: <TeamOutlined />,
         selectedIcon: <TeamOutlined />,
-        component: <Friends />,
+        component: <Friends />
     },
     {
         name: "Profile",
@@ -57,9 +62,10 @@ const routes = [
         exact: false,
         navTab: true,
         fullscreen: false,
+        restricted: true,
         icon: <UserOutlined />,
         selectedIcon: <UserOutlined />,
-        component: <Profile />,
+        component: <Profile />
     },
     {
         name: "Walkthrough",
@@ -67,7 +73,7 @@ const routes = [
         exact: false,
         navTab: false,
         fullscreen: true,
-        component: <Walkthrough />,
+        component: <Walkthrough />
     },
     {
         name: "Account",
@@ -84,8 +90,9 @@ const routes = [
         navTab: false,
         navDrawer: true,
         fullScreen: false,
+        restricted: true,
         icon: <QuestionCircleOutlined />,
-        component: <AboutUs />,
+        component: <AboutUs />
     },
     {
         name: "Rewards",
@@ -94,22 +101,41 @@ const routes = [
         navTab: false,
         navDrawer: true,
         fullscreen: false,
+        restricted: true,
         icon: <GiftOutlined />,
         selectedIcon: <GiftFilled />,
         component: <Rewards />
     },
+    {
+        name: "404",
+        path: "*",
+        exact: false,
+        navTab: false,
+        navDrawer: false,
+        fullscreen: true,
+        restricted: true,
+        component: <PageNotFound />
+    }
 ];
 
-export const navTabRoutes = routes.filter(route => route.navTab);
+export const navTabRoutes = routes.filter((route) => route.navTab);
 
-export const navDrawerRoutes = routes.filter(route => route.navDrawer);
+export const navDrawerRoutes = routes.filter((route) => route.navDrawer);
 
 export const navlessPaths = routes.filter((route) => route.fullscreen).map((route) => route.path);
 
-// TODO
-// Add Permissions & 404
 export const getRoute = () => {
-    return routes.map(({ name, path, exact, component }) => {
-        return <Route key={name} exact={exact} path={path} render={() => component} />;
+    const { getUser } = useAuth();
+    const loggedIn = getUser();
+
+    return routes.map(({ name, path, exact, component, restricted }) => {
+        return (
+            <Route
+                key={name}
+                exact={exact}
+                path={path}
+                render={() => (restricted && !loggedIn ? <PageNotFound /> : component)}
+            />
+        );
     });
 };

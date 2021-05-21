@@ -6,6 +6,10 @@ import theme from "../../context/themes/main";
 const { colors } = theme;
 
 const StyledDrawer = styled(Drawer)`
+    max-width: 500px;
+    left: 50%;
+    transform: translateX(-50%);
+
     .ant-drawer-close {
         display: none;
     }

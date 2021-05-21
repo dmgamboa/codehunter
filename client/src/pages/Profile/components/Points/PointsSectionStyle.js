@@ -2,43 +2,33 @@ import styled from "styled-components";
 
 const PSStyle = styled.div`
     margin: 20px;
+    margin-top: 25%;
+    .content {
+        text-align: center;
+    }
     #digits {
         float: left;
+        display: block;
     }
-    #redeemBtn {
-        margin-right: 8px;
-        float: right;
-        top: -49px;
-        right: -15px;
+    hr {
+        float: "left";
+        width: "100%";
+        display: "block";
+        border: 0.5px solid #bfbfbf;
     }
-
-    #redeemModal {
-        display: none;
-        position: fixed;
-        z-index: 1;
-        width: 40%;
-        height: 30%;
-        background-color: #99b4a5;
-        border: 1px solid #005526;
+    #linerTop {
+        margin-top: 5%;
+    }
+    #linerBottom {
+        margin-top: 23%;
     }
 
-    .redeem-modal .ant-modal-footer {
-        background-color: #99b4a5;
+    p {
+        margin-left: 150%;
+    }
+    #pointsText {
+        font-size: 110%;
     }
 
-    #confirmationText {
-        text-align: center;
-        color: black;
-    }
-
-    #yesRedeem {
-        background-color: #005526;
-        color: white;
-    }
-
-    #cancelRedeem {
-        background-color: #005526;
-        color: white;
-    }
 `;
 export default PSStyle;

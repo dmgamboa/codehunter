@@ -1,10 +1,10 @@
 import express from "express";
-import { getLocations } from "../models/locations.js";
+import { readPlace } from "../models/places.js";
 
 const router = express.Router();
 
 router.route("/").get(async (req, res) => {
-    const data = await getLocations();
+    const data = await readPlace(req);
     res.send(data);
 });
 

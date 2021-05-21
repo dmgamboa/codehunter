@@ -2,74 +2,53 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const locationSchema = new Schema({
-    points: Number
-    /*datasetid: String,
-    recordid: String,
-    fields: {
-        website: String,
-        active_space: String,
-        year: String,
-        cultural_space_name: String,
-        geom: {
-            type: String,
-            coordinates: [Number]
-        },
-        local_area: String,
-        ownership: String,
-        address: String,
-        type: String,
-        primary_use: String
-    },
-    record_timestamp: String*/
+    points: Number,
 });
 
 const userSchema = new Schema({
     name: {
         first: {
             type: String,
-            required: true
+            required: true,
         },
         last: {
             type: String,
-            required: true
+            required: true,
         }
     },
     username: {
         type: String,
-        required: true
+        required: true,
     },
     email: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
     },
     uid: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
     },
-    avatar: {
-        data: String,
-        imageType: String,
-    },
+    avatar: String,
     points: {
         type: Number,
         required: true,
         default: 0,
-        min: 0
+        min: 0,
     },
     friends: [{
         type: Schema.Types.ObjectId,
-        ref: "User"
+        ref: "User",
     }],
     redeemed: [{
         type: Schema.Types.ObjectId,
-        ref: "Location"
+        ref: "Location",
     }],
     bookmarks: [{
         type: Schema.Types.ObjectId,
-        ref: "Location"
-    }]
+        ref: "Location",
+    }],
 });
 
 const rewardSchema = new Schema({

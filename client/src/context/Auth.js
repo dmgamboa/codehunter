@@ -1,56 +1,37 @@
-import axios from "axios";
 import React, { useContext, useState } from "react";
 import { auth } from "../firebase";
 
 // Create context object
 const Auth = React.createContext();
 
-export function useAuth() {
+export const useAuth = () => {
     return useContext(Auth);
 };
 
 const AuthProvider = ({ children }) => {
-    const [currentUser, setCurrentUser] = useState();
-    const [userPoints, setUserPoints] = useState();
+    const [userData, setUserData] = useState();
 
     const getUser = () => {
-        if (currentUser) {
-            return currentUser;
+        if (localStorage.getItem("user")) {
+            return localStorage.getItem("user");
         } else {
             return;
         }
-    };
-
-    const getUID = () => {
-        auth.onAuthStateChanged(token => {
-            if (token) {
-                setCurrentUser(token);
-                return token;
-            } else {
-                return "UID unavailable";
-            }
-        });
     };
 
     // Creating new user in firebase and returns uid to create doc in user collection.
     // Set the currentUser as a token accessed from creating an account
     // Return the uid
     const signup = async (email, password) => {
-        const userCredentials = await auth.createUserWithEmailAndPassword(email, password);
-        // token to be set as currentUser
-        const userData = userCredentials.user;
-        setCurrentUser(userData);
-        const uid = userCredentials.user.uid;
-        setUserPoints(0);
-
-        return uid;
+        await auth.createUserWithEmailAndPassword(email, password).then((token) => {
+            localStorage.setItem("user", JSON.stringify(token.user));
+        });
     };
 
     const login = async (email, password) => {
-        const userCredentials = await auth.signInWithEmailAndPassword(email, password); 
-        const userData = userCredentials.user;
-        setCurrentUser(userData);
-        return userData;
+        await auth.signInWithEmailAndPassword(email, password).then((token) => {
+            localStorage.setItem("user", JSON.stringify(token.user));
+        });
     };
 
     function logout() {
@@ -58,14 +39,12 @@ const AuthProvider = ({ children }) => {
     };
 
     const value = {
-        currentUser,
         signup,
         login,
         logout,
-        getUID,
         getUser,
-        userPoints,
-        setUserPoints
+        userData,
+        setUserData,
     };
 
     return (

@@ -1,10 +1,10 @@
 import express from "express";
-import { addUser } from "../models/users.js";
+import { createUser } from "../models/users.js";
 
 const router = express.Router();
 
 router.post("/", async (req, res) => {
-    var response = await addUser(req);
+    var response = await createUser(req);
     response = JSON.stringify(response);
 
     console.log("response (router): " + response);

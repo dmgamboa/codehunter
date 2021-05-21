@@ -4,7 +4,7 @@ import config from "../config/index.js";
 const googleMapsKey = config.googleMapsKey;
 const maxHeight = 600;
 
-const getPlace = (data) => {
+const readPlace = (data) => {
     return new Promise(async (res, rej) => {
         var search = data.query.search;
         
@@ -40,7 +40,8 @@ const getPlace = (data) => {
             dataToReturn["photoURL"] = placePhoto.request.res.responseUrl;
         }
         if (placeData.opening_hours) {
-            dataToReturn["hours"] = placeData.opening_hours.weekday_text;
+            dataToReturn["hours"] = placeData.opening_hours.periods;
+            dataToReturn["open_now"] = placeData.opening_hours.open_now;
         }
         dataToReturn["phoneNumber"] = placeData.international_phone_number;
 
@@ -48,4 +49,4 @@ const getPlace = (data) => {
     });
 };
 
-export { getPlace };
+export { readPlace };

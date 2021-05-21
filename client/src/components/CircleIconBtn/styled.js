@@ -9,8 +9,4 @@ export const StyledBtn = styled.button`
     color: white;
     font-size: 1.75rem;
     cursor: pointer;
-
-    &:hover {
-        background: #08497E;
-    }
 `;
