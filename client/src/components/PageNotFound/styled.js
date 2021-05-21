@@ -6,7 +6,6 @@ export const Container = styled.div`
     justify-content: center;
     height: 100%;
     padding: 2rem;
-    overscroll-behavior: none;
 
     p {
         margin-bottom: 5rem;
