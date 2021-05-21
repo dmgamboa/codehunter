@@ -6,6 +6,7 @@ export const Container = styled.div`
     justify-content: center;
     height: 100%;
     padding: 2rem;
+    overscroll-behavior: none;
 
     p {
         margin-bottom: 5rem;
@@ -19,6 +20,13 @@ export const Container = styled.div`
             transform: translateX(-50%);
             margin-bottom: 5rem;
         }
+    }
+
+    .easter-egg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
     }
 
 
