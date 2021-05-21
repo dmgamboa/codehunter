@@ -16,14 +16,14 @@ import { getRewards } from "../axios";
 
 const RewardsScreen = () => {
 
-    const { userPoints } = useAuth();
+    const { userData } = useAuth();
 
     const { TabPane } = Tabs;
     const CheckableTag = Tag;
     const rewardTabPanes = ["All", "Food", "Accessories", "Activities", "Tech"];
 
     // eslint-disable-next-line no-unused-vars
-    const [category, setCategory] = useState(userPoints + " pts");
+    const [category, setCategory] = useState(userData.points + " pts");
 
     // Querying and infinite scroll
     const [categoryQuery, setCategoryQuery] = useState("all");
