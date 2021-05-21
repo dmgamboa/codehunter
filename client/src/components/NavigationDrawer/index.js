@@ -1,11 +1,21 @@
 import { Avatar } from "antd";
 import Icon, { LogoutOutlined } from "@ant-design/icons";
+import { useHistory } from "react-router-dom";
 
 import { ReactComponent as AvatarPlaceholder } from "../../assets/icons/doge/grinning.svg";
+import { useAuth } from "../../context/Auth";
 
 import { StyledDrawer } from "./styled";
 
-const NavigationDrawer = ({ visible, onClose, links, user, page, handleClick }) => {
+const NavigationDrawer = ({ visible, onClose, links, page, handleClick }) => {
+    const { userData, logout } = useAuth();
+    const history = useHistory();
+
+    const handleLogout = () => {
+        logout();
+        history.push("/");
+    };
+
     const renderDrawerLinks = (link) => {
         return link.map(({ path, name, icon }) => {
             return (
@@ -28,16 +38,16 @@ const NavigationDrawer = ({ visible, onClose, links, user, page, handleClick }) 
             <div className="top">
                 <Avatar icon={<Icon component={AvatarPlaceholder} />} />
                 <div className="text">
-                    <span className="name">{user?.name ?? "Hello!"}</span>
+                    <span className="name">{userData?.name?.first}</span>
                     <span className="points">
-                        <b>{user?.points ?? 0}</b> points
+                        <b>{userData?.points ?? 0}</b> points
                     </span>
                 </div>
             </div>
             <div className="links">
                 <span className="main-links">{renderDrawerLinks(links)}</span>
 
-                <span className="drawer-item active logout">
+                <span className="drawer-item active logout" onClick={handleLogout}>
                     <LogoutOutlined />
                     <span className="link">Log Out</span>
                 </span>
