@@ -7,8 +7,8 @@ const Account = () => {
     const match = useRouteMatch();
     return (
         <Switch>
-            <Route path={`${match.path}/`} render={() => <Login />} />
-            <Route path={`${match.path}/register`} render={() => <Register />} />
+            <Route exact path={`${match.path}/`} render={() => <Login />} />
+            <Route exact path={`${match.path}/register`} render={() => <Register />} />
         </Switch>
     );
 };

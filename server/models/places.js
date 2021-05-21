@@ -4,7 +4,7 @@ import config from "../config/index.js";
 const googleMapsKey = config.googleMapsKey;
 const maxHeight = 600;
 
-const getPlace = (data) => {
+const readPlace = (data) => {
     return new Promise(async (res, rej) => {
         var search = data.query.search;
         
@@ -49,4 +49,4 @@ const getPlace = (data) => {
     });
 };
 
-export { getPlace };
+export { readPlace };

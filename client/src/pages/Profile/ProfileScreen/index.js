@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import AvatarSection from "../components/Avatar/Avatar";
 import PointsSection from "../components/Points/PointsSection";
 import LocationsList from "../components/History/LocationsList";
-import { getProfileData, updateUser } from "../axios";
+import { updateUser } from "../axios";
 
 const ProfileScreen = () => {
     const { /*logout,*/ userPoints, getUser } = useAuth();

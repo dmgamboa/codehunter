@@ -1,41 +1,53 @@
 import { User } from "./schema.js";
 
-const addUser = (req) => {
+const createUser = (req) => {
     return new Promise((res, rej) => {
+        const user = JSON.parse(req.body.userToken);
+
+        if (!user) {
+            return rej("User token unavailable");
+        }
+
+        const userID = user.uid;
+
         // Construct document using schema
-        const newUser = new User(req.body);
+        const newUser = new User(req.body.userInfo);
         // Add newUser to user collection
+
+        newUser.uid = userID;
+
         newUser.save((err) => {
             if (err) {
                 return rej(err);
             }
-            return res(newUser.points);
         });
+
+        const fields = {
+            name: newUser.name,
+            points: newUser.points,
+        };
+
+        return res(fields);
     });
 };
 
-const getUser = (user) => {
+const readUser = (req) => {
     return new Promise((res, rej) => {
+        const user = JSON.parse(req.query.userToken);
+        const fields = req.query.fields;
+
         if (!user) {
             return rej("User not logged in");
         }
 
         const userID = user.uid;
-        
-        User.findOne({ uid: userID
-         }).exec((err, data) => {
+
+        User.findOne({ uid: userID }, fields).exec((err, data) => {
             if (err) {
                 return rej(err);
             }
             return res(data);
         });
-    });
-};
-
-const getUserPoints = (req) => {
-    return new Promise(async (res, rej) => {
-        const user = await getUser(JSON.parse(req.query.user));
-        return res(user.points);
     });
 };
 
@@ -94,4 +106,4 @@ const updateUser = (req) => {
     });
 };
 
-export { addUser, getUser, getUserPoints, addLocationAndPoints, updateUser };
+export { createUser, readUser, addLocationAndPoints, updateUser };

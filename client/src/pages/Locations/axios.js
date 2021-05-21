@@ -2,21 +2,12 @@ import axios from "axios";
 
 const url = process.env.REACT_APP_SERVER;
 
-const getMapData = async () => {
-    var mapData;
-
-    await axios.get(`${url}getMapData`).then((res) => {
-        mapData = res;
-    });
-    return mapData;
-};
-
-const getPlaceData = async (search) => {
+const readPlace = async (search) => {
     return await axios
-        .get(`${url}getPlaceData`, {
+        .get(`${url}readPlace`, {
             params: {
-                search: search
-            }
+                search: search,
+            },
         })
         .then((res) => {
             const { status, data } = res;
@@ -39,43 +30,46 @@ const getPlaceData = async (search) => {
 
                         parsedHours = {
                             status: data.open_now ? "Open Now" : "Closed",
-                            days
+                            days,
                         };
-                    }                    
+                    }
                 }
 
                 return {
                     hours: parsedHours,
                     image: data.photoURL,
-                    phone: data.phoneNumber
+                    phone: data.phoneNumber,
                 };
             }
         });
 };
 
-const getLocationsList = async (params) => {
-    return await axios.get(`${url}getLocationsList`, { params }).then((res) => {
-        const { status, data } = res;
+const readLocations = async (params) => {
+    const response = await axios.get(`${url}readLocations`, { params });
+    const { status, data } = response;
 
-        if (status === 200) {
-            return data.map(({ fields, distanceInKm }) => {
-                const { local_area, type, cultural_space_name, website, address, geom } = fields;
+    let locations;
 
-                return {
-                    name: cultural_space_name,
-                    type,
-                    local_area,
-                    website,
-                    address,
-                    distance: distanceInKm && Math.round(distanceInKm),
-                    coordinates: {
-                        lng: geom?.coordinates?.[0],
-                        lat: geom?.coordinates?.[1]
-                    }
-                };
-            });
-        }
-    });
+    if (status === 200) {
+        locations = data.map(({ fields, distanceInKm }) => {
+            const { local_area, type, cultural_space_name, website, address, geom } = fields;
+
+            return {
+                name: cultural_space_name,
+                type,
+                local_area,
+                website,
+                address,
+                distance: distanceInKm && Math.round(distanceInKm),
+                coordinates: {
+                    lng: geom?.coordinates?.[0],
+                    lat: geom?.coordinates?.[1],
+                },
+            };
+        });
+    }
+
+    return locations;
 };
 
-export { getMapData, getPlaceData, getLocationsList };
+export { readLocations, readPlace };

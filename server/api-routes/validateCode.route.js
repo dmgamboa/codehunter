@@ -1,5 +1,5 @@
 import express from "express";
-import { getLocation } from "../models/locations.js";
+import { readLocation } from "../models/locations.js";
 import { addLocationAndPoints } from "../models/users.js"
 
 const router = express.Router();
@@ -9,7 +9,7 @@ router.post("/", async (req, res) => {
     var response;
     
     try {
-        const location = await getLocation(req);
+        const location = await readLocation(req);
         var newPoints = await addLocationAndPoints(req, location);
         newPoints = JSON.stringify(newPoints);
         res.send(newPoints);
