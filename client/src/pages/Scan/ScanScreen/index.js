@@ -53,7 +53,7 @@ const ScanScreen = () => {
             <QrReader
                 delay={1000}
                 onScan={(data) => {
-                    !modalVisible && data && code !== data && handleScan(data);
+                    !modalVisible && data && data !== code && handleScan(data);
                 }}
             />
             <ScanModal error={error} visible={modalVisible} onClose={handleModal} points={points} />

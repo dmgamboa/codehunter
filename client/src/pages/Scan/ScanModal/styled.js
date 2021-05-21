@@ -1,6 +1,10 @@
 import styled from "styled-components";
 import { Modal } from "antd";
 
+import theme from "../../../context/themes/main";
+
+const { colors } = theme;
+
 export const StyledModal = styled(Modal)`
 
     .ant-modal-content {
@@ -20,6 +24,7 @@ export const StyledModal = styled(Modal)`
         }
 
         .doge {
+            order: -1;
             z-index: 99;
             width: 45%;
         }
@@ -32,6 +37,16 @@ export const StyledModal = styled(Modal)`
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
+    }
 
+    .new-points {
+        margin-top: 1rem;
+    }
+
+    .points {
+        margin-left: 0.25rem;
+        font-weight: bold;
+        font-size: 1.15rem;
+        color: ${colors.primary};
     }
 `;
