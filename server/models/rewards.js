@@ -21,6 +21,7 @@ export const massWriteRewards = async (documents) => {
 export const getRewards = (category, pageNumber, pageSize = 8) => {
     return new Promise(async (res, rej) => {
         const skips = pageSize * (pageNumber - 1);
+        console.log("category model: " + category);
         if (category === "all") {
             try {
                 const results = await Reward.find().skip(skips).limit(pageSize);

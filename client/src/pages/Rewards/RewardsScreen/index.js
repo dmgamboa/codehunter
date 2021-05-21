@@ -78,7 +78,7 @@ const RewardsScreen = () => {
     const [hasMore, setHasMore] = useState(false);
 
     useEffect(() => {
-        setRewards([]);
+
         handleScroll();
     }, [query]);
 
@@ -110,6 +110,7 @@ const RewardsScreen = () => {
 
     const handleCategory = (key) => {
         console.log("key: ", key);
+        setRewards([]);
         setPageNumber(1);
         setQuery(key);
     };
