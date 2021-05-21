@@ -51,43 +51,15 @@ const readUser = (req) => {
     });
 };
 
-const addLocationAndPoints = (req, location) => {
-    return new Promise(async (res, rej) => {
-        if (location == null) {
-            return rej("Invalid location");
-        }
-        const user = await getUser(req.body.user);
-
-        const hasRedeemed = user.redeemed.some((instance) => {
-            return instance.equals(location.id);
-        });
-
-        if (hasRedeemed) {
-            //TODO: UNCOMMENT FOR PRODUCTION
-            //return rej("Location already redeemed");
-        }
-
-        user.redeemed.push(location.id);
-
-        const points = location.points;
-
-        user.points += points;
-
-        await user.save();
-
-        return res(user.points);
-    });
-};
-
 const updateUser = (req) => {
     return new Promise(async (res, rej) => {
-        const firebaseUser = JSON.parse(req.body.user);
+        const user = JSON.parse(req.body.userToken);
 
-        if (!firebaseUser) {
+        if (!user) {
             return rej("User not logged in");
         }
-        // Get the Firebase user ID from the token.
-        const userID = firebaseUser.uid;
+
+        const userID = user.uid;
         const fields = JSON.parse(req.body.fields);
 
         User.findOneAndUpdate({ uid: userID }, { $set: fields }, async (err, user) => {
@@ -95,6 +67,22 @@ const updateUser = (req) => {
                 return rej(err);
             }
 
+            // Check if this is a scan handler by checking if the location was sent with the request.
+            if (req.location) {
+                const hasRedeemed = user.redeemed.some((instance) => {
+                    return instance.equals(req.location.id);
+                });
+
+                if (hasRedeemed) {
+                    //TODO: UNCOMMENT FOR PRODUCTION
+                    //return rej("Location already redeemed");
+                }
+                
+                user.redeemed.push(req.location.id);
+                user.points += req.location.points;
+            }
+            
+            // Check if the update includes a file, the avatar.
             if (req.file) {
                 user.avatar = req.file.location;
             }
@@ -106,4 +94,4 @@ const updateUser = (req) => {
     });
 };
 
-export { createUser, readUser, addLocationAndPoints, updateUser };
+export { createUser, readUser, updateUser };

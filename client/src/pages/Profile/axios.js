@@ -9,13 +9,13 @@ const readUser = async (userToken) => {
         },
     });
 
-    return user;
+    return user.data;
 };
 
 const updateUser = async (data) => {
-    const response = await axios.post(`${url}updateUser`, data);
+    const updatedUser = await axios.post(`${url}updateUser`, data);
 
-    return response;
+    return updatedUser.data;
 };
 
 export { readUser, updateUser};

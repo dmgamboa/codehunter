@@ -2,14 +2,14 @@ import axios from "axios";
 
 const url = process.env.REACT_APP_SERVER;
 
-const validateCodeAndEarnPoints = async (locationID, userToken) => {
+const handleCodeScan = async (locationID, userToken) => {
     const params = {
         locationID: locationID,
         userToken: userToken,
     };
 
-    const newPoints = await axios.post(`${url}validateCodeAndEarnPoints`, params);
-    return newPoints;
+    const newData = await axios.post(`${url}handleCodeScan`, params);
+    return newData.data;
 };
 
-export { validateCodeAndEarnPoints };
+export { handleCodeScan };
