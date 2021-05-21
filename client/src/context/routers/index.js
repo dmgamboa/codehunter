@@ -17,6 +17,7 @@ import Profile from "../../pages/Profile";
 import Walkthrough from "../../pages/Walkthrough";
 import Account from "../../pages/Account";
 import AboutUs from "../../pages/AboutUs";
+import Credits from "../../pages/Credits";
 
 import { ReactComponent as Logo } from "../../assets/icons/logo.svg";
 import PageNotFound from "../../components/PageNotFound";
@@ -115,7 +116,7 @@ const routes = [
         fullScreen: false,
         restricted: true,
         icon: <QuestionCircleOutlined />,
-        component: <AboutUs />
+        component: <Credits />
     },
     {
         name: "404",

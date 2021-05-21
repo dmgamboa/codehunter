@@ -12,7 +12,7 @@ import { Container } from "./styled";
 
 const Navigation = () => {
     const history = useHistory();
-    const { page } = useParams();
+    let { page } = useParams();
     let location = useLocation();
 
     const { getUser } = useAuth();
@@ -36,6 +36,7 @@ const Navigation = () => {
 
     useEffect(() => {
         navlessPaths.includes(`/${page}`) ? setHidden(true) : setHidden(false);
+        !navTabRoutes.includes(`/${page}`) && setTab();
         !isLoggedIn && setHidden(true);
     }, [location]);
 
