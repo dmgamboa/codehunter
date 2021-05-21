@@ -3,10 +3,12 @@ import { Button } from "antd";
 import { Link } from "react-router-dom";
 import { motion, useAnimation } from "framer-motion";
 import { useSwipeable } from "react-swipeable";
+import Lottie from "react-lottie";
 
 import { ReactComponent as ClosedDoge } from "../../assets/icons/doge/awkward.svg";
 import { ReactComponent as OpenDoge } from "../../assets/icons/doge/dizzy.svg";
 import { ReactComponent as HappyDoge } from "../../assets/icons/doge/love.svg";
+import EasterEgg from "../../assets/lottie/easter-egg.json";
 
 import { Container } from "./styled";
 
@@ -17,6 +19,11 @@ const PageNotFound = () => {
     const [bounce, setBounce] = useState(true);
     const [swipes, setSwipes] = useState([]);
     const [success, setSuccess] = useState(false);
+    const lottieOptions = {
+        loop: false,
+        autoplay: true,
+        animationData: EasterEgg
+    };
 
     const variants = {
         bounce: {
@@ -67,7 +74,6 @@ const PageNotFound = () => {
             }, 3500);
         } else {
             doge.start(variants.bounce);
-
             if (swipes.length > 0) {
                 checkSwipes();
                 setSwipes([]);
@@ -77,6 +83,7 @@ const PageNotFound = () => {
 
     return (
         <Container {...getSwipes}>
+            {success && (<div className="easter-egg"><Lottie options={lottieOptions}/></div>)}
             <motion.div
                 variants={variants}
                 animate={doge}
