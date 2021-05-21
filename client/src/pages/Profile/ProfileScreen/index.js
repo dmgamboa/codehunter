@@ -3,13 +3,13 @@ import { useHistory } from "react-router-dom";
 import AvatarSection from "../components/Avatar/Avatar";
 import PointsSection from "../components/Points/PointsSection";
 import LocationsList from "../components/History/LocationsList";
-import { getProfileData, updateUser } from "../axios";
+import { updateUser } from "../axios";
 
 const ProfileScreen = () => {
-    const { /*logout,*/ userPoints, getUser } = useAuth();
+    const { /*logout,*/ userData, getUser } = useAuth();
     const history = useHistory();
 
-    const points = (userPoints ? userPoints.data : "N/A");
+    const points = (userData ? userData.points : "N/A");
 
     function handleLogout() {
         //logout();
@@ -22,10 +22,10 @@ const ProfileScreen = () => {
         
         // Fields to update.
         const fields = {
-            username: "garfield",
+            username: "pumbaa",
         };
 
-        data.append("user", JSON.stringify(getUser()));
+        data.append("userToken", getUser());
         data.append("fields", JSON.stringify(fields));
         data.append("avatar", e.target[0].files[0]);
         const response = await updateUser(data);

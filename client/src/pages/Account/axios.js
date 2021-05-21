@@ -5,35 +5,35 @@ import firstLast from "../../util/firstLastWords.js";
 
 const url = process.env.REACT_APP_SERVER;
 
-// Send POST request
-const createUserDoc = async (values, uid) => {
+const createUser = async (values, userToken) => {
     const { firstName, lastName } = firstLast(values.fullname);
 
     const regiInfo = {
-        name: {
-            first: firstName,
-            last: lastName,
+        userInfo: {
+            name: {
+                first: firstName,
+                last: lastName,
+            },
+            email: values.email,
+            username: values.username,
         },
-        email: values.email,
-        username: values.username,
-        uid: uid,
+        userToken,
     };
 
-    const initialPoints = await axios.post(`${url}registration`, regiInfo);
-    return initialPoints;
+    const userData = await axios.post(`${url}createUser`, regiInfo);
+    
+    return userData.data;
 };
 
-const getUserPoints = async (user) => {
-    return await axios
-        .get(`${url}getUserPoints`, {
-            params: {
-                user,
-            },
-        })
-        .then(res => {
-            const { data } = res;
-            return data;
-        });
+const readUserContext = async (userToken) => {
+    const userContext = await axios.get(`${url}readUser`, {
+        params: {
+            userToken,
+            fields: "avatar points name",
+        },
+    });
+
+    return userContext.data;
 };
 
-export { createUserDoc, getUserPoints };
+export { createUser, readUserContext };

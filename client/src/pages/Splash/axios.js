@@ -2,15 +2,15 @@ import axios from "axios";
 
 const url = process.env.REACT_APP_SERVER;
 
-export const getUserPoints = async (user) => {
-    return await axios
-        .get(`${url}getUserPoints`, {
-            params: {
-                user,
-            },
-        })
-        .then((res) => {
-            const { data } = res;
-            return data;
-        });
+const readUserContext = async (userToken) => {
+    const userContext = await axios.get(`${url}readUser`, {
+        params: {
+            userToken,
+            fields: "avatar points name",
+        },
+    });
+
+    return userContext.data;
 };
+
+export { readUserContext };
