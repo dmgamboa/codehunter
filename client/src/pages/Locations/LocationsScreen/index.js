@@ -84,24 +84,28 @@ const LocationsScreen = () => {
     const handleDetails = async (location) => {
         setDetailsLoading(true);
         setDetailsVisible(true);
-        const searchQuery = `${location.name}${location.website && `+ ${location.website}`}`;
 
-        const placesData = await readPlace(searchQuery);
-        const details = {
-            name: location.name,
-            distance: location.distance,
-            bookmarked: location.bookmarked,
-            visited: location.visited,
-            image: placesData.image,
-            details: {
-                type: location.type,
-                address: location.address,
-                hours: placesData.hours,
-                phone: placesData.phone,
-                website: location.website
-            }
-        };
-        setLocationDetails(details);
+        if (locationDetails?.name !== location.name) {
+            const searchQuery = `${location.name}${location.website && `+ ${location.website}`}`;
+
+            const placesData = await readPlace(searchQuery);
+            const details = {
+                name: location.name,
+                distance: location.distance,
+                bookmarked: location.bookmarked,
+                visited: location.visited,
+                image: placesData.image,
+                details: {
+                    type: location.type,
+                    address: location.address,
+                    hours: placesData.hours,
+                    phone: placesData.phone,
+                    website: location.website
+                }
+            };
+            setLocationDetails(details);            
+        }
+
         setDetailsLoading(false);
     };
 
@@ -305,6 +309,7 @@ const LocationsScreen = () => {
                     >
                         <LocationsList
                             loading={loading}
+                            detailsLoading={detailsLoading}
                             locations={locations}
                             hasMore={locations.length < locationsCount}
                             handleTabs={handleTabs}
