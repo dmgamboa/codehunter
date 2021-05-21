@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Button } from "antd";
-import { Link } from "react-router-dom";
+import { Link, useRouteMatch } from "react-router-dom";
 import { motion, useAnimation } from "framer-motion";
 import { useSwipeable } from "react-swipeable";
 
@@ -13,6 +13,7 @@ import { Container } from "./styled";
 const PageNotFound = () => {
     const key = ["up", "up", "down", "down", "left", "right", "left", "right"];
     const doge = useAnimation();
+    const match = useRouteMatch();
 
     const [bounce, setBounce] = useState(true);
     const [swipes, setSwipes] = useState([]);
@@ -97,7 +98,7 @@ const PageNotFound = () => {
                 We can&apos;t seem to find the page you&apos;re looking for. Please log in and try
                 again.
             </p>
-            <Link to="account/login">
+            <Link to="/account/login/">
                 <Button type="primary" block>
                     Log In
                 </Button>
