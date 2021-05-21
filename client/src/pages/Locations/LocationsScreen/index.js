@@ -33,6 +33,7 @@ const LocationsScreen = () => {
     const [loading, setLoading] = useState(false);
     const [detailsLoading, setDetailsLoading] = useState(false);
     const [scrollArrowVisible, setScrollArrowVisible] = useState(false);
+    const [mapInitialCoords, setMapInitialCoords] = useState(null);
 
     const updateLocationDistance = (coords) => {
         const newLocations = locations.map((location) => {
@@ -175,6 +176,8 @@ const LocationsScreen = () => {
         newLocations = newList ? locations.concat(newLocations) : newLocations;
         setLocations(newLocations);
 
+        newLocations.length > 0 && setMapInitialCoords(newLocations[0].coordinates);
+
         setLoading(false);
     };
 
@@ -199,6 +202,7 @@ const LocationsScreen = () => {
                     loading={loading}
                     locations={locations}
                     handleDetails={handleDetails}
+                    coords={mapInitialCoords}
                 />
             )}
 
