@@ -29,6 +29,11 @@ const Navigation = () => {
         setDrawer(!drawer);
     };
 
+    const handleDrawerClick = (path) => {
+        setDrawer(false);
+        history.push(path);
+    };
+
     useEffect(() => {
         navlessPaths.includes(`/${page}`) ? setHidden(true) : setHidden(false);
         !isLoggedIn && setHidden(true);
@@ -70,6 +75,7 @@ const Navigation = () => {
                 onClose={handleToggleMore}
                 links={navDrawerRoutes}
                 page={`/${page}`}
+                handleClick={handleDrawerClick}
             />
         </Container>
     );

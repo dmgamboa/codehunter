@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { Avatar } from "antd";
 import Icon, { LogoutOutlined } from "@ant-design/icons";
 
@@ -6,14 +5,18 @@ import { ReactComponent as AvatarPlaceholder } from "../../assets/icons/doge/gri
 
 import { StyledDrawer } from "./styled";
 
-const NavigationDrawer = ({ visible, onClose, links, user, page }) => {
+const NavigationDrawer = ({ visible, onClose, links, user, page, handleClick }) => {
     const renderDrawerLinks = (link) => {
         return link.map(({ path, name, icon }) => {
             return (
-                <Link key={path} to={path} className={`drawer-item ${path === page && "active"}`}>
+                <span
+                    key={path}
+                    onClick={() => handleClick(path)}
+                    className={`drawer-item ${path === page && "active"}`}
+                >
                     {icon}
                     <span className="link">{name}</span>
-                </Link>
+                </span>
             );
         });
     };
