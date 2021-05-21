@@ -104,7 +104,7 @@ const PageNotFound = () => {
                 We can&apos;t seem to find the page you&apos;re looking for. Please log in and try
                 again.
             </p>
-            <Link to="/account/login/">
+            <Link to="/account/login/" className="link">
                 <Button type="primary" block>
                     Log In
                 </Button>
