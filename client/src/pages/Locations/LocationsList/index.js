@@ -1,3 +1,5 @@
+import { Spin } from "antd";
+
 import LocationCard from "../../../components/LocationCard";
 
 import { cardTabs } from "./constant";
@@ -5,6 +7,7 @@ import { StyledInfiniteScroll } from "./styled";
 
 const LocationsList = ({
     loading,
+    detailsLoading,
     locations,
     handleTabs,
     hasMore,
@@ -31,7 +34,7 @@ const LocationsList = ({
     };
 
     return (
-        <>
+        <Spin spinning={loading || detailsLoading}>
             {locations ? (
                 <StyledInfiniteScroll
                     next={handleScroll}
@@ -46,7 +49,7 @@ const LocationsList = ({
             ) : (
                 "No locations found."
             )}
-        </>
+        </Spin>
     );
 };
 

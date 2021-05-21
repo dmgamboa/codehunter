@@ -5,7 +5,7 @@ import StyledDrawer from "./styled";
 
 import LocationPlaceholder from "../../assets/placeholder-location.jpg";
 
-const LocationDetails = ({ loading, visible, onClose, location, tabs }) => {
+const LocationDetails = ({ visible, onClose, location, tabs }) => {
     const renderHours = (hours) => {
         return Object.keys(hours).map((day) => {
             return (
@@ -56,7 +56,7 @@ const LocationDetails = ({ loading, visible, onClose, location, tabs }) => {
                     key={key}
                     title={name}
                     icon={icon}
-                    onPress={() => onPress({ tabs: key })}
+                    onPress={() => onPress({ tab: key, location })}
                 />
             );
         });
@@ -64,7 +64,6 @@ const LocationDetails = ({ loading, visible, onClose, location, tabs }) => {
 
     return (
         <StyledDrawer
-            loading={loading}
             height="auto"
             placement="bottom"
             visible={visible}
