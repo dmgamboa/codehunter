@@ -24,7 +24,6 @@ const AvatarSection = ({name}) => {
                     </Button>
                 </div>
                 <div id="avatarPic">
-                    {/* <Avatar size={300} icon={<UserOutlined />} shape="square" id="profilePic"/> */}
                     <img src={pic} id="profilePic" />
                     <hr id="picLine" />
                 </div>
