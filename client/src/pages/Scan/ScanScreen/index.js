@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import QrReader from "react-qr-reader";
 
 import { useAuth } from "../../../context/Auth";
@@ -10,41 +10,53 @@ import { StyledScanner } from "./styled";
 const ScanScreen = () => {
     const prefix = "/codehunter/";
     const mongoDBIDLength = 24;
+
     const { getUser, userPoints, setUserPoints } = useAuth();
 
+    const [points, setPoints] = useState({});
+    const [code, setCode] = useState(null);
     const [error, setError] = useState("");
-    const [success, setSuccess] = useState(null);
     const [modalVisible, setModalVisible] = useState(false);
 
+    const handleModal = () => {
+        setModalVisible(!modalVisible);
+    };
+
     const handleScan = async (data) => {
-        console.log(data);
-        if (data) {
-            console.log("detected QR code");
-            if (data.substring(0, prefix.length) !== prefix) {
-                setError("Invalid QR code.");
+        setError("");
+        setCode(data);
+
+        if (
+            data.length > prefix.length &&
+            data?.substring(0, prefix.length) !== prefix &&
+            data.substring(prefix.length) != mongoDBIDLength
+        ) {
+            setError("That doesn't look like a code associated with any of our locations.");
+        } else {
+            const locationID = data.substring(prefix.length);
+            const oldPoints = userPoints;
+            const newPoints = await validateCodeAndEarnPoints(locationID, getUser());
+
+            if (newPoints !== oldPoints) {
+                setUserPoints(newPoints);
+                setPoints({ old: oldPoints, new: newPoints, diff: newPoints - oldPoints });
             } else {
-                const locationID = data.substring(prefix.length);
-
-                if (locationID.length == mongoDBIDLength) {
-                    const oldPoints = userPoints;
-
-                    const newPoints = await validateCodeAndEarnPoints(locationID, getUser());
-                    setUserPoints(newPoints);
-                }
+                setError("It looks like you've scanned this code before.");
             }
         }
+
+        handleModal();
     };
 
     return (
         <StyledScanner>
             <QrReader
                 delay={1000}
-                onError={(e) => console.error(e)}
-                onScan={() => {
-                    !modalVisible && handleScan();
+                onScan={(data) => {
+                    !modalVisible && data && code !== data && handleScan(data);
                 }}
             />
-            <ScanModal error={error} success={success} visible={modalVisible} />
+            <ScanModal error={error} visible={modalVisible} onClose={handleModal} points={points} />
         </StyledScanner>
     );
 };

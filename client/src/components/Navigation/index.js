@@ -12,7 +12,7 @@ import { Container } from "./styled";
 
 const Navigation = () => {
     const history = useHistory();
-    const { page, subpage } = useParams();
+    const { page } = useParams();
     let location = useLocation();
 
     const { getUser } = useAuth();

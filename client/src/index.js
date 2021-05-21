@@ -10,18 +10,16 @@ import App from "./App";
 import AuthProvider from "./context/Auth";
 
 ReactDOM.render(
-    <React.StrictMode>
-        <AuthProvider>
-            <Router>
-                <AnimatePresence exitBeforeEnter>
-                    <Switch>
-                        <Route exact path={["/"]} render={() => <Splash />} />
-                        <Route path={["/:page", "/:page/:subPage"]} render={() => <App />} />
-                    </Switch>
-                </AnimatePresence>
-            </Router>
-        </AuthProvider>
-    </React.StrictMode>,
+    <AuthProvider>
+        <Router>
+            <AnimatePresence exitBeforeEnter>
+                <Switch>
+                    <Route exact path={["/"]} render={() => <Splash />} />
+                    <Route path={["/:page", "/:page/:subPage"]} render={() => <App />} />
+                </Switch>
+            </AnimatePresence>
+        </Router>
+    </AuthProvider>,
     document.getElementById("root")
 );
 
