@@ -20,7 +20,7 @@ const PageNotFound = () => {
     const [swipes, setSwipes] = useState([]);
     const [success, setSuccess] = useState(false);
     const lottieOptions = {
-        loop: true,
+        loop: false,
         autoplay: true,
         animationData: EasterEgg
     };
@@ -74,7 +74,6 @@ const PageNotFound = () => {
             }, 3500);
         } else {
             doge.start(variants.bounce);
-
             if (swipes.length > 0) {
                 checkSwipes();
                 setSwipes([]);

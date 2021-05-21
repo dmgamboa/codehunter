@@ -22,10 +22,12 @@ export const Container = styled.div`
     }
 
     .easter-egg {
+        z-index: 99;
         position: absolute;
-        top: 0;
+        top: -1rem;
         left: 0;
         width: 100%;
+        height: 100vh;
     }
 
 
