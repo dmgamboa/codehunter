@@ -18,24 +18,27 @@ export const massWriteRewards = async (documents) => {
 };
 
 
-export const getRewards = async (category) => {
-    return new Promise((res, rej) => {
+export const getRewards = (category, pageNumber, pageSize = 8) => {
+    return new Promise(async (res, rej) => {
+        const skips = pageSize * (pageNumber - 1);
         if (category === "all") {
-            Reward.find()
-            .then((results) => { 
-                return res(results)
-            }).catch(err => {
+            try {
+                const results = await Reward.find().skip(skips).limit(pageSize);
+                return res(results);
+            } catch (err) {
                 return rej(err);
-            });
+            }
         };
-        Reward.find({ category: {$all: [category]}})
-        .then((results)=> { 
-            console.log("results: " + results)
+        // Calculate number of documents to skip
+        console.log("skips: ", skips);
+        console.log("pgnum: ", pageNumber);
+        console.log("pgsize: ", pageSize);
+        try {
+            const results = await Reward.find({ category: {$all: [category]}}).skip(skips).limit(pageSize).exec();
             return res(results);
-        }).catch(err => {
+        } catch (err) {
             return rej(err);
-        });
-
+        }      
     });
     
 };

@@ -50,7 +50,10 @@ const RewardCard = ({ name, description, cost, availability }) => {
                 <h1 className="name">
                     {name} 
                 </h1>
-                <span className="details">{description}</span>
+                <div className="details">
+                    {description}
+                    <span>{cost}</span>
+                </div>
 
                 <div className="icons">
                     {availability}
