@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
 import { auth } from "../firebase";
 
-// Create context object
 const Auth = React.createContext();
 
 export const useAuth = () => {
@@ -34,7 +33,8 @@ const AuthProvider = ({ children }) => {
         });
     };
 
-    function logout() {
+    const logout = () => {
+        localStorage.removeItem("user");
         return auth.signOut();
     };
 

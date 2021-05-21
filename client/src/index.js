@@ -1,4 +1,3 @@
-import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
@@ -10,18 +9,16 @@ import App from "./App";
 import AuthProvider from "./context/Auth";
 
 ReactDOM.render(
-    <React.StrictMode>
-        <AuthProvider>
-            <Router>
-                <AnimatePresence exitBeforeEnter>
-                    <Switch>
-                        <Route exact path={["/"]} render={() => <Splash />} />
-                        <Route path={["/:page", "/:page/:subPage"]} render={() => <App />} />
-                    </Switch>
-                </AnimatePresence>
-            </Router>
-        </AuthProvider>
-    </React.StrictMode>,
+    <AuthProvider>
+        <Router>
+            <AnimatePresence exitBeforeEnter>
+                <Switch>
+                    <Route exact path={["/"]} render={() => <Splash />} />
+                    <Route path={["/:page", "/:page/:subPage"]} render={() => <App />} />
+                </Switch>
+            </AnimatePresence>
+        </Router>
+    </AuthProvider>,
     document.getElementById("root")
 );
 

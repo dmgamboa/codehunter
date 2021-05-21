@@ -7,11 +7,15 @@ export const StyledScanner = styled.div`
     width: 100%;
 
     section {
-        /* width: 100%; */
-        /* height: 100vh; */
+        width: 100%;
+        height: 100vh;
 
-        /* div {
+        div {
             display: none;
-        } */
+        }
+    }
+
+    .confetti {
+        z-index: 99;
     }
 `;

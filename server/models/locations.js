@@ -43,13 +43,13 @@ const readLocations = (req) => {
                 return res(jsonData);
             }
 
-            for (let i = 0; i < limit; i++) {
+            for (let i = 0; i < limit && i < jsonData.length; i++) {
                 const locationCoords = {
-                    lng: jsonData[i].fields.geom.coordinates[0],
-                    lat: jsonData[i].fields.geom.coordinates[1],
+                    lng: jsonData[i].fields?.geom?.coordinates[0],
+                    lat: jsonData[i].fields?.geom?.coordinates[1],
                 }
                 
-                const distanceInKm = calculateDistance(userCoords, locationCoords);
+                const distanceInKm = locationCoords && calculateDistance(userCoords, locationCoords);
                 jsonData[i]["distanceInKm"] = distanceInKm;
             }
 

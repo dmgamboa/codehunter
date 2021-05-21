@@ -7,7 +7,7 @@ import LocationPlaceholder from "../../assets/placeholder-location.jpg";
 
 import StyledCard from "./styled";
 
-const LocationCard = ({ loading, location, tabs, handleClick }) => {
+const LocationCard = ({ loading, location, tabs }) => {
     const renderTabs = (tabs) => {
         return tabs.map(({ key, name, icon, onPress }) => {
             return (
@@ -27,7 +27,6 @@ const LocationCard = ({ loading, location, tabs, handleClick }) => {
         <StyledCard
             loading={loading}
             hoverable
-            onClick={() => handleClick(location)}
             title={
                 <>
                     <h2>{location.type}</h2>

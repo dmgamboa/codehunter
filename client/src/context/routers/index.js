@@ -17,6 +17,7 @@ import Profile from "../../pages/Profile";
 import Walkthrough from "../../pages/Walkthrough";
 import Account from "../../pages/Account";
 import AboutUs from "../../pages/AboutUs";
+import Credits from "../../pages/Credits";
 
 import { ReactComponent as Logo } from "../../assets/icons/logo.svg";
 import PageNotFound from "../../components/PageNotFound";
@@ -84,6 +85,18 @@ const routes = [
         component: <Account />
     },
     {
+        name: "Rewards",
+        path: "/rewards",
+        exact: false,
+        navTab: false,
+        navDrawer: true,
+        fullscreen: false,
+        restricted: true,
+        icon: <GiftOutlined />,
+        selectedIcon: <GiftFilled />,
+        component: <Rewards />
+    },
+    {
         name: "About Us",
         path: "/aboutus",
         exact: false,
@@ -95,16 +108,15 @@ const routes = [
         component: <AboutUs />
     },
     {
-        name: "Rewards",
-        path: "/rewards",
+        name: "Credits",
+        path: "/credits",
         exact: false,
         navTab: false,
         navDrawer: true,
-        fullscreen: false,
+        fullScreen: false,
         restricted: true,
-        icon: <GiftOutlined />,
-        selectedIcon: <GiftFilled />,
-        component: <Rewards />
+        icon: <QuestionCircleOutlined />,
+        component: <Credits />
     },
     {
         name: "404",
