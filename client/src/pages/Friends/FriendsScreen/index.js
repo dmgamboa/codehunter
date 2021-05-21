@@ -1,9 +1,13 @@
 
+// import Tab from "../components/Tab";
+import SearchBar from "../components/SearchBar/index";
+
 const FriendsScreen = () => {
     return (
-        <div>
-            Hello from Friends screen.
-        </div>
+        <>
+            <SearchBar className="search"/>
+            {/* <Tab/> */}
+        </>
     );
 };
 
