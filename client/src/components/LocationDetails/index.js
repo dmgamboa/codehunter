@@ -1,4 +1,3 @@
-import { Spin } from "antd";
 import { TabBar } from "antd-mobile";
 
 import { details as detailsToRender } from "./constant";
@@ -64,12 +63,17 @@ const LocationDetails = ({ loading, visible, onClose, location, tabs }) => {
     };
 
     return (
-        <StyledDrawer height="auto" placement="bottom" visible={visible} onClose={onClose}>
-            <Spin spinning={loading}/>
+        <StyledDrawer
+            loading={loading}
+            height="auto"
+            placement="bottom"
+            visible={visible}
+            onClose={onClose}
+        >
             {location && (
                 <>
                     <img
-                        referrerPolicy="no-referrer" 
+                        referrerPolicy="no-referrer"
                         src={location.image ?? LocationPlaceholder}
                         alt={location.name}
                     />

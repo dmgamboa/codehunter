@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Tag } from "antd";
+import { motion, AnimatePresence } from "framer-motion";
 import Icon, { UnorderedListOutlined, ArrowUpOutlined } from "@ant-design/icons";
 import startCase from "lodash/startCase";
 import replace from "lodash/replace";
@@ -22,8 +23,6 @@ import { detailsTabs, defaultFilters, gMapsLink } from "./constant";
 import { readLocations, readPlace } from "../axios";
 import { message } from "antd";
 
-import { useAuth } from "../../../context/Auth";
-
 const LocationsScreen = () => {
     const [locations, setLocations] = useState([]);
     const [locationsCount, setLocationsCount] = useState(500);
@@ -39,9 +38,6 @@ const LocationsScreen = () => {
     const [detailsLoading, setDetailsLoading] = useState(false);
     const [scrollArrowVisible, setScrollArrowVisible] = useState(false);
     const [mapInitialCoords, setMapInitialCoords] = useState(null);
-
-    const { userData } = useAuth();
-    console.log(userData);
 
     const updateLocationDistance = (coords) => {
         const newLocations = locations.map((location) => {
@@ -134,7 +130,9 @@ const LocationsScreen = () => {
                 : location.address
                     ? encodeURIComponent(replace(location.address, " ", "+"))
                     : encodeURIComponent(replace(location.name, " ", "+"));
-            const origin = userCoords ? encodeURIComponent(`${userCoords.lat},${userCoords.lng}`) : "";
+            const origin = userCoords
+                ? encodeURIComponent(`${userCoords.lat},${userCoords.lng}`)
+                : "";
             window.open(`${gMapsLink}destination=${destination}&origin=${origin ?? ""}`);
             break;
         }
@@ -230,14 +228,24 @@ const LocationsScreen = () => {
 
     return (
         <Layout className={mapView ? "map-view" : "list-view"}>
-            {mapView && (
-                <LocationsMap
-                    loading={loading}
-                    locations={locations}
-                    handleDetails={handleDetails}
-                    coords={mapInitialCoords}
-                />
-            )}
+            <AnimatePresence exitBeforeEnter>
+                {mapView && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 1, ease: "easeInOut" }}
+                    >
+                        <LocationsMap
+                            loading={loading}
+                            locations={locations}
+                            handleDetails={handleDetails}
+                            coords={mapInitialCoords}
+                        />                        
+                    </motion.div>
+                )}                
+            </AnimatePresence>
+
 
             <Top>
                 <SearchBar className="search" handleSearch={handleSearch} />
@@ -265,9 +273,20 @@ const LocationsScreen = () => {
             />
 
             <span className="icon-buttons">
-                {!mapView && scrollArrowVisible && (
-                    <CircleIconBtn icon={<ArrowUpOutlined onClick={handleScrollArrowClick} />} />
-                )}
+                <AnimatePresence exitBeforeEnter>
+                    {!mapView && scrollArrowVisible && (
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transitition={{ duration: 0.5, ease: "easeInOut" }}
+                        >
+                            <CircleIconBtn
+                                icon={<ArrowUpOutlined onClick={handleScrollArrowClick} />}
+                            />
+                        </motion.div>
+                    )}
+                </AnimatePresence>
                 <LocationsAccess userCoords={userCoords} handleClick={handleLocationsAccess} />
                 <CircleIconBtn
                     className="view-toggle"
@@ -275,18 +294,28 @@ const LocationsScreen = () => {
                     onClick={handleViewToggle}
                 />
             </span>
+            
+            <AnimatePresence exitBeforeEnter>
+                {!mapView && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 1, ease: "easeInOut" }}
+                    >
+                        <LocationsList
+                            loading={loading}
+                            locations={locations}
+                            hasMore={locations.length < locationsCount}
+                            handleTabs={handleTabs}
+                            handleDetails={handleDetails}
+                            handleScroll={handleScroll}
+                            handleScrollArrow={handleScrollArrow}
+                        />
+                    </motion.div>
+                )}                
+            </AnimatePresence>
 
-            {!mapView && (
-                <LocationsList
-                    loading={loading}
-                    locations={locations}
-                    hasMore={locations.length < locationsCount}
-                    handleTabs={handleTabs}
-                    handleDetails={handleDetails}
-                    handleScroll={handleScroll}
-                    handleScrollArrow={handleScrollArrow}
-                />
-            )}
         </Layout>
     );
 };
