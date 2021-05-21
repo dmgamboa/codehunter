@@ -29,9 +29,6 @@ const ProfileScreen = () => {
         data.append("fields", JSON.stringify(fields));
         data.append("avatar", e.target[0].files[0]);
         const response = await updateUser(data);
-
-        // Returns the user.
-        console.log(response);
     };
 
     return (

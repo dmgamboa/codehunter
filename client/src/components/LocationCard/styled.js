@@ -7,6 +7,7 @@ const { colors } = theme;
 
 const StyledCard = styled(Card)`
     border-radius: 1.5rem;
+    cursor: default;
 
     .ant-card-head {
         font-size: clamp(0.6rem, 3vw, 1.2rem);
@@ -40,6 +41,15 @@ const StyledCard = styled(Card)`
         margin-top: 1rem;
         padding: 0;
         height: 2rem;
+        cursor: pointer;
+    }
+
+    .am-tab-bar-tab {
+        &:hover {
+            .anticon {
+                color: ${colors.secondary};
+            }
+        }
     }
 `;
 
