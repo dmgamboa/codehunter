@@ -70,4 +70,5 @@ export const ListStyled = styled.div`
 export const HistoryListStyled = styled.div`
     margin: 20px;
     margin-top: 5%;
+    text-align: center;
 `;

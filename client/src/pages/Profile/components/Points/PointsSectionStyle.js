@@ -1,31 +1,36 @@
 import styled from "styled-components";
 
+// hr -> display: grid
+// top level -> flex
+
 const PSStyle = styled.div`
-    margin: 20px;
-    margin-top: 25%;
     .content {
         text-align: center;
     }
     #digits {
-        float: left;
-        display: block;
+        display: grid;
+        grid-template-row: 5% 75% 5%;
+        grid-template-column: 10% 50% 10%;
     }
     hr {
-        float: "left";
-        width: "100%";
-        display: "block";
         border: 0.5px solid #bfbfbf;
+
     }
     #linerTop {
-        margin-top: 5%;
+        grid-row-start: 1;
+        grid-row-end: 2;
+        grid-column-start: 1;
+        grid-column-end: 4;
+        width: 90%;
     }
     #linerBottom {
-        margin-top: 23%;
+        grid-row-start: 3;
+        grid-row-end: 4;
+        grid-column-start: 1;
+        grid-column-end: 4;
+        width: 90%;
     }
 
-    p {
-        margin-left: 150%;
-    }
     #pointsText {
         font-size: 110%;
     }

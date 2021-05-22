@@ -1,4 +1,7 @@
 import styled from "styled-components";
+import theme from "../../../../context/themes/main";
+
+const { colors } = theme;
 
 const AvatarContainer = styled.div`
     #editBtn {
@@ -40,8 +43,16 @@ const AvatarContainer = styled.div`
     #picLine {
         width: 100%;
         height: 10%;
-        z-index: 0;
+        border: 0.5px solid #bfbfbf;
     }
+
+    #name {
+        font-size: 200%;
+        font-weight: 650;
+        color: ${colors.primary};
+        text-align: center;
+    }
+
 `;
 
 export default AvatarContainer;

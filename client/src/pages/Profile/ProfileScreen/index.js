@@ -37,7 +37,8 @@ const ProfileScreen = () => {
                 <input type="file" />
                 <input type="submit" />
             </form>
-            <AvatarSection />
+            <AvatarSection name={"Hunter Welles"}/>
+            {/* <AvatarSection name={getUser}/> */}
             <PointsSection points={points} />
             <LocationsList />
         </div>
