@@ -13,7 +13,7 @@ function PointsSection({ points }) {
                         <p>
                             <span
                                 style={{
-                                    color: colors.secondary,
+                                    color: theme.secondary,
                                     fontWeight: "700",
                                     fontSize: "280%",
                                 }}
