@@ -1,5 +1,5 @@
 import PSStyle from "./PointsSectionStyle";
-
+import theme from "../../../../context/themes/main";
 
 
 //pass 0 to points when redeemed
@@ -12,7 +12,11 @@ function PointsSection({ points }) {
                     <div id="digits">
                         <p>
                             <span
-                                style={{ color: "#005526", fontWeight: "700", fontSize: "280%" }}
+                                style={{
+                                    color: colors.secondary,
+                                    fontWeight: "700",
+                                    fontSize: "280%",
+                                }}
                                 className="points-digits"
                             >
                                 {points}

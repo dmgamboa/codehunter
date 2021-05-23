@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Particles from "react-particles-js";
 import { motion } from "framer-motion";
@@ -8,11 +7,10 @@ import { useAuth } from "../../../context/Auth";
 import SplashLogo from "../SplashLogo";
 import { particleParams, animationTimes } from "./constant";
 import { Container, Content } from "./styled";
-import { readUserContext } from "../axios";
 
 const SplashScreen = () => {
     const history = useHistory();
-    const { getUser, setUserData } = useAuth();
+    const { getUser } = useAuth();
 
     const {
         orderInterval,
@@ -37,14 +35,6 @@ const SplashScreen = () => {
             history.push(path);
         }, timeout * 1000);
     };
-
-    useEffect(async () => {
-        const user = getUser();
-        if (user) {
-            const userData = await readUserContext(user);
-            setUserData(userData);
-        }
-    }, []);
 
     return (
         <motion.div

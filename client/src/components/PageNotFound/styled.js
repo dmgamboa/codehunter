@@ -21,9 +21,22 @@ export const Container = styled.div`
         }
     }
 
+    .easter-egg {
+        position: absolute;
+        top: -1rem;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        z-index: 9;
+    }
+
 
     a {
         align-self: center;
         width: 75%;
+    }
+
+    .link {
+        z-index: 99;
     }
 `;

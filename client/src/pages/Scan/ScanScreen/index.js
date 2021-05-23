@@ -10,7 +10,7 @@ import { StyledScanner } from "./styled";
 const ScanScreen = () => {
     const prefix = "/codehunter/";
     const mongoDBIDLength = 24;
-    const { getUser, userData, setUserData } = useAuth();
+    const { getUser, getUserData } = useAuth();
 
     const [points, setPoints] = useState({});
     const [code, setCode] = useState(null);
@@ -33,15 +33,14 @@ const ScanScreen = () => {
             setError("That doesn't look like a code associated with any of our locations.");
         } else {
             const locationID = data.substring(prefix.length);
-            const oldUserData = userData;
-            const newUserData = await handleCodeScan(locationID, getUser());
+            const oldUserData = getUserData();
+            await handleCodeScan(locationID, getUser());
 
-            if (newUserData.points !== oldUserData.points) {
-                setUserData(newUserData);
+            if (getUserData().points !== oldUserData.points) {
                 setPoints({
                     old: oldUserData.points,
-                    new: newUserData.points,
-                    diff: newUserData.points - oldUserData.points
+                    new: getUserData().points,
+                    diff: getUserData().points - oldUserData.points
                 });
             } else {
                 setError("It looks like you've scanned this code before.");
