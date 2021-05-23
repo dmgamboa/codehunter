@@ -1,21 +1,41 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { auth } from "../firebase";
+import axios from "axios";
 
 const Auth = React.createContext();
+const url = process.env.REACT_APP_SERVER;
 
 export const useAuth = () => {
     return useContext(Auth);
 };
 
 const AuthProvider = ({ children }) => {
-    const [userData, setUserData] = useState();
-
     const getUser = () => {
         if (localStorage.getItem("user")) {
             return localStorage.getItem("user");
-        } else {
-            return;
         }
+
+        return;
+    };
+
+    const getUserData = () => {
+        if (localStorage.getItem("userData")) {
+            return JSON.parse(localStorage.getItem("userData"));
+        }
+        
+        return;
+    };
+
+    const setUserData = async () => {
+        const userToken = getUser();
+        const userData = await axios.get(`${url}readUser`, {
+            params: {
+                userToken,
+                fields: "avatar points name",
+            },
+        });
+
+        localStorage.setItem("userData", JSON.stringify(userData.data));
     };
 
     // Creating new user in firebase and returns uid to create doc in user collection.
@@ -31,10 +51,13 @@ const AuthProvider = ({ children }) => {
         await auth.signInWithEmailAndPassword(email, password).then((token) => {
             localStorage.setItem("user", JSON.stringify(token.user));
         });
+
+        await setUserData();
     };
 
     const logout = () => {
         localStorage.removeItem("user");
+        localStorage.removeItem("userData");
         return auth.signOut();
     };
 
@@ -43,7 +66,7 @@ const AuthProvider = ({ children }) => {
         login,
         logout,
         getUser,
-        userData,
+        getUserData,
         setUserData,
     };
 

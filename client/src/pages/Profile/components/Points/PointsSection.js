@@ -1,5 +1,4 @@
 import PSStyle from "./PointsSectionStyle";
-import React, { useState } from "react";
 import theme from "../../../../context/themes/main";
 
 const { colors } = theme;

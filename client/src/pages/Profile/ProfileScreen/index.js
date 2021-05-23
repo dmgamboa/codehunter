@@ -1,20 +1,13 @@
 import { useAuth } from "../../../context/Auth";
-import { useHistory } from "react-router-dom";
 import AvatarSection from "../components/Avatar/Avatar";
 import PointsSection from "../components/Points/PointsSection";
 import LocationsList from "../components/History/LocationsList";
 import { updateUser } from "../axios";
 
 const ProfileScreen = () => {
-    const { /*logout,*/ userData, getUser } = useAuth();
-    const history = useHistory();
+    const { getUserData, getUser } = useAuth();
 
-    const points = (userData ? userData.points : "N/A");
-
-    function handleLogout() {
-        //logout();
-        history.push("/login");
-    }
+    const points = (getUserData() ? getUserData().points : "N/A");
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -28,7 +21,7 @@ const ProfileScreen = () => {
         data.append("userToken", getUser());
         data.append("fields", JSON.stringify(fields));
         data.append("avatar", e.target[0].files[0]);
-        const response = await updateUser(data);
+        await updateUser(data);
     };
 
     return (

@@ -1,10 +1,7 @@
 import { useHistory } from "react-router-dom";
 import { Button } from "antd";
-import { Avatar } from "antd";
-import { UserOutlined } from "@ant-design/icons";
 import AvatarContainer from "./AvatarStyled";
 import EditIcon from "../../images/edit.png";
-import Liner from "../../images/blackDivider.png";
 import pic from "../../images/sampleAvatar.png";
 
 const AvatarSection = ({name}) => {

@@ -33,7 +33,7 @@ const Register = () => {
     };
 
     var valuesRef = useRef();
-    var { signup, setUserData, getUser } = useAuth();
+    var { signup, getUser } = useAuth();
     const history = useHistory();
 
     const [loading, setLoading] = useState(false);
@@ -52,9 +52,7 @@ const Register = () => {
             await signup(values.email, values.password);
 
             // Axios POST request to create user doc in MongoDB
-            const userData = await createUser(values, getUser());
-
-            setUserData(userData);
+            await createUser(values, getUser());
 
             message.loading({ content: "Validating your CodeHunter license.", duration: 2 });
             history.push("/locations");
