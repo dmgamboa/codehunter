@@ -8,7 +8,7 @@ import { useAuth } from "../../context/Auth";
 import { StyledDrawer } from "./styled";
 
 const NavigationDrawer = ({ visible, onClose, links, page, handleClick }) => {
-    const { userData, logout } = useAuth();
+    const { logout, getUserData } = useAuth();
     const history = useHistory();
 
     const handleLogout = () => {
@@ -38,9 +38,9 @@ const NavigationDrawer = ({ visible, onClose, links, page, handleClick }) => {
             <div className="top">
                 <Avatar icon={<Icon component={AvatarPlaceholder} />} />
                 <div className="text">
-                    <span className="name">{userData?.name?.first}</span>
+                    <span className="name">{getUserData()?.name?.first}</span>
                     <span className="points">
-                        <b>{userData?.points ?? 0}</b> points
+                        <b>{getUserData()?.points ?? 0}</b> points
                     </span>
                 </div>
             </div>

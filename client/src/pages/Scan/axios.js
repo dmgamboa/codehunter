@@ -9,7 +9,8 @@ const handleCodeScan = async (locationID, userToken) => {
     };
 
     const newData = await axios.post(`${url}handleCodeScan`, params);
-    return newData.data;
+
+    localStorage.setItem("userData", JSON.stringify(newData.data));
 };
 
 export { handleCodeScan };

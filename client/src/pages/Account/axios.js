@@ -20,19 +20,8 @@ const createUser = async (values, userToken) => {
     };
 
     const userData = await axios.post(`${url}createUser`, regiInfo);
-    
-    return userData.data;
+
+    localStorage.setItem("userData", JSON.stringify(userData.data));
 };
 
-const readUserContext = async (userToken) => {
-    const userContext = await axios.get(`${url}readUser`, {
-        params: {
-            userToken,
-            fields: "avatar points name",
-        },
-    });
-
-    return userContext.data;
-};
-
-export { createUser, readUserContext };
+export { createUser };

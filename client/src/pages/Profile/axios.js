@@ -15,7 +15,7 @@ const readUser = async (userToken) => {
 const updateUser = async (data) => {
     const updatedUser = await axios.post(`${url}updateUser`, data);
 
-    return updatedUser.data;
+    localStorage.setItem("userData", JSON.stringify(updatedUser.data));
 };
 
 export { readUser, updateUser};
