@@ -9,18 +9,9 @@ import { initialCoords, mapViewSettings, mapsKey } from "./constant";
 const LocationsMap = ({
     locations,
     handleDetails,
-    userCoords,
+    coords
 }) => {
-    const { bound, initialZoom } = mapViewSettings;
-
-    // const withinBounds = (coordinates) => {
-    //     return (
-    //         initialCoords.lng > coordinates[0] - bound &&
-    //         initialCoords.lng < coordinates[0] + bound &&
-    //         initialCoords.lat > coordinates[1] - bound &&
-    //         initialCoords.lat < coordinates[1] + bound
-    //     );
-    // };
+    const { initialZoom } = mapViewSettings;
 
     const renderMarkers = (locations) => {
         return locations.map(location => {
@@ -41,7 +32,7 @@ const LocationsMap = ({
         <StyledMap>
             <GoogleMapReact
                 bootstrapURLKeys={{ key: mapsKey }}
-                center={initialCoords}
+                center={coords ?? initialCoords}
                 zoom={initialZoom}
             >
                 {locations && renderMarkers(locations)}

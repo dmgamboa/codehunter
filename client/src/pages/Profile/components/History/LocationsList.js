@@ -1,6 +1,4 @@
 import { ListStyled, HistoryListStyled } from "./LocationsListStyled";
-import InfiniteScroll from "react-infinite-scroller";
-import Location from "./Location";
 
 function LocationsList() {
     return (

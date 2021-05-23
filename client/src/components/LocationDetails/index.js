@@ -1,4 +1,3 @@
-import { Spin } from "antd";
 import { TabBar } from "antd-mobile";
 
 import { details as detailsToRender } from "./constant";
@@ -6,7 +5,7 @@ import StyledDrawer from "./styled";
 
 import LocationPlaceholder from "../../assets/placeholder-location.jpg";
 
-const LocationDetails = ({ loading, visible, onClose, location, tabs }) => {
+const LocationDetails = ({ visible, onClose, location, tabs }) => {
     const renderHours = (hours) => {
         return Object.keys(hours).map((day) => {
             return (
@@ -57,19 +56,23 @@ const LocationDetails = ({ loading, visible, onClose, location, tabs }) => {
                     key={key}
                     title={name}
                     icon={icon}
-                    onPress={() => onPress({ tabs: key })}
+                    onPress={() => onPress({ tab: key, location })}
                 />
             );
         });
     };
 
     return (
-        <StyledDrawer height="auto" placement="bottom" visible={visible} onClose={onClose}>
-            <Spin spinning={loading}/>
+        <StyledDrawer
+            height="auto"
+            placement="bottom"
+            visible={visible}
+            onClose={onClose}
+        >
             {location && (
                 <>
                     <img
-                        referrerPolicy="no-referrer" 
+                        referrerPolicy="no-referrer"
                         src={location.image ?? LocationPlaceholder}
                         alt={location.name}
                     />

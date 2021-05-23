@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+import theme from "../../../context/themes/main";
+
+const { colors } = theme;
+
 export const Layout = styled.div`
     flex: 1;
     width: 100%;
@@ -22,6 +26,20 @@ export const Layout = styled.div`
 
         & > *:not(:last-child) {
             margin-bottom: 0.5rem;
+        }
+    }
+
+    .filter-tags {
+        .ant-tag {
+            margin-bottom: 1rem;
+            padding: 0.1rem 0.5rem;
+            border-radius: 1.5rem;
+            background: ${colors.primary};
+            color: white;
+
+            .ant-tag-close-icon {
+                color: white;
+            }
         }
     }
 `;

@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
 import { auth } from "../firebase";
 
-// Create context object
 const Auth = React.createContext();
 
 export const useAuth = () => {
@@ -9,8 +8,7 @@ export const useAuth = () => {
 };
 
 const AuthProvider = ({ children }) => {
-    const [currentUser, setCurrentUser] = useState();
-    const [userPoints, setUserPoints] = useState();
+    const [userData, setUserData] = useState();
 
     const getUser = () => {
         if (localStorage.getItem("user")) {
@@ -20,53 +18,33 @@ const AuthProvider = ({ children }) => {
         }
     };
 
-    const getUID = () => {
-        auth.onAuthStateChanged(token => {
-            if (token) {
-                setCurrentUser(token);
-                return token;
-            } else {
-                localStorage.removeItem("user");
-                return "UID unavailable";
-            }
-        });
-    };
-
     // Creating new user in firebase and returns uid to create doc in user collection.
     // Set the currentUser as a token accessed from creating an account
     // Return the uid
     const signup = async (email, password) => {
-        const userCredentials = await auth.createUserWithEmailAndPassword(email, password);
-        // token to be set as currentUser
-        const userData = userCredentials.user;
-        setCurrentUser(userData);
-        
-        const uid = userCredentials.user.uid;
-
-        return uid;
+        await auth.createUserWithEmailAndPassword(email, password).then((token) => {
+            localStorage.setItem("user", JSON.stringify(token.user));
+        });
     };
 
     const login = async (email, password) => {
-        const userCredentials = await auth.signInWithEmailAndPassword(email, password); 
-        const userData = userCredentials.user;
-        localStorage.setItem("user", JSON.stringify(userData));
-        setCurrentUser(userData);
-        return userData;
+        await auth.signInWithEmailAndPassword(email, password).then((token) => {
+            localStorage.setItem("user", JSON.stringify(token.user));
+        });
     };
 
-    function logout() {
+    const logout = () => {
+        localStorage.removeItem("user");
         return auth.signOut();
     };
 
     const value = {
-        currentUser,
         signup,
         login,
         logout,
-        getUID,
         getUser,
-        userPoints,
-        setUserPoints
+        userData,
+        setUserData,
     };
 
     return (

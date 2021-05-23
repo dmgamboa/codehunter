@@ -25,38 +25,4 @@ export const defaultFilters = {
     sort: "az",
 };
 
-export const testLocations = [
-    {
-        name: "Telus World of Science",
-        distance: 5,
-        neighborhood: "Downtown",
-        bookmarked: false,
-        visited: true,
-        type: "Museum / Gallery",
-    },
-];
-
-export const testData = {
-    name: "Telus World of Science",
-    distance: 5,
-    bookmarked: true,
-    visited: false,
-    details: {
-        type: "Museum / Gallery",
-        address: "1455 Quebec St, Vancouver, BC V6A 3Z7",
-        hours: {
-            status: "Open now",
-            days: {
-                mon: ["08:00 AM", "10:00 PM"],
-                tue: ["08:00 AM", "10:00 PM"],
-                wed: ["08:00 AM", "10:00 PM"],
-                thu: ["08:00 AM", "10:00 PM"],
-                fri: ["08:00 AM", "10:00 PM"],
-                sat: [],
-                sun: [],
-            },
-        },
-        phone: "6041234567",
-        website: "https://www.scienceworld.ca"
-    }
-};
+export const gMapsLink = "https://www.google.com/maps/dir/?api=1&";

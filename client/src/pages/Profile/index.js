@@ -14,6 +14,11 @@ const Profile = () => {
                 path={`${match.path}`}
                 render={() => <ProfileScreen />}
             />
+            <Route 
+                exact
+                path={`${match.path}/edit`}
+                render={() => <ProfileScreen />}
+            />
         </Switch>
     );
 };

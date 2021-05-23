@@ -1,19 +1,18 @@
 import { useEffect, useState } from "react";
-import { useHistory, useParams, useLocation, Link } from "react-router-dom";
+import { useHistory, useParams, useLocation } from "react-router-dom";
 import { TabBar } from "antd-mobile";
-import Icon, { EllipsisOutlined } from "@ant-design/icons";
+import { EllipsisOutlined } from "@ant-design/icons";
 
 import { useAuth } from "../../context/Auth";
 import theme from "../../context/themes/main";
 import { navTabRoutes, navDrawerRoutes, navlessPaths } from "../../context/routers";
-import { ReactComponent as Logo } from "../../assets/icons/logo.svg";
 import NavigationDrawer from "../NavigationDrawer/";
 
-import { StyledDrawer, Container } from "./styled";
+import { Container } from "./styled";
 
 const Navigation = () => {
     const history = useHistory();
-    const { page } = useParams();
+    let { page } = useParams();
     let location = useLocation();
 
     const { getUser } = useAuth();
@@ -30,8 +29,14 @@ const Navigation = () => {
         setDrawer(!drawer);
     };
 
+    const handleDrawerClick = (path) => {
+        setDrawer(false);
+        history.push(path);
+    };
+
     useEffect(() => {
         navlessPaths.includes(`/${page}`) ? setHidden(true) : setHidden(false);
+        !navTabRoutes.includes(`/${page}`) && setTab();
         !isLoggedIn && setHidden(true);
     }, [location]);
 
@@ -66,7 +71,13 @@ const Navigation = () => {
                     onPress={handleToggleMore}
                 />
             </TabBar>
-            <NavigationDrawer visible={drawer} onClose={handleToggleMore} links={navDrawerRoutes} />
+            <NavigationDrawer
+                visible={drawer}
+                onClose={handleToggleMore}
+                links={navDrawerRoutes}
+                page={`/${page}`}
+                handleClick={handleDrawerClick}
+            />
         </Container>
     );
 };

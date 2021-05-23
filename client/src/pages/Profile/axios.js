@@ -2,20 +2,20 @@ import axios from "axios";
 
 const url = process.env.REACT_APP_SERVER;
 
-const getProfileData = async (user) => {
-    const profileData = await axios.get(`${url}getProfileData`, {
+const readUser = async (userToken) => {
+    const user = await axios.get(`${url}readUser`, {
         params: {
-            user: user,
+            userToken: userToken,
         },
     });
 
-    return profileData;
+    return user.data;
 };
 
 const updateUser = async (data) => {
-    const response = await axios.post(`${url}updateUser`, data);
+    const updatedUser = await axios.post(`${url}updateUser`, data);
 
-    return response;
+    return updatedUser.data;
 };
 
-export { getProfileData, updateUser};
+export { readUser, updateUser};

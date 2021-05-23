@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
+import { Tag } from "antd";
+import { motion, AnimatePresence } from "framer-motion";
 import Icon, { UnorderedListOutlined, ArrowUpOutlined } from "@ant-design/icons";
+import startCase from "lodash/startCase";
+import replace from "lodash/replace";
 
 import { ReactComponent as MapIcon } from "../../../assets/icons/map.svg";
 import { ReactComponent as FilterIcon } from "../../../assets/icons/filters.svg";
@@ -15,8 +19,8 @@ import LocationsList from "../LocationsList";
 import LocationsAccess from "../LocationsAccess";
 
 import { Layout, Top } from "./styled";
-import { detailsTabs, defaultFilters } from "./constant";
-import { getLocationsList, getPlaceData } from "../axios";
+import { detailsTabs, defaultFilters, gMapsLink } from "./constant";
+import { readLocations, readPlace } from "../axios";
 import { message } from "antd";
 
 const LocationsScreen = () => {
@@ -33,6 +37,7 @@ const LocationsScreen = () => {
     const [loading, setLoading] = useState(false);
     const [detailsLoading, setDetailsLoading] = useState(false);
     const [scrollArrowVisible, setScrollArrowVisible] = useState(false);
+    const [mapInitialCoords, setMapInitialCoords] = useState(null);
 
     const updateLocationDistance = (coords) => {
         const newLocations = locations.map((location) => {
@@ -65,6 +70,12 @@ const LocationsScreen = () => {
         setFiltersVisible(false);
     };
 
+    const handleFilterTag = (filter) => {
+        let newFilters = { ...filters };
+        delete newFilters[filter];
+        setFilters(newFilters);
+    };
+
     const handleDetailsClose = () => {
         setLocationDetails(null);
         setDetailsVisible(false);
@@ -73,24 +84,28 @@ const LocationsScreen = () => {
     const handleDetails = async (location) => {
         setDetailsLoading(true);
         setDetailsVisible(true);
-        const searchQuery = `${location.name}${location.website && `+ ${location.website}`}`;
 
-        const placesData = await getPlaceData(searchQuery);
-        const details = {
-            name: location.name,
-            distance: location.distance,
-            bookmarked: location.bookmarked,
-            visited: location.visited,
-            image: placesData.image,
-            details: {
-                type: location.type,
-                address: location.address,
-                hours: placesData.hours,
-                phone: placesData.phone,
-                website: location.website
-            }
-        };
-        setLocationDetails(details);
+        if (locationDetails?.name !== location.name) {
+            const searchQuery = `${location.name}${location.website && `+ ${location.website}`}`;
+
+            const placesData = await readPlace(searchQuery);
+            const details = {
+                name: location.name,
+                distance: location.distance,
+                bookmarked: location.bookmarked,
+                visited: location.visited,
+                image: placesData.image,
+                details: {
+                    type: location.type,
+                    address: location.address,
+                    hours: placesData.hours,
+                    phone: placesData.phone,
+                    website: location.website
+                }
+            };
+            setLocationDetails(details);            
+        }
+
         setDetailsLoading(false);
     };
 
@@ -113,9 +128,18 @@ const LocationsScreen = () => {
 
     const handleTabs = ({ tab, location }) => {
         switch (tab) {
-        case "directions":
-            // Redirect to GMaps
+        case "directions": {
+            const destination = location.coordinates
+                ? encodeURIComponent(`${location.coordinates.lat},${location.coordinates.lng}`)
+                : location.address
+                    ? encodeURIComponent(replace(location.address, " ", "+"))
+                    : encodeURIComponent(replace(location.name, " ", "+"));
+            const origin = userCoords
+                ? encodeURIComponent(`${userCoords.lat},${userCoords.lng}`)
+                : "";
+            window.open(`${gMapsLink}destination=${destination}&origin=${origin ?? ""}`);
             break;
+        }
         case "bookmark":
             // Add to Bookmarks
             break;
@@ -171,9 +195,11 @@ const LocationsScreen = () => {
             userCoords: userCoords ?? coords
         };
 
-        let newLocations = await getLocationsList(params);
+        let newLocations = await readLocations(params);
         newLocations = newList ? locations.concat(newLocations) : newLocations;
         setLocations(newLocations);
+
+        newLocations.length > 0 && setMapInitialCoords(newLocations[0].coordinates);
 
         setLoading(false);
     };
@@ -192,20 +218,47 @@ const LocationsScreen = () => {
 
     const detailsTabsWithHandle = detailsTabs.map((tab) => ({ ...tab, onPress: handleTabs }));
 
+    const renderFilterTags = () => {
+        return Object.keys(filters).map((filter) => {
+            if (filter !== "sort" && filters[filter]) {
+                return (
+                    <Tag key={filter} closable onClose={() => handleFilterTag(filter)}>
+                        {`${startCase(filter)}: ${startCase(filters[filter])}`}
+                    </Tag>
+                );
+            }
+        });
+    };
+
     return (
         <Layout className={mapView ? "map-view" : "list-view"}>
-            {mapView && (
-                <LocationsMap
-                    loading={loading}
-                    locations={locations}
-                    handleDetails={handleDetails}
-                />
-            )}
+            <AnimatePresence exitBeforeEnter>
+                {mapView && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 1, ease: "easeInOut" }}
+                    >
+                        <LocationsMap
+                            loading={loading}
+                            locations={locations}
+                            handleDetails={handleDetails}
+                            coords={mapInitialCoords}
+                        />                        
+                    </motion.div>
+                )}                
+            </AnimatePresence>
+
 
             <Top>
                 <SearchBar className="search" handleSearch={handleSearch} />
                 <Icon className="filter" component={FilterIcon} onClick={handleFilterToggle} />
             </Top>
+
+            {Object.keys(filters).length > 1 && (
+                <div className="filter-tags">{renderFilterTags()}</div>
+            )}
 
             <LocationsFilter
                 initialValues={defaultFilters}
@@ -224,9 +277,20 @@ const LocationsScreen = () => {
             />
 
             <span className="icon-buttons">
-                {!mapView && scrollArrowVisible && (
-                    <CircleIconBtn icon={<ArrowUpOutlined onClick={handleScrollArrowClick} />} />
-                )}
+                <AnimatePresence exitBeforeEnter>
+                    {!mapView && scrollArrowVisible && (
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transitition={{ duration: 0.5, ease: "easeInOut" }}
+                        >
+                            <CircleIconBtn
+                                icon={<ArrowUpOutlined onClick={handleScrollArrowClick} />}
+                            />
+                        </motion.div>
+                    )}
+                </AnimatePresence>
                 <LocationsAccess userCoords={userCoords} handleClick={handleLocationsAccess} />
                 <CircleIconBtn
                     className="view-toggle"
@@ -234,18 +298,29 @@ const LocationsScreen = () => {
                     onClick={handleViewToggle}
                 />
             </span>
+            
+            <AnimatePresence exitBeforeEnter>
+                {!mapView && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 1, ease: "easeInOut" }}
+                    >
+                        <LocationsList
+                            loading={loading}
+                            detailsLoading={detailsLoading}
+                            locations={locations}
+                            hasMore={locations.length < locationsCount}
+                            handleTabs={handleTabs}
+                            handleDetails={handleDetails}
+                            handleScroll={handleScroll}
+                            handleScrollArrow={handleScrollArrow}
+                        />
+                    </motion.div>
+                )}                
+            </AnimatePresence>
 
-            {!mapView && (
-                <LocationsList
-                    loading={loading}
-                    locations={locations}
-                    hasMore={locations.length < locationsCount}
-                    handleTabs={handleTabs}
-                    handleDetails={handleDetails}
-                    handleScroll={handleScroll}
-                    handleScrollArrow={handleScrollArrow}
-                />
-            )}
         </Layout>
     );
 };

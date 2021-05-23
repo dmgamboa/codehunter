@@ -85,6 +85,7 @@ const StyledDrawer = styled(Drawer)`
 
         .am-tab-bar {
             padding: 0.25rem;
+            cursor: pointer;
         }
 
         .am-tab-bar-tab {
