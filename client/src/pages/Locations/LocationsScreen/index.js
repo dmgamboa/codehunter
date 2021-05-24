@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Tag } from "antd";
+import { Tag, Form } from "antd";
 import { motion, AnimatePresence } from "framer-motion";
 import Icon, { UnorderedListOutlined, ArrowUpOutlined } from "@ant-design/icons";
 import startCase from "lodash/startCase";
@@ -24,6 +24,8 @@ import { readLocations, readPlace } from "../axios";
 import { message } from "antd";
 
 const LocationsScreen = () => {
+    const [form] = Form.useForm();
+
     const [locations, setLocations] = useState([]);
     const [locationsCount, setLocationsCount] = useState(500);
     const [locationDetails, setLocationDetails] = useState(null);
@@ -72,8 +74,9 @@ const LocationsScreen = () => {
 
     const handleFilterTag = (filter) => {
         let newFilters = { ...filters };
-        delete newFilters[filter];
+        newFilters[filter] = undefined;
         setFilters(newFilters);
+        form.setFieldsValue(newFilters);
     };
 
     const handleDetailsClose = () => {
@@ -261,6 +264,7 @@ const LocationsScreen = () => {
             )}
 
             <LocationsFilter
+                form={form}
                 initialValues={defaultFilters}
                 visible={filtersVisible}
                 onClose={handleFilterToggle}
