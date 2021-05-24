@@ -1,7 +1,14 @@
+import { motion } from "framer-motion";
 import styled from "styled-components";
 
-const StyledLogin = styled.div`
+const StyledLogin = styled(motion.div)`
     /* margin: 150px 10% 0 10%; */
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+
     .login {
         width: 100%;
     }

@@ -2,7 +2,12 @@ import styled from "styled-components";
 
 const StyledRegistration = styled.div`
     /* margin: 50px 10% 0 10%; */
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     width: 100%;
+    
     .signup {
         margin-bottom: 60px;
         display: flex;

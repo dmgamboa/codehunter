@@ -34,94 +34,87 @@ const Login = () => {
     };
 
     return (
-        <motion.div
+        <StyledLogin
             style={{ width: "100%" }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 1, ease: "easeInOut" }}
         >
-            <StyledLogin className="login">
-                <h1 className="welcome"> Welcome Back to CodeHunter.</h1>
+            <h1 className="welcome"> Welcome Back to CodeHunter.</h1>
 
-                <Form
-                    name="normal_login"
-                    className="login-form"
-                    initialValues={{
-                        remember: true
-                    }}
-                    ref={valuesRef}
-                    onFinish={onFinish}
+            <Form
+                name="normal_login"
+                className="login-form"
+                initialValues={{
+                    remember: true
+                }}
+                ref={valuesRef}
+                onFinish={onFinish}
+            >
+                {/* email field */}
+                <Form.Item
+                    name="email"
+                    rules={[
+                        {
+                            type: "email",
+                            message: "The input is not valid E-mail!"
+                        },
+                        {
+                            required: true,
+                            message: "Please input your E-mail!"
+                        }
+                    ]}
                 >
-                    {/* email field */}
-                    <Form.Item
-                        name="email"
-                        rules={[
-                            {
-                                type: "email",
-                                message: "The input is not valid E-mail!"
-                            },
-                            {
-                                required: true,
-                                message: "Please input your E-mail!"
-                            }
-                        ]}
-                    >
-                        <Input
-                            prefix={<MailOutlined className="site-form-item-icon" />}
-                            placeholder="Email"
-                        />
-                    </Form.Item>
+                    <Input
+                        prefix={<MailOutlined className="site-form-item-icon" />}
+                        placeholder="Email"
+                    />
+                </Form.Item>
 
-                    {/* Password field */}
-                    <Form.Item
-                        name="password"
-                        rules={[
-                            {
-                                required: true,
-                                message: "Please input your Password!"
-                            }
-                        ]}
-                    >
-                        <Input
-                            prefix={<LockOutlined className="site-form-item-icon" />}
-                            type="password"
-                            placeholder="Password"
-                        />
-                    </Form.Item>
+                {/* Password field */}
+                <Form.Item
+                    name="password"
+                    rules={[
+                        {
+                            required: true,
+                            message: "Please input your Password!"
+                        }
+                    ]}
+                >
+                    <Input
+                        prefix={<LockOutlined className="site-form-item-icon" />}
+                        type="password"
+                        placeholder="Password"
+                    />
+                </Form.Item>
 
-                    {/* Remember me check box */}
-                    <Form.Item>
-                        {/* Button previously an a tag */}
-                        <a className="login-form-forgot" href="#">
-                            Forgot password
-                        </a>
-                    </Form.Item>
+                {/* Remember me check box */}
+                <Form.Item>
+                    {/* Button previously an a tag */}
+                    <a className="login-form-forgot" href="#">
+                        Forgot password
+                    </a>
+                </Form.Item>
 
-                    {/* login button */}
-                    <Form.Item className="login-btn">
-                        <Button
-                            type="primary"
-                            htmlType="submit"
-                            className="login-form-button"
-                            block
-                        >
-                            Log in
-                        </Button>
-                    </Form.Item>
+                {/* login button */}
+                <Form.Item className="login-btn">
+                    <Button type="primary" htmlType="submit" className="login-form-button" block>
+                        Log in
+                    </Button>
+                </Form.Item>
 
-                    <p>
-                        Or <Link to="/account/register">register now</Link>
-                    </p>
+                <p>
+                    Or <Link to="/account/register">register now</Link>
+                </p>
 
-                    <div className="alternative">
-                        <AppleOutlined />
-                        <FacebookOutlined />
-                        <TwitterOutlined />
-                    </div>
-                </Form>
-            </StyledLogin>
-        </motion.div>
+                <div className="alternative">
+                    <AppleOutlined />
+                    <FacebookOutlined />
+                    <TwitterOutlined />
+                </div>
+            </Form>
+        </StyledLogin>
     );
 };
 
