@@ -6,6 +6,14 @@ export const StyledScanner = styled.div`
     transform: translateY(-50%);
     width: 100%;
 
+    &.error {
+        position: relative;
+
+        section {
+            display: none;
+        }
+    }
+
     section {
         width: 100%;
         height: 100vh;

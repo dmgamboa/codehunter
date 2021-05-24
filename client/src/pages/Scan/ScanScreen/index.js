@@ -3,6 +3,7 @@ import QrReader from "react-qr-reader";
 
 import { useAuth } from "../../../context/Auth";
 
+import ScanAccess from "../ScanAccess";
 import ScanModal from "../ScanModal";
 import { handleCodeScan } from "../axios";
 import { StyledScanner } from "./styled";
@@ -15,6 +16,7 @@ const ScanScreen = () => {
     const [points, setPoints] = useState({});
     const [code, setCode] = useState(null);
     const [error, setError] = useState("");
+    const [cameraError, setCameraError] = useState("");
     const [modalVisible, setModalVisible] = useState(false);
 
     const handleModal = () => {
@@ -51,13 +53,16 @@ const ScanScreen = () => {
     };
 
     return (
-        <StyledScanner>
+        <StyledScanner className={cameraError && "error"}>
             <QrReader
                 delay={1000}
+                onError={(e) => setCameraError(e.name)}
                 onScan={(data) => {
+                    cameraError && setCameraError("");
                     !modalVisible && data && data !== code && handleScan(data);
                 }}
             />
+            {cameraError && <ScanAccess error={cameraError.toString()}/>}
             <ScanModal error={error} visible={modalVisible} onClose={handleModal} points={points} />
         </StyledScanner>
     );
