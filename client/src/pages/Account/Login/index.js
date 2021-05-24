@@ -5,7 +5,7 @@ import {
     LockOutlined,
     AppleOutlined,
     FacebookOutlined,
-    TwitterOutlined,
+    TwitterOutlined
 } from "@ant-design/icons";
 import { Form, Input, Button, message } from "antd";
 
@@ -35,6 +35,7 @@ const Login = () => {
 
     return (
         <motion.div
+            style={{ width: "100%" }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -47,7 +48,7 @@ const Login = () => {
                     name="normal_login"
                     className="login-form"
                     initialValues={{
-                        remember: true,
+                        remember: true
                     }}
                     ref={valuesRef}
                     onFinish={onFinish}
@@ -58,12 +59,12 @@ const Login = () => {
                         rules={[
                             {
                                 type: "email",
-                                message: "The input is not valid E-mail!",
+                                message: "The input is not valid E-mail!"
                             },
                             {
                                 required: true,
-                                message: "Please input your E-mail!",
-                            },
+                                message: "Please input your E-mail!"
+                            }
                         ]}
                     >
                         <Input
@@ -78,8 +79,8 @@ const Login = () => {
                         rules={[
                             {
                                 required: true,
-                                message: "Please input your Password!",
-                            },
+                                message: "Please input your Password!"
+                            }
                         ]}
                     >
                         <Input
@@ -99,7 +100,12 @@ const Login = () => {
 
                     {/* login button */}
                     <Form.Item className="login-btn">
-                        <Button type="primary" htmlType="submit" className="login-form-button">
+                        <Button
+                            type="primary"
+                            htmlType="submit"
+                            className="login-form-button"
+                            block
+                        >
                             Log in
                         </Button>
                     </Form.Item>

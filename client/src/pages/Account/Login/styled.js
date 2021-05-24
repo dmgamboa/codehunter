@@ -1,11 +1,16 @@
 import styled from "styled-components";
 
 const StyledLogin = styled.div`
-    margin: 150px 10% 0 10%;
+    /* margin: 150px 10% 0 10%; */
+    .login {
+        width: 100%;
+    }
+
     .welcome {
         color: steelblue;
-        text-align: left;
-        width: 150px;
+        text-align: center;
+        /* text-align: left;
+        width: 150px; */
     }
     .ant-form-item-control-input-content {
         display: flex;
@@ -14,9 +19,6 @@ const StyledLogin = styled.div`
     .login-btn {
         display: flex;
         flex-direction: row;
-        .login-form-button {
-            width: 100%;
-        }
     }
     .alternative {
         margin-top: 60px;

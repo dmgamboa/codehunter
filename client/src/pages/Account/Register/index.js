@@ -199,7 +199,7 @@ const Register = () => {
                                     ),
                         },
                     ]}
-                    {...tailFormItemLayout}
+                    // {...tailFormItemLayout}
                 >
                     <Checkbox>
                         I have read the <a href="">agreement</a>
@@ -207,12 +207,14 @@ const Register = () => {
                 </Form.Item>
 
                 {/* register button */}
-                <Form.Item {...tailFormItemLayout}>
+                {/* <Form.Item {...tailFormItemLayout}> */}
+                <Form.Item>
                     <Button
                         disabled={loading}
                         type="primary"
                         htmlType="submit"
-                        className="full-length"
+                        // className="full-length"
+                        block
                     >
                         Register
                     </Button>
