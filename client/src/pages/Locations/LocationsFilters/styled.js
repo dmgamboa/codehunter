@@ -37,6 +37,10 @@ const StyledDrawer = styled(Drawer)`
         .ant-radio-button-wrapper {
             flex: 1;
 
+            span {
+                white-space: nowrap;
+            }
+
             &:first-of-type {
                 border-top-left-radius: 1.5rem;
                 border-bottom-left-radius: 1.5rem;

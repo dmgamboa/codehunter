@@ -16,8 +16,7 @@ import theme from "../../../context/themes/main";
 import { locationTypes, neighborhoods } from "./constant";
 import StyledDrawer from "./styled";
 
-const LocationsFilters = ({ visible, onClose, onFinish, initialValues, hasUserCoords }) => {
-    const [form] = Form.useForm();
+const LocationsFilters = ({ form, visible, onClose, onFinish, initialValues, hasUserCoords }) => {
     const { Option } = Select;
     const { colors } = theme;
 

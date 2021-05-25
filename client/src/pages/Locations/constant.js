@@ -1,7 +1,7 @@
 import Icon, { CloseCircleOutlined } from "@ant-design/icons";
 
-import { ReactComponent as GoogleMapsIcon } from "../../../assets/icons/google-maps.svg";
-import { ReactComponent as BookmarkIcon } from "../../../assets/icons/bookmark.svg";
+import { ReactComponent as GoogleMapsIcon } from "../../assets/icons/google-maps.svg";
+import { ReactComponent as BookmarkIcon } from "../../assets/icons/bookmark.svg";
 
 export const detailsTabs = [
     {
