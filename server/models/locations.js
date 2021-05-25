@@ -21,17 +21,22 @@ const readLocations = (req) => {
         const limit = (req.query.limit ? parseInt(req.query.limit) : 10);
         const skip = (page - 1) * limit;
         const filterReq = req.query.filters;
+        const sort = req.query.sort;
 
         let filters = {};
         if (filterReq) {
             for (const filter in filterReq) {
                 if (filterReq[filter]) {
-                    filters[`fields.${filter}`] = filterReq[filter];
+                    if (filter === "_id" || filter === "$text") {
+                        filters[filter] = filterReq[filter];
+                    } else {
+                        filters[`fields.${filter}`] = filterReq[filter];
+                    }
                 }
             }
         }
 
-        Location.find(filters, {}, { skip, limit }).exec((err, data) => {
+        Location.find(filters, {}, { skip, limit }).sort(sort).exec((err, data) => {
             if (err) {
                 return rej(err);
             }
