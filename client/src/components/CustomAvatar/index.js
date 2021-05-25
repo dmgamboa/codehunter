@@ -1,8 +1,21 @@
-import { Avatar } from "antd";
+import Icon from "@ant-design/icons";
 
-const CustomAvatar = ({ photo }) => {
+import { placeholders } from "./constant";
+import { StyledAvatar } from "./styled";
+
+const CustomAvatar = ({ photo, background = "white" }) => {
+    const getRandomAvatar = (placeholders) => {
+        const index = Math.floor(Math.random() * placeholders.length);
+        return placeholders[index];
+    };
+
     return (
-        <Avatar className="custom-avatar"/>
+        <StyledAvatar
+            className="custom-avatar"
+            style={{ background }}
+            src={photo && photo}
+            icon={!photo && <Icon component={getRandomAvatar(placeholders)} />}
+        />
     );
 };
 

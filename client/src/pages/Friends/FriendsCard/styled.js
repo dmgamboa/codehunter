@@ -21,8 +21,8 @@ export const StyledCard = styled(Card)`
         padding: 0.5rem;
         width: 100%;
         display: grid;
-        grid-template-columns: 10% 75% 5%;
-        column-gap: 1rem;
+        grid-template-columns: 15% 70% 5%;
+        column-gap: 0.5rem;
         align-items: center;
         justify-content: center;
 
@@ -33,6 +33,8 @@ export const StyledCard = styled(Card)`
 
     .ant-avatar {
         grid-column: 1;
+        height: 100%;
+        width: 100%;
     }
 
     .text {
