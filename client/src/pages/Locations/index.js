@@ -265,7 +265,7 @@ const Locations = () => {
 
             <Top>
                 <ConditionalWrapper
-                    condition={true}
+                    condition={filters.sort === "distance"}
                     wrapper={(children) => (
                         <Tooltip
                             placement="bottom"
