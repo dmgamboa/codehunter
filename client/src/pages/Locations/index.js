@@ -11,6 +11,7 @@ import { ReactComponent as FilterIcon } from "../../assets/icons/filters.svg";
 import CircleIconBtn from "../../components/CircleIconBtn";
 import SearchBar from "../../components/SearchBar";
 import { calculateDistance } from "../../util/calculateDistance";
+import { useAuth } from "../../context/Auth";
 
 import LocationsFilter from "./LocationsFilters";
 import LocationDetails from "../../components/LocationDetails";
@@ -25,6 +26,7 @@ import { message } from "antd";
 
 const Locations = () => {
     const [form] = Form.useForm();
+    const { getUser } = useAuth();
 
     const [locations, setLocations] = useState([]);
     const [locationsCount, setLocationsCount] = useState(500);
@@ -183,15 +185,17 @@ const Locations = () => {
     const handleLocations = async ({ coords, newList }) => {
         setLoading(true);
 
-        const { sort } = filters;
-
-        const searchAndFilter = {
-            ...filters,
-            cultural_space_name: search
-        };
-        delete searchAndFilter.sort;
+        const { sort, visited } = filters;
+        const userToken = getUser();
+        
+        let searchAndFilter = {};
+        if (search) {
+            searchAndFilter["$text"] = { $search: search };
+        }
 
         const params = {
+            userToken,
+            userFields: visited && "redeemed",
             sort,
             filters: searchAndFilter,
             page,
