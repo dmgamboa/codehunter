@@ -12,6 +12,7 @@ import { Layout, Filters, StyledInfiniteScroll } from "./styled";
 import { Tag, Tabs } from "antd";
 
 import CircleIconBtn from "../../components/CircleIconBtn";
+import Counter from "../../components/Counter";
 import RewardCard from "./RewardCard";
 import { useAuth } from "../../context/Auth";
 import { getRewards } from "./axios";
@@ -24,7 +25,8 @@ const Rewards = () => {
     const rewardTabPanes = ["All", "Food", "Accessories", "Activities", "Tech"];
 
     // eslint-disable-next-line no-unused-vars
-    const [category, setCategory] = useState(getUserData().points + " pts");
+    const [currentPoints, setCurrentPoints] = useState(0);
+    const [updatedPoints, setUpdatedPoints] = useState(getUserData().points);
 
     // Querying and infinite scroll
     const [categoryQuery, setCategoryQuery] = useState("all");
@@ -63,6 +65,12 @@ const Rewards = () => {
         }
         return icons;
     };
+
+    // Updates userPoints on UI
+    const updateUserPoints = async () => {
+        setCurrentPoints(updatedPoints);
+        setUpdatedPoints(getUserData().points);
+    }; 
 
     // Handle click on filter tags
     const handleFilterTag = (tag) => {
@@ -122,6 +130,7 @@ const Rewards = () => {
                             description={rewardInfo.description}
                             cost={rewardInfo.cost}
                             availability={icons}
+                            update={updateUserPoints}
                         ></RewardCard>
                     </div>
                 );
@@ -182,7 +191,7 @@ const Rewards = () => {
                 <Tabs
                     className="tabs"
                     defaultActiveKey="all"
-                    tabBarExtraContent={category}
+                    tabBarExtraContent={<><Counter from={currentPoints} to={updatedPoints} /> pts</>}
                     onChange={(key) => handleCategory(key)}
                     id="scrollableTabPane"
 

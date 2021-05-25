@@ -1,5 +1,5 @@
 import express from "express";
-import { massWriteRewards, getRewards, getCodeForReward } from "../models/rewards.js";
+import { massWriteRewards, getRewards, getCodeForReward, setUserPoints } from "../models/rewards.js";
 
 const router = express.Router();
 
@@ -33,6 +33,18 @@ router.get("/getCodeForReward", async (req, res) => {
         const params = req.query;
         const code = await getCodeForReward(params);
         res.send(code);
+    } catch (err) {
+        console.log(err);
+    }
+});
+
+router.post("/setUserPoints", async (req, res) => {
+    try {
+        const userId = req.body._id;
+        const rewardCost = req.body.rewardCost;
+        const updatedUserData = await setUserPoints(userId, rewardCost);
+
+        res.send(updatedUserData);
     } catch (err) {
         console.log(err);
     }

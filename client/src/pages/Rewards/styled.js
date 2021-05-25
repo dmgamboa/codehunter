@@ -84,6 +84,9 @@ export const Layout = styled.div`
     .ant-tabs-top > .ant-tabs-nav .ant-tabs-nav-wrap::before {
         box-shadow: inset 10px 0 8px -8px rgb(0 0 0 / 30%);
     }
+    .ant-tabs-extra-content {
+        padding-left: 0.5rem;
+    }
 `;
 
 export const Filters = styled.div`

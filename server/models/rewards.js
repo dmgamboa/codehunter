@@ -1,4 +1,4 @@
-import { Reward } from "./schema.js";
+import { Reward, User } from "./schema.js";
 
 // Used to write documents into rewards collection (see schema.js for details)
 export const massWriteRewards = async (documents) => {
@@ -63,6 +63,29 @@ export const getCodeForReward = async (query) => {
             const result = await Reward.findOne(query);
 
             return res("UNIQUECODE");
+        } catch (err) {
+            return rej(err);
+        }
+    });
+};
+
+export const setUserPoints = async (userId, rewardCost) => {
+    const parsedId = JSON.parse(userId);
+    return new Promise(async (res, rej) => {
+        try {
+            const currentPoints = await User.findOne({ _id: parsedId }, {"points": 1, _id: 0});
+ 
+            if(rewardCost > currentPoints.points) {
+                return res(false);
+            } else {
+                const updatedUserData = await User.findOneAndUpdate(
+                    { _id: parsedId },
+                    { $inc: { "points": -rewardCost} },
+                    { new: true }
+                );
+                
+                return res(updatedUserData);
+            }
         } catch (err) {
             return rej(err);
         }
