@@ -1,57 +1,16 @@
 import { ListStyled, HistoryListStyled } from "./LocationsListStyled";
+import renderHistoryList from "./Location";
 
-function LocationsList() {
+const LocationsList = ({history}) => {
+    console.log(history);
     return (
-        <>
-            <HistoryListStyled>
-                <h1>History</h1>
-                <ListStyled className="locationList">
-                    <div>
-                        <p>
-                            <span className="location-name">name</span>
-                            <span className="location-date">date</span>
-                            <span className="location-points">points</span>
-                        </p>
-                    </div>
-                    <div>
-                        <p>
-                            <span className="location-name">name</span>
-                            <span className="location-date">date</span>
-                            <span className="location-points">points</span>
-                        </p>
-                    </div>
-                    <div>
-                        <p>
-                            <span className="location-name">name</span>
-                            <span className="location-date">date</span>
-                            <span className="location-points">points</span>
-                        </p>
-                    </div>
-                    <div>
-                        <p>
-                            <span className="location-name">name</span>
-                            <span className="location-date">date</span>
-                            <span className="location-points">points</span>
-                        </p>
-                    </div>
-                    <div>
-                        <p>
-                            <span className="location-name">name</span>
-                            <span className="location-date">date</span>
-                            <span className="location-points">points</span>
-                        </p>
-                    </div>
-                    <div>
-                        <p>
-                            <span className="location-name">name</span>
-                            <span className="location-date">date</span>
-                            <span className="location-points">points</span>
-                        </p>
-                    </div>
-                </ListStyled>
-            </HistoryListStyled>
-        </>
+        <HistoryListStyled>
+            <h1>History</h1>
+            <ListStyled className="locationList">
+                {history && renderHistoryList(history)}
+            </ListStyled>
+        </HistoryListStyled>
     );
-}
+};
 
 export default LocationsList;
