@@ -13,7 +13,7 @@ export const Layout = styled.div`
         }
     }
 
-    .anticon {
+    .anticon-trophy {
         color: ${colors.secondary};
     }
 
