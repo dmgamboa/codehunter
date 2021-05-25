@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Tag, Form } from "antd";
+import { Tag, Form, Tooltip, message } from "antd";
 import { motion, AnimatePresence } from "framer-motion";
 import Icon, { UnorderedListOutlined, ArrowUpOutlined } from "@ant-design/icons";
 import startCase from "lodash/startCase";
@@ -10,8 +10,10 @@ import { ReactComponent as FilterIcon } from "../../assets/icons/filters.svg";
 
 import CircleIconBtn from "../../components/CircleIconBtn";
 import SearchBar from "../../components/SearchBar";
+import ConditionalWrapper from "../../components/ConditionalWrapper";
 import { calculateDistance } from "../../util/calculateDistance";
 import { useAuth } from "../../context/Auth";
+import theme from "../../context/themes/main";
 
 import LocationsFilter from "./LocationsFilters";
 import LocationDetails from "../../components/LocationDetails";
@@ -22,11 +24,11 @@ import LocationsAccess from "./LocationsAccess";
 import { Layout, Top } from "./styled";
 import { detailsTabs, defaultFilters, gMapsLink } from "./constant";
 import { readLocations, readPlace } from "./axios";
-import { message } from "antd";
 
 const Locations = () => {
     const [form] = Form.useForm();
     const { getUser } = useAuth();
+    const { colors } = theme;
 
     const [locations, setLocations] = useState([]);
     const [locationsCount, setLocationsCount] = useState(500);
@@ -108,7 +110,7 @@ const Locations = () => {
                     website: location.website
                 }
             };
-            setLocationDetails(details);            
+            setLocationDetails(details);
         }
 
         setDetailsLoading(false);
@@ -187,10 +189,14 @@ const Locations = () => {
 
         const { sort, visited } = filters;
         const userToken = getUser();
-        
+
         let searchAndFilter = {};
         if (search) {
             searchAndFilter["$text"] = { $search: search };
+        }
+
+        if (sort === "distance") {
+            delete searchAndFilter["$text"];
         }
 
         const params = {
@@ -252,14 +258,32 @@ const Locations = () => {
                             locations={locations}
                             handleDetails={handleDetails}
                             coords={mapInitialCoords}
-                        />                        
+                        />
                     </motion.div>
-                )}                
+                )}
             </AnimatePresence>
 
-
             <Top>
-                <SearchBar className="search" handleSearch={handleSearch} />
+                <ConditionalWrapper
+                    condition={true}
+                    wrapper={(children) => (
+                        <Tooltip
+                            placement="bottom"
+                            color={colors.secondary}
+                            title="Cannot use search when sorting by distance."
+                        >
+                            {children}
+                        </Tooltip>
+                    )}
+                >
+                    <div className="search-bar">
+                        <SearchBar
+                            className="search"
+                            handleSearch={handleSearch}
+                            disabled={filters.sort === "distance"}
+                        />
+                    </div>                          
+                </ConditionalWrapper>
                 <Icon className="filter" component={FilterIcon} onClick={handleFilterToggle} />
             </Top>
 
@@ -306,7 +330,7 @@ const Locations = () => {
                     onClick={handleViewToggle}
                 />
             </span>
-            
+
             <AnimatePresence exitBeforeEnter>
                 {!mapView && (
                     <motion.div
@@ -326,9 +350,8 @@ const Locations = () => {
                             handleScrollArrow={handleScrollArrow}
                         />
                     </motion.div>
-                )}                
+                )}
             </AnimatePresence>
-
         </Layout>
     );
 };

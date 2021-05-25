@@ -50,6 +50,10 @@ export const Top = styled.div`
     align-items: center;
     margin-bottom: 1rem;
 
+    .search-bar {
+        width: 100%;
+    }
+
     .filter {
         z-index: 1;
         margin-left: 1rem;
