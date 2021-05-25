@@ -63,8 +63,7 @@ const Scan = () => {
                     !modalVisible && data && data !== code && handleScan(data);
                 }}
             />
-            <ScanOverlay />
-            {cameraError && <ScanAccess error={cameraError.toString()}/>}
+            {cameraError ? <ScanAccess error={cameraError.toString()}/> : <ScanOverlay/>}
             <ScanModal error={error} visible={modalVisible} onClose={handleModal} points={points} />
         </StyledScanner>
     );
