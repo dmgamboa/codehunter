@@ -5,7 +5,7 @@ import Lottie from "react-lottie";
 
 import { ReactComponent as DisappointedDoge } from "../../../assets/icons/doge/relax.svg";
 import { ReactComponent as HappyDoge } from "../../../assets/icons/doge/happy.svg";
-import { ReactComponent as TsundereDoge } from "../../../assets/icons/doge/annoying.svg";
+import TsundereDoge from "../../../components/TsundereDoge";
 import Confetti from "../../../assets/lottie/confetti.json";
 import Counter from "../../../components/Counter";
 import WindowHeight from "../../../context/themes/WindowSize";
@@ -52,7 +52,7 @@ const ScanModal = ({ error, onClose, visible, points }) => {
                             animate={{ scale: [0, 1.5, 1] }}
                             transition={{ duration: confettiDuration, ease: "easeInOut" }}
                         >
-                            <TsundereDoge />
+                            <TsundereDoge duration={2} delay={confettiDuration}/>
                         </motion.div>
                     ) : (
                         <motion.div
