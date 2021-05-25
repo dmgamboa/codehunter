@@ -14,7 +14,7 @@ import { StyledModal } from "./styled";
 
 const ScanModal = ({ error, onClose, visible, points }) => {
     const window = WindowHeight();
-
+    
     const errorMessages = ["Wait a second ...", "Holup...", "Uh oh..."];
     const successMessages = ["Wow!", "You're amazing!", "Keep it up!", "Took you a while..."];
     const lottieOptions = {
@@ -22,6 +22,7 @@ const ScanModal = ({ error, onClose, visible, points }) => {
         autoplay: true,
         animationData: Confetti
     };
+    const confettiDuration = 1;
 
     let tsundereDoge;
 
@@ -49,15 +50,15 @@ const ScanModal = ({ error, onClose, visible, points }) => {
                         <motion.div
                             className="doge"
                             animate={{ scale: [0, 1.5, 1] }}
-                            transition={{ duration: 1, ease: "easeInOut" }}
+                            transition={{ duration: confettiDuration, ease: "easeInOut" }}
                         >
                             <TsundereDoge />
                         </motion.div>
                     ) : (
                         <motion.div
                             className="doge"
-                            animate={{ scale: [0, 1.5, 1] }}
-                            transition={{ duration: 1, ease: "easeInOut" }}
+                            animate={{ scale: [0, 1.5, 1], rotate: [-15, 15] }}
+                            transition={{ duration: confettiDuration, ease: "easeInOut", rotate: { delay: confettiDuration, repeat: Infinity, repeatDelay: 0.25, type: "spring", repeatType: "reverse" } }}
                         >
                             <HappyDoge />
                         </motion.div>
@@ -88,7 +89,7 @@ const ScanModal = ({ error, onClose, visible, points }) => {
                     <div className="new-points">
                         You now have
                         <span className="points">
-                            <Counter from={points.old} to={points.new} /> points
+                            <Counter from={points.old} to={points.new} delay={confettiDuration}/> points
                         </span>
                         .
                     </div>
