@@ -19,18 +19,18 @@ import { ReactComponent as Logo } from "../../../assets/icons/logo.svg";
 import Icon from "@ant-design/icons";
 
 const Register = () => {
-    const tailFormItemLayout = {
-        wrapperCol: {
-            xs: {
-                span: 24,
-                offset: 0,
-            },
-            sm: {
-                span: 16,
-                offset: 8,
-            },
-        },
-    };
+    // const tailFormItemLayout = {
+    //     wrapperCol: {
+    //         xs: {
+    //             span: 24,
+    //             offset: 0,
+    //         },
+    //         sm: {
+    //             span: 16,
+    //             offset: 8,
+    //         },
+    //     },
+    // };
 
     var valuesRef = useRef();
     var { signup, getUser } = useAuth();
@@ -199,7 +199,7 @@ const Register = () => {
                                     ),
                         },
                     ]}
-                    {...tailFormItemLayout}
+                    // {...tailFormItemLayout}
                 >
                     <Checkbox>
                         I have read the <a href="">agreement</a>
@@ -207,12 +207,14 @@ const Register = () => {
                 </Form.Item>
 
                 {/* register button */}
-                <Form.Item {...tailFormItemLayout}>
+                {/* <Form.Item {...tailFormItemLayout}> */}
+                <Form.Item>
                     <Button
                         disabled={loading}
                         type="primary"
                         htmlType="submit"
-                        className="full-length"
+                        // className="full-length"
+                        block
                     >
                         Register
                     </Button>

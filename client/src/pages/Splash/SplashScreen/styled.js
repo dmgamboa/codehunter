@@ -3,8 +3,6 @@ import styled from "styled-components";
 export const Container = styled.div`
     margin: 0;
     padding: 0;
-    width: 100vw;
-    height: 100vh;
     background-image: linear-gradient(to right bottom, #08497e, #005684, #006286, #006d86, #007884, #057f83, #168681, #278c7e, #30917e, #3a977d, #449c7c, #4ea17a);
     overflow: hidden;
 `;

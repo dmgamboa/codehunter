@@ -9,12 +9,14 @@ import { ReactComponent as ClosedDoge } from "../../assets/icons/doge/awkward.sv
 import { ReactComponent as OpenDoge } from "../../assets/icons/doge/dizzy.svg";
 import { ReactComponent as HappyDoge } from "../../assets/icons/doge/love.svg";
 import EasterEgg from "../../assets/lottie/easter-egg.json";
+import WindowSize from "../../context/themes/WindowSize";
 
 import { Container } from "./styled";
 
 const PageNotFound = () => {
     const key = ["up", "up", "down", "down", "left", "right", "left", "right"];
     const doge = useAnimation();
+    const window = WindowSize();
 
     const [bounce, setBounce] = useState(true);
     const [swipes, setSwipes] = useState([]);
@@ -82,7 +84,7 @@ const PageNotFound = () => {
     }, [bounce]);
 
     return (
-        <Container {...getSwipes}>
+        <Container {...getSwipes} style={{ height: window.height }}>
             {success && (<div className="easter-egg"><Lottie options={lottieOptions}/></div>)}
             <motion.div
                 variants={variants}
@@ -101,12 +103,16 @@ const PageNotFound = () => {
 
             <h1>Well, this is awkward...</h1>
             <p>
-                We can&apos;t seem to find the page you&apos;re looking for. Please log in and try
-                again.
+                We can&apos;t seem to find the page you&apos;re looking for. Be honest ... just how lost are you right now?
             </p>
             <Link to="/account/login/" className="link">
+                <Button type="secondary" block>
+                    Just took a wrong turn.
+                </Button>
+            </Link>
+            <Link to="/walkthrough" className="link">
                 <Button type="primary" block>
-                    Log In
+                    What&apos;s a CodeHunter?
                 </Button>
             </Link>
         </Container>
