@@ -31,6 +31,19 @@ const Friends = () => {
         console.log("handleScroll");
     };
 
+    const handleMenu = (key) => {
+        switch (key) {
+        case "view":
+            break;
+        case "add":
+            break;
+        case "pending":
+            break;
+        case "sent":
+            break;
+        }
+    };
+
     const renderTabPanes = (tabs) => {
         return tabs.map((tab) => {
             return <TabPane key={tab.toLowerCase()} tab={tab} />;
@@ -40,12 +53,18 @@ const Friends = () => {
     const renderFriendsList = (friends) => {
         return friends.map((friend) => {
             const status = tab === "all" ? "friends" : tab && tab;
-            return <FriendsCard key={friend.name} friend={friend} status={status} />;
+            return (
+                <FriendsCard
+                    key={friend.name}
+                    friend={friend}
+                    status={status}
+                    handleMenu={handleMenu}
+                />
+            );
         });
     };
 
-    useEffect(() => {
-    }, [tab]);
+    useEffect(() => {}, [tab]);
 
     return (
         <Layout>

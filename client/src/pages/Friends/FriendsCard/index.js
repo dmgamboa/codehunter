@@ -7,7 +7,7 @@ import CustomAvatar from "../../../components/CustomAvatar/";
 import { options } from "./constant";
 import { StyledCard } from "./styled";
 
-const FriendsCard = ({ friend, status }) => {
+const FriendsCard = ({ friend, status, handleMenu }) => {
     const { SubMenu, Item } = Menu;
 
     const getMenuOptions = (status) => {
@@ -56,7 +56,7 @@ const FriendsCard = ({ friend, status }) => {
                     <TrophyOutlined /> {friend.points} points
                 </span>
             </div>
-            <Menu>
+            <Menu onSelect={({key}) => handleMenu(key)}>
                 <SubMenu icon={<EllipsisOutlined rotate={90} />}>
                     {renderMenuOptions(status)}
                 </SubMenu>
