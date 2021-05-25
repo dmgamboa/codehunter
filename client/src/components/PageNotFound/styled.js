@@ -6,6 +6,7 @@ export const Container = styled.div`
     justify-content: center;
     height: 100%;
     padding: 2rem;
+    line-height: 1.5;
 
     p {
         margin-bottom: 5rem;
@@ -37,5 +38,6 @@ export const Container = styled.div`
 
     .link {
         z-index: 99;
+        margin-bottom: 2rem;
     }
 `;

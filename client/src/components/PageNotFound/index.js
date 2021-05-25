@@ -103,12 +103,16 @@ const PageNotFound = () => {
 
             <h1>Well, this is awkward...</h1>
             <p>
-                We can&apos;t seem to find the page you&apos;re looking for. Please log in and try
-                again.
+                We can&apos;t seem to find the page you&apos;re looking for. Be honest ... just how lost are you right now?
             </p>
             <Link to="/account/login/" className="link">
+                <Button type="secondary" block>
+                    Just took a wrong turn.
+                </Button>
+            </Link>
+            <Link to="/walkthrough" className="link">
                 <Button type="primary" block>
-                    Log In
+                    What&apos;s a CodeHunter?
                 </Button>
             </Link>
         </Container>

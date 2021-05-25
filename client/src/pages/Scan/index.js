@@ -2,10 +2,10 @@ import { useState } from "react";
 import QrReader from "react-qr-reader";
 
 import { useAuth } from "../../context/Auth";
-import { WindowSize } from "../../context/themes/WindowSize";
 
 import ScanAccess from "./ScanAccess";
 import ScanModal from "./ScanModal";
+import ScanOverlay from "./ScanOverlay";
 import { handleCodeScan } from "./axios";
 import { StyledScanner } from "./styled";
 
@@ -63,6 +63,7 @@ const Scan = () => {
                     !modalVisible && data && data !== code && handleScan(data);
                 }}
             />
+            <ScanOverlay />
             {cameraError && <ScanAccess error={cameraError.toString()}/>}
             <ScanModal error={error} visible={modalVisible} onClose={handleModal} points={points} />
         </StyledScanner>
