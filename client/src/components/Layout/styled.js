@@ -23,7 +23,6 @@ export const Content = styled.div`
     background: linear-gradient(0deg, rgba(8,73,126,0.22) 0%, rgba(8,73,126,0) 20%, rgba(255,255,255,1) 100%);
     z-index: 99;
     overflow: scroll;
-    overflow-x: hidden;
     -ms-overflow-style: none;
     scrollbar-width: none;
     scroll-behavior: smooth;

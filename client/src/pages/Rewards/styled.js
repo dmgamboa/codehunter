@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import theme from "../../../context/themes/main";
+import theme from "../../context/themes/main";
 
 const { colors } = theme;
 

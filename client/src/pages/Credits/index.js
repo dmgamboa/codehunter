@@ -23,7 +23,7 @@ const Credits = () => {
                     <h3>StackOverflow</h3>For making our lives easier.
                 </li>
                 <li>
-                    <h3>Icons</h3>All asset icons besides our logo and favicon are from <a href="https://www.flaticon.com/">Flaticon</a>.
+                    <h3>Icons</h3>All asset icons besides our logo and favicon from <a href="https://www.flaticon.com/">Flaticon</a>.
                 </li>
                 <li>
                     <h3>Scan</h3>Confetti animation from <a href="https://lottiefiles.com/35875-confetti-on-transparent-background">Lottie</a>.
