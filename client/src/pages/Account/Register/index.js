@@ -19,18 +19,18 @@ import { ReactComponent as Logo } from "../../../assets/icons/logo.svg";
 import Icon from "@ant-design/icons";
 
 const Register = () => {
-    const tailFormItemLayout = {
-        wrapperCol: {
-            xs: {
-                span: 24,
-                offset: 0,
-            },
-            sm: {
-                span: 16,
-                offset: 8,
-            },
-        },
-    };
+    // const tailFormItemLayout = {
+    //     wrapperCol: {
+    //         xs: {
+    //             span: 24,
+    //             offset: 0,
+    //         },
+    //         sm: {
+    //             span: 16,
+    //             offset: 8,
+    //         },
+    //     },
+    // };
 
     var valuesRef = useRef();
     var { signup, getUser } = useAuth();

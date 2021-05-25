@@ -12,7 +12,6 @@ import { Form, Input, Button, message } from "antd";
 import StyledLogin from "./styled.js";
 
 import { useRef } from "react";
-import { motion } from "framer-motion";
 
 const Login = () => {
     const valuesRef = useRef();
