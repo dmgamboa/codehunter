@@ -10,7 +10,6 @@ import { StyledDrawer } from "./styled";
 const NavigationDrawer = ({ visible, onClose, links, page, handleClick }) => {
     const { logout, getUserData } = useAuth();
     const history = useHistory();
-    const { name, points, photoUrl } = getUserData();
 
     const handleLogout = () => {
         logout();
@@ -37,11 +36,11 @@ const NavigationDrawer = ({ visible, onClose, links, page, handleClick }) => {
             <span className="circles"></span>
 
             <div className="top">
-                <CustomAvatar photo={photoUrl}/>
+                <CustomAvatar photo={getUserData()?.photoUrl}/>
                 <div className="text">
-                    <span className="name">{name && name.first}</span>
+                    <span className="name">{getUserData()?.first}</span>
                     <span className="points">
-                        <b>{points ?? 0}</b> points
+                        <b>{getUserData()?.points ?? 0}</b> points
                     </span>
                 </div>
             </div>
