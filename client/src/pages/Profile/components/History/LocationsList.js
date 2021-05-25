@@ -2,7 +2,6 @@ import { ListStyled, HistoryListStyled } from "./LocationsListStyled";
 import renderHistoryList from "./Location";
 
 const LocationsList = ({history}) => {
-    console.log(history);
     return (
         <HistoryListStyled>
             <h1>History</h1>
