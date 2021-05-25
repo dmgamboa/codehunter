@@ -8,10 +8,13 @@ import { ReactComponent as HappyDoge } from "../../../assets/icons/doge/happy.sv
 import { ReactComponent as TsundereDoge } from "../../../assets/icons/doge/annoying.svg";
 import Confetti from "../../../assets/lottie/confetti.json";
 import Counter from "../../../components/Counter";
+import WindowHeight from "../../../context/themes/WindowSize";
 
 import { StyledModal } from "./styled";
 
 const ScanModal = ({ error, onClose, visible, points }) => {
+    const window = WindowHeight();
+
     const errorMessages = ["Wait a second ...", "Holup...", "Uh oh..."];
     const successMessages = ["Wow!", "You're amazing!", "Keep it up!", "Took you a while..."];
     const lottieOptions = {
@@ -93,7 +96,7 @@ const ScanModal = ({ error, onClose, visible, points }) => {
             </div>
 
             {!error && (
-                <div className="confetti">
+                <div className="confetti" style={{ height: window.height, width: window.width }}>
                     <Lottie options={lottieOptions} />
                 </div>
             )}

@@ -32,8 +32,6 @@ export const StyledModal = styled(Modal)`
 
     .confetti {
         position: absolute;
-        height: 100vh;
-        width: 100vw;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);

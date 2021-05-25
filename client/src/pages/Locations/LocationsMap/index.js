@@ -1,6 +1,7 @@
 import GoogleMapReact from "google-map-react";
 
 import Marker from "../../../components/Marker";
+import WindowSize from "../../../context/themes/WindowSize";
 
 import { StyledMap } from "./styled";
 import { initialCoords, mapViewSettings, mapsKey } from "./constant";
@@ -11,6 +12,7 @@ const LocationsMap = ({
     handleDetails,
     coords
 }) => {
+    const window = WindowSize();
     const { initialZoom } = mapViewSettings;
 
     const renderMarkers = (locations) => {
@@ -29,7 +31,7 @@ const LocationsMap = ({
     };
 
     return (
-        <StyledMap>
+        <StyledMap style={{ height: window.height }}>
             <GoogleMapReact
                 bootstrapURLKeys={{ key: mapsKey }}
                 center={coords ?? initialCoords}

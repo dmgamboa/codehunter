@@ -9,12 +9,14 @@ import { ReactComponent as ClosedDoge } from "../../assets/icons/doge/awkward.sv
 import { ReactComponent as OpenDoge } from "../../assets/icons/doge/dizzy.svg";
 import { ReactComponent as HappyDoge } from "../../assets/icons/doge/love.svg";
 import EasterEgg from "../../assets/lottie/easter-egg.json";
+import WindowSize from "../../context/themes/WindowSize";
 
 import { Container } from "./styled";
 
 const PageNotFound = () => {
     const key = ["up", "up", "down", "down", "left", "right", "left", "right"];
     const doge = useAnimation();
+    const window = WindowSize();
 
     const [bounce, setBounce] = useState(true);
     const [swipes, setSwipes] = useState([]);
@@ -82,7 +84,7 @@ const PageNotFound = () => {
     }, [bounce]);
 
     return (
-        <Container {...getSwipes}>
+        <Container {...getSwipes} style={{ height: window.height }}>
             {success && (<div className="easter-egg"><Lottie options={lottieOptions}/></div>)}
             <motion.div
                 variants={variants}

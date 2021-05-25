@@ -2,6 +2,7 @@ import { useState } from "react";
 import QrReader from "react-qr-reader";
 
 import { useAuth } from "../../context/Auth";
+import { WindowSize } from "../../context/themes/WindowSize";
 
 import ScanAccess from "./ScanAccess";
 import ScanModal from "./ScanModal";

@@ -6,7 +6,6 @@ export const StyledMap = styled.div`
     top: -1rem;
     left: 0;
     width: 100%;
-    height: 100vh;
 
     .gm-fullscreen-control,
     .gmnoprint,
