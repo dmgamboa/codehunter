@@ -20,7 +20,7 @@ const readLocations = (req) => {
         const page = parseInt(req.query.page);
         const limit = (req.query.limit ? parseInt(req.query.limit) : 10);
         const skip = (page - 1) * limit;
-        const filterReq = req.query.filters && JSON.parse(req.query.filters);
+        const filterReq = req.query.filters;
 
         let filters = {};
         if (filterReq) {

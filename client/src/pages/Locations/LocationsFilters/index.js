@@ -56,7 +56,7 @@ const LocationsFilters = ({ visible, onClose, onFinish, initialValues, hasUserCo
                             wrapper={(children) => (
                                 <Tooltip
                                     color={colors.primary}
-                                    title="Please allow access to permisions to use this option."
+                                    title="Please allow access to permissions to use this option."
                                 >
                                     {children}
                                 </Tooltip>
