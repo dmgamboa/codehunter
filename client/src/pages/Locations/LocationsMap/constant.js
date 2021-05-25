@@ -4,7 +4,7 @@ export const initialCoords = {
 };
 
 export const mapViewSettings = {
-    initialZoom: 14,
+    initialZoom: 12,
     bound: 0.015,
 };
 

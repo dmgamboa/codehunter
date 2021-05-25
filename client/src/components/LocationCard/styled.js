@@ -10,7 +10,7 @@ const StyledCard = styled(Card)`
     cursor: default;
 
     .ant-card-head {
-        font-size: clamp(0.6rem, 3vw, 1.2rem);
+        font-size: clamp(0.6rem, 3vw, 1rem);
 
         .ant-card-head-title {
             display: flex;
@@ -33,7 +33,7 @@ const StyledCard = styled(Card)`
     }
 
     h1 {
-        font-size: clamp(1rem, 6vw, 2.2rem);
+        font-size: clamp(1rem, 6vw, 1.75rem);
         color: ${colors.primary};
     }
 

@@ -3,6 +3,7 @@ import Particles from "react-particles-js";
 import { motion } from "framer-motion";
 
 import { useAuth } from "../../../context/Auth";
+import WindowHeight from "../../../context/themes/WindowSize";
 
 import SplashLogo from "../SplashLogo";
 import { particleParams, animationTimes } from "./constant";
@@ -11,6 +12,7 @@ import { Container, Content } from "./styled";
 const SplashScreen = () => {
     const history = useHistory();
     const { getUser } = useAuth();
+    const window = WindowHeight();
 
     const {
         orderInterval,
@@ -43,7 +45,7 @@ const SplashScreen = () => {
             exit={{ opacity: 0 }}
             transition={{ duration: fillDuration / 2 }}
         >
-            <Container>
+            <Container style={{ height: window.height, width: window.width }}>
                 <Content>
                     <SplashLogo
                         className="logo"
@@ -63,7 +65,7 @@ const SplashScreen = () => {
                 </Content>
                 <Particles
                     width="100vw"
-                    height="100vh"
+                    height={window.height}
                     params={particleParams}
                 />
                 {redirect(timeout)}

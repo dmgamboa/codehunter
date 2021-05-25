@@ -6,6 +6,14 @@ export const StyledScanner = styled.div`
     transform: translateY(-50%);
     width: 100%;
 
+    &.error {
+        position: relative;
+
+        section {
+            display: none;
+        }
+    }
+
     section {
         width: 100%;
         height: 100vh;
@@ -17,5 +25,13 @@ export const StyledScanner = styled.div`
 
     .confetti {
         z-index: 99;
+    }
+
+    .overlay {
+        position: absolute;
+        z-index: 99;
+        top: 50%;
+        transform: translateY(-50%);
+        padding: 0 2rem;
     }
 `;

@@ -17,7 +17,7 @@ const Counter = ({ from, to, duration = 1, delay = 0 }) => {
         return () => controls.stop();
     }, [from, to]);
 
-    return <span className="counter" ref={ref} />;
+    return <span className="counter" ref={ref}>{from}</span>;
 };
 
 export default Counter;
