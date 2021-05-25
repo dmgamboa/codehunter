@@ -27,6 +27,7 @@ const Locations = () => {
     const [form] = Form.useForm();
 
     const [locations, setLocations] = useState([]);
+    // eslint-disable-next-line no-unused-vars
     const [locationsCount, setLocationsCount] = useState(500);
     const [locationDetails, setLocationDetails] = useState(null);
     const [filtersVisible, setFiltersVisible] = useState(false);

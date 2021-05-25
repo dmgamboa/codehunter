@@ -1,15 +1,17 @@
 import { useState, useEffect } from "react";
-import InfiniteScroll from "react-infinite-scroll-component";
+import { motion, AnimatePresence } from "framer-motion";
 import {
     LoadingOutlined,
     ShopOutlined,
     LaptopOutlined,
     FieldTimeOutlined,
-    GiftOutlined
+    GiftOutlined,
+    ArrowUpOutlined,
 } from "@ant-design/icons";
-import { Layout, Filters } from "./styled";
+import { Layout, Filters, StyledInfiniteScroll } from "./styled";
 import { Tag, Tabs } from "antd";
 
+import CircleIconBtn from "../../components/CircleIconBtn";
 import RewardCard from "./RewardCard";
 import { useAuth } from "../../context/Auth";
 import { getRewards } from "./axios";
@@ -33,6 +35,7 @@ const Rewards = () => {
     const [hasMore, setHasMore] = useState(false);
     // eslint-disable-next-line no-unused-vars
     const [error, setError] = useState(false);
+    const [scrollArrowVisible, setScrollArrowVisible] = useState(false);
 
     const tagsDataArr = ["Online", "In-Store", "Limited Time"];
 
@@ -84,7 +87,7 @@ const Rewards = () => {
                 const results = await getRewards({
                     category: categoryQuery,
                     availability: availQuery,
-                    pageNum: pageNumber
+                    pageNum: pageNumber,
                 });
 
                 setRewards([...rewards, results]);
@@ -126,6 +129,25 @@ const Rewards = () => {
         });
     };
 
+    const handleScrollArrow = () => {
+        setScrollArrowVisible(hasScrolledDownWindow());
+    };
+
+    // Checks whether user has scrolled down the page
+    const hasScrolledDownWindow = () => {
+        const mainContent = document.getElementById("mainContent");
+        if (mainContent.scrollTop > window.innerHeight) {
+            return true;
+        }
+        return false;
+    };
+
+    // Scrolls back to top of page
+    const handleScrollArrowClick = () => {
+        const mainContent = document.getElementById("mainContent");
+        mainContent.scrollTo(0, 0);
+    };
+
     useEffect(() => {
         handleScroll();
     }, [categoryQuery, availQuery]);
@@ -143,7 +165,6 @@ const Rewards = () => {
                         {tagsDataArr.map((tag) => (
                             <CheckableTag
                                 key={tag}
-                                // checked={}
                                 onClick={() => handleFilterTag(tag)}
                                 className={
                                     availQuery.includes(tag)
@@ -164,36 +185,14 @@ const Rewards = () => {
                     tabBarExtraContent={category}
                     onChange={(key) => handleCategory(key)}
                     id="scrollableTabPane"
+
                 >
                     {rewardTabPanes.map((tabName) => {
-                        return (
-                            <TabPane tab={tabName} key={tabName.toLowerCase()}>
-                                {/* <InfiniteScroll
-                                    dataLength={rewards.length}
-                                    next={handleScroll}
-                                    hasMore={hasMore}
-                                    scrollableTarget="scrollableTabPane"
-                                    scrollThreshold={0.95}
-                                    // onScroll={handleScrollArrow}
-                                    loader={
-                                        <div className="loadingIcon">
-                                            {loading && <LoadingOutlined />}
-                                        </div>
-                                    }
-                                    endMessage={
-                                        <p style={{ textAlign: "center" }}>
-                                            <b>Check back soon for new rewards!</b>
-                                        </p>
-                                    }
-                                >
-                                    {renderCards()}
-                                </InfiniteScroll> */}
-                            </TabPane>
-                        );
+                        return <TabPane tab={tabName} key={tabName.toLowerCase()}></TabPane>;
                     })}
                 </Tabs>
             </div>
-            <InfiniteScroll
+            <StyledInfiniteScroll
                 dataLength={rewards.length}
                 next={handleScroll}
                 hasMore={hasMore}
@@ -206,9 +205,28 @@ const Rewards = () => {
                         <b>Check back soon for new rewards!</b>
                     </p>
                 }
+                onScroll={handleScrollArrow}
             >
                 {renderCards()}
-            </InfiniteScroll>
+            </StyledInfiniteScroll>
+
+            <span className="icon-buttons">
+                <AnimatePresence exitBeforeEnter>
+                    {scrollArrowVisible && (
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transitition={{ duration: 0.5, ease: "easeInOut" }}
+                        >
+                            <CircleIconBtn
+                                className="scrollToTop"
+                                icon={<ArrowUpOutlined onClick={handleScrollArrowClick} />}
+                            />
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+            </span>
         </Layout>
     );
 };

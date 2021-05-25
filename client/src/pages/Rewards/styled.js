@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 import theme from "../../context/themes/main";
 
@@ -19,7 +20,6 @@ export const Layout = styled.div`
         "filters" 8%
         "tabsAndList" 82%
         / 100%; */
-
     .title {
         grid-area: title;
         .giftIcon {
@@ -29,7 +29,7 @@ export const Layout = styled.div`
 
     .filters {
         /* grid-area: filters; */
-        
+        margin-bottom: 5px;
         .filterTags {
             display: flex;
             justify-content: space-around;
@@ -51,7 +51,6 @@ export const Layout = styled.div`
         /* grid-area: tabsAndList; */
         text-align: left;
         /* overflow-y: scroll; */
-    
         .loadingIcon {
             margin-top: 20px;
             font-size: clamp(1rem, 25px, 2rem);
@@ -62,18 +61,35 @@ export const Layout = styled.div`
     .top {
         position: sticky;
         top: -1rem;
-        padding-top: 2rem;
+        padding-top: 1.5rem;
+        margin-left: -1px;
         z-index: 99;
-        background: white;
+        background: #fff;
     }
 
     .ant-card {
         margin-bottom: 0.5rem;
     }
-    
+    .ant-card-cover {
+        /* border: 1.5px solid #fff; */
+    }
+    .scrollToTop {
+        position: absolute;
+        bottom: 80px;
+        right: 35px;
+    }
+    .ant-tabs-top > .ant-tabs-nav .ant-tabs-nav-wrap::after{
+        box-shadow: inset -10px 0 8px -8px rgb(0 0 0 / 30%);
+    }
+    .ant-tabs-top > .ant-tabs-nav .ant-tabs-nav-wrap::before {
+        box-shadow: inset 10px 0 8px -8px rgb(0 0 0 / 30%);
+    }
 `;
 
 export const Filters = styled.div`
 
+`;
+
+export const StyledInfiniteScroll = styled(InfiniteScroll)`
 
 `;
