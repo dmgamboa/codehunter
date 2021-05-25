@@ -5,7 +5,7 @@ import {
     ShopOutlined,
     LaptopOutlined,
     FieldTimeOutlined,
-    GiftOutlined,
+    GiftOutlined
 } from "@ant-design/icons";
 import { Layout, Filters } from "./styled";
 import { Tag, Tabs } from "antd";
@@ -15,7 +15,6 @@ import { useAuth } from "../../context/Auth";
 import { getRewards } from "./axios";
 
 const Rewards = () => {
-
     const { getUserData } = useAuth();
 
     const { TabPane } = Tabs;
@@ -85,7 +84,7 @@ const Rewards = () => {
                 const results = await getRewards({
                     category: categoryQuery,
                     availability: availQuery,
-                    pageNum: pageNumber,
+                    pageNum: pageNumber
                 });
 
                 setRewards([...rewards, results]);
@@ -133,46 +132,43 @@ const Rewards = () => {
 
     return (
         <Layout>
-            <h1 className="title">
-                <GiftOutlined className="icon giftIcon" />
-                CodeHunter Rewards
-            </h1>
+            <div className="top">
+                <h1 className="title">
+                    <GiftOutlined className="icon giftIcon" />
+                    CodeHunter Rewards
+                </h1>
 
-            <Filters className="filters">
-                <div className="filterTags">
-                    {tagsDataArr.map((tag) => (
-                        <CheckableTag
-                            key={tag}
-                            // checked={}
-                            onClick={() => handleFilterTag(tag)}
-                            className={
-                                availQuery.includes(tag)
-                                    ? "filterTagActive filterTag"
-                                    : "filterTagInactive filterTag"
-                            }
-                            icon={addIconFilterTags(tag)}
-                        >
-                            {tag}
-                        </CheckableTag>
-                    ))}
-                </div>
-            </Filters>
+                <Filters className="filters">
+                    <div className="filterTags">
+                        {tagsDataArr.map((tag) => (
+                            <CheckableTag
+                                key={tag}
+                                // checked={}
+                                onClick={() => handleFilterTag(tag)}
+                                className={
+                                    availQuery.includes(tag)
+                                        ? "filterTagActive filterTag"
+                                        : "filterTagInactive filterTag"
+                                }
+                                icon={addIconFilterTags(tag)}
+                            >
+                                {tag}
+                            </CheckableTag>
+                        ))}
+                    </div>
+                </Filters>
 
-            <Tabs
-                className="tabs"
-                defaultActiveKey="all"
-                tabBarExtraContent={category}
-                onChange={(key) => handleCategory(key)}
-                id="scrollableTabPane"
-            >
-                {rewardTabPanes.map((tabName) => {
-                    return (
-                        <TabPane
-                            tab={tabName}
-                            key={tabName.toLowerCase()}
-                        >
-                            {
-                                <InfiniteScroll
+                <Tabs
+                    className="tabs"
+                    defaultActiveKey="all"
+                    tabBarExtraContent={category}
+                    onChange={(key) => handleCategory(key)}
+                    id="scrollableTabPane"
+                >
+                    {rewardTabPanes.map((tabName) => {
+                        return (
+                            <TabPane tab={tabName} key={tabName.toLowerCase()}>
+                                {/* <InfiniteScroll
                                     dataLength={rewards.length}
                                     next={handleScroll}
                                     hasMore={hasMore}
@@ -191,12 +187,28 @@ const Rewards = () => {
                                     }
                                 >
                                     {renderCards()}
-                                </InfiniteScroll>
-                            }
-                        </TabPane>
-                    );
-                })}
-            </Tabs>
+                                </InfiniteScroll> */}
+                            </TabPane>
+                        );
+                    })}
+                </Tabs>
+            </div>
+            <InfiniteScroll
+                dataLength={rewards.length}
+                next={handleScroll}
+                hasMore={hasMore}
+                scrollableTarget="mainContent"
+                scrollThreshold={0.95}
+                // onScroll={handleScrollArrow}
+                loader={<div className="loadingIcon">{loading && <LoadingOutlined />}</div>}
+                endMessage={
+                    <p style={{ textAlign: "center" }}>
+                        <b>Check back soon for new rewards!</b>
+                    </p>
+                }
+            >
+                {renderCards()}
+            </InfiniteScroll>
         </Layout>
     );
 };

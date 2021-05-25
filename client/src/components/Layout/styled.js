@@ -30,4 +30,14 @@ export const Content = styled.div`
     &::-webkit-scrollbar {
         display: none;
     }
+
+    * {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+        scroll-behavior: smooth;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
 `;
