@@ -1,13 +1,16 @@
+import { useState, useEffect } from "react";
 import { useAuth } from "../../../context/Auth";
 import AvatarSection from "../components/Avatar/Avatar";
 import PointsSection from "../components/Points/PointsSection";
 import LocationsList from "../components/History/LocationsList";
-import { updateUser } from "../axios";
+import { readHistory, updateUser } from "../axios";
 
 const ProfileScreen = () => {
     const { getUserData, getUser } = useAuth();
 
-    const points = (getUserData() ? getUserData().points : "N/A");
+    const [history, setHistory] = useState(null);
+
+    const {name, avatar, points} = getUserData();
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -15,7 +18,10 @@ const ProfileScreen = () => {
         
         // Fields to update.
         const fields = {
-            username: "pumbaa",
+            name: {
+                first: "hakuna",
+                last: "matata",
+            }
         };
 
         data.append("userToken", getUser());
@@ -24,16 +30,20 @@ const ProfileScreen = () => {
         await updateUser(data);
     };
 
+    useEffect(async () => {
+        const userHistory = await readHistory(getUser());
+        setHistory(userHistory.history);
+    }, []);
+
     return (
         <div>
             <form onSubmit={onSubmit}>
                 <input type="file" />
                 <input type="submit" />
             </form>
-            <AvatarSection name={"Hunter Welles"}/>
-            {/* <AvatarSection name={getUser}/> */}
+            <AvatarSection firstName={name.first} lastName={name.last} avatar={avatar} />
             <PointsSection points={points} />
-            <LocationsList />
+            <LocationsList history={history} />
         </div>
     );
 };
