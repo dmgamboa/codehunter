@@ -12,12 +12,13 @@ import { readHistory, updateUser } from "../axios";
 
 const ProfileScreen = () => {
     const params = useParams();
-    const { getUser } = useAuth();
+    const { getUser, getUserData } = useAuth();
 
     const [loading, setLoading] = useState(false);
     const [userDetails, setUserDetails] = useState({});
     const [editDetails, setEditDetails] = useState({});
     const [editDrawer, setEditDrawer] = useState(false);
+    const [history, setHistory] = useState([]);
 
     const handleEditDrawer = () => {
         setEditDrawer(!editDrawer);
@@ -35,19 +36,22 @@ const ProfileScreen = () => {
         setLoading(false);
     };
 
-    const handleUser = async () => {
+    const handleUser = () => {
         setLoading(true);
-        // if (!params.id) {
-        //     const token = getUser();
+        if (!params.id) {
+            const user = getUserData();
+            setUserDetails(user);
 
-        //     const user = await readUser(token);
-        //     console.log(user);
-        //     setUserDetails(user);
-
-        //     const { name, username, avatar } = user;
-        //     setEditDetails({ name: `${name.first} ${name.last}`, username, avatar });
-        // }
+            const { name, username, avatar } = user;
+            setEditDetails({ name: `${name.first} ${name.last}`, username, avatar });
+        }
         setLoading(false);
+    };
+
+    const handleHistory = async () => {
+        const token = getUser();
+        const history = await readHistory(token);
+        setHistory(history);
     };
 
     const renderStatusButton = (status) => {
@@ -65,6 +69,7 @@ const ProfileScreen = () => {
 
     useEffect(() => {
         handleUser();
+        handleHistory();
     }, []);
 
     const renderHistoryList = (list) => {
@@ -79,7 +84,7 @@ const ProfileScreen = () => {
                                 weekday: "short",
                                 month: "short",
                                 day: "numeric"
-                            }).format(date)}
+                            }).format(new Date(date))}
                         </span>
                     </span>
                 </div>
@@ -120,8 +125,8 @@ const ProfileScreen = () => {
                 <h2>
                     <EnvironmentFilled /> Recently Visited
                 </h2>
-                {userDetails.redeemed?.length > 0 ? (
-                    renderHistoryList(userDetails.redeemed)
+                {history.length > 0 ? (
+                    renderHistoryList(history)
                 ) : (
                     <span className="no-history">
                         {`Looks like ${
