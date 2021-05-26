@@ -12,7 +12,7 @@ import { useAuth } from "../../../context/Auth";
 import _ from "lodash";
 
 
-const RewardCard = ({ name, description, cost, availability, update }) => {
+const RewardCard = ({ name, description, cost, availability, update, companyLogo }) => {
 
     const [showConfetti, setShowConfetti] = useState(false);
     const [isModalVisible, setIsModalVisible] = useState(false);
@@ -68,7 +68,7 @@ const RewardCard = ({ name, description, cost, availability, update }) => {
             <StyledCard
                 hoverable
                 onClick={showConfirmation}
-                cover={<img src={LocationPlaceholder} alt="placeholder name" />}
+                cover={<img src={companyLogo || LocationPlaceholder} alt="placeholder name" />}
             >
                 <h1 className="name">
                     {name} 

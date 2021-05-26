@@ -131,6 +131,7 @@ const Rewards = () => {
                             cost={rewardInfo.cost}
                             availability={icons}
                             update={updateUserPoints}
+                            companyLogo={rewardInfo.img}
                         ></RewardCard>
                     </div>
                 );
