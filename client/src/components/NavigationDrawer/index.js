@@ -2,7 +2,7 @@ import { Avatar } from "antd";
 import Icon, { LogoutOutlined } from "@ant-design/icons";
 import { useHistory } from "react-router-dom";
 
-import { ReactComponent as AvatarPlaceholder } from "../../assets/icons/doge/grinning.svg";
+import CustomAvatar from "../../components/CustomAvatar";
 import { useAuth } from "../../context/Auth";
 
 import { StyledDrawer } from "./styled";
@@ -36,7 +36,7 @@ const NavigationDrawer = ({ visible, onClose, links, page, handleClick }) => {
             <span className="circles"></span>
 
             <div className="top">
-                <Avatar icon={<Icon component={AvatarPlaceholder} />} />
+                <CustomAvatar photo={getUserData()?.photoUrl}/>
                 <div className="text">
                     <span className="name">{getUserData()?.name?.first}</span>
                     <span className="points">

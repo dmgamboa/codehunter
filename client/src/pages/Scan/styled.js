@@ -31,7 +31,9 @@ export const StyledScanner = styled.div`
         position: absolute;
         z-index: 99;
         top: 50%;
-        transform: translateY(-50%);
+        left: 50%;
+        transform: translate(-50%, -50%);
         padding: 0 2rem;
+        width: 100%;
     }
 `;

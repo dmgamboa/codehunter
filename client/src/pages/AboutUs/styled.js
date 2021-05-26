@@ -2,10 +2,7 @@ import styled from "styled-components";
 import clouds from "../../assets/aboutus/cloud.png";
 
 const Styled= styled.div`
-    * {
-        font-family: 'Tomorrow', sans-serif;
-    }
-    height: 90vh;
+    height: 100%;
     background: url(${clouds});
     animation: animate 60s linear infinite;
     .aboutus {

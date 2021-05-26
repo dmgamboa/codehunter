@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Drawer } from "antd";
-import { GithubOutlined, LeftOutlined, LinkedinOutlined } from "@ant-design/icons";
+import { GithubOutlined, ArrowLeftOutlined, LinkedinOutlined } from "@ant-design/icons";
 
 import { StyledBubble, StyledDrawer } from "./styled";
 
@@ -41,7 +41,7 @@ const Bubble = ({ name, avatar, place, animal, intro, career, outsideOfWork, git
                     width="100%"
                 >
                     <div className="about-me">
-                        <LeftOutlined className="return" onClick={onClose} />
+                        <ArrowLeftOutlined className="return" onClick={onClose} />
 
                         <div className="general-info">
                             <p>{intro}</p>

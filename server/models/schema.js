@@ -41,10 +41,6 @@ const userSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "User",
     }],
-    redeemed: [{
-        type: Schema.Types.ObjectId,
-        ref: "Location",
-    }],
     bookmarks: [{
         type: Schema.Types.ObjectId,
         ref: "Location",
@@ -56,16 +52,44 @@ const rewardSchema = new Schema({
         data: String,
         imageType: String,
     },
-    name:  String,
+    name: String,
     description: String,
     cost: Number,
-    availability: [String], //online, in-store, limited time
-    category: [String], //food, accessories, acitivites, tech
+    availability: [String], // online, in-store, limited time
+    category: [String], // food, accessories, acitivites, tech
+    img: String //Link to amazon s3 bucket
+});
+
+const historySchema = new Schema({
+    uid: {
+        type: String,
+        required: true,
+    },
+    history: [{
+        locationID: {
+            type: Schema.Types.ObjectId,
+            ref: "Location",
+            required: true,
+        },
+        location: {
+            type: String,
+            required: true,
+        },
+        date: {
+            type: Date,
+            required: true,
+        },
+        points: {
+            type: Number,
+            required: true,
+        }
+    }],
 });
 
 // User -> users
 const Location = mongoose.model("locations", locationSchema);
 const User = mongoose.model("users", userSchema);
 const Reward = mongoose.model("reward", rewardSchema);
+const History = mongoose.model("histories", historySchema);
 
-export { Location, User, Reward };
+export { Location, User, Reward, History };

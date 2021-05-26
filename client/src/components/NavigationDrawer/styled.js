@@ -52,20 +52,8 @@ export const StyledDrawer = styled(Drawer)`
         margin-bottom: 3rem;
 
         .ant-avatar {
-            position: relative;
-            margin-right: 0.5rem;
-            width: 75px;
-            height: 75px;
-            background: white;
-
-            .anticon {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                font-size: 3rem;
-                color: black;
-            }
+            width: 50px;
+            height: 50px;
         }
 
         .text {

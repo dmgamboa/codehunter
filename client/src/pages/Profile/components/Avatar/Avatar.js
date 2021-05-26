@@ -1,9 +1,14 @@
 import { useHistory } from "react-router-dom";
 import AvatarContainer from "./AvatarStyled";
 import pic from "../../images/sampleAvatar.png";
-import EditButton from "../EditBtn/index";
-const AvatarSection = ({name}) => {
+import EditButton from "../EditBtn"
+
+const AvatarSection = ({firstName, lastName, avatar}) => {
     const history = useHistory();
+
+    if (!avatar) {
+        avatar = pic;
+    }
 
     const handleEdit = () => {
         history.push("./profile/edit");
@@ -14,11 +19,11 @@ const AvatarSection = ({name}) => {
             <AvatarContainer>
                 <EditButton onClick={handleEdit} className="editBtn"/>
                 <div id="avatarPic">
-                    <img src={pic} id="profilePic" />
+                    <img src={avatar} id="profilePic" />
                     <hr id="picLine" />
                 </div>
                 <div id="name">
-                    <p>{name}</p>
+                    <p>{firstName} {lastName}</p>
                 </div>
             </AvatarContainer>
         </>

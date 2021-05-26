@@ -69,16 +69,6 @@ const updateUser = (req) => {
 
             // Check if this is a scan handler by checking if the location was sent with the request.
             if (req.location) {
-                const hasRedeemed = user.redeemed.some((instance) => {
-                    return instance.equals(req.location.id);
-                });
-
-                if (hasRedeemed) {
-                    //TODO: UNCOMMENT FOR PRODUCTION
-                    //return rej("Location already redeemed");
-                }
-                
-                user.redeemed.push(req.location.id);
                 user.points += req.location.points;
             }
             

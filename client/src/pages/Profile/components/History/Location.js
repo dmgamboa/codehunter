@@ -1,24 +1,23 @@
-"use strict";
-
-var LocationsList = document.querySelector("locationsList");
-
 const renderHistoryList = (list) => {
-    LocationsList.innerHTML = "";
-    list.map((item) => {
-        const { place, date, points } = item;
-        const location = document.createElement("div");
-        location.setAttribute("class", "location");
-        location.innerHTML = `
-        <div>
-            <p>
-                <span class="location-name">${place}</span>
-                <span class="location-date">${date}</span>
-                <span class="location-points">${points}</span>
-            </p>
-        </div>
-        `;
-        LocationsList.appendChild(location);
+    return list.map((item) => {
+        const { _id, location, date, points } = item;
+        const newDate = new Date(date);
+        const year = newDate.getFullYear();
+        const month = newDate.getMonth() + 1;
+        const day = newDate.getDate();
+        
+        return (
+            <div key={_id}>
+                <p>
+                    <span className="location-name">{location}</span>
+                    <span className="location-date">
+                        {year + "-" + month + "-" + day}
+                    </span>
+                    <span className="location-points">{points}</span>
+                </p>
+            </div>
+        );
     });
 };
 
-//user axios here
+export default renderHistoryList;

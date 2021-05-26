@@ -1,35 +1,33 @@
 import PSStyle from "./PointsSectionStyle";
-import theme from "../../../../context/themes/main";
+import colors from "../../../../context/themes/main";
 
 
 //pass 0 to points when redeemed
-function PointsSection({ points }) {
+const PointsSection = ({ points }) => {
     return (
-        <>
-            <PSStyle>
-                <div className="content">
-                    <hr id="linerTop" />
-                    <div id="digits">
-                        <p>
-                            <span
-                                style={{
-                                    color: theme.secondary,
-                                    fontWeight: "700",
-                                    fontSize: "280%",
-                                }}
-                                className="points-digits"
-                            >
-                                {points}
-                            </span>
-                            <br />
-                            <span style={{ fontSize: "150%", marginLeft: "15px" }}> points</span>
-                        </p>
-                    </div>
-                    <hr id="linerBottom" />
+        <PSStyle>
+            <div className="content">
+                <hr id="linerTop" />
+                <div id="digits">
+                    <p>
+                        <span
+                            style={{
+                                color: colors.secondary,
+                                fontWeight: "700",
+                                fontSize: "280%",
+                            }}
+                            className="points-digits"
+                        >
+                            {points}
+                        </span>
+                        <br />
+                        <span style={{ fontSize: "150%", marginLeft: "15px" }}> points</span>
+                    </p>
                 </div>
-            </PSStyle>
-        </>
+                <hr id="linerBottom" />
+            </div>
+        </PSStyle>
     );
-}
+};
 
 export default PointsSection;

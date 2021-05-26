@@ -17,6 +17,7 @@ const Scan = () => {
     const [points, setPoints] = useState({});
     const [code, setCode] = useState(null);
     const [error, setError] = useState("");
+    const [cameraStart, setCameraStart] = useState(true);
     const [cameraError, setCameraError] = useState("");
     const [modalVisible, setModalVisible] = useState(false);
 
@@ -37,7 +38,7 @@ const Scan = () => {
         } else {
             const locationID = data.substring(prefix.length);
             const oldUserData = getUserData();
-            await handleCodeScan(locationID, getUser());
+            await handleCodeScan(locationID, getUser(), new Date());
 
             if (getUserData().points !== oldUserData.points) {
                 setPoints({
@@ -57,13 +58,15 @@ const Scan = () => {
         <StyledScanner className={cameraError && "error"}>
             <QrReader
                 delay={1000}
-                onError={(e) => setCameraError(e.name)}
+                onError={(e) => { setCameraError(e.name); cameraStart && setCameraStart(false); }}
                 onScan={(data) => {
+                    !cameraStart && setCameraStart(true);
                     cameraError && setCameraError("");
                     !modalVisible && data && data !== code && handleScan(data);
                 }}
             />
-            {cameraError ? <ScanAccess error={cameraError.toString()}/> : <ScanOverlay/>}
+            {cameraStart && <ScanOverlay />}
+            {cameraError && <ScanAccess error={cameraError.toString()}/>}
             <ScanModal error={error} visible={modalVisible} onClose={handleModal} points={points} />
         </StyledScanner>
     );
