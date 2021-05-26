@@ -8,8 +8,11 @@ export const Layout = styled.div`
     flex: 1;
     width: 100%;
     .top {
+        text-align: center;
+
         .anticon {
             color: ${colors.primary};
+            margin-right: 0.5rem;
         }
     }
 

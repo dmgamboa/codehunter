@@ -3,17 +3,37 @@ import { Card } from "antd";
 
 import theme from "../../../context/themes/main";
 
-const { colors } = theme;
+const { colors, fonts } = theme;
 
 export const StyledCard = styled(Card)`
     border-radius: 1.5rem;
+    border: none;
     line-height: 1;
 
     h2 {
+        display: flex;
+        align-items: center;
         color: ${colors.primary};
+        font-size: clamp(1.25rem, 3vw, 1.5rem);
         
         .username {
-            color: black;
+            margin-left: 0.5rem;
+            color: rgba(0, 0, 0, 0.5);
+            font-size: 0.6em;
+            font-family: ${fonts.body};
+            text-transform: uppercase;
+
+            &::before {
+                content: "(";
+                filter: opacity(0.5);
+                margin-right: 0.25rem;
+            }
+
+            &::after {
+                content: ")";
+                filter: opacity(0.5);
+                margin-left: 0.25rem;
+            }
         }
     }
 

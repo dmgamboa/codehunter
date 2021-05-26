@@ -47,10 +47,10 @@ const FriendsCard = ({ friend, status, handleMenu }) => {
 
     return (
         <StyledCard className="friends-card">
-            <CustomAvatar />
+            <CustomAvatar background="lightgray" />
             <div className="text">
                 <h2>
-                    {friend.name} <span className="username">[ {friend.username} ]</span>
+                    {friend.name} <span className="username">{friend.username}</span>
                 </h2>
                 <span className="points">
                     <TrophyOutlined /> {friend.points} points

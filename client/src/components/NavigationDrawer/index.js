@@ -38,7 +38,7 @@ const NavigationDrawer = ({ visible, onClose, links, page, handleClick }) => {
             <div className="top">
                 <CustomAvatar photo={getUserData()?.photoUrl}/>
                 <div className="text">
-                    <span className="name">{getUserData()?.first}</span>
+                    <span className="name">{getUserData()?.name?.first}</span>
                     <span className="points">
                         <b>{getUserData()?.points ?? 0}</b> points
                     </span>
