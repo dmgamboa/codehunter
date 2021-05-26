@@ -1,20 +1,55 @@
 import { useState, useEffect } from "react";
-import { useParams, useHistory } from "react-router-dom";
-import { Button } from "antd";
+import { useParams } from "react-router-dom";
+import { Button, Spin } from "antd";
 import { TrophyOutlined, EnvironmentFilled, EditOutlined } from "@ant-design/icons";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 import CustomAvatar from "../../../components/CustomAvatar";
 import { useAuth } from "../../../context/Auth";
 
+import ProfileEditDrawer from "../ProfileEditDrawer";
 import { Layout } from "./styled";
-import { readUser } from "../axios";
+import { readUser, updateUser } from "../axios";
 
 const ProfileScreen = () => {
     const params = useParams();
-    const { getUserData, getUser } = useAuth();
+    const { getUser } = useAuth();
 
+    const [loading, setLoading] = useState(false);
     const [userDetails, setUserDetails] = useState({});
+    const [editDetails, setEditDetails] = useState({});
+    const [editDrawer, setEditDrawer] = useState(false);
+
+    const handleEditDrawer = () => {
+        setEditDrawer(!editDrawer);
+    };
+
+    const handleEdit = async (values) => {
+        setLoading(true);
+        const token = getUser();
+        const params = new FormData();
+        params.append("userToken", token);
+        params.append("fields", values.fields);
+        params.append("avatar", values.avatar);
+        await updateUser(params);
+        handleUser();
+        setLoading(false);
+    };
+
+    const handleUser = async () => {
+        setLoading(true);
+        if (!params.id) {
+            const token = getUser();
+
+            const user = await readUser(token);
+            console.log(user);
+            setUserDetails(user);
+
+            const { name, username, avatar } = user;
+            setEditDetails({ name: `${name.first} ${name.last}`, username, avatar });
+        }
+        setLoading(false);
+    };
 
     const renderStatusButton = (status) => {
         switch (status) {
@@ -29,12 +64,8 @@ const ProfileScreen = () => {
         }
     };
 
-    useEffect(async () => {
-        if (!params.id) {
-            const token = getUser();
-            const user = getUserData();
-            setUserDetails(user);
-        }
+    useEffect(() => {
+        handleUser();
     }, []);
 
     const renderHistoryList = (list) => {
@@ -59,11 +90,19 @@ const ProfileScreen = () => {
 
     return (
         <Layout>
+            <Spin spinning={loading} style={{ width: "100%", flex: "1" }} />
+            <ProfileEditDrawer
+                visible={editDrawer}
+                onClose={handleEditDrawer}
+                initialValues={editDetails}
+                onFinish={handleEdit}
+            />
             <div className="top">
                 <span className="circles"></span>
-                <CustomAvatar size="80px" photo={userDetails?.photoUrl} background="lightgray" />
+                <CustomAvatar size="80px" photo={userDetails?.avatar} background="lightgray" />
                 <h1 className="name">
-                    <span className="accent">{userDetails?.name?.first}</span> {userDetails?.name?.last}
+                    <span className="accent">{userDetails?.name?.first}</span>{" "}
+                    {userDetails?.name?.last}
                 </h1>
                 <span className="points">
                     <TrophyOutlined /> {userDetails?.points} points
@@ -73,7 +112,7 @@ const ProfileScreen = () => {
                         {userDetails?.status && renderStatusButton(userDetails?.status)}
                     </Button>
                 ) : (
-                    <Button type="secondary">
+                    <Button type="secondary" onClick={handleEditDrawer}>
                         <EditOutlined /> Edit Profile
                     </Button>
                 )}
@@ -82,13 +121,15 @@ const ProfileScreen = () => {
                 <h2>
                     <EnvironmentFilled /> Recently Visited
                 </h2>
-                {userDetails.history ? (
-                    <InfiniteScroll dataLength={userDetails.history}>
-                        {renderHistoryList(userDetails.history)}
-                    </InfiniteScroll>
+                {userDetails.redeemed?.length > 0 ? (
+                    renderHistoryList(userDetails.redeemed)
                 ) : (
                     <span className="no-history">
-                        {`Looks like ${params.id ? `${userDetails?.name?.first} hasn't` : "you haven't"} discovered any codes yet. ${params.id ? "It's time to help them out!" : "Go get hunting!"}`}
+                        {`Looks like ${
+                            params.id ? `${userDetails?.name?.first} hasn't` : "you haven't"
+                        } discovered any codes yet. ${
+                            params.id ? "It's time to help them out!" : "Go get hunting!"
+                        }`}
                     </span>
                 )}
             </div>

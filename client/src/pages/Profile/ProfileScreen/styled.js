@@ -3,7 +3,7 @@ import { rgba } from "polished";
 
 import theme from "../../../context/themes/main";
 
-const { colors, fonts } = theme;
+const { colors } = theme;
 
 export const Layout = styled.div`
     flex: 1;

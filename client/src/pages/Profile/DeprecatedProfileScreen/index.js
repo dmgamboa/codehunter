@@ -9,6 +9,10 @@ const ProfileScreen = () => {
 
     const points = (getUserData() ? getUserData().points : "N/A");
 
+    const handleAvatarChange = (file) => {
+        console.log(file);
+    };
+
     const onSubmit = async (e) => {
         e.preventDefault();
         const data = new FormData();
@@ -27,7 +31,7 @@ const ProfileScreen = () => {
     return (
         <div>
             <form onSubmit={onSubmit}>
-                <input type="file" />
+                <input type="file" onChange={handleAvatarChange}/>
                 <input type="submit" />
             </form>
             <AvatarSection name={"Hunter Welles"}/>

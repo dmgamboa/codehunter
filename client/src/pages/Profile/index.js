@@ -15,12 +15,7 @@ const Profile = () => {
             />
             <Route 
                 exact
-                path={`${match.path}/edit`}
-                render={() => <ProfileScreen />}
-            />
-            <Route 
-                exact
-                path={`${match.path}/user/:id`}
+                path={`${match.path}/:id`}
                 render={() => <ProfileScreen />}
             />
             <Route path={`${match.path}`} render={() => <PageNotFound />} />
