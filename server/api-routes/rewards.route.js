@@ -1,19 +1,23 @@
 import express from "express";
-import { massWriteRewards, getRewards, getCodeForReward } from "../models/rewards.js";
+import { massWriteRewards, getAllRewards, getRewards, getCodeForReward, setUserPoints } from "../models/rewards.js";
 
 const router = express.Router();
 
-// ${url}rewards/add-all-rewards
-router.post("/add-all-rewards", async (req, res) => {
-    try {
-        const result = await massWriteRewards(rewardsData);
+router.route("/add-all-reward")
+    .post(async (req, res) => {
+        try {
+            const result = await massWriteRewards(rewardsData);
+            res.send("Successfully written data to rewards collection");
+        } catch (err) {
+            res.send(err);
+        }
 
-        res.send("Successfully written data to rewards collection");
-    } catch (err) {
-        res.send(err);
-    }
+    })
+    .get(async (req, res) => {
+        const allDocsRewards = await getAllRewards();
+        res.send(allDocsRewards);
+    });
 
-});
 
 router.get("/getRewards", async (req, res) => {
     try {
@@ -33,6 +37,18 @@ router.get("/getCodeForReward", async (req, res) => {
         const params = req.query;
         const code = await getCodeForReward(params);
         res.send(code);
+    } catch (err) {
+        console.log(err);
+    }
+});
+
+router.post("/setUserPoints", async (req, res) => {
+    try {
+        const userId = req.body._id;
+        const rewardCost = req.body.rewardCost;
+        const updatedUserData = await setUserPoints(userId, rewardCost);
+
+        res.send(updatedUserData);
     } catch (err) {
         console.log(err);
     }

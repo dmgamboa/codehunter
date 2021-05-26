@@ -38,7 +38,7 @@ const Scan = () => {
         } else {
             const locationID = data.substring(prefix.length);
             const oldUserData = getUserData();
-            await handleCodeScan(locationID, getUser());
+            await handleCodeScan(locationID, getUser(), new Date());
 
             if (getUserData().points !== oldUserData.points) {
                 setPoints({

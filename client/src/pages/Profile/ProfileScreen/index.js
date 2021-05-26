@@ -2,14 +2,13 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Button, Spin } from "antd";
 import { TrophyOutlined, EnvironmentFilled, EditOutlined } from "@ant-design/icons";
-import InfiniteScroll from "react-infinite-scroll-component";
 
 import CustomAvatar from "../../../components/CustomAvatar";
 import { useAuth } from "../../../context/Auth";
 
 import ProfileEditDrawer from "../ProfileEditDrawer";
 import { Layout } from "./styled";
-import { readUser, updateUser } from "../axios";
+import { readHistory, updateUser } from "../axios";
 
 const ProfileScreen = () => {
     const params = useParams();
@@ -38,16 +37,16 @@ const ProfileScreen = () => {
 
     const handleUser = async () => {
         setLoading(true);
-        if (!params.id) {
-            const token = getUser();
+        // if (!params.id) {
+        //     const token = getUser();
 
-            const user = await readUser(token);
-            console.log(user);
-            setUserDetails(user);
+        //     const user = await readUser(token);
+        //     console.log(user);
+        //     setUserDetails(user);
 
-            const { name, username, avatar } = user;
-            setEditDetails({ name: `${name.first} ${name.last}`, username, avatar });
-        }
+        //     const { name, username, avatar } = user;
+        //     setEditDetails({ name: `${name.first} ${name.last}`, username, avatar });
+        // }
         setLoading(false);
     };
 
