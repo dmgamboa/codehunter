@@ -4,26 +4,7 @@ import theme from "../../../../context/themes/main";
 const { colors } = theme;
 
 const AvatarContainer = styled.div`
-    #editBtn {
-        color: black;
-        background-color: #adc9df;
-        width: 17%;
-        height: 3.5%;
-        position: absolute;
-        z-index: 1;
-        text-align: right;
-        padding-bottom: 22px;
-        font-weight: 500;
-        right: 35px;
-    }
-    #editIcon {
-        margin-top: 6px;
-        margin-left: 4.5px;
-        right: 75px;
-        width: 5%;
-        position: absolute;
-        z-index: 2;
-    }
+    position: relative;
 
     #avatarPic {
         top: 10px;
