@@ -59,7 +59,7 @@ const SplashScreen = () => {
                         animate={{ opacity: 1 }}
                         transition={{ delay: fillDelay + textDelay, duration: fillDuration - textDelay}}
                     >
-                        <h1 className="app-name">Code<b>Hunter</b></h1>
+                        <h1 className="app-name">Code<strong>Hunter</strong></h1>
                         <h2 className="team-name">by 4bby</h2>  
                     </motion.div>
                 </Content>
