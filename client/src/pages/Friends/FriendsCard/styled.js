@@ -8,6 +8,7 @@ const { colors, fonts } = theme;
 export const StyledCard = styled(Card)`
     border-radius: 1.5rem;
     border: none;
+    border-bottom: 1px solid lightgray;
     line-height: 1;
 
     h2 {

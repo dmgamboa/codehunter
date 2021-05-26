@@ -14,7 +14,7 @@ const FriendsCard = ({ friend, status, handleMenu }) => {
         let menu = cloneDeep(options);
         let optionIndex = [];
         switch (status) {
-        case "friends":
+        case "friend":
             optionIndex.push(menu.findIndex((val) => val.key === "remove"));
             break;
         case "pending":
@@ -56,7 +56,7 @@ const FriendsCard = ({ friend, status, handleMenu }) => {
                     <TrophyOutlined /> {friend.points} points
                 </span>
             </div>
-            <Menu onSelect={({key}) => handleMenu(key)}>
+            <Menu onSelect={({key}) => handleMenu(key, friend.id)}>
                 <SubMenu icon={<EllipsisOutlined rotate={90} />}>
                     {renderMenuOptions(status)}
                 </SubMenu>

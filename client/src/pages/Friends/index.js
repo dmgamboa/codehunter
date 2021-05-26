@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Tabs } from "antd";
 import Icon from "@ant-design/icons";
@@ -11,6 +12,7 @@ import { tabs, testFriends } from "./constant";
 import { Layout } from "./styled";
 
 const Friends = () => {
+    const history = useHistory();
     const { TabPane } = Tabs;
 
     const [friends, setFriends] = useState(testFriends);
@@ -31,9 +33,10 @@ const Friends = () => {
         console.log("handleScroll");
     };
 
-    const handleMenu = (key) => {
+    const handleMenu = (key, id) => {
         switch (key) {
         case "view":
+            history.push(`/profile/user/${id}`);
             break;
         case "add":
             break;
@@ -52,7 +55,7 @@ const Friends = () => {
 
     const renderFriendsList = (friends) => {
         return friends.map((friend) => {
-            const status = tab === "all" ? "friends" : tab && tab;
+            const status = tab === "all" ? "friend" : tab && tab;
             return (
                 <FriendsCard
                     key={friend.name}
