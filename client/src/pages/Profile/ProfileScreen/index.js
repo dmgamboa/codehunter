@@ -1,50 +1,143 @@
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { Button, Spin } from "antd";
+import { TrophyOutlined, EnvironmentFilled, EditOutlined } from "@ant-design/icons";
+
+import CustomAvatar from "../../../components/CustomAvatar";
 import { useAuth } from "../../../context/Auth";
-import AvatarSection from "../components/Avatar/Avatar";
-import PointsSection from "../components/Points/PointsSection";
-import LocationsList from "../components/History/LocationsList";
+
+import ProfileEditDrawer from "../ProfileEditDrawer";
+import { Layout } from "./styled";
 import { readHistory, updateUser } from "../axios";
 
 const ProfileScreen = () => {
-    const { getUserData, getUser } = useAuth();
+    const params = useParams();
+    const { getUser, getUserData } = useAuth();
 
-    const [history, setHistory] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [userDetails, setUserDetails] = useState({});
+    const [editDetails, setEditDetails] = useState({});
+    const [editDrawer, setEditDrawer] = useState(false);
+    const [history, setHistory] = useState([]);
 
-    const {name, avatar, points} = getUserData();
-
-    const onSubmit = async (e) => {
-        e.preventDefault();
-        const data = new FormData();
-        
-        // Fields to update.
-        const fields = {
-            name: {
-                first: "hakuna",
-                last: "matata",
-            }
-        };
-
-        data.append("userToken", getUser());
-        data.append("fields", JSON.stringify(fields));
-        data.append("avatar", e.target[0].files[0]);
-        await updateUser(data);
+    const handleEditDrawer = () => {
+        setEditDrawer(!editDrawer);
     };
 
-    useEffect(async () => {
-        const userHistory = await readHistory(getUser());
-        setHistory(userHistory.history);
+    const handleEdit = async (values) => {
+        setLoading(true);
+        const token = getUser();
+        const params = new FormData();
+        params.append("userToken", token);
+        params.append("fields", values.fields);
+        params.append("avatar", values.avatar);
+        await updateUser(params);
+        handleUser();
+        setLoading(false);
+    };
+
+    const handleUser = () => {
+        setLoading(true);
+        if (!params.id) {
+            const user = getUserData();
+            setUserDetails(user);
+
+            const { name, username, avatar } = user;
+            setEditDetails({ name: `${name.first} ${name.last}`, username, avatar });
+        }
+        setLoading(false);
+    };
+
+    const handleHistory = async () => {
+        const token = getUser();
+        const history = await readHistory(token);
+        setHistory(history);
+    };
+
+    const renderStatusButton = (status) => {
+        switch (status) {
+        case "friend":
+            return "Remove Friend";
+        case "pending":
+            return "Accept Request";
+        case "sent":
+            return "Cancel Request";
+        default:
+            return "Add Friend";
+        }
+    };
+
+    useEffect(() => {
+        handleUser();
+        handleHistory();
     }, []);
 
+    const renderHistoryList = (list) => {
+        return list.map(({ location, points, date }) => {
+            return (
+                <div className="history-card" key={location}>
+                    <h3 className="location">{location}</h3>
+                    <span className="details">
+                        <span className="points">{points} points</span>
+                        <span className="date">
+                            {Intl.DateTimeFormat(navigator.language, {
+                                weekday: "short",
+                                month: "short",
+                                day: "numeric"
+                            }).format(new Date(date))}
+                        </span>
+                    </span>
+                </div>
+            );
+        });
+    };
+
     return (
-        <div>
-            <form onSubmit={onSubmit}>
-                <input type="file" />
-                <input type="submit" />
-            </form>
-            <AvatarSection firstName={name.first} lastName={name.last} avatar={avatar} />
-            <PointsSection points={points} />
-            <LocationsList history={history} />
-        </div>
+        <Layout>
+            <Spin spinning={loading} style={{ width: "100%", flex: "1" }} />
+            <ProfileEditDrawer
+                visible={editDrawer}
+                onClose={handleEditDrawer}
+                initialValues={editDetails}
+                onFinish={handleEdit}
+            />
+            <div className="top">
+                <span className="circles"></span>
+                <CustomAvatar size="80px" photo={userDetails?.avatar} background="lightgray" />
+                <h1 className="name">
+                    <span className="accent">{userDetails?.name?.first}</span>{" "}
+                    {userDetails?.name?.last}
+                </h1>
+                <span className="points">
+                    <TrophyOutlined /> {userDetails?.points} points
+                </span>
+                {params.id ? (
+                    <Button className={`status-btn ${userDetails?.status}`}>
+                        {userDetails?.status && renderStatusButton(userDetails?.status)}
+                    </Button>
+                ) : (
+                    <Button type="secondary" onClick={handleEditDrawer}>
+                        <EditOutlined /> Edit Profile
+                    </Button>
+                )}
+            </div>
+            <div className="history">
+                <h2>
+                    <EnvironmentFilled /> Recently Visited
+                </h2>
+                {history.length > 0 ? (
+                    renderHistoryList(history)
+                ) : (
+                    <span className="no-history">
+                        {`Looks like ${
+                            params.id ? `${userDetails?.name?.first} hasn't` : "you haven't"
+                        } discovered any codes yet. ${
+                            params.id ? "It's time to help them out!" : "Go get hunting!"
+                        }`}
+                    </span>
+                )}
+            </div>
+        </Layout>
     );
 };
 

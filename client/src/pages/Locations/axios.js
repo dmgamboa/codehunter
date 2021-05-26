@@ -41,7 +41,10 @@ const readPlace = async (search) => {
                     phone: data.phoneNumber,
                 };
             }
-        });
+
+            return {};
+        },
+        (error) => { return {}; });
 };
 
 const readLocations = async (params) => {
