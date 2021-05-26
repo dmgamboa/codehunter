@@ -55,8 +55,9 @@ const rewardSchema = new Schema({
     name: String,
     description: String,
     cost: Number,
-    availability: [String], //online, in-store, limited time
-    category: [String], //food, accessories, acitivites, tech
+    availability: [String], // online, in-store, limited time
+    category: [String], // food, accessories, acitivites, tech
+    img: String //Link to amazon s3 bucket
 });
 
 const historySchema = new Schema({

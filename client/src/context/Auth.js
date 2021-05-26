@@ -39,8 +39,7 @@ const AuthProvider = ({ children }) => {
     };
 
     // Creating new user in firebase and returns uid to create doc in user collection.
-    // Set the currentUser as a token accessed from creating an account
-    // Return the uid
+    // Set the user credentials in localStorage
     const signup = async (email, password) => {
         await auth.createUserWithEmailAndPassword(email, password).then((token) => {
             localStorage.setItem("user", JSON.stringify(token.user));

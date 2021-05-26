@@ -6,34 +6,52 @@ import LocationPlaceholder from "../../../assets/placeholder-location.jpg";
 import { StyledCard, StyledModal } from "./styled";
 
 import Confetti from "react-confetti";
-import { getCodeForReward } from "../axios"; 
+import { getCodeForReward, setUserPoints } from "../axios"; 
+import { useAuth } from "../../../context/Auth";
 
-const RewardCard = ({ name, description, cost, availability }) => {
- 
+import _ from "lodash";
+
+
+const RewardCard = ({ name, description, cost, availability, update, companyLogo }) => {
+
     const [showConfetti, setShowConfetti] = useState(false);
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [isRedeemModalVisible, setIsRedeemModalVisible] = useState(false);
     const [redeemableCode, setRedeemableCode] = useState("no code");
-
+    const [successRedeem, setSuccessRedeem] = useState(true);
+    const { getUserData, setUserData } = useAuth();
 
     const showConfirmation = () => {
         setIsModalVisible(true);
     };
-    const handleRedeem = async () => {
+
+    const handleRedeem = _.debounce(async () => {
         const code = await getCodeForReward({ name: name, description: description, cost: cost });
-
         setRedeemableCode(code);
-
         setIsModalVisible(false);
- 
-
         setIsRedeemModalVisible(true);
-    };
+
+        const userId = JSON.stringify(getUserData()._id);
+        const data = {
+            _id: userId, 
+            rewardCost: cost
+        };
+
+        const updatedUser = await setUserPoints(data);
+        if (!updatedUser) {
+            setSuccessRedeem(false);
+        } else {
+            setSuccessRedeem(true);
+            setUserData(updatedUser);
+        }
+    }, 200);
 
     const handleShownCode = () => {
         setIsRedeemModalVisible(false);
 
-        setShowConfetti(true);
+        if (successRedeem) {
+            setShowConfetti(true);
+        }
         setTimeout(() => {
             setShowConfetti(false);
         }, 5000);
@@ -42,14 +60,15 @@ const RewardCard = ({ name, description, cost, availability }) => {
     const handleCancel = () => {
         setIsModalVisible(false);
     };
+    
     return (
         <>
             {/* This becomes a antd card using styled component (see styled.js) */}
-            {showConfetti ? <Confetti className="confetti" numberOfPieces={80}/> : null}    
+            {showConfetti ? <Confetti className="confetti" numberOfPieces={cost}/> : null}    
             <StyledCard
                 hoverable
                 onClick={showConfirmation}
-                cover={<img src={LocationPlaceholder} alt="placeholder name" />}
+                cover={<img src={companyLogo || LocationPlaceholder} alt="placeholder name" />}
             >
                 <h1 className="name">
                     {name} 
@@ -65,14 +84,21 @@ const RewardCard = ({ name, description, cost, availability }) => {
             </StyledCard>
 
             <StyledModal
-                title={<span><GiftOutlined/>Keep this code somewhere safe</span>}
+                title={<span><GiftOutlined/>{successRedeem ? "keep this code somewhere safe" : "Keep hunting!"}</span>}
                 visible={isRedeemModalVisible}
-                onOk={handleShownCode}
-                onCancel={handleShownCode}
+                onOk={() => {
+                    update();
+                    handleShownCode();
+                }}
+                onCancel={() => { 
+                    update();
+                    handleShownCode();
+                }}
                 okText="ok"
+                closeOnOverlayClick={false}
             >
-                <p className="modal-name">Here ya go!</p>
-                <p className="cost">{redeemableCode}</p>
+                <p className="modal-name">{successRedeem ? "Here ya go!" : "You don't have enough points"}</p>
+                <p className="cost">{successRedeem ? redeemableCode : "but you'll get there" }</p>
             </StyledModal>
  
             <StyledModal
