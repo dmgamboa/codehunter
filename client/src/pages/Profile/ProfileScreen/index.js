@@ -22,6 +22,7 @@ const ProfileScreen = () => {
                 first: "hakuna",
                 last: "matata",
             }
+            
         };
 
         data.append("userToken", getUser());

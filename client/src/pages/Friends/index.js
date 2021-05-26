@@ -9,14 +9,18 @@ import SearchBar from "../../components/SearchBar";
 import FriendsCard from "./FriendsCard";
 import { tabs, testFriends } from "./constant";
 import { Layout } from "./styled";
+import { readFriends } from "./axios";
+import { useAuth } from "../../context/Auth";
 
 const Friends = () => {
     const { TabPane } = Tabs;
 
-    const [friends, setFriends] = useState(testFriends);
+    const { getUser } = useAuth();
+
+    const [friends, setFriends] = useState();
     const [friendsLength, setFriendsLength] = useState(100);
     const [tab, setTab] = useState("all");
-    const [search, setSearch] = useState("");
+    const [search, setSearch] = useState(null);
     const [page, setPage] = useState(1);
 
     const handleSearch = (query) => {
@@ -64,7 +68,31 @@ const Friends = () => {
         });
     };
 
+    const handleFriends = async () => {
+        const filters = {};
+
+        if (search) {
+            filters["$text"] = { $search: search };
+        }
+
+        const params = {
+            userToken: getUser(),
+            filters,
+        };
+
+        const friendsData = await readFriends(getUser(), params);
+        setFriends(friendsData);
+    };
+
     useEffect(() => {}, [tab]);
+
+    useEffect(async () => {
+        await handleFriends();
+    }, []);
+
+    useEffect(async () => {
+        await handleFriends();
+    }, [search]);
 
     return (
         <Layout>
