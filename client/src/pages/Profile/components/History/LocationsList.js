@@ -8,42 +8,42 @@ function LocationsList() {
                 <ListStyled className="locationList">
                     <div>
                         <p>
-                            <span className="location-name">name</span>
+                            <span className="location-name">place</span>
                             <span className="location-date">date</span>
                             <span className="location-points">points</span>
                         </p>
                     </div>
                     <div>
                         <p>
-                            <span className="location-name">name</span>
+                            <span className="location-name">place</span>
                             <span className="location-date">date</span>
                             <span className="location-points">points</span>
                         </p>
                     </div>
                     <div>
                         <p>
-                            <span className="location-name">name</span>
+                            <span className="location-name">place</span>
                             <span className="location-date">date</span>
                             <span className="location-points">points</span>
                         </p>
                     </div>
                     <div>
                         <p>
-                            <span className="location-name">name</span>
+                            <span className="location-name">place</span>
                             <span className="location-date">date</span>
                             <span className="location-points">points</span>
                         </p>
                     </div>
                     <div>
                         <p>
-                            <span className="location-name">name</span>
+                            <span className="location-name">place</span>
                             <span className="location-date">date</span>
                             <span className="location-points">points</span>
                         </p>
                     </div>
                     <div>
                         <p>
-                            <span className="location-name">name</span>
+                            <span className="location-name">place</span>
                             <span className="location-date">date</span>
                             <span className="location-points">points</span>
                         </p>
