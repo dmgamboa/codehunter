@@ -1,19 +1,23 @@
 import express from "express";
-import { massWriteRewards, getRewards, getCodeForReward, setUserPoints } from "../models/rewards.js";
+import { massWriteRewards, getAllRewards, getRewards, getCodeForReward, setUserPoints } from "../models/rewards.js";
 
 const router = express.Router();
 
-// ${url}rewards/add-all-rewards
-router.post("/add-all-rewards", async (req, res) => {
-    try {
-        const result = await massWriteRewards(rewardsData);
+router.route("/add-all-reward")
+    .post(async (req, res) => {
+        try {
+            const result = await massWriteRewards(rewardsData);
+            res.send("Successfully written data to rewards collection");
+        } catch (err) {
+            res.send(err);
+        }
 
-        res.send("Successfully written data to rewards collection");
-    } catch (err) {
-        res.send(err);
-    }
+    })
+    .get(async (req, res) => {
+        const allDocsRewards = await getAllRewards();
+        res.send(allDocsRewards);
+    });
 
-});
 
 router.get("/getRewards", async (req, res) => {
     try {

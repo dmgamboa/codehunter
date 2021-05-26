@@ -17,6 +17,13 @@ export const massWriteRewards = async (documents) => {
     });
 };
 
+export const getAllRewards = async () => {
+    return new Promise(async (res, rej) => {
+        const collection = await Reward.find({});
+        return res(collection)
+    });
+};
+
 export const getRewards = (category, avail, pageNumber, pageSize = 8) => {
     let fmtAvail;
     if (avail) {
@@ -39,7 +46,7 @@ export const getRewards = (category, avail, pageNumber, pageSize = 8) => {
             } catch (err) {
                 return rej(err);
             }
-        }
+        };
 
         try {
             const results = await Reward.find({
@@ -85,9 +92,9 @@ export const setUserPoints = async (userId, rewardCost) => {
                 );
                 
                 return res(updatedUserData);
-            }
+            };
         } catch (err) {
             return rej(err);
-        }
+        };
     });
 };
