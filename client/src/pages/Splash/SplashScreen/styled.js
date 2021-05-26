@@ -15,11 +15,20 @@ export const Content = styled.div`
     margin: 0;
     padding: 0;
 
+    .app-name {
+        font-family: nasalization, sans-serif;
+        text-transform: uppercase;
+        font-size: clamp(1.5rem, 5vw, 3rem);
+    }
+
+    .team-name {
+        font-size: clamp(1rem, 3vw, 1.75rem);
+    }
+
     .app-name,
     .team-name {
         text-align: center;
         color: white;
-        text-shadow: 1px 2px 1px rgba(0, 0, 0, 0.3);
     }
     
     svg {
