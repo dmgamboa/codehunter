@@ -5,8 +5,9 @@ import theme from "../../../context/themes/main";
 const { colors } = theme;
 
 export const StyledCard = styled(Card)`
-    .rewardCard {
-    }
+    border-radius: 1.5rem;
+    border: none;
+    border-bottom: 1px solid lightgray;
     display: flex;
     align-items: center;
     height: 90px;
@@ -58,7 +59,6 @@ export const StyledCard = styled(Card)`
         }
         .icons {
             grid-area: icons;
-            justify-self: flex-end;
             display: flex;
             flex-direction: column;
             justify-content: space-around;
