@@ -65,6 +65,10 @@ export const StyledCard = styled(Card)`
             font-size: 18pt;
         }
     }
+
+    .placeholder {
+        padding: 0.5rem 0;
+    }
 `;
 
 export const StyledModal = styled(Modal)`

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { GiftOutlined } from "@ant-design/icons";
 
-import LocationPlaceholder from "../../../assets/placeholder-location.jpg";
+import RewardsPlaceholder from "../../../assets/placeholders/rewards/gift.svg";
 
 import { StyledCard, StyledModal } from "./styled";
 
@@ -68,7 +68,7 @@ const RewardCard = ({ name, description, cost, availability, update, companyLogo
             <StyledCard
                 hoverable
                 onClick={showConfirmation}
-                cover={<img src={companyLogo || LocationPlaceholder} alt="placeholder name" />}
+                cover={<img className={!companyLogo && "placeholder"} src={companyLogo || RewardsPlaceholder} alt="reward company" />}
             >
                 <h1 className="name">
                     {name} 

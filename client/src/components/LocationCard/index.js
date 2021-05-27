@@ -3,7 +3,7 @@ import { TabBar } from "antd-mobile";
 import Icon, { CheckCircleOutlined } from "@ant-design/icons";
 
 import { ReactComponent as BookmarkIcon } from "../../assets/icons/bookmark.svg";
-import LocationPlaceholder from "../../assets/placeholder-location.jpg";
+import LocationPlaceholder from "../../assets/placeholders/locations/others.png";
 
 import StyledCard from "./styled";
 
