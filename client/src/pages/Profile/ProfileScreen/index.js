@@ -8,7 +8,7 @@ import { useAuth } from "../../../context/Auth";
 
 import ProfileEditDrawer from "../ProfileEditDrawer";
 import { Layout } from "./styled";
-import { readHistory, updateUser } from "../axios";
+import { readFriend, readFriendHistory, readHistory, updateUser } from "../axios";
 
 const ProfileScreen = () => {
     const params = useParams();
@@ -36,22 +36,31 @@ const ProfileScreen = () => {
         setLoading(false);
     };
 
-    const handleUser = () => {
+    const handleUser = async () => {
         setLoading(true);
         if (!params.id) {
-            const user = getUserData();
-            setUserDetails(user);
+            const user = await getUserData();
+            await setUserDetails(user);
 
             const { name, username, avatar } = user;
-            setEditDetails({ name: `${name.first} ${name.last}`, username, avatar });
+            await setEditDetails({ name: `${name.first} ${name.last}`, username, avatar });
+        } else {
+            const friend = await readFriend(params.id);
+
+            setUserDetails(friend);
         }
         setLoading(false);
     };
 
     const handleHistory = async () => {
-        const token = getUser();
-        const history = await readHistory(token);
-        setHistory(history);
+        if (!params.id) {
+            const token = getUser();
+            const history = await readHistory(token);
+            setHistory(history);
+        } else {
+            const history = await readFriendHistory(params.id);
+            setHistory(history);
+        }
     };
 
     const renderStatusButton = (status) => {
@@ -68,7 +77,7 @@ const ProfileScreen = () => {
     useEffect(() => {
         handleUser();
         handleHistory();
-    }, []);
+    }, [params.id]);
 
     const renderHistoryList = (list) => {
         return list.map(({ location, points, date }) => {
