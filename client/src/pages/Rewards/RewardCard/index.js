@@ -22,6 +22,8 @@ const RewardCard = ({ rewardId, name, description, cost, availability, update, c
     const [successRedeem, setSuccessRedeem] = useState(true);
     const [isRedeemed, setIsRedeemed] = useState(false);
     const { getUserData, setUserData } = useAuth();
+    // eslint-disable-next-line
+    const [error, setError] = useState();
 
     const showConfirmation = () => {
         setIsModalVisible(true);
@@ -41,16 +43,21 @@ const RewardCard = ({ rewardId, name, description, cost, availability, update, c
         };
 
         // Returns updated user data to set pts on UI
-        const updatedUser = await setUserPoints(data);
-        if (!updatedUser) {
-            setSuccessRedeem(false);
-        } else {
-            setSuccessRedeem(true);
-            // Remove card from UI
-            setIsRedeemed(true);
-            setUserData(updatedUser);
-            // Add reward to array in db and handle null/undefined values
-            addReward(data);
+        try {
+            const updatedUser = await setUserPoints(data);
+            if (!updatedUser) {
+                setSuccessRedeem(false);
+            } else {
+                setSuccessRedeem(true);
+                // Remove card from UI
+                setIsRedeemed(true);
+                setUserData(updatedUser);
+                // Add reward to array in db and handle null/undefined values
+                addReward(data);
+            }
+        } catch (err) {
+            // Error is set but not displayed to user
+            setError(err);
         }
     }, 200);
 
