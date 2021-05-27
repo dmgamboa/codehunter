@@ -30,7 +30,13 @@ export const addReward = async (query) => {
     return await axios.post(`${url}rewards/addReward`, query);
 };
 
-export const getRewardsArr = async (query) => {
-    const results = await axios.get(`${url}rewards/getRewardsArr`, { params: query });
-    return results.data;
+export const getRewardsArr = async (userToken) => {
+    const results = await axios.get(`${url}readUser`, {
+        params: {
+            userToken,
+            fields: "rewards",
+        },
+    });
+    
+    return results.data.rewards;
 };

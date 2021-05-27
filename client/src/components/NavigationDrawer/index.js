@@ -1,5 +1,4 @@
-import { Avatar } from "antd";
-import Icon, { LogoutOutlined } from "@ant-design/icons";
+import { LogoutOutlined } from "@ant-design/icons";
 import { useHistory } from "react-router-dom";
 
 import CustomAvatar from "../../components/CustomAvatar";

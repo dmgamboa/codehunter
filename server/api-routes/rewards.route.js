@@ -1,5 +1,5 @@
 import express from "express";
-import { massWriteRewards, getAllRewards, getRewards, getCodeForReward, setUserPoints, addReward, getRewardsArr } from "../models/rewards.js";
+import { massWriteRewards, getAllRewards, getRewards, getCodeForReward, setUserPoints, addReward } from "../models/rewards.js";
 
 const router = express.Router();
 
@@ -11,7 +11,6 @@ router.route("/add-all-reward")
         } catch (err) {
             res.send(err);
         };
-
     })
     .get(async (req, res) => {
         const allDocsRewards = await getAllRewards();
@@ -28,7 +27,7 @@ router.get("/getRewards", async (req, res) => {
 
         res.send(results);
     } catch(err) {
-        console.log(err)
+        res.send(err)
     };
 });
 
@@ -38,7 +37,7 @@ router.get("/getCodeForReward", async (req, res) => {
         const code = await getCodeForReward(params);
         res.send(code);
     } catch (err) {
-        console.log(err);
+        res.send(err);
     };
 });
 
@@ -50,7 +49,7 @@ router.post("/setUserPoints", async (req, res) => {
 
         res.send(updatedUserData);
     } catch (err) {
-        console.log(err);
+        res.send(err);
     };
 });
 
@@ -62,17 +61,7 @@ router.post("/addReward", async (req, res) => {
 
         res.send(updatedUserData);
     } catch (err) {
-        console.log(err);
-    };
-});
-
-router.get("/getRewardsArr", async (req, res) => {
-    try {
-        const userId = req.query._id;
-        const rewardsArr = await getRewardsArr(userId);
-        res.send(rewardsArr);
-    } catch (err) {
-        console.log(err);
+        res.send(err);
     };
 });
 
