@@ -15,7 +15,7 @@ import CircleIconBtn from "../../components/CircleIconBtn";
 import Counter from "../../components/Counter";
 import RewardCard from "./RewardCard";
 import { useAuth } from "../../context/Auth";
-import { getRewards } from "./axios";
+import { getRewards, getRewardsArr } from "./axios";
 
 const Rewards = () => {
     const { getUserData } = useAuth();
@@ -34,6 +34,7 @@ const Rewards = () => {
     const [pageNumber, setPageNumber] = useState(1);
     const [loading, setLoading] = useState(false);
     const [rewards, setRewards] = useState([]);
+    const [rewardsArr, setRewardsArr] = useState([]);
     const [hasMore, setHasMore] = useState(false);
     // eslint-disable-next-line no-unused-vars
     const [error, setError] = useState(false);
@@ -122,10 +123,14 @@ const Rewards = () => {
             // Rewards has possible nested arrays
             return arr.map((rewardInfo, index) => {
                 const icons = addIconRewardCard(rewardInfo.availability);
+                if(rewardsArr.includes(rewardInfo._id)) {
+                    return;
+                }
                 return (
                     <div key={index}>
                         <RewardCard
                             key={rewardInfo._id}
+                            rewardId={rewardInfo._id}
                             name={rewardInfo.name}
                             description={rewardInfo.description}
                             cost={rewardInfo.cost}
@@ -162,6 +167,14 @@ const Rewards = () => {
         handleScroll();
     }, [categoryQuery, availQuery]);
 
+
+    useEffect(async () => {
+        const userId = {
+            _id: getUserData()._id
+        };
+        const arr = await getRewardsArr(userId);
+        setRewardsArr(arr);
+    }, []);
     return (
         <Layout>
             <div className="top">

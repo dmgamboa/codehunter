@@ -45,6 +45,7 @@ const userSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "Location",
     }],
+    rewards: [Schema.Types.ObjectId],
 });
 
 const rewardSchema = new Schema({
