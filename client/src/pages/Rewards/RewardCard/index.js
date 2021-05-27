@@ -4,6 +4,8 @@ import { GiftOutlined } from "@ant-design/icons";
 import LocationPlaceholder from "../../../assets/placeholder-location.jpg";
 
 import { StyledCard, StyledModal } from "./styled";
+import TwitterBtn from "./TwitterBtn";
+import {Button} from "antd";
 
 import Confetti from "react-confetti";
 import { getCodeForReward, setUserPoints } from "../axios"; 
@@ -96,6 +98,15 @@ const RewardCard = ({ name, description, cost, availability, update, companyLogo
                 }}
                 okText="ok"
                 closeOnOverlayClick={false}
+                footer={[
+                    <TwitterBtn id="twitterShare" key="link"/>,
+                    <Button id="redeemedOk" size="large" style={{width: "100%", top: "4px"}} key="submit" type="primary" onClick={() => {
+                        update();
+                        handleShownCode();}}>
+                        OK
+                    </Button>
+                    
+                ]}
             >
                 <p className="modal-name">{successRedeem ? "Here ya go!" : "You don't have enough points"}</p>
                 <p className="cost">{successRedeem ? redeemableCode : "but you'll get there" }</p>
