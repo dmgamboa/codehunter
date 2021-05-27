@@ -17,6 +17,7 @@ export const massWriteRewards = async (documents) => {
     });
 };
 
+// To read Reward collection
 export const getAllRewards = async () => {
     return new Promise(async (res, rej) => {
         const collection = await Reward.find({});
@@ -24,6 +25,7 @@ export const getAllRewards = async () => {
     });
 };
 
+// Get rewards from Rewards collection
 export const getRewards = (category, avail, pageNumber, pageSize = 8) => {
     let fmtAvail;
     if (avail) {
@@ -93,6 +95,37 @@ export const setUserPoints = async (userId, rewardCost) => {
                 
                 return res(updatedUserData);
             };
+        } catch (err) {
+            return rej(err);
+        };
+    });
+};
+
+// Add reward id to reward array in user collection
+export const addReward = async (userId, rewardId) => {
+    const parsedUserId = JSON.parse(userId);
+
+    return new Promise(async (res, rej) => {
+        try {
+            const updatedUserData = await User.findOneAndUpdate(
+                { _id: parsedUserId },
+                { $push: { "rewards": rewardId} },
+                { new: true }
+            );
+            
+            return res(updatedUserData);
+        } catch (err) {
+            return rej(err);
+        };
+    });
+};
+
+// Get rewards array from user collection 
+export const getRewardsArr = async (userId) => {
+    return new Promise(async (res, rej) => {
+        try {
+            const rewardsArr = await User.findById(userId, "rewards");
+            return res(rewardsArr.rewards);
         } catch (err) {
             return rej(err);
         };
