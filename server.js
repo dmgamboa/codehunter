@@ -40,6 +40,4 @@ app.use("/updateUser", updateUser);
 // Rewards page
 app.use("/rewards", rewards);
 
-app.listen(port, () => {
-    console.log(`App listening to port ${port}`);
-});
+app.listen(port);
