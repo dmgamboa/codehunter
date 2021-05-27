@@ -105,6 +105,8 @@ export const Layout = styled.div`
         }
 
         .history-card {
+            position: relative;
+            overflow: hidden;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -126,6 +128,32 @@ export const Layout = styled.div`
 
             .points {
                 margin-bottom: 0.5rem;
+            }
+
+            .circles {
+                position: absolute;
+                top: 0;
+                left: 0;
+                transform: translate(-50%, -50%);
+                width: 100px;
+                height: 100px;
+                background: ${rgba(colors.secondary, 0.1)};
+                z-index: -3;
+                border-radius: 50%;
+                filter: drop-shadow(0 0.25rem 0.15rem rgba(0, 0, 0, 0.3));
+
+                &:after {
+                    content: "";
+                    position: absolute;
+                    border-radius: 50%;
+                    left: -50%;
+                    top: 75%;
+                    /* transform: translate(-50%, -50%); */
+                    background: inherit;
+                    z-index: -1;
+                    width: 200px;
+                    height: 200px;
+                }
             }
         }
     }

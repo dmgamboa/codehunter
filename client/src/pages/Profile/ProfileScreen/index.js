@@ -83,6 +83,7 @@ const ProfileScreen = () => {
         return list.map(({ location, points, date }) => {
             return (
                 <div className="history-card" key={location}>
+                    <span className="circles"></span>
                     <h3 className="location">{location}</h3>
                     <span className="details">
                         <span className="points">{points} points</span>

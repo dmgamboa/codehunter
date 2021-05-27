@@ -3,7 +3,7 @@ import { TabBar } from "antd-mobile";
 import { details as detailsToRender } from "./constant";
 import StyledDrawer from "./styled";
 
-import LocationPlaceholder from "../../assets/placeholder-location.jpg";
+import LocationPlaceholder from "../../assets/placeholders/locations/others.png";
 
 const LocationDetails = ({ visible, onClose, location, tabs }) => {
     const renderHours = (hours) => {
