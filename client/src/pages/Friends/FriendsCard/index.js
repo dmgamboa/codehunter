@@ -18,9 +18,6 @@ const FriendsCard = ({ friend, status, handleMenu }) => {
             optionIndex.push(menu.findIndex((val) => val.key === "remove"));
             break;
         case "pending":
-            optionIndex.push(menu.findIndex((val) => val.key === "accept"));
-            break;
-        case "sent":
             optionIndex.push(menu.findIndex((val) => val.key === "cancel"));
             break;
         default:
@@ -48,16 +45,16 @@ const FriendsCard = ({ friend, status, handleMenu }) => {
     return (
         <StyledCard className="friends-card">
             <span className="circles"></span>
-            <CustomAvatar background="lightgray" />
+            <CustomAvatar background="lightgray" photo={friend.avatar} />
             <div className="text">
                 <h2>
-                    {friend.name} <span className="username">{friend.username}</span>
+                    {friend.name.first} {friend.name.last} <span className="username">{friend.username}</span>
                 </h2>
                 <span className="points">
                     <TrophyOutlined /> {friend.points} points
                 </span>
             </div>
-            <Menu onSelect={({key}) => handleMenu(key, friend.id)}>
+            <Menu onSelect={({key}) => handleMenu(key, friend._id)}>
                 <SubMenu icon={<EllipsisOutlined rotate={90} />}>
                     {renderMenuOptions(status)}
                 </SubMenu>

@@ -43,8 +43,9 @@ const readPlace = async (search) => {
             }
 
             return {};
-        },
-        (error) => { return {}; });
+        }).catch(() => {
+            return {};
+        });
 };
 
 const readLocations = async (params) => {
