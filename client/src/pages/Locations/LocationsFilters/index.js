@@ -76,7 +76,7 @@ const LocationsFilters = ({ form, visible, onClose, onFinish, initialValues, has
                     </Radio.Group>
                 </Form.Item>
 
-                <div className="switch">
+                {/* <div className="switch">
                     <Form.Item name="bookmarked" valuePropName="checked">
                         <Switch />
                     </Form.Item>
@@ -84,7 +84,7 @@ const LocationsFilters = ({ form, visible, onClose, onFinish, initialValues, has
                         <Icon component={BookmarkIcon} />
                         Bookmarked
                     </span>
-                </div>
+                </div> */}
 
                 <div className="switch">
                     <Form.Item name="visited" valuePropName="checked">

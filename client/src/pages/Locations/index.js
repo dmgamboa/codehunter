@@ -102,12 +102,12 @@ const Locations = () => {
                 distance: location.distance,
                 bookmarked: location.bookmarked,
                 visited: location.visited,
-                image: placesData.image,
+                image: placesData?.image,
                 details: {
                     type: location.type,
                     address: location.address,
-                    hours: placesData.hours,
-                    phone: placesData.phone,
+                    hours: placesData?.hours,
+                    phone: placesData?.phone,
                     website: location.website
                 }
             };
