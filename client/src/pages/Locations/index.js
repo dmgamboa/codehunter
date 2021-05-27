@@ -202,7 +202,7 @@ const Locations = () => {
 
         const params = {
             userToken,
-            userFields: visited && "redeemed",
+            userFields: visited && "history.locationID",
             sort,
             filters: searchAndFilter,
             page,

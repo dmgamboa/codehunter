@@ -10,7 +10,6 @@ router.post("/", async (req, res) => {
 
     await createHistory(req);
 
-    console.log("response (router): " + response);
     res.send(response);
 });
 

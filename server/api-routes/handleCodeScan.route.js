@@ -16,10 +16,6 @@ router.post("/", async (req, res) => {
             res.send("Invalid location");
         }
 
-        console.log(location);
-
-        console.log("here", location.fields);
-
         const historyReq = {
             userToken: req.body.userToken,
             location,
@@ -43,6 +39,7 @@ router.post("/", async (req, res) => {
                 avatar: user.avatar,
                 name: user.name,
                 points: user.points,
+                username: user.username,
             };
 
             response = updatedData;

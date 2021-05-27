@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Card } from "antd";
+import { rgba } from "polished";
 
 import theme from "../../../context/themes/main";
 
@@ -10,13 +11,14 @@ export const StyledCard = styled(Card)`
     border: none;
     border-bottom: 1px solid lightgray;
     line-height: 1;
+    overflow: hidden;
 
     h2 {
         display: flex;
         align-items: center;
         color: ${colors.primary};
         font-size: clamp(1.25rem, 3vw, 1.5rem);
-        
+
         .username {
             margin-left: 0.5rem;
             color: rgba(0, 0, 0, 0.5);
@@ -39,6 +41,7 @@ export const StyledCard = styled(Card)`
     }
 
     .ant-card-body {
+        position: relative;
         padding: 0.5rem;
         width: 100%;
         display: grid;
@@ -46,6 +49,7 @@ export const StyledCard = styled(Card)`
         column-gap: 0.5rem;
         align-items: center;
         justify-content: center;
+        overflow: hidden;
 
         &::before {
             display: none;
@@ -65,6 +69,8 @@ export const StyledCard = styled(Card)`
     .ant-menu {
         grid-column: 3;
         border: none;
+        z-index: 99;
+        background: none;
     }
 
     .ant-menu-submenu-title {
@@ -72,8 +78,44 @@ export const StyledCard = styled(Card)`
     }
 
     .ant-menu-submenu-arrow {
-       
         display: none;
         border: none;
-    }   
+    }
+
+    .circles {
+        position: absolute;
+        bottom: 0;
+        right: 5%;
+        transform: translate(50%, 50%);
+        width: 150px;
+        height: 150px;
+        background: ${rgba(colors.secondary, 0.1)};
+        z-index: 1;
+        border-radius: 50%;
+        filter: drop-shadow(0 0.25rem 0.15rem rgba(0, 0, 0, 0.3));
+
+        &:before,
+        &:after {
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+            background: inherit;
+        }
+
+        &:before {
+            z-index: -2;
+            right: 25px;
+            bottom: 25px;
+            width: 100px;
+            height: 100px;
+        }
+
+        &:after {
+            z-index: -1;
+            right: 50px;
+            bottom: 50px;
+            width: 50px;
+            height: 50px;
+        }
+    }
 `;

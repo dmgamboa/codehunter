@@ -9,6 +9,7 @@ import readHistory from "./api-routes/readHistory.route.js";
 import readLocations from "./api-routes/readLocations.route.js";
 import readPlace from "./api-routes/readPlace.route.js";
 import readUser from "./api-routes/readUser.route.js";
+import readUsers from "./api-routes/readUsers.route.js";
 import updateUser from "./api-routes/updateUser.route.js";
 import rewards from "./api-routes/rewards.route.js";
 
@@ -33,6 +34,7 @@ app.use("/readHistory", readHistory);
 app.use("/readLocations", readLocations);
 app.use("/readPlace", readPlace);
 app.use("/readUser", readUser);
+app.use("/readUsers", readUsers);
 app.use("/updateUser", updateUser);
 
 // Rewards page

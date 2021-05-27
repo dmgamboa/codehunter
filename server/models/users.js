@@ -25,6 +25,7 @@ const createUser = (req) => {
         const fields = {
             name: newUser.name,
             points: newUser.points,
+            username: newUser.username,
         };
 
         return res(fields);
@@ -33,16 +34,41 @@ const createUser = (req) => {
 
 const readUser = (req) => {
     return new Promise((res, rej) => {
-        const user = JSON.parse(req.query.userToken);
         const fields = req.query.fields;
 
-        if (!user) {
-            return rej("User not logged in");
+        // If the _id is passed in, it's looking for friend data.
+        if (req.query._id) {
+            User.findOne({ _id: req.query._id }, fields).exec((err, data) => {
+                if (err) {
+                    return rej(err);
+                }
+                return res(data);
+            });
+        } else {
+            const user = JSON.parse(req.query.userToken);
+
+            if (!user) {
+                return rej("User not logged in");
+            }
+
+            const userID = user.uid;
+
+            User.findOne({ uid: userID }, fields).exec((err, data) => {
+                if (err) {
+                    return rej(err);
+                }
+                return res(data);
+            });
         }
+    });
+};
 
-        const userID = user.uid;
+const readUsers = (req) => {
+    return new Promise((res, rej) => {
+        const filters = req.query.filters;
+        const fields = req.query.fields;
 
-        User.findOne({ uid: userID }, fields).exec((err, data) => {
+        User.find(filters, fields).exec((err, data) => {
             if (err) {
                 return rej(err);
             }
@@ -77,11 +103,31 @@ const updateUser = (req) => {
                 user.avatar = req.file.location;
             }
 
+            // Check if a user is to be added to this user's "friends" array.
+            if (req.body.friendID) {
+                const hasFriend = user.friends.some((instance) => {
+                    return (instance).equals(req.body.friendID);
+                });
+        
+                if (hasFriend) {
+                    user.friends.pull(req.body.friendID);
+                    if (req.body.removeFriend) {
+                        User.findOneAndUpdate({ _id: req.body.friendID }, {}, async (err, friend) => {
+                            friend.friends.pull(user._id);
+                            await friend.save();
+                        });
+                    }
+                } else {
+                    user.friends.push(req.body.friendID);
+                }
+            }
+
             await user.save();
 
+        }).then((user) => {
             return res(user);
         });
     });
 };
 
-export { createUser, readUser, updateUser };
+export { createUser, readUser, readUsers, updateUser };

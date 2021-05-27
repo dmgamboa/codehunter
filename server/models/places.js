@@ -15,6 +15,10 @@ const readPlace = (data) => {
             `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?key=${googleMapsKey}&input=${search}&inputtype=textquery`
             );
         
+        if (!(placeSearch.data.candidates[0])) {
+            return rej(400);
+        }
+
         const placeID = placeSearch.data.candidates[0].place_id;
 
         const placeDetails = await axios.get(

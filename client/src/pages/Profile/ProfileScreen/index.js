@@ -8,7 +8,7 @@ import { useAuth } from "../../../context/Auth";
 
 import ProfileEditDrawer from "../ProfileEditDrawer";
 import { Layout } from "./styled";
-import { readHistory, updateUser } from "../axios";
+import { readFriend, readFriendHistory, readHistory, updateUser } from "../axios";
 
 const ProfileScreen = () => {
     const params = useParams();
@@ -32,26 +32,35 @@ const ProfileScreen = () => {
         params.append("fields", values.fields);
         params.append("avatar", values.avatar);
         await updateUser(params);
-        handleUser();
+        await handleUser();
         setLoading(false);
     };
 
-    const handleUser = () => {
+    const handleUser = async () => {
         setLoading(true);
         if (!params.id) {
-            const user = getUserData();
-            setUserDetails(user);
+            const user = await getUserData();
+            await setUserDetails(user);
 
             const { name, username, avatar } = user;
-            setEditDetails({ name: `${name.first} ${name.last}`, username, avatar });
+            await setEditDetails({ name: `${name.first} ${name.last}`, username, avatar });
+        } else {
+            const friend = await readFriend(params.id);
+
+            setUserDetails(friend);
         }
         setLoading(false);
     };
 
     const handleHistory = async () => {
-        const token = getUser();
-        const history = await readHistory(token);
-        setHistory(history);
+        if (!params.id) {
+            const token = getUser();
+            const history = await readHistory(token);
+            setHistory(history);
+        } else {
+            const history = await readFriendHistory(params.id);
+            setHistory(history);
+        }
     };
 
     const renderStatusButton = (status) => {
@@ -59,8 +68,6 @@ const ProfileScreen = () => {
         case "friend":
             return "Remove Friend";
         case "pending":
-            return "Accept Request";
-        case "sent":
             return "Cancel Request";
         default:
             return "Add Friend";
@@ -70,12 +77,13 @@ const ProfileScreen = () => {
     useEffect(() => {
         handleUser();
         handleHistory();
-    }, []);
+    }, [params.id]);
 
     const renderHistoryList = (list) => {
         return list.map(({ location, points, date }) => {
             return (
                 <div className="history-card" key={location}>
+                    <span className="circles"></span>
                     <h3 className="location">{location}</h3>
                     <span className="details">
                         <span className="points">{points} points</span>

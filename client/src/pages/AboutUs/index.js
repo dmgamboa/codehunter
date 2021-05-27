@@ -73,7 +73,8 @@ const AboutUs = () => {
                         intro={joshIntro}
                         career={joshCareer}
                         outsideOfWork={joshOutsideOfWork}  
-                        githubLink="https://github.com/joshuakrauchi" ></Bubble>
+                        githubLink="https://github.com/joshuakrauchi"
+                        linkedinLink="https://www.linkedin.com/in/joshua-krauchi/" ></Bubble>
                     <Bubble className="name ethan" 
                         name="Ethan" 
                         avatar={ethanAvatar}

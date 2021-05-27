@@ -9,7 +9,6 @@ import Icon, {
 import { kebabCase } from "lodash";
 
 import { ReactComponent as FilterIcon } from "../../../assets/icons/filters.svg";
-import { ReactComponent as BookmarkIcon } from "../../../assets/icons/bookmark.svg";
 import ConditionalWrapper from "../../../components/ConditionalWrapper";
 import theme from "../../../context/themes/main";
 
