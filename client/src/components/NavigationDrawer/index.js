@@ -1,10 +1,11 @@
-import { Avatar } from "antd";
-import Icon, { LogoutOutlined } from "@ant-design/icons";
+import { LogoutOutlined } from "@ant-design/icons";
 import { useHistory } from "react-router-dom";
 
 import CustomAvatar from "../../components/CustomAvatar";
 import { useAuth } from "../../context/Auth";
 
+import { TwitterTweetEmbed } from "react-twitter-embed";
+ 
 import { StyledDrawer } from "./styled";
 
 const NavigationDrawer = ({ visible, onClose, links, page, handleClick }) => {
@@ -44,14 +45,24 @@ const NavigationDrawer = ({ visible, onClose, links, page, handleClick }) => {
                     </span>
                 </div>
             </div>
+
+
             <div className="links">
                 <span className="main-links">{renderDrawerLinks(links)}</span>
 
+
+                <div className="twitterShare">
+                    <TwitterTweetEmbed
+                        className="twitterShare"
+                        tweetId={"1397802119290183683"}
+                    />
+                </div>
                 <span className="drawer-item active logout" onClick={handleLogout}>
                     <LogoutOutlined />
                     <span className="link">Log Out</span>
                 </span>
             </div>
+
         </StyledDrawer>
     );
 };

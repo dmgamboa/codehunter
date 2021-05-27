@@ -4,7 +4,7 @@ import { GiftOutlined } from "@ant-design/icons";
 import LocationPlaceholder from "../../../assets/placeholder-location.jpg";
 
 import { StyledCard, StyledModal } from "./styled";
-import {Button} from "antd";
+import { Button } from "antd";
 
 import Confetti from "react-confetti";
 import { getCodeForReward, setUserPoints } from "../axios"; 
@@ -61,7 +61,8 @@ const RewardCard = ({ name, description, cost, availability, update, companyLogo
     const handleCancel = () => {
         setIsModalVisible(false);
     };
-    
+
+
     return (
         <>
             {/* This becomes a antd card using styled component (see styled.js) */}
@@ -103,13 +104,13 @@ const RewardCard = ({ name, description, cost, availability, update, companyLogo
                         handleShownCode();}}>
                         OK
                     </Button>
-                    
                 ]}
             >
                 <p className="modal-name">{successRedeem ? "Here ya go!" : "You don't have enough points"}</p>
                 <p className="cost">{successRedeem ? redeemableCode : "but you'll get there" }</p>
             </StyledModal>
- 
+
+
             <StyledModal
                 title={<span><GiftOutlined/> Please confirm</span>}
                 visible={isModalVisible}
