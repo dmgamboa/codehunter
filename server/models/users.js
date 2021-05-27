@@ -67,14 +67,15 @@ const readUsers = (req) => {
 
 const updateUser = (req) => {
     return new Promise(async (res, rej) => {
-        const user = req.body.userToken;
+        console.log(req.body);
+        const user = JSON.parse(req.body.userToken);
 
         if (!user) {
             return rej("User not logged in");
         }
 
         const userID = user.uid;
-        const fields = JSON.parse(req.body.fields);
+        const fields = JSON.parse(req.body.fields); 
 
         User.findOneAndUpdate({ uid: userID }, { $set: fields }, async (err, user) => {
             if (err) {
@@ -92,22 +93,21 @@ const updateUser = (req) => {
             }
 
             // Check if a user is to be added to this user's "friends" array.
-            if (req.friendID) {
+            if (req.body.friendID) {
                 const hasFriend = user.friends.some((instance) => {
-                    return (instance).equals(req.friendID);
+                    return (instance).equals(req.body.friendID);
                 });
         
                 if (hasFriend) {
-                    user.friends.pull(req.friendID);
-
-                    if (req.removeFriend) {
-                        User.findOneAndUpdate({ _id: friendID }, {}, async (err, friend) => {
+                    user.friends.pull(req.body.friendID);
+                    if (req.body.removeFriend) {
+                        User.findOneAndUpdate({ _id: req.body.friendID }, {}, async (err, friend) => {
                             friend.friends.pull(user._id);
                             await friend.save();
                         });
                     }
                 } else {
-                    user.friends.push(req.friendID);
+                    user.friends.push(req.body.friendID);
                 }
             }
 

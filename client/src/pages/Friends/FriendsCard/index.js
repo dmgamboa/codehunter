@@ -18,9 +18,6 @@ const FriendsCard = ({ friend, status, handleMenu }) => {
             optionIndex.push(menu.findIndex((val) => val.key === "remove"));
             break;
         case "pending":
-            optionIndex.push(menu.findIndex((val) => val.key === "accept"));
-            break;
-        case "sent":
             optionIndex.push(menu.findIndex((val) => val.key === "cancel"));
             break;
         default:
@@ -47,7 +44,7 @@ const FriendsCard = ({ friend, status, handleMenu }) => {
 
     return (
         <StyledCard className="friends-card">
-            <CustomAvatar background="lightgray" />
+            <CustomAvatar background="lightgray" photo={friend.avatar} />
             <div className="text">
                 <h2>
                     {friend.name.first} {friend.name.last} <span className="username">{friend.username}</span>

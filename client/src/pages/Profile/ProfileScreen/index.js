@@ -11,31 +11,6 @@ import { Layout } from "./styled";
 import { readHistory, updateUser } from "../axios";
 
 const ProfileScreen = () => {
-<<<<<<< HEAD
-    const { getUserData, getUser } = useAuth();
-
-    const [history, setHistory] = useState(null);
-
-    const {name, avatar, points} = getUserData();
-
-    const onSubmit = async (e) => {
-        e.preventDefault();
-        const data = new FormData();
-        
-        // Fields to update.
-        const fields = {
-            name: {
-                first: "hakuna",
-                last: "matata",
-            }
-            
-        };
-
-        data.append("userToken", getUser());
-        data.append("fields", JSON.stringify(fields));
-        data.append("avatar", e.target[0].files[0]);
-        await updateUser(data);
-=======
     const params = useParams();
     const { getUser, getUserData } = useAuth();
 
@@ -47,7 +22,6 @@ const ProfileScreen = () => {
 
     const handleEditDrawer = () => {
         setEditDrawer(!editDrawer);
->>>>>>> 6ea7089cd23bf509fa401d3443f35c5f2a5c5a45
     };
 
     const handleEdit = async (values) => {
@@ -85,8 +59,6 @@ const ProfileScreen = () => {
         case "friend":
             return "Remove Friend";
         case "pending":
-            return "Accept Request";
-        case "sent":
             return "Cancel Request";
         default:
             return "Add Friend";

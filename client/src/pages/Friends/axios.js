@@ -11,9 +11,7 @@ const readUsers = async (params) => {
 };
 
 const updateUser = async (params) => {
-    await axios.get(`${url}updateUser`, {
-        params,
-    });
+    await axios.post(`${url}updateUser`, params);
 };
 
 export { readUsers, updateUser };

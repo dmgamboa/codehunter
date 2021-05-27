@@ -3,16 +3,6 @@ import axios from "axios";
 const url = process.env.REACT_APP_SERVER;
 
 const readHistory = async (userToken) => {
-<<<<<<< HEAD
-    const userData = await axios.get(`${url}readHistory`, {
-        params: {
-            userToken: userToken,
-            userFields: "history"
-        },
-    });
-
-    return userData.data;
-=======
     return await axios
         .get(`${url}readHistory`, {
             params: {
@@ -27,7 +17,6 @@ const readHistory = async (userToken) => {
                 return history;
             }
         });
->>>>>>> 6ea7089cd23bf509fa401d3443f35c5f2a5c5a45
 };
 
 const updateUser = async (data) => {

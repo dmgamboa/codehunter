@@ -24,10 +24,9 @@ router.route("/").get(async (req, res) => {
         default:
             req.query.filters["_id"] = {
                 $nin: user.friends,
+                $ne: user._id
             };
     }
-
-    console.log(req.query.filters);
 
     const users = await readUsers(req);
     return res.send(users);

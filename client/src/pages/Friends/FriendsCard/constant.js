@@ -18,12 +18,6 @@ export const options = [
         visible: false,
     },
     {
-        key: "accept",
-        title: "Accept Request",
-        icon: "",
-        visible: false,
-    },
-    {
         key: "cancel",
         title: "Cancel Request",
         icon: "",

@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import InfiniteScroll from "react-infinite-scroll-component";
 import { Tabs } from "antd";
 import Icon from "@ant-design/icons";
 
@@ -8,7 +7,7 @@ import { ReactComponent as FriendsIcon } from "../../assets/icons/friendship.svg
 import SearchBar from "../../components/SearchBar";
 
 import FriendsCard from "./FriendsCard";
-import { tabs, testFriends } from "./constant";
+import { tabs } from "./constant";
 import { Layout } from "./styled";
 import { readUsers, updateUser } from "./axios";
 import { useAuth } from "../../context/Auth";
@@ -16,15 +15,11 @@ import { useAuth } from "../../context/Auth";
 const Friends = () => {
     const history = useHistory();
     const { TabPane } = Tabs;
-
     const { getUser } = useAuth();
 
-    //const [friends, setFriends] = useState();
-    const [friendsLength, setFriendsLength] = useState(100);
     const [tab, setTab] = useState("friends");
     const [search, setSearch] = useState("");
     const [friends, setFriends] = useState([]);
-    const [page, setPage] = useState(1);
 
     const handleSearch = (query) => {
         setSearch(query);
@@ -35,21 +30,16 @@ const Friends = () => {
         setTab(tab);
     };
 
-    const handleScroll = () => {
-        console.log("handleScroll");
-    };
-
     const handleMenu = (key, id) => {
         switch (key) {
         case "view":
             history.push(`/profile/${id}`);
             break;
-        case "add":
+        case "remove":
+            handleFriend(id, true);
             break;
-        case "pending":
-            break;
-        case "incoming":
-            break;
+        default:
+            handleFriend(id, false);
         }
     };
 
@@ -61,7 +51,7 @@ const Friends = () => {
 
     const renderFriendsList = (friends) => {
         return friends.map((friend) => {
-            const status = tab === "friends" ? "friend" : tab && tab;
+            const status = search ? "" : tab === "friends" ? "friend" : tab && tab;
             return (
                 <FriendsCard
                     key={friend._id}
@@ -105,15 +95,17 @@ const Friends = () => {
     }, [search]);
 
     // Handles adding friend, removing pending, accepting incoming, and removing friend.
-    const handleFriend = async (friendID, removeFriend) => {
+    const handleFriend = async (friendID, removeFriend = false) => {
         const params = {
             userToken: getUser(),
-            filters: {},
+            fields: "{}",
             friendID,
             removeFriend,
         };
+        !removeFriend && delete params.removeFriend;
 
         await updateUser(params);
+        search ? await handleFriends({ tabsOverride: true }) : await handleFriends({});
     };
 
     return (
@@ -124,21 +116,11 @@ const Friends = () => {
                     The Friend Zone
                 </h1>
                 <SearchBar handleSearch={handleSearch} />
-                <Tabs defaultActiveKey="friends" onChange={handleTabs}>
+                <Tabs defaultActiveKey="friends" onChange={handleTabs} activeKey={search ? "" : tab}>
                     {renderTabPanes(tabs)}
                 </Tabs>
             </div>
-            {
-                <InfiniteScroll
-                    dataLength={friendsLength}
-                    next={handleScroll}
-                    hasMore={true}
-                    scrollableTarget="mainContent"
-                    scrollThreshold={0.95}
-                >
-                    {friends && renderFriendsList(friends)}
-                </InfiniteScroll>
-            }
+            {friends && renderFriendsList(friends)}
         </Layout>
     );
 };

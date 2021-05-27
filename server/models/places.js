@@ -16,7 +16,7 @@ const readPlace = (data) => {
             );
         
         if (!(placeSearch.data.candidates[0])) {
-            return rej("Failure");
+            return rej(400);
         }
 
         const placeID = placeSearch.data.candidates[0].place_id;
