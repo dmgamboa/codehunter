@@ -33,21 +33,32 @@ const createUser = (req) => {
 
 const readUser = (req) => {
     return new Promise((res, rej) => {
-        const user = JSON.parse(req.query.userToken);
         const fields = req.query.fields;
 
-        if (!user) {
-            return rej("User not logged in");
-        }
+        // If the _id is passed in, it's looking for friend data.
+        if (req.query._id) {
+            User.findOne({ _id: req.query._id }, fields).exec((err, data) => {
+                if (err) {
+                    return rej(err);
+                }
+                return res(data);
+            });
+        } else {
+            const user = JSON.parse(req.query.userToken);
 
-        const userID = user.uid;
-
-        User.findOne({ uid: userID }, fields).exec((err, data) => {
-            if (err) {
-                return rej(err);
+            if (!user) {
+                return rej("User not logged in");
             }
-            return res(data);
-        });
+
+            const userID = user.uid;
+
+            User.findOne({ uid: userID }, fields).exec((err, data) => {
+                if (err) {
+                    return rej(err);
+                }
+                return res(data);
+            });
+        }
     });
 };
 

@@ -26,6 +26,7 @@ const createHistory = (req) => {
 const readHistory = (req) => {
     return new Promise((res, rej) => {
         const user = JSON.parse(req.query.userToken);
+        const fields = req.query.userFields;
 
         if (!user) {
             return rej("User not logged in");
@@ -33,11 +34,11 @@ const readHistory = (req) => {
 
         const userID = user.uid;
 
-        History.findOne({ uid: userID }, req.query.userFields).exec((err, data) => {
+        History.findOne({ uid: userID }, fields).exec((err, data) => {
             if (err) {
                 return rej(err);
             }
-
+            
             if (req.query.locationID) {
                 let response = []
                 for (let i = 0; i < data.history.length; i++) {
