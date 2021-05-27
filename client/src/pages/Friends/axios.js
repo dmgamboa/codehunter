@@ -7,9 +7,15 @@ const readFriends = async (params) => {
         params,
     });
 
-    console.log(friends.data);
-
     return friends.data.friends;
 };
 
-export { readFriends };
+const readUsers = async (params) => {
+    const users = await axios.get(`${url}readUsers`, {
+        params,
+    });
+    
+    return users.data;
+};
+
+export { readFriends, readUsers };

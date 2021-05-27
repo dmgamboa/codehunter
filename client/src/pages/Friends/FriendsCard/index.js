@@ -50,13 +50,13 @@ const FriendsCard = ({ friend, status, handleMenu }) => {
             <CustomAvatar background="lightgray" />
             <div className="text">
                 <h2>
-                    {friend.name} <span className="username">{friend.username}</span>
+                    {friend.name.first} {friend.name.last} <span className="username">{friend.username}</span>
                 </h2>
                 <span className="points">
                     <TrophyOutlined /> {friend.points} points
                 </span>
             </div>
-            <Menu onSelect={({key}) => handleMenu(key, friend.id)}>
+            <Menu onSelect={({key}) => handleMenu(key, friend._id)}>
                 <SubMenu icon={<EllipsisOutlined rotate={90} />}>
                     {renderMenuOptions(status)}
                 </SubMenu>

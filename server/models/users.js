@@ -51,9 +51,23 @@ const readUser = (req) => {
     });
 };
 
+const readUsers = (req) => {
+    return new Promise((res, rej) => {
+        const filters = req.query.filters;
+        const fields = req.query.fields;
+
+        User.find(filters, fields).exec((err, data) => {
+            if (err) {
+                return rej(err);
+            }
+            return res(data);
+        });
+    });
+};
+
 const updateUser = (req) => {
     return new Promise(async (res, rej) => {
-        const user = JSON.parse(req.body.userToken);
+        const user = req.body.userToken;
 
         if (!user) {
             return rej("User not logged in");
@@ -84,4 +98,4 @@ const updateUser = (req) => {
     });
 };
 
-export { createUser, readUser, updateUser };
+export { createUser, readUser, readUsers, updateUser };

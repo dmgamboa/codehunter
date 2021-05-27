@@ -1,7 +1,7 @@
 export const tabs = [
-    "All",
+    "Friends",
     "Pending",
-    "Sent"
+    "Incoming"
 ];
 
 export const testFriends = [

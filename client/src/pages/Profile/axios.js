@@ -6,7 +6,7 @@ const readHistory = async (userToken) => {
     const userData = await axios.get(`${url}readHistory`, {
         params: {
             userToken: userToken,
-            fields: "history"
+            userFields: "history"
         },
     });
 

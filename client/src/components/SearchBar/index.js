@@ -13,7 +13,7 @@ const SearchBar = ({ className, handleSearch, disabled }) => {
         <StyledSearch
             disabled={disabled}
             className={className}
-            placeholder="Look up places..."
+            placeholder="Look up..."
             onChange={debouncedSearch}
             allowClear
         />

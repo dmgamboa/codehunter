@@ -10,7 +10,7 @@ import SearchBar from "../../components/SearchBar";
 import FriendsCard from "./FriendsCard";
 import { tabs, testFriends } from "./constant";
 import { Layout } from "./styled";
-import { readFriends } from "./axios";
+import { readFriends, readUsers } from "./axios";
 import { useAuth } from "../../context/Auth";
 
 const Friends = () => {
@@ -19,14 +19,16 @@ const Friends = () => {
 
     const { getUser } = useAuth();
 
-    const [friends, setFriends] = useState();
+    //const [friends, setFriends] = useState();
     const [friendsLength, setFriendsLength] = useState(100);
-    const [tab, setTab] = useState("all");
-    const [search, setSearch] = useState(null);
+    const [tab, setTab] = useState("friends");
+    const [search, setSearch] = useState("");
+    const [friends, setFriends] = useState([]);
     const [page, setPage] = useState(1);
+    const [hasData, setHasData] = useState(false);
 
     const handleSearch = (query) => {
-        query !== search && setSearch(query);
+        setSearch(query);
     };
 
     const handleTabs = (tab) => {
@@ -46,7 +48,7 @@ const Friends = () => {
             break;
         case "pending":
             break;
-        case "sent":
+        case "incoming":
             break;
         }
     };
@@ -59,10 +61,10 @@ const Friends = () => {
 
     const renderFriendsList = (friends) => {
         return friends.map((friend) => {
-            const status = tab === "all" ? "friend" : tab && tab;
+            const status = tab === "friends" ? "friend" : tab && tab;
             return (
                 <FriendsCard
-                    key={friend.name}
+                    key={friend._id}
                     friend={friend}
                     status={status}
                     handleMenu={handleMenu}
@@ -71,30 +73,37 @@ const Friends = () => {
         });
     };
 
-    const handleFriends = async () => {
+    const handleFriends = async ({ tabsOverride }) => {
         const filters = {};
-
-        if (search) {
-            filters["$text"] = { $search: search };
-        }
-
         const params = {
             userToken: getUser(),
             filters,
+            tab: tabsOverride ? "" : tab,
         };
 
-        const friendsData = await readFriends(getUser(), params);
+        console.log(params);
+
+        if (search) {
+            // Search bar used. Search for all users not in user's "friends" array.
+            filters["$text"] = { $search: search };
+        }
+
+        const friendsData = await readUsers(params);
         setFriends(friendsData);
     };
 
-    useEffect(() => {}, [tab]);
-
     useEffect(async () => {
-        await handleFriends();
+        await handleFriends({});
     }, []);
 
     useEffect(async () => {
-        await handleFriends();
+        if (!search) {
+            await handleFriends({});
+        }
+    }, [tab]);
+
+    useEffect(async () => {
+        search ? await handleFriends({tabsOverride: true}) : await handleFriends({});
     }, [search]);
 
     return (
@@ -105,19 +114,19 @@ const Friends = () => {
                     The Friend Zone
                 </h1>
                 <SearchBar handleSearch={handleSearch} />
-                <Tabs defaultActiveKey="all" onChange={handleTabs}>
+                <Tabs defaultActiveKey="friends" onChange={handleTabs}>
                     {renderTabPanes(tabs)}
                 </Tabs>
             </div>
-            {friends && (
+            {(
                 <InfiniteScroll
-                    dataLength={friends.length}
+                    dataLength={friendsLength}
                     next={handleScroll}
                     hasMore={true}
                     scrollableTarget="mainContent"
                     scrollThreshold={0.95}
                 >
-                    {renderFriendsList(friends)}
+                    {friends && renderFriendsList(friends)}
                 </InfiniteScroll>
             )}
         </Layout>

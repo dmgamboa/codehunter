@@ -33,10 +33,20 @@ const readHistory = (req) => {
 
         const userID = user.uid;
 
-        History.findOne({ uid: userID }, "history").exec((err, data) => {
+        History.findOne({ uid: userID }, req.query.userFields).exec((err, data) => {
             if (err) {
                 return rej(err);
             }
+
+            if (req.query.locationID) {
+                let response = []
+                for (let i = 0; i < data.history.length; i++) {
+                    response.push(data.history[i].locationID);
+                }
+                
+                return res(response);
+            }
+
             return res(data);
         });
     });
