@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 
 import CustomAvatar from "../../components/CustomAvatar";
 import { useAuth } from "../../context/Auth";
-
+ 
 import { StyledDrawer } from "./styled";
 
 const NavigationDrawer = ({ visible, onClose, links, page, handleClick }) => {
@@ -43,14 +43,16 @@ const NavigationDrawer = ({ visible, onClose, links, page, handleClick }) => {
                     </span>
                 </div>
             </div>
+
+
             <div className="links">
                 <span className="main-links">{renderDrawerLinks(links)}</span>
-
                 <span className="drawer-item active logout" onClick={handleLogout}>
                     <LogoutOutlined />
                     <span className="link">Log Out</span>
                 </span>
             </div>
+
         </StyledDrawer>
     );
 };
