@@ -4,7 +4,6 @@ import { GiftOutlined } from "@ant-design/icons";
 import LocationPlaceholder from "../../../assets/placeholder-location.jpg";
 
 import { StyledCard, StyledModal } from "./styled";
-import TwitterBtn from "./TwitterBtn";
 import {Button} from "antd";
 
 import Confetti from "react-confetti";
@@ -99,7 +98,6 @@ const RewardCard = ({ name, description, cost, availability, update, companyLogo
                 okText="ok"
                 closeOnOverlayClick={false}
                 footer={[
-                    <TwitterBtn id="twitterShare" key="link"/>,
                     <Button id="redeemedOk" size="large" style={{width: "100%", top: "4px"}} key="submit" type="primary" onClick={() => {
                         update();
                         handleShownCode();}}>
