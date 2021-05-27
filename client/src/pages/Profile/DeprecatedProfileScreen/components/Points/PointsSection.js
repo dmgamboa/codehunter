@@ -1,7 +1,6 @@
 import PSStyle from "./PointsSectionStyle";
-import theme from "../../../../context/themes/main";
+import colors from "../../../../context/themes/main";
 
-const { colors } = theme;
 
 //pass 0 to points when redeemed
 const PointsSection = ({ points }) => {

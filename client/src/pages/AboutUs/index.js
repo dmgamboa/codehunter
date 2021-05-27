@@ -85,7 +85,7 @@ const AboutUs = () => {
                         githubLink="https://github.com/ethanlee123"
                         linkedinLink="https://www.linkedin.com/in/ethan-lee-17470718b/" ></Bubble>    
                 </div>
-
+            
             </div>
 
         </Styled>
