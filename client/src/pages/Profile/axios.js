@@ -50,8 +50,15 @@ const readHistory = async (userToken) => {
 
 const updateUser = async (data) => {
     const updatedUser = await axios.post(`${url}updateUser`, data);
+    
+    const updatedUserDetails = {
+        avatar: updatedUser.data.avatar,
+        name: updatedUser.data.name,
+        points: updatedUser.data.points,
+        username: updatedUser.data.username,
+    };
 
-    localStorage.setItem("userData", JSON.stringify(updatedUser.data));
+    localStorage.setItem("userData", JSON.stringify(updatedUserDetails));
 };
 
 export { readFriend, readFriendHistory, readHistory, updateUser };

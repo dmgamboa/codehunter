@@ -39,6 +39,7 @@ router.post("/", async (req, res) => {
                 avatar: user.avatar,
                 name: user.name,
                 points: user.points,
+                username: user.username,
             };
 
             response = updatedData;

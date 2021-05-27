@@ -32,7 +32,7 @@ const ProfileScreen = () => {
         params.append("fields", values.fields);
         params.append("avatar", values.avatar);
         await updateUser(params);
-        handleUser();
+        await handleUser();
         setLoading(false);
     };
 

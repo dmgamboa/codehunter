@@ -25,6 +25,7 @@ const createUser = (req) => {
         const fields = {
             name: newUser.name,
             points: newUser.points,
+            username: newUser.username,
         };
 
         return res(fields);
@@ -78,7 +79,6 @@ const readUsers = (req) => {
 
 const updateUser = (req) => {
     return new Promise(async (res, rej) => {
-        console.log(req.body);
         const user = JSON.parse(req.body.userToken);
 
         if (!user) {
@@ -86,7 +86,7 @@ const updateUser = (req) => {
         }
 
         const userID = user.uid;
-        const fields = JSON.parse(req.body.fields); 
+        const fields = JSON.parse(req.body.fields);
 
         User.findOneAndUpdate({ uid: userID }, { $set: fields }, async (err, user) => {
             if (err) {
@@ -124,6 +124,7 @@ const updateUser = (req) => {
 
             await user.save();
 
+        }).then((user) => {
             return res(user);
         });
     });

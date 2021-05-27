@@ -31,7 +31,7 @@ const AuthProvider = ({ children }) => {
         const userData = await axios.get(`${url}readUser`, {
             params: {
                 userToken,
-                fields: "avatar points name",
+                fields: "avatar points name username",
             },
         });
 

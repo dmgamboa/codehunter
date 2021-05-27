@@ -18,7 +18,7 @@ import { useAuth } from "../../context/Auth";
 import { getRewards, getRewardsArr } from "./axios";
 
 const Rewards = () => {
-    const { getUserData } = useAuth();
+    const { getUser, getUserData } = useAuth();
 
     const { TabPane } = Tabs;
     const CheckableTag = Tag;
@@ -169,10 +169,7 @@ const Rewards = () => {
 
 
     useEffect(async () => {
-        const userId = {
-            _id: getUserData()._id
-        };
-        const arr = await getRewardsArr(userId);
+        const arr = await getRewardsArr(getUser());
         setRewardsArr(arr);
     }, []);
     return (

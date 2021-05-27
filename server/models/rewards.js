@@ -123,15 +123,3 @@ export const addReward = async (userId, rewardId) => {
         };
     });
 };
-
-// Get rewards array from user collection 
-export const getRewardsArr = async (userId) => {
-    return new Promise(async (res, rej) => {
-        try {
-            const rewardsArr = await User.findById(userId, "rewards");
-            return res(rewardsArr.rewards);
-        } catch (err) {
-            return rej(err);
-        };
-    });
-};

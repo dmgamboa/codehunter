@@ -31,11 +31,13 @@ export const addReward = async (query) => {
     });
 };
 
-export const getRewardsArr = async (query) => {
-    const results = await axios
-        .get(`${url}rewards/getRewardsArr`, { params: query })
-        .catch((err) => {
-            throw new Error(err);
-        });
-    return results.data;
+export const getRewardsArr = async (userToken) => {
+    const results = await axios.get(`${url}readUser`, {
+        params: {
+            userToken,
+            fields: "rewards",
+        },
+    });
+    
+    return results.data.rewards;
 };
