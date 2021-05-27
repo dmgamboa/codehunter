@@ -3,6 +3,7 @@ import { massWriteRewards, getAllRewards, getRewards, getCodeForReward, setUserP
 
 const router = express.Router();
 
+// Used to mass write to rewards collection
 router.route("/add-all-reward")
     .post(async (req, res) => {
         try {
@@ -19,26 +20,18 @@ router.route("/add-all-reward")
 
 
 router.get("/getRewards", async (req, res) => {
-    try {
-        const category = req.query.category;
-        const availability = req.query.availability;
-        const pageNumber = req.query.pageNum;
-        const results = await getRewards(category, availability, pageNumber);
+    const category = req.query.category;
+    const availability = req.query.availability;
+    const pageNumber = req.query.pageNum;
+    const results = await getRewards(category, availability, pageNumber);
 
-        res.send(results);
-    } catch(err) {
-        res.send(err)
-    };
+    res.send(results);
 });
 
 router.get("/getCodeForReward", async (req, res) => {
-    try {
-        const params = req.query;
-        const code = await getCodeForReward(params);
-        res.send(code);
-    } catch (err) {
-        res.send(err);
-    };
+    const params = req.query;
+    const code = await getCodeForReward(params);
+    res.send(code);
 });
 
 router.post("/setUserPoints", async (req, res) => {
@@ -49,7 +42,7 @@ router.post("/setUserPoints", async (req, res) => {
 
         res.send(updatedUserData);
     } catch (err) {
-        res.send(err);
+        res.status(400).send("Id and/or cost invalid");
     };
 });
 
@@ -61,7 +54,7 @@ router.post("/addReward", async (req, res) => {
 
         res.send(updatedUserData);
     } catch (err) {
-        res.send(err);
+        res.status(400).send("Id and/or reward id invalid");
     };
 });
 

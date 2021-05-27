@@ -84,6 +84,10 @@ export const setUserPoints = async (userId, rewardCost) => {
         try {
             const currentPoints = await User.findOne({ _id: parsedId }, {"points": 1, _id: 0});
  
+            if (!userId || !rewardCost) {
+                return rej(new Error("Id and/or cost is undefined"))
+            }
+
             if(rewardCost > currentPoints.points) {
                 return res(false);
             } else {
