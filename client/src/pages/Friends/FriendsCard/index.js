@@ -47,6 +47,7 @@ const FriendsCard = ({ friend, status, handleMenu }) => {
 
     return (
         <StyledCard className="friends-card">
+            <span className="circles"></span>
             <CustomAvatar background="lightgray" />
             <div className="text">
                 <h2>

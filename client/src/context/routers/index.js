@@ -6,7 +6,8 @@ import Icon, {
     GiftOutlined,
     GiftFilled,
     UserOutlined,
-    QuestionCircleOutlined
+    QuestionCircleOutlined,
+    HeartOutlined
 } from "@ant-design/icons";
 
 import Locations from "../../pages/Locations";
@@ -116,7 +117,7 @@ const routes = [
         navDrawer: true,
         fullScreen: false,
         restricted: true,
-        icon: <QuestionCircleOutlined />,
+        icon: <HeartOutlined />,
         component: <Credits />
     },
     {
