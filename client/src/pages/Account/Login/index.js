@@ -3,9 +3,6 @@ import { Link, useHistory } from "react-router-dom";
 import {
     MailOutlined,
     LockOutlined,
-    AppleOutlined,
-    FacebookOutlined,
-    TwitterOutlined
 } from "@ant-design/icons";
 import { Form, Input, Button, message } from "antd";
 
@@ -88,14 +85,6 @@ const Login = () => {
                     />
                 </Form.Item>
 
-                {/* Remember me check box */}
-                <Form.Item>
-                    {/* Button previously an a tag */}
-                    <a className="login-form-forgot" href="#">
-                        Forgot password
-                    </a>
-                </Form.Item>
-
                 {/* login button */}
                 <Form.Item className="login-btn">
                     <Button type="primary" htmlType="submit" className="login-form-button" block>
@@ -106,12 +95,6 @@ const Login = () => {
                 <p>
                     Or <Link to="/account/register">register now</Link>
                 </p>
-
-                <div className="alternative">
-                    <AppleOutlined />
-                    <FacebookOutlined />
-                    <TwitterOutlined />
-                </div>
             </Form>
         </StyledLogin>
     );

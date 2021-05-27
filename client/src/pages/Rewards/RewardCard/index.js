@@ -85,7 +85,7 @@ const RewardCard = ({ rewardId, name, description, cost, availability, update, c
             {!isRedeemed && <StyledCard
                 hoverable
                 onClick={showConfirmation}
-                cover={<img className={!companyLogo && "placeholder"} src={companyLogo || RewardsPlaceholder} alt="reward company" />}
+                cover={<img className="placeholder" src={companyLogo || RewardsPlaceholder} alt="reward company" />}
             >
                 <h1 className="name">
                     {name} 

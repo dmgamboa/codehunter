@@ -74,10 +74,6 @@ export const StyledDrawer = styled(Drawer)`
         }
     }
 
-    #twitter-widget-0 {
-        max-width: 220px;
-    }
-
     .links {
         flex: 1;
         display: flex;
