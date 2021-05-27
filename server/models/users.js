@@ -23,6 +23,7 @@ const createUser = (req) => {
         });
 
         const fields = {
+            _id: newUser._id,
             name: newUser.name,
             points: newUser.points,
             username: newUser.username,

@@ -10,6 +10,7 @@ export const getRewards = async (query) => {
 
 export const getCodeForReward = async (query) => {
     const code = await axios.get(`${url}rewards/getCodeForReward`, { params: query });
+
     const codeData = code.data;
     return codeData;
 };
