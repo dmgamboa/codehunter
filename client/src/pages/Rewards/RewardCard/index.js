@@ -6,18 +6,19 @@ import LocationPlaceholder from "../../../assets/placeholder-location.jpg";
 import { StyledCard, StyledModal } from "./styled";
 
 import Confetti from "react-confetti";
-import { getCodeForReward, setUserPoints } from "../axios"; 
+import { getCodeForReward, setUserPoints, addReward } from "../axios"; 
 import { useAuth } from "../../../context/Auth";
 
 import _ from "lodash";
 
 
-const RewardCard = ({ name, description, cost, availability, update, companyLogo }) => {
+const RewardCard = ({ rewardId, name, description, cost, availability, update, companyLogo }) => {
 
     const [showConfetti, setShowConfetti] = useState(false);
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [isRedeemModalVisible, setIsRedeemModalVisible] = useState(false);
     const [redeemableCode, setRedeemableCode] = useState("no code");
+    // Control which type of message is displayed upon redeeming
     const [successRedeem, setSuccessRedeem] = useState(true);
     const [isRedeemed, setIsRedeemed] = useState(false);
     const { getUserData, setUserData } = useAuth();
@@ -35,16 +36,21 @@ const RewardCard = ({ name, description, cost, availability, update, companyLogo
         const userId = JSON.stringify(getUserData()._id);
         const data = {
             _id: userId, 
-            rewardCost: cost
+            rewardCost: cost,
+            rewardId: rewardId,
         };
 
+        // Returns updated user data to set pts on UI
         const updatedUser = await setUserPoints(data);
         if (!updatedUser) {
             setSuccessRedeem(false);
         } else {
             setSuccessRedeem(true);
+            // Remove card from UI
             setIsRedeemed(true);
             setUserData(updatedUser);
+            // Add reward to array in db and handle null/undefined values
+            addReward(data);
         }
     }, 200);
 

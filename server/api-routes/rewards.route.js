@@ -1,5 +1,5 @@
 import express from "express";
-import { massWriteRewards, getAllRewards, getRewards, getCodeForReward, setUserPoints } from "../models/rewards.js";
+import { massWriteRewards, getAllRewards, getRewards, getCodeForReward, setUserPoints, addReward, getRewardsArr } from "../models/rewards.js";
 
 const router = express.Router();
 
@@ -10,7 +10,7 @@ router.route("/add-all-reward")
             res.send("Successfully written data to rewards collection");
         } catch (err) {
             res.send(err);
-        }
+        };
 
     })
     .get(async (req, res) => {
@@ -29,7 +29,7 @@ router.get("/getRewards", async (req, res) => {
         res.send(results);
     } catch(err) {
         console.log(err)
-    }
+    };
 });
 
 router.get("/getCodeForReward", async (req, res) => {
@@ -39,7 +39,7 @@ router.get("/getCodeForReward", async (req, res) => {
         res.send(code);
     } catch (err) {
         console.log(err);
-    }
+    };
 });
 
 router.post("/setUserPoints", async (req, res) => {
@@ -51,7 +51,29 @@ router.post("/setUserPoints", async (req, res) => {
         res.send(updatedUserData);
     } catch (err) {
         console.log(err);
-    }
+    };
+});
+
+router.post("/addReward", async (req, res) => {
+    try {
+        const userId = req.body._id;
+        const rewardId = req.body.rewardId;
+        const updatedUserData = await addReward(userId, rewardId);
+
+        res.send(updatedUserData);
+    } catch (err) {
+        console.log(err);
+    };
+});
+
+router.get("/getRewardsArr", async (req, res) => {
+    try {
+        const userId = req.query._id;
+        const rewardsArr = await getRewardsArr(userId);
+        res.send(rewardsArr);
+    } catch (err) {
+        console.log(err);
+    };
 });
 
 export default router;

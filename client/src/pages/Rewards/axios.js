@@ -15,9 +15,22 @@ export const getCodeForReward = async (query) => {
 };
 
 export const setUserPoints = async (query) => {
+
     // Returns update user data with updated points
     const result = await axios.post(`${url}rewards/setUserPoints`, query);
     return result.data;
 
  
+};
+
+export const addReward = async (query) => {
+    if (!query.rewardId) {
+        return false;
+    };
+    return await axios.post(`${url}rewards/addReward`, query);
+};
+
+export const getRewardsArr = async (query) => {
+    const results = await axios.get(`${url}rewards/getRewardsArr`, { params: query });
+    return results.data;
 };
