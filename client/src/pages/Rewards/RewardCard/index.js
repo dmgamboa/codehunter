@@ -19,6 +19,7 @@ const RewardCard = ({ name, description, cost, availability, update, companyLogo
     const [isRedeemModalVisible, setIsRedeemModalVisible] = useState(false);
     const [redeemableCode, setRedeemableCode] = useState("no code");
     const [successRedeem, setSuccessRedeem] = useState(true);
+    const [isRedeemed, setIsRedeemed] = useState(false);
     const { getUserData, setUserData } = useAuth();
 
     const showConfirmation = () => {
@@ -42,6 +43,7 @@ const RewardCard = ({ name, description, cost, availability, update, companyLogo
             setSuccessRedeem(false);
         } else {
             setSuccessRedeem(true);
+            setIsRedeemed(true);
             setUserData(updatedUser);
         }
     }, 200);
@@ -64,8 +66,8 @@ const RewardCard = ({ name, description, cost, availability, update, companyLogo
     return (
         <>
             {/* This becomes a antd card using styled component (see styled.js) */}
-            {showConfetti ? <Confetti className="confetti" numberOfPieces={cost}/> : null}    
-            <StyledCard
+            {showConfetti ? <Confetti className="confetti" numberOfPieces={50}/> : null}    
+            {!isRedeemed && <StyledCard
                 hoverable
                 onClick={showConfirmation}
                 cover={<img src={companyLogo || LocationPlaceholder} alt="placeholder name" />}
@@ -81,7 +83,7 @@ const RewardCard = ({ name, description, cost, availability, update, companyLogo
                 <div className="icons">
                     {availability}
                 </div>
-            </StyledCard>
+            </StyledCard>}
 
             <StyledModal
                 title={<span><GiftOutlined/>{successRedeem ? "keep this code somewhere safe" : "Keep hunting!"}</span>}
