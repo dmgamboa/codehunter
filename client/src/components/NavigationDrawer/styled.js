@@ -56,6 +56,7 @@ export const StyledDrawer = styled(Drawer)`
             height: 50px;
         }
 
+            
         .text {
             display: flex;
             flex-direction: column;
@@ -72,7 +73,11 @@ export const StyledDrawer = styled(Drawer)`
             }
         }
     }
-    
+
+    #twitter-widget-0 {
+        max-width: 220px;
+    }
+
     .links {
         flex: 1;
         display: flex;
