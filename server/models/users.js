@@ -91,6 +91,26 @@ const updateUser = (req) => {
                 user.avatar = req.file.location;
             }
 
+            // Check if a user is to be added to this user's "friends" array.
+            if (req.friendID) {
+                const hasFriend = user.friends.some((instance) => {
+                    return (instance).equals(req.friendID);
+                });
+        
+                if (hasFriend) {
+                    user.friends.pull(req.friendID);
+
+                    if (req.removeFriend) {
+                        User.findOneAndUpdate({ _id: friendID }, {}, async (err, friend) => {
+                            friend.friends.pull(user._id);
+                            await friend.save();
+                        });
+                    }
+                } else {
+                    user.friends.push(req.friendID);
+                }
+            }
+
             await user.save();
 
             return res(user);

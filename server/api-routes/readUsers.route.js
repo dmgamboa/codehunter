@@ -14,6 +14,8 @@ router.route("/").get(async (req, res) => {
             req.query.filters["friends"] = user._id;
             break;
         case "pending":
+            req.query.filters["_id"] = { $in: user.friends };
+            req.query.filters["friends"] = { $ne: user._id };
             break;
         case "incoming":
             req.query.filters["_id"] = { $nin: user.friends };

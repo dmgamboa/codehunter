@@ -10,7 +10,7 @@ import SearchBar from "../../components/SearchBar";
 import FriendsCard from "./FriendsCard";
 import { tabs, testFriends } from "./constant";
 import { Layout } from "./styled";
-import { readFriends, readUsers } from "./axios";
+import { readUsers, updateUser } from "./axios";
 import { useAuth } from "../../context/Auth";
 
 const Friends = () => {
@@ -25,13 +25,13 @@ const Friends = () => {
     const [search, setSearch] = useState("");
     const [friends, setFriends] = useState([]);
     const [page, setPage] = useState(1);
-    const [hasData, setHasData] = useState(false);
 
     const handleSearch = (query) => {
         setSearch(query);
     };
 
     const handleTabs = (tab) => {
+        setSearch("");
         setTab(tab);
     };
 
@@ -42,7 +42,7 @@ const Friends = () => {
     const handleMenu = (key, id) => {
         switch (key) {
         case "view":
-            history.push(`/profile/user/${id}`);
+            history.push(`/profile/${id}`);
             break;
         case "add":
             break;
@@ -81,8 +81,6 @@ const Friends = () => {
             tab: tabsOverride ? "" : tab,
         };
 
-        console.log(params);
-
         if (search) {
             // Search bar used. Search for all users not in user's "friends" array.
             filters["$text"] = { $search: search };
@@ -103,8 +101,20 @@ const Friends = () => {
     }, [tab]);
 
     useEffect(async () => {
-        search ? await handleFriends({tabsOverride: true}) : await handleFriends({});
+        search ? await handleFriends({ tabsOverride: true }) : await handleFriends({});
     }, [search]);
+
+    // Handles adding friend, removing pending, accepting incoming, and removing friend.
+    const handleFriend = async (friendID, removeFriend) => {
+        const params = {
+            userToken: getUser(),
+            filters: {},
+            friendID,
+            removeFriend,
+        };
+
+        await updateUser(params);
+    };
 
     return (
         <Layout>
@@ -118,7 +128,7 @@ const Friends = () => {
                     {renderTabPanes(tabs)}
                 </Tabs>
             </div>
-            {(
+            {
                 <InfiniteScroll
                     dataLength={friendsLength}
                     next={handleScroll}
@@ -128,7 +138,7 @@ const Friends = () => {
                 >
                     {friends && renderFriendsList(friends)}
                 </InfiniteScroll>
-            )}
+            }
         </Layout>
     );
 };

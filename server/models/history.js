@@ -58,16 +58,13 @@ const updateHistory = (req) => {
         const userID = user.uid;
         const location = JSON.parse(JSON.stringify(req.location));
         const date = req.date;
-
-        console.log(location);
-    
+        
         History.findOneAndUpdate({ uid: userID }, {}, async (err, history) => {
             if (err) {
                 return rej(err);
             }
 
             const hasRedeemed = history.history.some((instance) => {
-                console.log(instance);
                 return (instance.locationID).equals(location._id);
             });
     

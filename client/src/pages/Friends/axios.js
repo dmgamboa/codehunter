@@ -2,14 +2,6 @@ import axios from "axios";
 
 const url = process.env.REACT_APP_SERVER;
 
-const readFriends = async (params) => {
-    const friends = await axios.get(`${url}readUser`, {
-        params,
-    });
-
-    return friends.data.friends;
-};
-
 const readUsers = async (params) => {
     const users = await axios.get(`${url}readUsers`, {
         params,
@@ -18,4 +10,10 @@ const readUsers = async (params) => {
     return users.data;
 };
 
-export { readFriends, readUsers };
+const updateUser = async (params) => {
+    await axios.get(`${url}updateUser`, {
+        params,
+    });
+};
+
+export { readUsers, updateUser };
