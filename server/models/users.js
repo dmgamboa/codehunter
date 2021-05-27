@@ -96,6 +96,7 @@ const updateUser = (req) => {
             // Check if this is a scan handler by checking if the location was sent with the request.
             if (req.location) {
                 user.points += req.location.points;
+                await user.save();
             }
             
             // Check if the update includes a file, the avatar.
@@ -112,7 +113,10 @@ const updateUser = (req) => {
                 if (hasFriend) {
                     user.friends.pull(req.body.friendID);
                     if (req.body.removeFriend) {
-                        User.findOneAndUpdate({ _id: req.body.friendID }, {}, async (err, friend) => {
+                        User.findOneAndUpdate({ _id: req.body.friendID }, {}, async (friendErr, friend) => {
+                            if (friendErr) {
+                                return rej(friendErr);
+                            }
                             friend.friends.pull(user._id);
                             await friend.save();
                         });

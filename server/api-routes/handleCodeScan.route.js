@@ -1,6 +1,6 @@
 import express from "express";
 import { readLocation } from "../models/locations.js";
-import { updateUser } from "../models/users.js"
+import { readUser, updateUser } from "../models/users.js"
 import { updateHistory } from "../models/history.js";
 
 const router = express.Router();
@@ -33,23 +33,19 @@ router.post("/", async (req, res) => {
                 location,
             };
             
-            const user = await updateUser(userReq);
+            await updateUser(userReq);
 
-            const updatedData = {
-                avatar: user.avatar,
-                name: user.name,
-                points: user.points,
-                username: user.username,
+            response = {
+                points: location.points,
             };
 
-            response = updatedData;
         } else {
-            reponse = "Location redeemed"
+            response = "Location redeemed"
         }
     } catch (error) {
         response = "Error: " + error;
     }
-
+    
     res.send(response);
 });
 

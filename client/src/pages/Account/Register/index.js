@@ -3,9 +3,6 @@ import { Link, useHistory } from "react-router-dom";
 import {
     UserOutlined,
     LockOutlined,
-    AppleOutlined,
-    FacebookOutlined,
-    TwitterOutlined,
     MailOutlined,
 } from "@ant-design/icons";
 import { Form, Input, Button, Checkbox, message } from "antd";
@@ -19,19 +16,6 @@ import { ReactComponent as Logo } from "../../../assets/icons/logo.svg";
 import Icon from "@ant-design/icons";
 
 const Register = () => {
-    // const tailFormItemLayout = {
-    //     wrapperCol: {
-    //         xs: {
-    //             span: 24,
-    //             offset: 0,
-    //         },
-    //         sm: {
-    //             span: 16,
-    //             offset: 8,
-    //         },
-    //     },
-    // };
-
     var valuesRef = useRef();
     var { signup, getUser } = useAuth();
     const history = useHistory();
@@ -182,7 +166,7 @@ const Register = () => {
                     <Input
                         prefix={<LockOutlined className="site-form-item-icon" />}
                         type="password"
-                        placeholder="Password"
+                        placeholder="Confirm password"
                     />
                 </Form.Item>
 
@@ -202,7 +186,7 @@ const Register = () => {
                     // {...tailFormItemLayout}
                 >
                     <Checkbox>
-                        I have read the <a href="">agreement</a>
+                        I agree to the <a href="https://i.imgur.com/UUKITAE.png" target="_blank" rel="noreferrer">terms and conditions</a>.
                     </Checkbox>
                 </Form.Item>
 
@@ -220,13 +204,6 @@ const Register = () => {
                     </Button>
                 </Form.Item>
             </Form>
-
-            <p>or sign up with</p>
-            <div className="alternative">
-                <AppleOutlined />
-                <FacebookOutlined />
-                <TwitterOutlined />
-            </div>
 
             <p>
                 Already have an account? <Link to="/account/login">Login.</Link>

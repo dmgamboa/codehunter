@@ -8,7 +8,6 @@ const StyledLogin = styled(motion.div)`
     flex-direction: column;
     justify-content: center;
 
-
     .login {
         width: 100%;
     }
@@ -26,13 +25,6 @@ const StyledLogin = styled(motion.div)`
     .login-btn {
         display: flex;
         flex-direction: row;
-    }
-    .alternative {
-        margin-top: 60px;
-        clear: left;
-        font-size: 24pt;
-        display: flex;
-        justify-content: space-around;
     }
 `;
 

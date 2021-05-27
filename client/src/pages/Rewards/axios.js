@@ -38,6 +38,6 @@ export const getRewardsArr = async (userToken) => {
             fields: "rewards",
         },
     });
-    
+
     return results.data.rewards;
 };
