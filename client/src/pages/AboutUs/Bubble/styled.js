@@ -12,7 +12,9 @@ const StyledDrawer = styled.div`
     }
 
     .ant-drawer-content {
-        position: relative;
+        position: absolute;
+        top: 0;
+        left: 0;
         color: #fff;
         height: 100vh;
            
@@ -46,7 +48,6 @@ const StyledDrawer = styled.div`
             }
         }
         .ant-drawer-body {
-     
             .about-me {
                 height: 100%;
                 display: grid;

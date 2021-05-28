@@ -12,10 +12,6 @@ export const StyledSwiper = styled(Swiper)`
             background: #005526;
         }
     }
-
-    .twitter {
-        padding: 1rem;
-    }
 `;
 
 export const StyledPara = styled.div`
@@ -25,7 +21,7 @@ export const StyledPara = styled.div`
     text-align: center;
     align-items: center;
     min-height: 120px;
-    padding: 3rem 1rem;
+    padding: 2rem 1rem 0rem 1rem;
     .heading {
         color: #08497e;
         font-size: 8vh;

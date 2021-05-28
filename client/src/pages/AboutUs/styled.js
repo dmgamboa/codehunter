@@ -2,24 +2,18 @@ import styled from "styled-components";
 import clouds from "../../assets/aboutus/cloud.png";
 
 const Styled= styled.div`
-    flex: 1;
+    height: 100%;
     background: url(${clouds});
     animation: animate 60s linear infinite;
-    
+
     .aboutus {
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
-        height: 100%;
-
+        height: 80%;
         display: flex;
         flex-direction: column;
-        /* justify-content: space-between; */
-
-        .twitter {
-            padding: 1rem;
-        }
     }
     @keyframes animate {
         0% {background-position: 0%}
@@ -32,10 +26,9 @@ const Styled= styled.div`
         /* Carousel styles */
     }
     .bubble-container {
-        position: absolute;
-        bottom: 5rem;
-        width: 100%;
-        /* height: 100%; */
+        /* 4 bubble avatarc container styles */
+        height: 100%;
+        width: 100%; 
         display: grid;
         grid-template:
             "bubble1 bubble2" 50%
