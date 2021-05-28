@@ -71,6 +71,11 @@ export const StyledCard = styled(Card)`
         border: none;
         z-index: 99;
         background: none;
+        justify-self: center;
+
+        .anticon-ellipsis {
+            font-size: 2.5rem;
+        }
     }
 
     .ant-menu-submenu-title {
