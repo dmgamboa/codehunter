@@ -1,4 +1,3 @@
-import e from "express";
 import express from "express";
 import { readLocations } from "../models/locations.js";
 import { readHistory } from "../models/history.js";
@@ -6,7 +5,6 @@ import { readHistory } from "../models/history.js";
 const router = express.Router();
 
 router.route("/").get(async (req, res) => {
-
     req.query.filters = JSON.parse(req.query.filters);
     if (req.query.sort === "az") {
         req.query.sort = { "fields.cultural_space_name": 1 };
@@ -33,14 +31,13 @@ router.route("/").get(async (req, res) => {
         const params = {
             query: {
                 userToken,
-                fields: req.query.userFields,
+                fields: userFields,
                 locationID: true,
             },
         };
 
         const userHistory = await readHistory(params);
 
-        req.query["page"] = 1;
         req.query.filters["_id"] = { $in: userHistory };
     }
 

@@ -25,7 +25,7 @@ const AboutUs = () => {
     const ethanAvatar = ethan;
 
     const donnaIntro = "Never give up, never surrender!";
-    const pariyaIntro = "";
+    const pariyaIntro = "Why fit in, when you were born to stand out?";
     const joshIntro = "Enough expository banter! Now we fight like men! And ladies! And ladies who dress like men!";
     const ethanIntro = "Thought provoking question: 'Do we want to strive for mastery or proficiency?'";
 

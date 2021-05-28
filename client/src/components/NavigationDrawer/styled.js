@@ -149,6 +149,7 @@ export const StyledDrawer = styled(Drawer)`
         }
     }
 
+    
     .ant-drawer-close {
         color: ${colors.secondary};
     }
