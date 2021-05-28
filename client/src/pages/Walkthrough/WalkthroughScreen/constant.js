@@ -11,11 +11,11 @@ export const carouselItems = [
     {
         img: walkthroughImage02,
         heading: "Redeem Rewards",
-        body: "Exchange your points with vouchers, discounts and even free passes."
+        body: "Exchange your points for vouchers and free passes to your favourite locations."
     },
     {
         img: walkthroughImage03,
         heading: "Add Friends",
-        body: "Compare your progress."
+        body: "Compare your progress with your friends."
     }
 ];

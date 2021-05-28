@@ -55,14 +55,6 @@ const StyledRegistration = styled.div`
         text-align: center;
     }
 
-    .alternative {
-        margin-top: 10px;
-        clear: left;
-        font-size: 24pt;
-        display: flex;
-        justify-content: space-around;
-    }
-
     .full-length {
         width: 100%;
     }

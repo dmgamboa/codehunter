@@ -70,8 +70,7 @@ const updateHistory = (req) => {
             });
     
             if (hasRedeemed) {
-                //TODO: UNCOMMENT FOR PRODUCTION
-                //return rej(false);
+                return rej(false);
             }
             
             const instance = {
