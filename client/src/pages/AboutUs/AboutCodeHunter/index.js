@@ -52,13 +52,13 @@ const AboutCodeHunter = () => {
                     fadeEffect={{ crossFade: true }}
                     pagination={{ dynamicBullets: true }}
                 >
-                    <SwiperSlide>
+                    {/* <SwiperSlide>
                         <div className="twitter">
                             <TwitterTweetEmbed
                                 tweetId={"1397802119290183683"}
                             />
                         </div>
-                    </SwiperSlide>
+                    </SwiperSlide> */}
                     {renderCarouselItems(carouselItems)}
 
                 </StyledSwiper>
