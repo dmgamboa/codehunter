@@ -1,4 +1,3 @@
-import { TwitterTweetEmbed } from "react-twitter-embed";
 import { motion } from "framer-motion";
 import { SwiperSlide } from "swiper/react";
 import SwiperCore, { Pagination, EffectFade } from "swiper/core";
@@ -52,13 +51,6 @@ const AboutCodeHunter = () => {
                     fadeEffect={{ crossFade: true }}
                     pagination={{ dynamicBullets: true }}
                 >
-                    {/* <SwiperSlide>
-                        <div className="twitter">
-                            <TwitterTweetEmbed
-                                tweetId={"1397802119290183683"}
-                            />
-                        </div>
-                    </SwiperSlide> */}
                     {renderCarouselItems(carouselItems)}
 
                 </StyledSwiper>
