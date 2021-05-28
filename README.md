@@ -1,7 +1,7 @@
 
 
 <p align="center">
-    <img alt="codehunter logo" src=".\client\public\codehunter-logo.png">
+    <img alt="codehunter logo" src=".\client\src\assets\readme\codehunter-logo.png">
 </p>
 
 <p align="center" style="font-weight: bold">
@@ -12,6 +12,7 @@
 * [General info](#general-info)
 * [Setup](#setup)
 * [Technologies](#technologies)
+* [Testing History](#testing-history)
 * [Contents](#content)
 * [Citations: pictures, libraries, API's etc.](#citations);
 
@@ -26,17 +27,16 @@ A scavenger hunt app designed to encourage tourism and exploration in the city o
 
 #### *Check out our video below.*
 
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=YOUTUBE_VIDEO_ID_HERE
-" target="_blank"><img src="http://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg" 
-alt="codehunter video" width="240" height="180" style="display: block"/></a>
+<a href="https://www.youtube.com/watch?v=Yg10IbmY_nQ" target="_blank"><img src=".\client\src\assets\readme\thumbnail.png" 
+alt="codehunter video" width="340" height="180" style="display: block"/></a>
 
 ***
 ## 📦 **Setup**
 1. Git clone our repository
 2. In a new branch, do the following...
 3. Run **npm install** to install dependencies
-4. Add our .env.local file to the client folder (includes api keys)
-5. Add our .env file to server folder (includes api keys)
+4. Add our .env.local (message us and we'll send it over) file to the client folder (includes api keys)
+5. Add our .env (message us and we'll send it over) file to server folder (includes api keys)
 6. Change directory to client and run **npm start**
 7. Change directory to server and run **npm run dev**
 
