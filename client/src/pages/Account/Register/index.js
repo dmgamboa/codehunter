@@ -3,37 +3,21 @@ import { Link, useHistory } from "react-router-dom";
 import {
     UserOutlined,
     LockOutlined,
-    AppleOutlined,
-    FacebookOutlined,
-    TwitterOutlined,
     MailOutlined,
 } from "@ant-design/icons";
 import { Form, Input, Button, Checkbox, message } from "antd";
 
 import { useAuth } from "../../../context/Auth";
 
-import StyledRegistration from "./styled.js";
-import createUserDoc from "./axios.js";
+import StyledRegistration from "./styled";
+import { createUser } from "../axios";
 
 import { ReactComponent as Logo } from "../../../assets/icons/logo.svg";
 import Icon from "@ant-design/icons";
 
 const Register = () => {
-    const tailFormItemLayout = {
-        wrapperCol: {
-            xs: {
-                span: 24,
-                offset: 0,
-            },
-            sm: {
-                span: 16,
-                offset: 8,
-            },
-        },
-    };
-
     var valuesRef = useRef();
-    var { signup, getUserUID } = useAuth();
+    var { signup, getUser } = useAuth();
     const history = useHistory();
 
     const [loading, setLoading] = useState(false);
@@ -48,12 +32,11 @@ const Register = () => {
             // Prevent user from spam clicking register
             setLoading(true);
 
-            // Wait for firebase to create user then get user uid
+            // Wait for firebase to create user
             await signup(values.email, values.password);
-            const userUID = getUserUID();
 
-            // Axios POST request to create user doc in mongoDb
-            createUserDoc(values, userUID);
+            // Axios POST request to create user doc in MongoDB
+            await createUser(values, getUser());
 
             message.loading({ content: "Validating your CodeHunter license.", duration: 2 });
             history.push("/locations");
@@ -183,7 +166,7 @@ const Register = () => {
                     <Input
                         prefix={<LockOutlined className="site-form-item-icon" />}
                         type="password"
-                        placeholder="Password"
+                        placeholder="Confirm password"
                     />
                 </Form.Item>
 
@@ -196,36 +179,31 @@ const Register = () => {
                                 value
                                     ? Promise.resolve()
                                     : Promise.reject(
-                                          new Error("Accept the agreement to register.")
-                                      ),
+                                        new Error("Accept the agreement to register.")
+                                    ),
                         },
                     ]}
-                    {...tailFormItemLayout}
+                    // {...tailFormItemLayout}
                 >
                     <Checkbox>
-                        I have read the <a href="">agreement</a>
+                        I agree to the <a href="https://i.imgur.com/UUKITAE.png" target="_blank" rel="noreferrer">terms and conditions</a>.
                     </Checkbox>
                 </Form.Item>
 
                 {/* register button */}
-                <Form.Item {...tailFormItemLayout}>
+                {/* <Form.Item {...tailFormItemLayout}> */}
+                <Form.Item>
                     <Button
                         disabled={loading}
                         type="primary"
                         htmlType="submit"
-                        className="full-length"
+                        // className="full-length"
+                        block
                     >
                         Register
                     </Button>
                 </Form.Item>
             </Form>
-
-            <p>or sign up with</p>
-            <div className="alternative">
-                <AppleOutlined />
-                <FacebookOutlined />
-                <TwitterOutlined />
-            </div>
 
             <p>
                 Already have an account? <Link to="/account/login">Login.</Link>

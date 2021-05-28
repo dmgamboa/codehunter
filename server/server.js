@@ -1,33 +1,45 @@
 // Our application entry point
 import express from "express";
 import mongoose from "mongoose";
+import cors from "cors";
 import config from "./config/index.js";
-import getMapData from "./api-routes/getMapData.route.js";
-import registration from "./api-routes/registration.route.js";
-import getPlaceData from "./api-routes/getPlaceData.route.js";
-import getLocationsList from "./api-routes/getLocationsList.route.js";
+import createUser from "./api-routes/createUser.route.js";
+import handleCodeScan from "./api-routes/handleCodeScan.route.js";
+import readHistory from "./api-routes/readHistory.route.js";
+import readLocations from "./api-routes/readLocations.route.js";
+import readPlace from "./api-routes/readPlace.route.js";
+import readUser from "./api-routes/readUser.route.js";
+import readUsers from "./api-routes/readUsers.route.js";
+import updateUser from "./api-routes/updateUser.route.js";
+import rewards from "./api-routes/rewards.route.js";
 
 const app = express();
 const port = config.port;
 const uri = config.databaseURL;
 
-// Connect with mongoose.
+// Connection to MongoDB.
 mongoose.connect(uri, {
-    // only 50 ppl can connect at one time
     poolSize: 50,
-    // after 2500 ms request will timeout
-    // Warning: Top-level use of w, wtimeout, j, and fsync is deprecated. Use writeConcern instead.
-    //wtimeout: 2500,
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
 });
 
 app.use(express.json());
-app.use("/registration", registration);
-app.use("/getMapData", getMapData);
-app.use("/getPlaceData", getPlaceData);
-app.use("/getLocationsList", getLocationsList);
+app.use(cors());
+app.use("/createUser", createUser);
+app.use("/handleCodeScan", handleCodeScan);
+app.use("/readHistory", readHistory);
+app.use("/readLocations", readLocations);
+app.use("/readPlace", readPlace);
+app.use("/readUser", readUser);
+app.use("/readUsers", readUsers);
+app.use("/updateUser", updateUser);
+
+// Rewards page
+app.use("/rewards", rewards);
 
 app.listen(port, () => {
-    //console.log(`App listening to port ${port}`);
+    console.log(`App listening to port ${port}`);
 });

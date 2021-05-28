@@ -7,9 +7,10 @@ const { colors } = theme;
 
 const StyledCard = styled(Card)`
     border-radius: 1.5rem;
+    cursor: default;
 
     .ant-card-head {
-        font-size: clamp(0.6rem, 3vw, 1.2rem);
+        font-size: clamp(0.6rem, 3vw, 1rem);
 
         .ant-card-head-title {
             display: flex;
@@ -32,7 +33,7 @@ const StyledCard = styled(Card)`
     }
 
     h1 {
-        font-size: clamp(1rem, 6vw, 3rem);
+        font-size: clamp(1rem, 6vw, 1.75rem);
         color: ${colors.primary};
     }
 
@@ -40,6 +41,15 @@ const StyledCard = styled(Card)`
         margin-top: 1rem;
         padding: 0;
         height: 2rem;
+        cursor: pointer;
+    }
+
+    .am-tab-bar-tab {
+        &:hover {
+            .anticon {
+                color: ${colors.secondary};
+            }
+        }
     }
 `;
 

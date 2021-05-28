@@ -3,7 +3,7 @@ import { TabBar } from "antd-mobile";
 import { details as detailsToRender } from "./constant";
 import StyledDrawer from "./styled";
 
-import LocationPlaceholder from "../../assets/placeholder-location.jpg";
+import LocationPlaceholder from "../../assets/placeholders/locations/others.png";
 
 const LocationDetails = ({ visible, onClose, location, tabs }) => {
     const renderHours = (hours) => {
@@ -12,7 +12,7 @@ const LocationDetails = ({ visible, onClose, location, tabs }) => {
                 <span key={day} className="hour">
                     <span className="day">{day}</span>
                     <span className="time">
-                        {hours[day].length > 0 ? `${hours[day][0]} - ${hours[day][1]}` : "Closed"}
+                        {hours[day][0] ? `${hours[day][0]} - ${hours[day][1]}` : "Closed"}
                     </span>
                 </span>
             );
@@ -26,7 +26,7 @@ const LocationDetails = ({ visible, onClose, location, tabs }) => {
                     {detailsToRender[detail]}
                     {loc[detail] ? (
                         detail === "hours" ? (
-                            loc[detail]["status"]
+                            loc.hours?.status
                         ) : detail === "website" ? (
                             <a href={loc[detail]} target="_blank" rel="noreferrer">
                                 {loc[detail]}
@@ -41,7 +41,7 @@ const LocationDetails = ({ visible, onClose, location, tabs }) => {
                     ) : (
                         `No ${detail} listed.`
                     )}
-                    {detail === "hours" && (
+                    {detail === "hours" && loc.hours?.days && (
                         <div className="hours-list">{renderHours(loc[detail]["days"])}</div>
                     )}
                 </span>
@@ -51,27 +51,47 @@ const LocationDetails = ({ visible, onClose, location, tabs }) => {
 
     const renderTabs = (tabs) => {
         return tabs.map(({ key, name, icon, onPress }) => {
-            return <TabBar.Item key={key} title={name} icon={icon} onPress={() => onPress(key)} />;
+            return (
+                <TabBar.Item
+                    key={key}
+                    title={name}
+                    icon={icon}
+                    onPress={() => onPress({ tab: key, location })}
+                />
+            );
         });
     };
 
     return (
-        <StyledDrawer height="auto" placement="bottom" visible={visible} onClose={onClose}>
-            <img src={location.img ? location.img : LocationPlaceholder} alt={location.name} />
+        <StyledDrawer
+            height="auto"
+            placement="bottom"
+            visible={visible}
+            onClose={onClose}
+        >
+            {location && (
+                <>
+                    <img
+                        referrerPolicy="no-referrer"
+                        src={location.image ?? LocationPlaceholder}
+                        alt={location.name}
+                    />
 
-            <span className="top">
-                <h1>{location.name}</h1>
-                <span className="distance">
-                    {location.distance && `${location.distance}km away`}
-                </span>
-            </span>
+                    <span className="top">
+                        <h1>{location.name}</h1>
+                        <span className="distance">
+                            {location.distance && `${location.distance}km away`}
+                        </span>
+                    </span>
 
-            {renderDetails(location.details)}
+                    {renderDetails(location.details)}
 
-            {tabs && (
-                <TabBar tintColor="#08497E" unselectedTintColor="#08497E">
-                    {renderTabs(tabs)}
-                </TabBar>
+                    {tabs && (
+                        <TabBar tintColor="#08497E" unselectedTintColor="#08497E">
+                            {renderTabs(tabs)}
+                        </TabBar>
+                    )}
+                </>
             )}
         </StyledDrawer>
     );

@@ -1,15 +1,8 @@
 import { StyledBtn } from "./styled";
 
-const CircleIconBtn = ({
-    className,
-    icon,
-    onClick
-}) => {
+const CircleIconBtn = ({ className, icon, onClick, size = "55px" }) => {
     return (
-        <StyledBtn
-            className={className}
-            onClick={onClick}
-        >
+        <StyledBtn className={className} onClick={onClick} style={{height: size , width: size}}>
             {icon}
         </StyledBtn>
     );

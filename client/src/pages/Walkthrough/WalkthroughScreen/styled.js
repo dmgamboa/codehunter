@@ -42,6 +42,14 @@ export const Container = styled.div`
     .swiper-slide {
         width: 100% !important;
     }
+
+    .ant-switch {
+        margin-right: 0.5rem;
+    }
+
+    .skip {
+        margin-bottom: 1rem;
+    }
 `;
 
 export const StyledSwiper = styled(Swiper)`

@@ -6,6 +6,10 @@ import theme from "../../context/themes/main";
 const { colors } = theme;
 
 const StyledDrawer = styled(Drawer)`
+    max-width: 500px;
+    left: 50%;
+    transform: translateX(-50%);
+
     .ant-drawer-close {
         display: none;
     }
@@ -54,7 +58,7 @@ const StyledDrawer = styled(Drawer)`
             h1 {
                 margin: 0;
                 color: ${colors.primary};
-                font-size: clamp(1rem, 5vw, 2.5rem);
+                font-size: clamp(1rem, 5vw, 1.75rem);
             }
         }
 
@@ -81,6 +85,7 @@ const StyledDrawer = styled(Drawer)`
 
         .am-tab-bar {
             padding: 0.25rem;
+            cursor: pointer;
         }
 
         .am-tab-bar-tab {

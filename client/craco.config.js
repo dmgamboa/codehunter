@@ -10,7 +10,8 @@ module.exports = {
                         modifyVars: {
                             "@primary-color": "#08497E",
                             "@secondary-color": "#005526",
-                            "@accent-color": "#88201C"
+                            "@accent-color": "#88201C",
+                            "@font-family": "gulim, sans-serif"
                         },
                         javascriptEnabled: true,
                     },

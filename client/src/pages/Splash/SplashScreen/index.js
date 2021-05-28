@@ -2,12 +2,17 @@ import { useHistory } from "react-router-dom";
 import Particles from "react-particles-js";
 import { motion } from "framer-motion";
 
+import { useAuth } from "../../../context/Auth";
+import WindowHeight from "../../../context/themes/WindowSize";
+
 import SplashLogo from "../SplashLogo";
 import { particleParams, animationTimes } from "./constant";
 import { Container, Content } from "./styled";
 
 const SplashScreen = () => {
     const history = useHistory();
+    const { getUser } = useAuth();
+    const window = WindowHeight();
 
     const {
         orderInterval,
@@ -21,7 +26,15 @@ const SplashScreen = () => {
     
     const redirect = (timeout) => {
         setTimeout(() => {
-            history.push("/walkthrough");
+            let path;
+
+            if (getUser()) {
+                path = "/locations";
+            } else {
+                path = localStorage.getItem("skip") ? "/account/login" : "/walkthrough";
+            }
+
+            history.push(path);
         }, timeout * 1000);
     };
 
@@ -32,7 +45,7 @@ const SplashScreen = () => {
             exit={{ opacity: 0 }}
             transition={{ duration: fillDuration / 2 }}
         >
-            <Container>
+            <Container style={{ height: window.height, width: window.width }}>
                 <Content>
                     <SplashLogo
                         className="logo"
@@ -46,13 +59,13 @@ const SplashScreen = () => {
                         animate={{ opacity: 1 }}
                         transition={{ delay: fillDelay + textDelay, duration: fillDuration - textDelay}}
                     >
-                        <h1 className="app-name">Code<b>Hunter</b></h1>
+                        <h1 className="app-name">Code<strong>Hunter</strong></h1>
                         <h2 className="team-name">by 4bby</h2>  
                     </motion.div>
                 </Content>
                 <Particles
                     width="100vw"
-                    height="100vh"
+                    height={window.height}
                     params={particleParams}
                 />
                 {redirect(timeout)}

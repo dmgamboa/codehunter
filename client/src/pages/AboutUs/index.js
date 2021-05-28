@@ -1,4 +1,3 @@
-
 import Banner from "./Banner";
 import Bubble from "./Bubble";
 import AboutCodeHunter from "./AboutCodeHunter";
@@ -10,7 +9,7 @@ import pariya from "../../assets/aboutus/pariya.png";
 import josh from "../../assets/aboutus/josh.png";
 import ethan from "../../assets/aboutus/ethan.png";
 
-// Credits: David Clode @davidclode : https://unsplash.com/photos/DCelW4ytxfM
+// Credits: Unknown from https://64.media.tumblr.com/ac62b768ecf53f200512d344b6420b17/28c84b95f0079bd6-83/s1920x1920/1a3e69dcc5021fdbc5439e25b5035f5a5da42f7f.jpg
 import frog from "../../assets/aboutus/frog.jpg";
 // Credits: Kaja Reichardt@kajareichardtphotos : https://unsplash.com/photos/HoV6CTICUHc
 import goose from "../../assets/aboutus/goose.jpg";
@@ -25,12 +24,12 @@ const AboutUs = () => {
     const joshAvatar = josh;
     const ethanAvatar = ethan;
 
-    const donnaIntro = "";
+    const donnaIntro = "Never give up, never surrender!";
     const pariyaIntro = "";
     const joshIntro = "Enough expository banter! Now we fight like men! And ladies! And ladies who dress like men!";
     const ethanIntro = "Thought provoking question: 'Do we want to strive for mastery or proficiency?'";
 
-    const donnaCareer = "Full-stack web/mobile Developer";
+    const donnaCareer = "Full-stack Web/Mobile Developer";
     const pariyaCareer = "Software Developer";
     const joshCareer = "Game Developer";
     const ethanCareer = "Combining software with automative/finance/medicine";
@@ -73,7 +72,8 @@ const AboutUs = () => {
                         intro={joshIntro}
                         career={joshCareer}
                         outsideOfWork={joshOutsideOfWork}  
-                        githubLink="https://github.com/joshuakrauchi" ></Bubble>
+                        githubLink="https://github.com/joshuakrauchi"
+                        linkedinLink="https://www.linkedin.com/in/joshua-krauchi/" ></Bubble>
                     <Bubble className="name ethan" 
                         name="Ethan" 
                         avatar={ethanAvatar}
@@ -84,9 +84,7 @@ const AboutUs = () => {
                         githubLink="https://github.com/ethanlee123"
                         linkedinLink="https://www.linkedin.com/in/ethan-lee-17470718b/" ></Bubble>    
                 </div>
-
             </div>
-
         </Styled>
     );
 };

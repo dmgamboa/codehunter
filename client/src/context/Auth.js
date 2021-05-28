@@ -1,51 +1,75 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext } from "react";
 import { auth } from "../firebase";
+import axios from "axios";
 
-// Create context object
 const Auth = React.createContext();
+const url = process.env.REACT_APP_SERVER;
 
-export function useAuth() {
+export const useAuth = () => {
     return useContext(Auth);
 };
 
 const AuthProvider = ({ children }) => {
-    const [currentUser, setCurrentUser] = useState();
-
-    const getUserUID = () => {
-        if (currentUser) {
-            return currentUser.uid;
-        } else {
-            return "no uid";
+    const getUser = () => {
+        if (localStorage.getItem("user")) {
+            return localStorage.getItem("user");
         }
+
+        return;
     };
 
-    // Creating new user in firebase and document in user collection in MongoDB
-    const signup = (email, password) => {
-        return auth.createUserWithEmailAndPassword(email, password);
+    const getUserData = () => {
+        if (localStorage.getItem("userData")) {
+            return JSON.parse(localStorage.getItem("userData"));
+        }
+        
+        return;
     };
 
-    const login = (email, password) => {
-        return auth.signInWithEmailAndPassword(email, password);
+    const setUserData = async () => {
+        const userToken = getUser();
+        const userData = await axios.get(`${url}readUser`, {
+            params: {
+                userToken,
+                fields: "avatar points name username",
+            },
+        });
+        
+        const { data } = userData;
+
+        localStorage.setItem("userData", JSON.stringify(data));
+        return data;
     };
 
-    function logout() {
+    // Creating new user in firebase and returns uid to create doc in user collection.
+    // Set the user credentials in localStorage
+    const signup = async (email, password) => {
+        await auth.createUserWithEmailAndPassword(email, password).then((token) => {
+            localStorage.setItem("user", JSON.stringify(token.user));
+        });
+    };
+
+    const login = async (email, password) => {
+        await auth.signInWithEmailAndPassword(email, password).then((token) => {
+            localStorage.setItem("user", JSON.stringify(token.user));
+        });
+
+        await setUserData();
+    };
+
+    const logout = () => {
+        localStorage.removeItem("user");
+        localStorage.removeItem("userData");
         return auth.signOut();
     };
 
-    useEffect(() => {
-        const unsubscribe = auth.onAuthStateChanged(token => {
-            setCurrentUser(token);
-        });
-    // Unsubscribe from the listener onAuthStateChanged
-        return unsubscribe;
-    }, []);
-
     const value = {
-        currentUser,
         signup,
         login,
         logout,
-        getUserUID
+        getUser,
+        getUserData,
+        setUserData,
     };
 
     return (

@@ -1,3 +1,4 @@
+import { TwitterTweetEmbed } from "react-twitter-embed";
 import { motion } from "framer-motion";
 import { SwiperSlide } from "swiper/react";
 import SwiperCore, { Pagination, EffectFade } from "swiper/core";
@@ -12,53 +13,55 @@ const AboutCodeHunter = () => {
     SwiperCore.use([Pagination, EffectFade]);
 
     const emphasize = (text) => {
-			let para = [];
-            text.split(" ").map(word => {
-                if (word == "passion" | word == "desire" | word == "resolve") {
-                    para.push(
-                        <span className="emphasize">{word} </span>
-                    );
-                } else {
-                    para.push(word + " ");
-                }
-            });
-            return para;
+        let para = [];
+        text.split(" ").map((word) => {
+            if ((word == "passion") | (word == "desire") | (word == "resolve")) {
+                para.push(<span className="emphasize" key={word}>{word} </span>);
+            } else {
+                para.push(word + " ");
+            }
+        });
+        return para;
     };
-    
-    const renderCarouselItems = (items) => {
-        return items.map(({ text, heading }) => {
-            return (
-                <SwiperSlide key={text}>
-                    <StyledPara>
-                        {text ? 
-                            <div className="text">{text ? emphasize(text) : ""}</div>  
-                        : ""}
-                        {heading ? <h4 className="heading">{heading}</h4> : ""} 
 
+    const renderCarouselItems = (items) => {
+        return items.map(({ text, heading, subheading, key }) => {
+            return (
+                <SwiperSlide key={key}>
+                    <StyledPara>
+                        {text ? <div className="text">{text ? emphasize(text) : ""}</div> : ""}
+                        {heading ? <h4 className="heading">{heading}</h4> : ""}
+                        {subheading ? <h4 className="subheading">{subheading}</h4> : ""}
                     </StyledPara>
                 </SwiperSlide>
             );
         });
     };
-    
+
     return (
         <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 1, ease: "easeInOut"}}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1, ease: "easeInOut" }}
         >
             <Container>
-      
-                    <StyledSwiper
-                        centeredSlides="true"
-                        effect="fade"
-                        fadeEffect={{crossFade: true}}
-                        pagination={{dynamicBullets: true}}
-                    >
-                        {renderCarouselItems(carouselItems)}
-                    </StyledSwiper>
+                <StyledSwiper
+                    centeredSlides="true"
+                    effect="fade"
+                    fadeEffect={{ crossFade: true }}
+                    pagination={{ dynamicBullets: true }}
+                >
+                    <SwiperSlide>
+                        <div className="twitter">
+                            <TwitterTweetEmbed
+                                tweetId={"1397802119290183683"}
+                            />
+                        </div>
+                    </SwiperSlide>
+                    {renderCarouselItems(carouselItems)}
 
+                </StyledSwiper>
             </Container>
         </motion.div>
     );

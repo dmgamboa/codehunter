@@ -1,8 +1,7 @@
 import { Switch, Route, useRouteMatch } from "react-router-dom";
 
+import PageNotFound from "../../components/PageNotFound";
 import ProfileScreen from "./ProfileScreen";
-
-import "./ProfileScreen";
 
 const Profile = () => {
     const match = useRouteMatch();
@@ -14,6 +13,12 @@ const Profile = () => {
                 path={`${match.path}`}
                 render={() => <ProfileScreen />}
             />
+            <Route 
+                exact
+                path={`${match.path}/:id`}
+                render={() => <ProfileScreen />}
+            />
+            <Route path={`${match.path}`} render={() => <PageNotFound />} />
         </Switch>
     );
 };

@@ -6,6 +6,10 @@ import theme from "../../../context/themes/main";
 const { colors } = theme;
 
 const StyledDrawer = styled(Drawer)`
+    max-width: 500px;
+    left: 50%;
+    transform: translateX(-50%);
+
     .ant-drawer-header {
         .ant-drawer-title {
             display: flex;
@@ -32,6 +36,10 @@ const StyledDrawer = styled(Drawer)`
 
         .ant-radio-button-wrapper {
             flex: 1;
+
+            span {
+                white-space: nowrap;
+            }
 
             &:first-of-type {
                 border-top-left-radius: 1.5rem;

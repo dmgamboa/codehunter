@@ -3,21 +3,30 @@ import { TabBar } from "antd-mobile";
 import Icon, { CheckCircleOutlined } from "@ant-design/icons";
 
 import { ReactComponent as BookmarkIcon } from "../../assets/icons/bookmark.svg";
-import LocationPlaceholder from "../../assets/placeholder-location.jpg";
+import LocationPlaceholder from "../../assets/placeholders/locations/others.png";
 
 import StyledCard from "./styled";
 
-const LocationCard = ({ location, tabs, onClick }) => {
+const LocationCard = ({ loading, location, tabs }) => {
     const renderTabs = (tabs) => {
         return tabs.map(({ key, name, icon, onPress }) => {
-            return <TabBar.Item key={key} title={name} icon={icon} onPress={() => onPress(key)} />;
+            return (
+                <TabBar.Item
+                    key={key}
+                    title={name}
+                    icon={icon}
+                    onPress={() =>
+                        onPress({ tab: key, location })
+                    }
+                />
+            );
         });
     };
 
     return (
         <StyledCard
+            loading={loading}
             hoverable
-            onClick={onClick}
             title={
                 <>
                     <h2>{location.type}</h2>

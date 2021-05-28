@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { List } from "antd";
+import InfiniteScroll from "react-infinite-scroll-component";
 
-export const StyledList = styled(List)`
+export const StyledInfiniteScroll = styled(InfiniteScroll)`
     .ant-card {
         margin-bottom: 1rem;
     }

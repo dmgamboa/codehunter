@@ -2,17 +2,17 @@ import { Route, Switch, useRouteMatch } from "react-router-dom";
 
 import Login from "./Login/index";
 import Register from "./Register/index";
-import AuthProvider from "../../context/Auth";
+import PageNotFound from "../../components/PageNotFound";
 
 const Account = () => {
     const match = useRouteMatch();
     return (
-        <AuthProvider>
-            <Switch>
-                <Route exact path={`${match.path}/register`} render={() => <Register />} />
-                <Route exact path={`${match.path}/login`} render={() => <Login />} />
-            </Switch>
-        </AuthProvider>
+        <Switch>
+            <Route exact path={`${match.path}/login`} render={() => <Login />} />
+            <Route exact path={`${match.path}`} render={() => <Login />} />
+            <Route exact path={`${match.path}/register`} render={() => <Register />} />
+            <Route path={`${match.path}`} render={() => <PageNotFound />} />
+        </Switch>
     );
 };
 

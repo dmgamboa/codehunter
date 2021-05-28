@@ -4,20 +4,18 @@ import Icon, {
     ArrowUpOutlined,
     ArrowDownOutlined,
     CheckCircleOutlined,
-    UndoOutlined,
+    UndoOutlined
 } from "@ant-design/icons";
 import { kebabCase } from "lodash";
 
 import { ReactComponent as FilterIcon } from "../../../assets/icons/filters.svg";
-import { ReactComponent as BookmarkIcon } from "../../../assets/icons/bookmark.svg";
 import ConditionalWrapper from "../../../components/ConditionalWrapper";
 import theme from "../../../context/themes/main";
 
 import { locationTypes, neighborhoods } from "./constant";
 import StyledDrawer from "./styled";
 
-const LocationsFilters = ({ visible, onClose, onFinish, initialValues, hasUserCoords }) => {
-    const [form] = Form.useForm();
+const LocationsFilters = ({ form, visible, onClose, onFinish, initialValues, hasUserCoords }) => {
     const { Option } = Select;
     const { colors } = theme;
 
@@ -56,7 +54,7 @@ const LocationsFilters = ({ visible, onClose, onFinish, initialValues, hasUserCo
                             wrapper={(children) => (
                                 <Tooltip
                                     color={colors.primary}
-                                    title="Please allow access to permisions to use this option."
+                                    title="Please allow access to permissions to use this option."
                                 >
                                     {children}
                                 </Tooltip>
@@ -77,7 +75,7 @@ const LocationsFilters = ({ visible, onClose, onFinish, initialValues, hasUserCo
                     </Radio.Group>
                 </Form.Item>
 
-                <div className="switch">
+                {/* <div className="switch">
                     <Form.Item name="bookmarked" valuePropName="checked">
                         <Switch />
                     </Form.Item>
@@ -85,7 +83,7 @@ const LocationsFilters = ({ visible, onClose, onFinish, initialValues, hasUserCo
                         <Icon component={BookmarkIcon} />
                         Bookmarked
                     </span>
-                </div>
+                </div> */}
 
                 <div className="switch">
                     <Form.Item name="visited" valuePropName="checked">
@@ -103,7 +101,7 @@ const LocationsFilters = ({ visible, onClose, onFinish, initialValues, hasUserCo
                     </Select>
                 </Form.Item>
 
-                <Form.Item label="Neighborhood" name="location_type">
+                <Form.Item label="Neighborhood" name="local_area">
                     <Select showSearch allowClear placeholder="Any">
                         {renderOptions(neighborhoods)}
                     </Select>
@@ -114,7 +112,13 @@ const LocationsFilters = ({ visible, onClose, onFinish, initialValues, hasUserCo
                         Apply
                     </Button>
 
-                    <Button onClick={() => form.resetFields()} block>
+                    <Button
+                        onClick={() => {
+                            form.resetFields();
+                            form.submit();
+                        }}
+                        block
+                    >
                         <UndoOutlined /> Reset
                     </Button>
                 </span>

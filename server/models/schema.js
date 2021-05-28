@@ -2,38 +2,95 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const locationSchema = new Schema({
-    /*datasetid: String,
-    recordid: String,
-    fields: {
-        website: String,
-        active_space: String,
-        year: String,
-        cultural_space_name: String,
-        geom: {
-            type: String,
-            coordinates: [Number]
-        },
-        local_area: String,
-        ownership: String,
-        address: String,
-        type: String,
-        primary_use: String
-    },
-    record_timestamp: String*/
+    points: Number,
 });
 
 const userSchema = new Schema({
     name: {
-        first: String,
-        last: String
+        first: {
+            type: String,
+            required: true,
+        },
+        last: {
+            type: String,
+            required: true,
+        }
     },
-    username: String,
-    email: String,
-    uid: String
+    username: {
+        type: String,
+        required: true,
+    },
+    email: {
+        type: String,
+        required: true,
+        unique: true,
+    },
+    uid: {
+        type: String,
+        required: true,
+        unique: true,
+    },
+    avatar: String,
+    points: {
+        type: Number,
+        required: true,
+        default: 0,
+        min: 0,
+    },
+    friends: [{
+        type: Schema.Types.ObjectId,
+        ref: "User",
+    }],
+    bookmarks: [{
+        type: Schema.Types.ObjectId,
+        ref: "Location",
+    }],
+    rewards: [Schema.Types.ObjectId],
+});
+
+const rewardSchema = new Schema({
+    logo: {
+        data: String,
+        imageType: String,
+    },
+    name: String,
+    description: String,
+    cost: Number,
+    availability: [String], // online, in-store, limited time
+    category: [String], // food, accessories, acitivites, tech
+    img: String //Link to amazon s3 bucket
+});
+
+const historySchema = new Schema({
+    uid: {
+        type: String,
+        required: true,
+    },
+    history: [{
+        locationID: {
+            type: Schema.Types.ObjectId,
+            ref: "Location",
+            required: true,
+        },
+        location: {
+            type: String,
+            required: true,
+        },
+        date: {
+            type: Date,
+            required: true,
+        },
+        points: {
+            type: Number,
+            required: true,
+        }
+    }],
 });
 
 // User -> users
 const Location = mongoose.model("locations", locationSchema);
 const User = mongoose.model("users", userSchema);
+const Reward = mongoose.model("reward", rewardSchema);
+const History = mongoose.model("histories", historySchema);
 
-export { Location, User };
+export { Location, User, Reward, History };

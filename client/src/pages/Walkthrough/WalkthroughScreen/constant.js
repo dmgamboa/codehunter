@@ -6,16 +6,16 @@ export const carouselItems = [
     {
         img: walkthroughImage01,
         heading: "Hunt Codes",
-        body: "Blahbbity Blihbbity Bloo"
+        body: "Earn points by scanning QR codes hidden around the city of Vancouver."
     },
     {
         img: walkthroughImage02,
         heading: "Redeem Rewards",
-        body: "Second slide text"
+        body: "Exchange your points for vouchers and free passes to your favourite locations."
     },
     {
         img: walkthroughImage03,
         heading: "Add Friends",
-        body: "Third slide text"
-    },
+        body: "Compare your progress with your friends."
+    }
 ];
