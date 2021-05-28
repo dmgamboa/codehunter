@@ -8,7 +8,7 @@
     CODEHUNTER
 </p>
 
-## Table of Contents
+## **Table of Contents**
 * [General info](#general-info)
 * [Setup](#setup)
 * [Technologies](#technologies)
@@ -16,7 +16,7 @@
 * [Citations: pictures, libraries, API's etc.](#citations);
 
 ***
-## ✨General Info
+## ✨**General Info**
 A scavenger hunt app designed to encourage tourism and exploration in the city of Vancouver. Our aim is to help the people of Vancouver explore what British Columbia has to offer and support local businesses hit hard by the pandemic (2020).
 ### Features
 * Add your friends and people you meet along the code hunting journey.
@@ -31,7 +31,7 @@ A scavenger hunt app designed to encourage tourism and exploration in the city o
 alt="codehunter video" width="240" height="180" style="display: block"/></a>
 
 ***
-## 📦 Setup
+## 📦 **Setup**
 1. Git clone our repository
 2. In a new branch, do the following...
 3. Run **npm install** to install dependencies
@@ -41,7 +41,7 @@ alt="codehunter video" width="240" height="180" style="display: block"/></a>
 7. Change directory to server and run **npm run dev**
 
 ***
-## 👨‍💻 Technologies
+## 👨‍💻 **Technologies**
 Technologies used for this project:
 * JavaScript/HTML/CSS
 * Nodejs
@@ -51,6 +51,7 @@ Technologies used for this project:
 * Ant Design
 * Multer
 * Visual Studio Code
+* Selenium IDE
 
 ### Third Party APIs
 * HTML5 GeoLocation API
@@ -69,10 +70,11 @@ Technologies used for this project:
 * Unsplash
 
 ***
-## Testing History
+## ✏️ **Testing History**
+Automated testing performed by Selenium IDE
 <a href="https://docs.google.com/spreadsheets/d/1QuMZohZ4OqHskKSqTsVvwNvOB3deYw7iLcbWxDl5DTo/edit?usp=sharing">View testing history</a>
 ***
-## 🏕️ Content
+## 🏕️ **Content**
 Brief overview of the most important contents of the project folder:
 
 ```
@@ -110,7 +112,7 @@ server
 
 ```
 ***
-## 🌎Citations
+## 🌎 **Citations**
 [React](https://reactjs.org/) (JavaScript Library) v17.0.2 by Jordan Walke (original author), Facebook, and community (developers)  [MIT License](https://opensource.org/licenses/MIT)
 
 [Ant Design](https://ant.design/) by community [Creative Commons Attribution 4.0 International Public License](http://creativecommons.org/licenses/by/4.0/)
@@ -118,6 +120,8 @@ server
 [Axios](https://github.com/axios/axios) v0.21.1 by @emilyemorehouse, Matt Zabriskie, Nick Uraltsev, and community (developers) [MIT License](https://opensource.org/licenses/MIT)
 
 [ESLint](https://github.com/Microsoft/vscode-eslint) v2.1.10 by Dirk Baeumer and community (developers) [MIT License](https://opensource.org/licenses/MIT)
+
+[Selenium IDE](https://www.selenium.dev/selenium-ide/) v3.17.0 by community (developers) [Apache License 2.0](https://github.com/SeleniumHQ/selenium-ide/blob/trunk/LICENSE)
 
 
 [Frog photo on About Us page](https://unsplash.com/photos/DCelW4ytxfM) by David Clode @davidclode [Unsplash License](https://unsplash.com/license)
