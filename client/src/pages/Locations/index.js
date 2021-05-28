@@ -188,10 +188,13 @@ const Locations = () => {
     const handleLocations = async ({ coords, newList }) => {
         setLoading(true);
 
-        const { sort, visited } = filters;
+        const { sort, visited, type, local_area } = filters;
         const userToken = getUser();
 
-        let searchAndFilter = {};
+        let searchAndFilter = {
+            type,
+            local_area,
+        };
         if (search) {
             searchAndFilter["$text"] = { $search: search };
         }
@@ -227,6 +230,7 @@ const Locations = () => {
     }, [page]);
 
     useEffect(() => {
+        setPage(1);
         handleLocations({});
     }, [search, filters]);
 

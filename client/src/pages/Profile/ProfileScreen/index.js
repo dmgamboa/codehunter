@@ -78,7 +78,7 @@ const ProfileScreen = () => {
     useEffect(() => {
         handleUser();
         handleHistory();
-    }, []);
+    }, [params.id]);
 
     const renderHistoryList = (list) => {
         return list.map(({ location, points, date }) => {
