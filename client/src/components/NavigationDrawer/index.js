@@ -44,13 +44,16 @@ const NavigationDrawer = ({ visible, onClose, links, page, handleClick }) => {
                 </div>
             </div>
 
+            
 
             <div className="links">
+                
                 <span className="main-links">{renderDrawerLinks(links)}</span>
                 <span className="drawer-item active logout" onClick={handleLogout}>
                     <LogoutOutlined />
                     <span className="link">Log Out</span>
                 </span>
+                
             </div>
 
         </StyledDrawer>
