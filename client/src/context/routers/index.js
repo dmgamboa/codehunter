@@ -7,7 +7,8 @@ import Icon, {
     GiftFilled,
     UserOutlined,
     QuestionCircleOutlined,
-    HeartOutlined
+    HeartOutlined,
+    TwitterOutlined
 } from "@ant-design/icons";
 
 import Locations from "../../pages/Locations";
@@ -19,6 +20,7 @@ import Walkthrough from "../../pages/Walkthrough";
 import Account from "../../pages/Account";
 import AboutUs from "../../pages/AboutUs";
 import Credits from "../../pages/Credits";
+import Timeline from "../../pages/Timeline";
 
 import { ReactComponent as Logo } from "../../assets/icons/logo.svg";
 import PageNotFound from "../../components/PageNotFound";
@@ -121,6 +123,17 @@ const routes = [
         component: <Credits />
     },
     {
+        name: "Timeline",
+        path: "/timeline",
+        exact: false,
+        navTab: false,
+        navDrawer: true,
+        fullScreen: false,
+        restricted: false,
+        icon: <TwitterOutlined />,
+        component: <Timeline />
+    },
+    {
         name: "404",
         path: "*",
         exact: false,
@@ -129,7 +142,7 @@ const routes = [
         fullscreen: true,
         restricted: true,
         component: <PageNotFound />
-    }
+    },
 ];
 
 export const navTabRoutes = routes.filter((route) => route.navTab);
