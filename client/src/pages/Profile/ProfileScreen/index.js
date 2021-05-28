@@ -12,7 +12,7 @@ import { readFriend, readFriendHistory, readHistory, updateUser } from "../axios
 
 const ProfileScreen = () => {
     const params = useParams();
-    const { getUser, getUserData } = useAuth();
+    const { getUser, setUserData } = useAuth();
 
     const [loading, setLoading] = useState(false);
     const [userDetails, setUserDetails] = useState({});
@@ -38,21 +38,21 @@ const ProfileScreen = () => {
 
     const handleUser = async () => {
         setLoading(true);
-        if (!params.id) {
-            const user = await getUserData();
-            await setUserDetails(user);
+        const user = params.id ? await readFriend(params.id) : await setUserData();
+        setUserDetails(user);
 
-            const { name, username, avatar } = user;
-            await setEditDetails({ name: `${name.first} ${name.last}`, username, avatar });
-        } else {
-            const friend = await readFriend(params.id);
-
-            setUserDetails(friend);
-        }
+        !user && history.push("/user-not-found");
+        !params.id &&
+            setEditDetails({
+                name: `${user.name?.first} ${user.name?.last}`,
+                username: user.username,
+                avatar: user.avatar
+            });
         setLoading(false);
     };
 
     const handleHistory = async () => {
+        setLoading(true);
         if (!params.id) {
             const token = getUser();
             const history = await readHistory(token);
@@ -61,6 +61,7 @@ const ProfileScreen = () => {
             const history = await readFriendHistory(params.id);
             setHistory(history);
         }
+        setLoading(false);
     };
 
     const renderStatusButton = (status) => {
@@ -77,7 +78,7 @@ const ProfileScreen = () => {
     useEffect(() => {
         handleUser();
         handleHistory();
-    }, [params.id]);
+    }, []);
 
     const renderHistoryList = (list) => {
         return list.map(({ location, points, date }) => {
@@ -102,49 +103,58 @@ const ProfileScreen = () => {
 
     return (
         <Layout>
-            <Spin spinning={loading} style={{ width: "100%", flex: "1" }} />
-            <ProfileEditDrawer
-                visible={editDrawer}
-                onClose={handleEditDrawer}
-                initialValues={editDetails}
-                onFinish={handleEdit}
-            />
-            <div className="top">
-                <span className="circles"></span>
-                <CustomAvatar size="80px" photo={userDetails?.avatar} background="lightgray" />
-                <h1 className="name">
-                    <span className="accent">{userDetails?.name?.first}</span>{" "}
-                    {userDetails?.name?.last}
-                </h1>
-                <span className="points">
-                    <TrophyOutlined /> {userDetails?.points} points
-                </span>
-                {params.id ? (
-                    <Button className={`status-btn ${userDetails?.status}`}>
-                        {userDetails?.status && renderStatusButton(userDetails?.status)}
-                    </Button>
-                ) : (
-                    <Button type="secondary" onClick={handleEditDrawer}>
-                        <EditOutlined /> Edit Profile
-                    </Button>
-                )}
-            </div>
-            <div className="history">
-                <h2>
-                    <EnvironmentFilled /> Recently Visited
-                </h2>
-                {history.length > 0 ? (
-                    renderHistoryList(history)
-                ) : (
-                    <span className="no-history">
-                        {`Looks like ${
-                            params.id ? `${userDetails?.name?.first} hasn't` : "you haven't"
-                        } discovered any codes yet. ${
-                            params.id ? "It's time to help them out!" : "Go get hunting!"
-                        }`}
-                    </span>
-                )}
-            </div>
+            {loading ? (
+                <Spin spinning={loading} style={{ width: "100%", flex: "1" }} />
+            ) : (
+                <>
+                    <ProfileEditDrawer
+                        visible={editDrawer}
+                        onClose={handleEditDrawer}
+                        initialValues={editDetails}
+                        onFinish={handleEdit}
+                    />
+                    <div className="top">
+                        <span className="circles"></span>
+                        <CustomAvatar
+                            size="80px"
+                            photo={userDetails?.avatar}
+                            background="lightgray"
+                        />
+                        <h1 className="name">
+                            <span className="accent">{userDetails?.name?.first}</span>{" "}
+                            {userDetails?.name?.last}
+                        </h1>
+                        <span className="points">
+                            <TrophyOutlined /> {userDetails?.points} points
+                        </span>
+                        {params.id ? (
+                            <Button className={`status-btn ${userDetails?.status}`}>
+                                {userDetails?.status && renderStatusButton(userDetails?.status)}
+                            </Button>
+                        ) : (
+                            <Button type="secondary" onClick={handleEditDrawer}>
+                                <EditOutlined /> Edit Profile
+                            </Button>
+                        )}
+                    </div>
+                    <div className="history">
+                        <h2>
+                            <EnvironmentFilled /> Recently Visited
+                        </h2>
+                        {history.length > 0 ? (
+                            renderHistoryList(history)
+                        ) : (
+                            <span className="no-history">
+                                {`Looks like ${
+                                    params.id ? `${userDetails?.name?.first} hasn't` : "you haven't"
+                                } discovered any codes yet. ${
+                                    params.id ? "It's time to help them out!" : "Go get hunting!"
+                                }`}
+                            </span>
+                        )}
+                    </div>
+                </>
+            )}
         </Layout>
     );
 };

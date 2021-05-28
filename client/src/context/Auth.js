@@ -34,8 +34,11 @@ const AuthProvider = ({ children }) => {
                 fields: "avatar points name username",
             },
         });
+        
+        const { data } = userData;
 
-        localStorage.setItem("userData", JSON.stringify(userData.data));
+        localStorage.setItem("userData", JSON.stringify(data));
+        return data;
     };
 
     // Creating new user in firebase and returns uid to create doc in user collection.

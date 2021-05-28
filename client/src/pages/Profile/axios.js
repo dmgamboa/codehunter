@@ -58,7 +58,7 @@ const updateUser = async (data) => {
         username: updatedUser.data.username,
     };
 
-    localStorage.setItem("userData", JSON.stringify(updatedUserDetails));
+    // localStorage.setItem("userData", JSON.stringify(updatedUserDetails));
 };
 
 export { readFriend, readFriendHistory, readHistory, updateUser };
