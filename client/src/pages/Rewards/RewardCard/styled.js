@@ -1,4 +1,5 @@
 import { Card, Modal } from "antd";
+import Confetti from "react-confetti";
 import styled from "styled-components";
 import theme from "../../../context/themes/main";
 
@@ -14,7 +15,7 @@ export const StyledCard = styled(Card)`
     display: grid;
     grid-template:
         "image content" 100%
-        / 30% 70%;
+        / 25% 75%;
     .ant-card-cover {
         grid-area: image;
         height: 100%;
@@ -88,4 +89,10 @@ export const StyledModal = styled(Modal)`
     button:hover.ant-btn-primary {
         background-color: ${colors.secondary};
     }
+`;
+
+export const StyledConfetti = styled(Confetti)`
+    position: absolute;
+    width: 100%;
+    height: 100vh;
 `;
