@@ -6,6 +6,16 @@ import StyledDrawer from "./styled";
 import LocationPlaceholder from "../../assets/placeholders/locations/others.png";
 
 const LocationDetails = ({ visible, onClose, location, tabs }) => {
+    /**
+     * returns a string appended with "https://"
+     * if url has no scheme
+     * @param {*} url 
+     */ 
+    const addScheme = (url) => {
+        const hasScheme = url.startsWith("http://") || url.startsWith("https://");
+        return hasScheme ? url : `https://${url}`;
+    };
+
     const renderHours = (hours) => {
         return Object.keys(hours).map((day) => {
             return (
@@ -28,7 +38,7 @@ const LocationDetails = ({ visible, onClose, location, tabs }) => {
                         detail === "hours" ? (
                             loc.hours?.status
                         ) : detail === "website" ? (
-                            <a href={loc[detail]} target="_blank" rel="noreferrer">
+                            <a href={addScheme(loc[detail])} target="_blank" rel="noreferrer">
                                 {loc[detail]}
                             </a>
                         ) : detail === "phone" ? (
